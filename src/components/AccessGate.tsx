@@ -16,7 +16,7 @@ export default function AccessGate({ onUnlock }: { onUnlock: () => void }) {
     event.preventDefault()
 
     if (password !== ACCESS_PASSWORD) {
-      setError('La contraseña no es correcta. Inténtalo de nuevo.')
+      setError('The password is incorrect. Please try again.')
       return
     }
 
@@ -29,10 +29,10 @@ export default function AccessGate({ onUnlock }: { onUnlock: () => void }) {
       <section className="access-card" aria-labelledby="access-title">
         <span className="eyebrow">Proprietary and confidential</span>
         <h1 id="access-title">Data Lineage Explorer</h1>
-        <p>Ingresa la contraseña para consultar el linaje documentado.</p>
+        <p>Enter the password to view the documented lineage.</p>
 
         <form onSubmit={handleSubmit}>
-          <label htmlFor="access-password">Contraseña</label>
+          <label htmlFor="access-password">Password</label>
           <div className="password-field">
             <input
               id="access-password"
@@ -53,11 +53,11 @@ export default function AccessGate({ onUnlock }: { onUnlock: () => void }) {
               onClick={() => setShowPassword((visible) => !visible)}
               aria-pressed={showPassword}
             >
-              {showPassword ? 'Ocultar' : 'Revelar'}
+              {showPassword ? 'Hide' : 'Reveal'}
             </button>
           </div>
           {error ? <p className="access-error" id="access-error" role="alert">{error}</p> : null}
-          <button className="access-submit" type="submit">Acceder</button>
+          <button className="access-submit" type="submit">Sign in</button>
         </form>
       </section>
     </main>
