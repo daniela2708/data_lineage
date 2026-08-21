@@ -16,6 +16,27 @@ body{font-family:var(--sans);background:var(--light);color:var(--dark);
   font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .page-shell{width:min(100%,var(--page));margin-inline:auto}
 
+/* ---------- access gate ---------- */
+.access-page{min-height:100dvh;display:grid;place-items:center;padding:28px;
+  background:radial-gradient(circle at top left,rgba(233,61,68,.13),transparent 34%),var(--light)}
+.access-card{width:min(100%,440px);padding:34px;border:1px solid var(--n-darker);border-radius:var(--r);
+  background:var(--white);box-shadow:0 22px 60px rgba(33,30,30,.12)}
+.access-card h1{font-size:25px}.access-card>p{margin:0 0 25px;color:var(--n-darkest)}
+.access-card form>label{display:block;margin-bottom:7px;font-family:var(--mono);font-size:10px;
+  font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.password-field{display:flex;border:1px solid var(--n-darker);border-radius:var(--r-sm);overflow:hidden;background:var(--white)}
+.password-field:focus-within{outline:2px solid var(--red);outline-offset:-1px;border-color:var(--red)}
+.password-field input{min-width:0;flex:1;padding:11px 12px;border:0;outline:0;background:transparent;
+  color:var(--dark);font:inherit}
+.reveal-password{padding:0 13px;border:0;border-left:1px solid var(--n-darker);background:var(--n-lighter);
+  color:var(--n-darkest);font-family:var(--mono);font-size:9px;font-weight:700;text-transform:uppercase;cursor:pointer}
+.reveal-password:hover{color:var(--dark);background:var(--n)}
+.access-error{margin:8px 0 0;color:var(--red-darkest);font-size:12px}
+.access-submit{width:100%;margin-top:17px;padding:11px 16px;border:0;border-radius:var(--r-sm);
+  background:var(--dark);color:var(--white);font:700 13px var(--sans);cursor:pointer}
+.access-submit:hover{background:var(--red)}
+.access-submit:focus-visible,.reveal-password:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+
 /* ---------- header ---------- */
 header{background:var(--white);border-bottom:1px solid var(--n-darker)}
 .header-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:56px;
