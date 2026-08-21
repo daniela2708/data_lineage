@@ -1,4 +1,5 @@
 import { DATA } from '../data/dataset'
+import { ORACLE_LINEAGE } from '../data/oracleLineage'
 
 /** Counts that frame the whole prototype. Every one is derived, none is typed in. */
 export default function StatStrip() {
@@ -10,7 +11,7 @@ export default function StatStrip() {
   const stats: [string, number][] = [
     ['End-to-end trace', 1],
     ['Documented steps', DATA.flow.nodes.length],
-    ['Interacting pipelines', interactingPipelines.size],
+    ['Interacting workflows', interactingPipelines.size + ORACLE_LINEAGE.liveFlows.length + 1],
     ['Business cases', tracedTable?.bcs.length ?? 0],
   ]
 

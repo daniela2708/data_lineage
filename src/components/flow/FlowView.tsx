@@ -1,20 +1,21 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import FlowRail from './FlowRail'
 import StepCard from './StepCard'
+import OracleLineageDiagram from './OracleLineageDiagram'
 import { DATA } from '../../data/dataset'
+import { ORACLE_LINEAGE } from '../../data/oracleLineage'
 import { activeStep, flowLayout } from '../../lib/flowLayout'
 import { useFlowTimeline } from '../../hooks/useFlowTimeline'
 import { joinDot } from '../../lib/text'
 
 /** The single-page end-to-end story for the traced table. */
 export default function FlowView({ active }: { active: boolean }) {
+  const [tableQuery, setTableQuery] = useState('')
   const flow = DATA.flow
   const table = DATA.tables.find((candidate) => candidate.id === flow.id)
   const layout = useMemo(() => flowLayout(flow.nodes), [flow.nodes])
   const timeline = useFlowTimeline(layout.total, active)
   const current = activeStep(layout, timeline.t)
-  const createdTables = Array.from(new Map(flow.nodes.slice(1).map((node) => [`${node.zone}-${node.label}`, node])).values())
-  const requiredTables = Array.from(new Map(flow.nodes.flatMap((node) => node.side ?? []).map((input) => [input.id ?? input.label, input])).values())
   const pipelineNames = Array.from(new Set([
     ...(table?.pipeIds.flatMap((id) => {
       const pipeline = DATA.pipelines.find((candidate) => candidate.id === id)
@@ -27,6 +28,13 @@ export default function FlowView({ active }: { active: boolean }) {
     ['Business cases', table.bcs.join(', ')], ['Wave', table.wave], ['Complexity', table.cplx],
     ['Technical owner', table.owner], ['Status', table.status],
   ] : []
+  const normalizedTableQuery = tableQuery.trim().toLowerCase()
+  const matchesTableQuery = (name: string, detail: string) =>
+    !normalizedTableQuery || `${name} ${detail}`.toLowerCase().includes(normalizedTableQuery)
+  const filteredCreatedTables = ORACLE_LINEAGE.createdTables.filter((item) => matchesTableQuery(item.name, item.status))
+  const filteredRequiredTables = ORACLE_LINEAGE.requiredTables.filter((item) => matchesTableQuery(item.name, item.detail))
+  const filteredDownstreams = ORACLE_LINEAGE.downstreams.filter((item) => matchesTableQuery(item.name, item.detail))
+  const visibleTableCount = filteredCreatedTables.length + filteredRequiredTables.length + filteredDownstreams.length
 
   return (
     <div>
@@ -66,23 +74,50 @@ export default function FlowView({ active }: { active: boolean }) {
           <div><span className="relationship-kicker">Lineage context</span><h3>Dependencies and related tables</h3><p>Tables are grouped by their role in the documented CLUB_CARD_DIM flow.</p></div>
           <span>Evidence from source files</span>
         </div>
+        <div className="table-search-row">
+          <label>
+            <span>Filter tables</span>
+            <input
+              type="search"
+              value={tableQuery}
+              onChange={(event) => setTableQuery(event.target.value)}
+              placeholder="Name, schema, status or relationship"
+            />
+          </label>
+          <span className="table-search-count" aria-live="polite">{visibleTableCount} results</span>
+          {tableQuery ? <button className="chip" onClick={() => setTableQuery('')}>Clear</button> : null}
+        </div>
         <div className="relationship-grid">
           <section className="relationship-column">
-            <div className="relationship-title"><span className="relationship-type">Created for this table</span><strong>{createdTables.length}</strong></div>
-            <p>Intermediate and published tables produced along this trace.</p>
-            <div className="relationship-items">{createdTables.map((node) => <div key={`${node.zone}-${node.label}`}><strong>{node.label}</strong><span>{node.zone}</span></div>)}</div>
+            <div className="relationship-title"><span className="relationship-type">Created for this table</span><strong>{filteredCreatedTables.length}</strong></div>
+            <p>Oracle staging tables built exclusively to load this dimension.</p>
+            <div className="relationship-items">{filteredCreatedTables.length ? filteredCreatedTables.map((item) => <div key={item.name}><strong>{item.name}</strong><span>{item.status}</span></div>) : <div className="relationship-empty">No matching tables</div>}</div>
           </section>
           <section className="relationship-column">
-            <div className="relationship-title"><span className="relationship-type">Other required tables</span><strong>{requiredTables.length}</strong></div>
-            <p>Source and lookup tables needed by the flow, but not created exclusively for it.</p>
-            <div className="relationship-items">{requiredTables.map((input) => <div key={input.id ?? input.label}><strong>{input.label}</strong><span>{input.id ?? 'Catalog ID not documented'}</span></div>)}</div>
+            <div className="relationship-title"><span className="relationship-type">Other required tables</span><strong>{filteredRequiredTables.length}</strong></div>
+            <p>Sources, lookups and injection tables owned by other processes.</p>
+            <div className="relationship-items">{filteredRequiredTables.length ? filteredRequiredTables.map((item) => <div key={item.name}><strong>{item.name}</strong><span>{item.detail}</span></div>) : <div className="relationship-empty">No matching tables</div>}</div>
           </section>
           <section className="relationship-column downstream-column">
-            <div className="relationship-title"><span className="relationship-type">Downstreams</span><strong>Gap</strong></div>
-            <p>Known consumers or the documented gap after publication.</p>
-            <div className="relationship-items"><div className="relationship-empty">{flow.downstream}</div></div>
+            <div className="relationship-title"><span className="relationship-type">Downstreams</span><strong>{filteredDownstreams.length}</strong></div>
+            <p>Confirmed consumers only; name-inferred candidates are excluded.</p>
+            <div className="relationship-items">{filteredDownstreams.length ? filteredDownstreams.map((item) => <div key={item.name}><strong>{item.name}</strong><span>{item.detail}</span></div>) : <div className="relationship-empty">No matching tables</div>}</div>
           </section>
         </div>
+      </div>
+
+      <div className="card oracle-card">
+        <div className="oracle-heading">
+          <div><span className="relationship-kicker">Current Oracle / TIBCO process</span><h3>{ORACLE_LINEAGE.target}</h3><p>Complementary source-side evidence from Data Engineering, captured on {ORACLE_LINEAGE.evidenceDate}.</p></div>
+          <span>{ORACLE_LINEAGE.rowCount.toLocaleString('en-US')} rows · {ORACLE_LINEAGE.columnCount} columns</span>
+        </div>
+        <div className="oracle-summary">
+          <div><span>Orchestrator</span><strong>{ORACLE_LINEAGE.orchestrator}</strong></div>
+          <div><span>Cadence</span><strong>{ORACLE_LINEAGE.cadence}</strong></div>
+        </div>
+        <OracleLineageDiagram />
+        <h2 className="sec">Engineering findings</h2>
+        <div className="finding-list">{ORACLE_LINEAGE.findings.map((finding) => <p key={finding}>{finding}</p>)}</div>
       </div>
 
       {table && <div className="card table-summary">
@@ -94,11 +129,14 @@ export default function FlowView({ active }: { active: boolean }) {
 
       <div className="card pipeline-card">
         <div className="pipeline-heading">
-          <div><span className="flow-kicker">Integration footprint</span><h3>Pipelines that interact with {flow.table}</h3></div><strong>{pipelineNames.length}</strong>
+          <div><span className="flow-kicker">Integration footprint</span><h3>Pipelines and data flows that interact with {flow.table}</h3></div><strong>{pipelineNames.length + ORACLE_LINEAGE.liveFlows.length + 1}</strong>
         </div>
-        <div className="pipeline-list">{pipelineNames.map((name) => {
+        <div className="pipeline-list">
+          <div><strong>{ORACLE_LINEAGE.orchestrator}</strong><span>Oracle / TIBCO · live orchestrator</span></div>
+          {ORACLE_LINEAGE.liveFlows.map((name) => <div key={name}><strong>{name}</strong><span>Oracle / TIBCO · live data flow</span></div>)}
+          {pipelineNames.map((name) => {
           const pipeline = DATA.pipelines.find((candidate) => candidate.name === name || candidate.id === name)
-          return <div key={name}><strong>{name}</strong><span>{pipeline ? [pipeline.id, pipeline.tool, pipeline.status].filter(Boolean).join(' · ') : 'Documented in the end-to-end trace'}</span></div>
+          return <div key={name}><strong>{name}</strong><span>{pipeline ? [pipeline.id, pipeline.tool, pipeline.status].filter(Boolean).join(' · ') : 'Azure / Snowflake · documented in the end-to-end trace'}</span></div>
         })}</div>
       </div>
     </div>

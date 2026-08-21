@@ -1,0 +1,330 @@
+<meta charset="utf-8">
+<title>CLUB_CARD_DIM: relational diagram of the current Oracle process</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+       color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+  h1{font-size:22px;font-weight:500;margin:0 0 4px}
+  h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+  h3{font-size:15.5px;font-weight:500;margin:28px 0 2px;color:#26215C}
+  .sub{font-size:13px;color:#5F5E5A;margin:0 0 20px}
+  .intro{font-size:13.5px;color:#5F5E5A;margin:0 0 10px;max-width:940px}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12.5px;color:#5F5E5A;margin:0 0 18px}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:22px;height:11px;border-radius:2px;display:inline-block}
+  .wrap{width:100%;overflow-x:auto}
+  svg{display:block;min-width:1680px}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+       background:#F1EFE8;padding:1px 4px;border-radius:3px}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+  th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+  th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9;white-space:nowrap}
+  td.q{white-space:nowrap;color:#5F5E5A;width:30px}
+  .tag{display:inline-block;font-size:11.5px;padding:1px 7px;border-radius:10px;white-space:nowrap}
+  .live{background:#E1F5EE;color:#04342C}
+  .dead{background:#F1EFE8;color:#444441}
+  .gap{background:#FCEBEB;color:#501313}
+  .warn{background:#FAEEDA;color:#412402}
+  .note{font-size:13.5px;background:#F1EFE8;border-left:3px solid #B4B2A9;padding:10px 14px;
+        margin:16px 0 0;border-radius:0;max-width:940px}
+  .note p{margin:0 0 8px}
+  .note p:last-child{margin:0}
+  .foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+</style>
+
+<h1>WMBI.CLUB_CARD_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side &nbsp;·&nbsp; 13,106,526 rows &nbsp;·&nbsp; evidence as of 18-Aug-2026</p>
+
+<div class="legend">
+  <span><i class="sw" style="background:#E1F5EE;border:1px solid #0F6E56"></i>live process</span>
+  <span><i class="sw" style="background:#FAEEDA;border:1px solid #854F0B"></i>injection from fact loads</span>
+  <span><i class="sw" style="background:#FAECE7;border:1px solid #993C1D"></i>fact dependency</span>
+  <span><i class="sw" style="background:#EEEDFE;border:1px solid #534AB7"></i>target table</span>
+  <span><i class="sw" style="background:#F1EFE8;border:1px dashed #B4B2A9"></i>dead, still in production</span>
+  <span>dashed line = does not execute</span>
+</div>
+
+<div class="wrap">
+<svg viewBox="0 0 1680 840" width="1680" height="840" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<g font-size="12" fill="#888780" font-weight="500">
+<text x="20" y="20">Source system</text>
+<text x="440" y="20">Pre-staging</text>
+<text x="880" y="20">Staging</text>
+<text x="1330" y="20">Target</text>
+</g>
+<line x1="20" y1="30" x2="1660" y2="30" stroke="#D3D1C7" stroke-width="0.5"/>
+
+<line x1="215" y1="117" x2="436" y2="117" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="655" y1="117" x2="876" y2="117" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="1105" y1="117" x2="1326" y2="117" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="1105" y1="231" x2="1200" y2="231" stroke="#854F0B" stroke-width="1.1"/>
+<line x1="1105" y1="293" x2="1200" y2="293" stroke="#854F0B" stroke-width="1.1"/>
+<path d="M1200 231 L1200 262 L1326 262" fill="none" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<path d="M1200 293 L1200 262" fill="none" stroke="#854F0B" stroke-width="1.1"/>
+<line x1="1105" y1="382" x2="1200" y2="382" stroke="#993C1D" stroke-width="1.1"/>
+<line x1="1105" y1="455" x2="1200" y2="455" stroke="#993C1D" stroke-width="1.1"/>
+<path d="M1200 455 L1200 382 L1326 382" fill="none" stroke="#993C1D" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="215" y1="560" x2="876" y2="560" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="1105" y1="560" x2="1326" y2="560" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="1105" y1="670" x2="1326" y2="670" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+
+<text x="20" y="48" font-size="12.5" font-weight="500" fill="#0F6E56">Live chain: AMS process, daily</text>
+<rect x="20" y="55" width="195" height="112" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M20 59a4 4 0 0 1 4-4h187a4 4 0 0 1 4 4v33H20z" fill="#E1F5EE"/>
+<line x1="20" y1="92" x2="215" y2="92" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="30" y="73" font-size="11" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">AMS_PROD.LogixXS.dbo</text>
+<text x="30" y="87" font-size="10.5" fill="#0F6E56">SQL Server · HQAnalytics connection</text>
+<g font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">
+<text x="30" y="110">CardIDs</text>
+<text x="30" y="125">Customers</text>
+<text x="30" y="140">CustomerExt</text>
+<text x="30" y="155">CustomerPreferences</text>
+</g>
+
+<rect x="225" y="101" width="200" height="32" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="325" y="114" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">move_data/</text>
+<text x="325" y="127" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">wmbi_pstg_ams_clubcard_src_feed</text>
+
+<rect x="440" y="55" width="215" height="126" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M440 59a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v33h-215z" fill="#E1F5EE"/>
+<line x1="440" y1="92" x2="655" y2="92" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="450" y="70" font-size="10" fill="#0F6E56" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="450" y="86" font-size="11" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">PSTG_AMS_CLUBCARD_SRC_FEED</text>
+<g font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#2C2C2A">
+<text x="450" y="108">CLUB_CARD_ID</text>
+<text x="450" y="123">CUSTOMER_ID</text>
+<text x="450" y="138">HOUSEHOLD_ID</text>
+</g>
+<line x1="440" y1="147" x2="655" y2="147" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="450" y="161" font-size="10.5" fill="#5F5E5A">Truncated and fully reloaded</text>
+<text x="450" y="174" font-size="10.5" fill="#5F5E5A">on every run</text>
+
+<rect x="675" y="101" width="180" height="32" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="765" y="114" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_pstg_club_card_dim</text>
+<text x="765" y="127" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_stg_club_card_dim</text>
+
+<rect x="880" y="55" width="225" height="126" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M880 59a4 4 0 0 1 4-4h217a4 4 0 0 1 4 4v33H880z" fill="#E1F5EE"/>
+<line x1="880" y1="92" x2="1105" y2="92" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="890" y="70" font-size="10" fill="#0F6E56" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="890" y="86" font-size="11" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">STG_CLUB_CARD_DIM_AMS</text>
+<g font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#2C2C2A">
+<text x="890" y="108">CLUB_CARD_KEY</text>
+<text x="890" y="123">CLUB_CARD_ID</text>
+<text x="890" y="138">CHECKSUM_VAL</text>
+</g>
+<line x1="880" y1="147" x2="1105" y2="147" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="890" y="161" font-size="10.5" fill="#0F6E56">6,951,875 rows · live</text>
+<text x="890" y="174" font-size="10.5" fill="#0F6E56">Last refreshed 18-Aug 21:36</text>
+
+<rect x="1130" y="101" width="172" height="32" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="1216" y="114" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_insert_update_</text>
+<text x="1216" y="127" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">club_card_dim</text>
+
+<text x="880" y="199" font-size="12.5" font-weight="500" fill="#854F0B">Live: injection from fact-load processes</text>
+<rect x="880" y="205" width="225" height="52" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M880 209a4 4 0 0 1 4-4h217a4 4 0 0 1 4 4v22H880z" fill="#FAEEDA"/>
+<line x1="880" y1="231" x2="1105" y2="231" stroke="#854F0B" stroke-width="0.6"/>
+<text x="890" y="223" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">STG_MARKETFORCE_SURV_RESP</text>
+<text x="890" y="248" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<text x="1095" y="248" font-size="10" fill="#854F0B" text-anchor="end">survey responses</text>
+
+<rect x="880" y="267" width="225" height="52" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M880 271a4 4 0 0 1 4-4h217a4 4 0 0 1 4 4v22H880z" fill="#FAEEDA"/>
+<line x1="880" y1="293" x2="1105" y2="293" stroke="#854F0B" stroke-width="0.6"/>
+<text x="890" y="285" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">STG_POS_POINTS_EARNED_F</text>
+<text x="890" y="310" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<text x="1095" y="310" font-size="10" fill="#854F0B" text-anchor="end">points earned</text>
+
+<rect x="1130" y="246" width="172" height="32" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="1216" y="259" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_ins_unappr_val_</text>
+<text x="1216" y="272" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">club_card_dim_no_date_param</text>
+
+<text x="880" y="341" font-size="12.5" font-weight="500" fill="#993C1D">Fact tables read by the post-load steps</text>
+<rect x="880" y="355" width="225" height="75" rx="4" fill="#fff" stroke="#993C1D" stroke-width="0.6"/>
+<path d="M880 359a4 4 0 0 1 4-4h217a4 4 0 0 1 4 4v22H880z" fill="#FAECE7"/>
+<line x1="880" y1="381" x2="1105" y2="381" stroke="#993C1D" stroke-width="0.6"/>
+<text x="890" y="373" font-size="11" font-weight="500" fill="#4A1B0C" font-family="ui-monospace,Menlo,monospace">WMBI.SALES_POS_TX_F</text>
+<g font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#2C2C2A">
+<text x="890" y="398">CLUB_CARD_KEY</text>
+<text x="890" y="413">ACCT_EFF_DT_KEY</text>
+</g>
+<text x="890" y="426" font-size="10" fill="#993C1D">Loaded earlier, by another process</text>
+
+<rect x="880" y="438" width="225" height="48" rx="4" fill="#fff" stroke="#993C1D" stroke-width="0.6"/>
+<path d="M880 442a4 4 0 0 1 4-4h217a4 4 0 0 1 4 4v22H880z" fill="#FAECE7"/>
+<line x1="880" y1="464" x2="1105" y2="464" stroke="#993C1D" stroke-width="0.6"/>
+<text x="890" y="456" font-size="11" font-weight="500" fill="#4A1B0C" font-family="ui-monospace,Menlo,monospace">WMBI.DT_DIM</text>
+<text x="890" y="480" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">DT_KEY</text>
+
+<rect x="1130" y="358" width="172" height="46" rx="3" fill="#fff" stroke="#F5C4B3" stroke-width="0.6"/>
+<text x="1216" y="371" font-size="10" fill="#993C1D" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_update_first_tx_dt</text>
+<text x="1216" y="385" font-size="10" fill="#993C1D" text-anchor="middle">The dimension reads the fact</text>
+<text x="1216" y="398" font-size="10" fill="#A32D2D" text-anchor="middle">Dependency never declared</text>
+
+<text x="20" y="500" font-size="12.5" font-weight="500" fill="#5F5E5A">Dead chains: still in production, no longer executing</text>
+<rect x="20" y="510" width="195" height="82" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<line x1="20" y1="536" x2="215" y2="536" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="528" font-size="11" font-weight="500" fill="#444441">Previous source system</text>
+<text x="30" y="556" font-size="10.5" fill="#5F5E5A" font-family="ui-monospace,Menlo,monospace">vw_wmbi_club_card</text>
+<text x="30" y="574" font-size="10.5" fill="#5F5E5A" font-family="ui-monospace,Menlo,monospace">eme_customer</text>
+
+<rect x="400" y="544" width="290" height="32" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="545" y="557" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_stage_club_card_dim</text>
+<text x="545" y="570" font-size="10" fill="#5F5E5A" text-anchor="middle">Last execution: 12-Aug-2020</text>
+
+<rect x="880" y="510" width="225" height="82" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<line x1="880" y1="536" x2="1105" y2="536" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="890" y="528" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_CLUB_CARD_DIM</text>
+<text x="890" y="556" font-size="10.5" fill="#5F5E5A">15,019,410 rows, frozen</text>
+<text x="890" y="574" font-size="10.5" fill="#A32D2D">No name or household data</text>
+
+<rect x="1130" y="544" width="172" height="32" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="1216" y="557" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_upsert_club_card_dim</text>
+<text x="1216" y="570" font-size="10" fill="#5F5E5A" text-anchor="middle">+ 4 enrichment flows</text>
+
+<rect x="880" y="638" width="225" height="64" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<line x1="880" y1="664" x2="1105" y2="664" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="890" y="656" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_CLUB_CARD</text>
+<text x="890" y="681" font-size="10.5" fill="#5F5E5A">0 rows · unchanged since 2016</text>
+<text x="890" y="695" font-size="10.5" fill="#5F5E5A">Original 2013 generation</text>
+
+<rect x="1130" y="654" width="172" height="32" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="1216" y="667" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_upsert_</text>
+<text x="1216" y="680" font-size="10" fill="#5F5E5A" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">club_card_dim</text>
+
+<rect x="1330" y="55" width="290" height="647" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M1330 59a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="1330" y1="92" x2="1620" y2="92" stroke="#534AB7" stroke-width="0.8"/>
+<text x="1342" y="73" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.CLUB_CARD_DIM</text>
+<text x="1342" y="87" font-size="10.5" fill="#3C3489">13,106,526 rows · 41 columns</text>
+
+<g font-size="10.5" font-family="ui-monospace,Menlo,monospace">
+<text x="1342" y="116" fill="#2C2C2A">CLUB_CARD_KEY</text><text x="1608" y="116" fill="#888780" text-anchor="end">PK</text>
+<text x="1342" y="134" fill="#2C2C2A">CLUB_CARD_ID</text><text x="1608" y="134" fill="#888780" text-anchor="end">UK</text>
+<text x="1342" y="152" fill="#2C2C2A">HOUSEHOLD_ID</text><text x="1608" y="152" fill="#888780" text-anchor="end">grouping</text>
+<text x="1342" y="170" fill="#2C2C2A">CUST_ID</text>
+<text x="1342" y="188" fill="#2C2C2A">FIRST_TX_DT</text><text x="1608" y="188" fill="#993C1D" text-anchor="end">from the fact</text>
+<text x="1342" y="206" fill="#2C2C2A">REC_UPDT_SRC_SYS</text><text x="1608" y="206" fill="#A32D2D" text-anchor="end">not reliable</text>
+<text x="1342" y="224" fill="#2C2C2A">EARN_POINTS_FL</text><text x="1608" y="224" fill="#A32D2D" text-anchor="end">source lost 2020</text>
+<text x="1342" y="242" fill="#2C2C2A">HOUSEHOLD_ID_OLD</text><text x="1608" y="242" fill="#A32D2D" text-anchor="end">no known writer</text>
+<text x="1342" y="260" fill="#888780">... 33 more columns</text>
+</g>
+
+<line x1="1330" y1="284" x2="1620" y2="284" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1342" y="302" font-size="11" font-weight="500" fill="#26215C">Post-load steps, on the loaded table</text>
+<g font-size="10.5" font-family="ui-monospace,Menlo,monospace" fill="#2C2C2A">
+<text x="1342" y="322">1. df_build_update_household_fl</text>
+<text x="1342" y="338">2. df_build_update_first_tx_dt</text>
+<text x="1342" y="354">3. df_build_update_points_earn_fl</text>
+</g>
+<text x="1342" y="372" font-size="10.5" fill="#3C3489">Step 2 is the one that reads the fact table.</text>
+<text x="1342" y="385" font-size="10.5" fill="#A32D2D">Step 3 lost its source in 2020.</text>
+
+<line x1="1330" y1="398" x2="1620" y2="398" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1342" y="416" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="1342" y="434" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">WMBI.CLUB_CARD_SEQ_TR</text>
+<text x="1342" y="450" font-size="10.5" fill="#3C3489">INSERT · enabled. Assigns the surrogate</text>
+<text x="1342" y="463" font-size="10.5" fill="#3C3489">key, which is why a fact-load process can</text>
+<text x="1342" y="476" font-size="10.5" fill="#3C3489">create a member on its own.</text>
+
+<line x1="1330" y1="490" x2="1620" y2="490" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1342" y="508" font-size="11" font-weight="500" fill="#26215C">Who consumes it</text>
+<text x="1342" y="526" font-size="10.5" fill="#3C3489">Around 1,100 WebFOCUS reports, plus the</text>
+<text x="1342" y="539" font-size="10.5" fill="#3C3489">Snowflake copy in BI_PROD.WMBI, which</text>
+<text x="1342" y="552" font-size="10.5" fill="#3C3489">ADF synchronises separately.</text>
+<text x="1342" y="574" font-size="10.5" fill="#A32D2D">The Databricks notebooks replicate the EME</text>
+<text x="1342" y="587" font-size="10.5" fill="#A32D2D">chain, which is the one that died in 2020.</text>
+
+<line x1="20" y1="730" x2="1660" y2="730" stroke="#D3D1C7" stroke-width="0.5"/>
+<rect x="20" y="748" width="1085" height="72" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.6"/>
+<path d="M20 752a4 4 0 0 1 4-4h1077a4 4 0 0 1 4 4v22H20z" fill="#EEEDFE"/>
+<line x1="20" y1="774" x2="1105" y2="774" stroke="#534AB7" stroke-width="0.6"/>
+<text x="30" y="766" font-size="11" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">pf_ams_club_card_dim_process, orchestrator of the live chain</text>
+<text x="30" y="792" font-size="10.5" fill="#3C3489">Chains the six steps in order and sends an e-mail when it finishes. A seventh step, df_build_pstg_ams_clubcard_src_feed, is left unwired and never runs.</text>
+<text x="30" y="808" font-size="10.5" fill="#A32D2D">Schedule to be confirmed: the header says daily at 05:00, the data shows activity at 05:21 to 06:30 and again at 21:36 to 22:34. Alerts go to a single mailbox.</text>
+<path d="M1105 784 L1200 784 L1200 690 L1326 690" fill="none" stroke="#534AB7" stroke-width="1.1" stroke-dasharray="3 3" marker-end="url(#a)"/>
+</svg>
+</div>
+
+<h2>Dependencies</h2>
+
+<h3>Tables built exclusively to load this dimension</h3>
+<p class="intro">Nothing outside this chain reads them. They are truncated and reloaded on every run and hold no history.</p>
+
+<table>
+<tr><th>Table</th><th>Status</th></tr>
+<tr><td><code>WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED</code></td><td><span class="tag live">live</span></td></tr>
+<tr><td><code>WMBI_ETL.STG_CLUB_CARD_DIM_AMS</code></td><td><span class="tag live">live</span></td></tr>
+<tr><td><code>WMBI_ETL.STG_CLUB_CARD_DIM</code></td><td><span class="tag dead">dead</span></td></tr>
+<tr><td><code>WMBI_ETL.STG_CLUB_CARD</code></td><td><span class="tag dead">dead</span></td></tr>
+</table>
+
+<div class="note">
+<p><strong>Pending confirmation.</strong> There is probably one more intermediate table in this group. <code>df_build_pstg_club_card_dim</code> runs between the pre-staging and the staging build, and we have not read it yet, so its target table is unknown.</p>
+</div>
+
+<h3>Tables owned by other processes</h3>
+<p class="intro">Not created for this dimension, but it either reads from them or receives rows through them.</p>
+
+<table>
+<tr><th>Table</th><th>How it feeds the dimension</th><th>Status</th></tr>
+<tr><td><code>AMS_PROD.LogixXS.dbo</code><br><span style="font-size:12px;color:#888780">CardIDs · Customers · CustomerExt · CustomerPreferences</span></td><td>The actual source of the data, on SQL Server. External to the warehouse</td><td><span class="tag live">live</span></td></tr>
+<tr><td><code>WMBI.SALES_POS_TX_F</code></td><td>Read by post-load step 2 to compute <code>FIRST_TX_DT</code>. Must be loaded first, but nothing verifies it</td><td><span class="tag warn">implicit</span></td></tr>
+<tr><td><code>WMBI.DT_DIM</code></td><td>Read in the same step, to turn <code>ACCT_EFF_DT_KEY</code> into a calendar date</td><td><span class="tag warn">implicit</span></td></tr>
+<tr><td><code>WMBI_ETL.STG_MARKETFORCE_SURV_RESP</code></td><td>The survey load injects 14,221 placeholder members. Source data comes from MarketForce, an external vendor delivering by file</td><td><span class="tag warn">injects rows</span></td></tr>
+<tr><td><code>WMBI_ETL.STG_POS_POINTS_EARNED_F</code></td><td>The POS points load injects 962 placeholder members</td><td><span class="tag warn">injects rows</span></td></tr>
+</table>
+
+<h3>Tables that depend on WMBI.CLUB_CARD_DIM</h3>
+<p class="intro">Any table carrying <code>CLUB_CARD_KEY</code> needs this dimension migrated first. Only the first row is confirmed from code; the rest are candidates identified from the staging inventory.</p>
+
+<table>
+<tr><th>Table</th><th>Relationship</th><th>Evidence</th></tr>
+<tr><td><code>WMBI.SALES_POS_TX_F</code></td><td>Carries <code>CLUB_CARD_KEY</code>. This dependency runs <strong>both ways</strong>: the fact needs the key from the dimension, and the dimension later reads the fact to fill <code>FIRST_TX_DT</code></td><td>confirmed in code</td></tr>
+<tr><td><code>POINTS_EARNED_REDEEMED_F</code> · <code>AMS_POINT_ACT_F</code> · <code>AMS_POS_POINTS_EARN_F</code> · <code>AMS_TX_REWARD_F</code> · <code>POS_POINTS_EARNED_F</code> · <code>MANUAL_POINT_ADJ_F</code></td><td>Loyalty-points facts, all recorded per member</td><td>inferred from names</td></tr>
+<tr><td><code>POS_TX_TENDER_F</code> · <code>MARKETFORCE_WEIS2GO_F</code> · <code>FUEL_PRTNR_PRGM_F</code> · <code>SUNOCO_FUEL_PRTNR_PRGM_F</code> · <code>RX_DAILY_SCRIPT_F</code> · <code>RX_WKLY_SCRIPT_F</code></td><td>Other customer-level facts: tender, orders, fuel partner programme, pharmacy</td><td>inferred from names</td></tr>
+<tr><td><code>CLUB_CARD_ATTRIB_XREF</code> · <code>AMS_OFFER_GRP_XREF</code> · <code>CUSTOMER_ATTR_XREF</code></td><td>Cross-references attaching attributes and offer groups to each card</td><td>inferred from names</td></tr>
+<tr><td>~1,100 WebFOCUS reports · <code>BI_PROD.WMBI</code> in Snowflake</td><td>End consumers. The Snowflake copy is synchronised separately by ADF</td><td>from the report catalogue</td></tr>
+</table>
+
+<h3>Not counted as dependencies</h3>
+<div class="note">
+<p><strong><code>vw_wmbi_club_card</code> and <code>eme_customer</code> are out of scope.</strong> They were the previous source and have not fed anything since August 2020, so there is no reason to migrate them. Worth keeping on record for one reason: the opt-out data behind <code>EARN_POINTS_FL</code> lived there, and AMS does not send it.</p>
+</div>
+
+<h3>The 4 enrichment flows of the EME chain</h3>
+<p class="intro">These followed <code>df_upsert_club_card_dim</code> in the dead chain. All four belong to the <code>df_club_card_resolve_*</code> family.</p>
+
+<table>
+<tr><th>Flow</th><th>Writes to</th></tr>
+<tr><td><code>df_club_card_resolve_household_flags</code></td><td>dimension</td></tr>
+<tr><td><code>df_club_card_resolve_first_tx_dt</code></td><td>dimension</td></tr>
+<tr><td><code>df_club_card_resolve_earn_points_fl_stg</code></td><td><strong>staging</strong></td></tr>
+<tr><td><code>df_club_card_resolve_earn_points_fl_update</code></td><td>dimension</td></tr>
+</table>
+<p class="intro" style="margin-top:8px">Three write to the dimension. The third writes back to staging, which is why that table now holds only earn-points data.</p>
+
+<h2>The three generations, in order</h2>
+<p class="intro">The dimension has been loaded by three different implementations over twelve years. Each arrived with a change of source system, and none of the previous ones was ever removed.</p>
+
+<table>
+<tr><th>Period</th><th>Flow that loads the dimension</th><th>From</th></tr>
+<tr><td>2013</td><td><code>df_wmbi_upsert_club_card_dim</code></td><td><code>STG_CLUB_CARD</code></td></tr>
+<tr><td>~2014 to 2020</td><td><code>df_upsert_club_card_dim</code></td><td><code>STG_CLUB_CARD_DIM</code> (EME)</td></tr>
+<tr><td>2020 to today</td><td><code>df_build_insert_update_club_card_dim</code></td><td><code>STG_CLUB_CARD_DIM_AMS</code></td></tr>
+</table>
+
+<h2>Questions for the Weis team</h2>
+
+<table>
+<tr><th>Question</th><th>Why it matters</th></tr>
+<tr><td>Should <code>STG_CLUB_CARD_DIM</code> and <code>STG_CLUB_CARD</code> be migrated, or can they be retired?</td><td>Nothing has written to them since 2020 and 2016. Our recommendation is to retire both, but the first still holds 15 million rows and we cannot rule out that something reads it</td></tr>
+</table>
+
+<p class="foot">Wizeline · Weis Markets discovery · table-level relational diagram, Oracle / DataMigrator side · 19-Aug-2026</p>
