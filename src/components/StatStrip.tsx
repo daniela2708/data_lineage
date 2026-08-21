@@ -1,15 +1,17 @@
-import { DATA, tablesInLegacyReporting, tablesWithoutPipeline } from '../data/dataset'
+import { DATA } from '../data/dataset'
 
 /** Counts that frame the whole prototype. Every one is derived, none is typed in. */
 export default function StatStrip() {
+  const tracedTable = DATA.tables.find((table) => table.id === DATA.flow.id)
+  const interactingPipelines = new Set([
+    ...(tracedTable?.pipeIds.map((id) => DATA.pipelines.find((pipeline) => pipeline.id === id)?.name ?? id) ?? []),
+    ...DATA.flow.nodes.flatMap((node) => (node.pipe ? [node.pipe] : [])),
+  ])
   const stats: [string, number][] = [
-    ['Tables tracked', DATA.meta.total],
-    ['In Phase 1 scope', DATA.meta.inScope],
-    ['Traced end to end', 1],
-    ['Pipelines', DATA.meta.pipelines],
-    ['Triggers', DATA.meta.triggers],
-    ['Read by legacy reporting', tablesInLegacyReporting.length],
-    ['No pipeline recorded', tablesWithoutPipeline.length],
+    ['End-to-end trace', 1],
+    ['Documented steps', DATA.flow.nodes.length],
+    ['Interacting pipelines', interactingPipelines.size],
+    ['Business cases', tracedTable?.bcs.length ?? 0],
   ]
 
   return (

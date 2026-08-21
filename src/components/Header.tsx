@@ -10,8 +10,8 @@ export default function Header() {
           <span className="eyebrow">Data platform modernization · Discovery</span>
           <h1>Data Lineage Explorer</h1>
           <p className="sub">
-            Follow a documented table path from source to publication, inspect any table in the
-            catalog, or scan the complete Phase 1 estate. Every view redraws directly from the data.
+            Follow the documented path for CLUB_CARD_DIM from its source tables to publication,
+            including its dependencies, related pipelines, and known downstreams.
           </p>
         </div>
         <div className="brand" aria-label="Weis Markets in collaboration with Wizeline">

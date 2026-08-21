@@ -2,11 +2,9 @@
 
 Interactive prototype for the data platform modernization discovery. React + Vite + TypeScript.
 
-It answers three questions that a static diagram cannot:
-
-1. **Animated flow** plays one table's chain step by step, from the operational source tables to the published table in Snowflake.
-2. **Table view** shows any table in the catalog with the source system, triggers and pipelines behind it, and what depends on it.
-3. **Whole estate** groups the tables in scope by the pipeline that loads them, with a dashed lane for the ones whose loading process is not documented anywhere.
+It presents a single interactive story for `CLUB_CARD_DIM`: an animated end-to-end trace,
+the tables created or required along the way, known downstreams, key catalog details, and the
+pipelines that interact with it.
 
 ## Running it
 
@@ -32,7 +30,7 @@ Import the GitHub repository into Vercel. The included `vercel.json` installs wi
 
 ```
 src/
-  App.tsx                    view switching, filters, selection
+  App.tsx                    single-page application shell
   types.ts                   the dataset contract, documented field by field
   data/
     lineage.json             generated browser-ready cache of the Excel catalog
@@ -44,7 +42,7 @@ src/
   hooks/
     useFlowTimeline.ts       one requestAnimationFrame loop, play, pause, speed
   components/
-    Header, StatStrip, Toolbar, TableList
+    Header, StatStrip
     flow/    FlowView, FlowRail, StepCard
     table/   TableView, LineageGraph
     estate/  EstateView
@@ -57,9 +55,12 @@ src/
 
 **Zone colour** walks the layers from dark to red as the data moves towards published: SQL Server, Landing, Raw, Bronze, Silver, Gold, CSV, Snowflake. Also in `lib/tokens.ts` as `zoneColor()`.
 
-## Adding another traced table
+## Traced table model
 
-The animated diagram is generated from a list of steps, not drawn. To add a second table, append to `flow` in `src/data/lineage.json` following the `Flow` type in `src/types.ts`, then render `FlowView` against it. Nothing in `flowLayout.ts` is specific to the table that is traced today: the band above the rail grows a row per side input, the rail grows a column per step, and the timeline recomputes.
+The animated diagram is generated from the `flow` list of steps rather than drawn by hand.
+`FlowView` currently presents the single curated `CLUB_CARD_DIM` trace. Nothing in
+`flowLayout.ts` is specific to that table: the band above the rail grows a row per side input,
+the rail grows a column per step, and the timeline recomputes.
 
 A step looks like this:
 

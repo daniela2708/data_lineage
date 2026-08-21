@@ -229,6 +229,20 @@ svg{display:block;width:100%;height:auto;overflow:visible}
   text-transform:uppercase;margin-top:3px;overflow-wrap:anywhere}
 .relationship-empty{padding:13px;border:1px dashed var(--n-d2);border-radius:7px;color:var(--n-darkest);
   background:rgba(255,255,255,.65);font-size:12px;line-height:1.5}
+.dependency-card{padding:24px}
+.dependency-card .relationship-heading{margin-bottom:18px}
+.downstream-column{border-color:var(--red-lightest)}
+.table-summary .lead{margin-bottom:16px}
+.pipeline-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+  padding-bottom:16px;margin-bottom:14px;border-bottom:1px solid var(--n-darker)}
+.pipeline-heading h3{margin:0;font-size:20px}
+.pipeline-heading>strong{display:grid;place-items:center;min-width:34px;height:30px;border-radius:999px;
+  background:var(--red);color:var(--white);font-family:var(--mono);font-size:11px}
+.pipeline-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.pipeline-list>div{padding:12px 14px;border:1px solid var(--n-darker);border-radius:9px;background:var(--n-lighter)}
+.pipeline-list strong{display:block;font-size:13px;overflow-wrap:anywhere}
+.pipeline-list span{display:block;margin-top:4px;font-family:var(--mono);font-size:9px;color:var(--n-darkest);
+  text-transform:uppercase;letter-spacing:.04em;overflow-wrap:anywhere}
 
 .note{border-left:3px solid var(--red);background:var(--white);padding:13px 17px;
   border-radius:0 var(--r-sm) var(--r-sm) 0;margin:0 0 18px;font-size:13px}
@@ -317,6 +331,8 @@ footer span{font-family:var(--mono);text-transform:uppercase;letter-spacing:.09e
   main{padding-block:24px 40px}
   .wrap{border-inline:0}
   .flow-heading{display:block}.flow-route{margin-top:12px}
+  .pipeline-list{grid-template-columns:1fr}
+  .relationship-heading{display:block}.relationship-heading>span{display:inline-block;margin-top:10px}
   .history-heading{display:block}.history-heading>span{display:inline-block;margin-top:10px}
   .note-history{grid-template-columns:1fr;padding-inline:14px}
   .history-entry{grid-template-columns:1fr;gap:9px}
