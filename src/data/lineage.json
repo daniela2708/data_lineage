@@ -1,0 +1,4806 @@
+{
+ "tables": [
+  {
+   "id": "TBL-MER-FC-010",
+   "name": "SALES_DAILY_BUDGET_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Sales Planning / Budgeting",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Wave 1",
+   "disp": "Build",
+   "status": "In Progress",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/27/26: Everything looks prior to REC_CREATE_DT 3/19/26. Will wait until next Snowflake update to see if newer records match.\n 1/15: Harry and Jeff to work with Datavail file came from Kronos Jeff will assist"
+  },
+  {
+   "id": "TBL-MER-DM-006",
+   "name": "ITEM_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Item Master",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 4,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "Review",
+   "cplx": "High",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS",
+    "PL_ORCH_ALL_DB_TO_LANDING"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-002",
+    "PL-004"
+   ],
+   "inwf": true,
+   "note": "6/22: Push table to SF when unapproved reocrds are inserted into Databricks6/9: Identifying unapproved records in Oracle but not in SF 3/18: records are Unapproved records will research issue 3/17: Job in Oracle not updating in SF 3/11: 39 rows are from Inventory_As_Counted will research 3/10: Add filter to check Tlog for new records 3/9: Will update table synch databricks 3/6: should drop below 100 on 3/9 Unapproved items came over to Azure 3/5: There are 6 scan codes with mismatched values and a couple items that may be duplicates. Details are in DevOps. HS Inventory_As_Counted not working will research Contact JH for BCG Definition for testing 3/4: Will follow up with MZ on BCG observation of 70% complete. (27) inventory as counted records of the unapproved process 1/30: Ran tests excluding Unapproved items. Found 5 items that were updated in Snowflake on 1/30 and Oracle hasn't been updated yet. Everything else looks good with the exception of the known issue with character set mismatches.\n 9/15: Per JF Double slashes issue is minor table can be used today if needed 9/12: Will conduct testing review decision on odd characters from HQ 6/30 JME - Testing looks good will check until 7/7 6/24: Unapproved inserts update to match Oracle 6/23: HS Updated the code and is ready for retesting ITEM_WAREHOUSE_CD has null in Oracle and blank in Snowflake\n 6/16: ITEM_BRAND_NM variance Null and Blank. 6/10: Per Mike HS make it match Oracle 6/4: dups removed. Variance being investigated"
+  },
+  {
+   "id": "TBL-MER-DM-001",
+   "name": "BAR_CD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "HQ",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Build",
+   "status": "In Progress",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "2/2/26: still no records after REC_CREATE_DT 4/2/25\n 9/10: reviewed table. There haven't been any record updates since 4/2/25\n 7/8: HS: there is only an update to the table...this is done through the SALES_POS_LN process. Need process to update SF. HS to review code with JME 4/3: Tested and found variance of 122 more records in Oracle. All of the records were created 4/2 through 4/3. Prepare for testing 4/3 3/14: HS is researching DataMigrator 3/5: Path found for creating a notebook No notebooks, used in other notebooks. Should be defined and built"
+  },
+  {
+   "id": "TBL-WHS-FC-001",
+   "name": "LOC_ORDER_FILL_RATE_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Warehouse",
+   "type": "Fact",
+   "src": "WMS",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Build",
+   "status": "In Progress",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "5/7: Per MZ low priority 4/11: No data in Oracle updated. Rod Note says code runs and no new rows to find. 3/26: Copy from Oracle to SF. Backlog and review Itasca checksum column issue being will continue testing"
+  },
+  {
+   "id": "TBL-MER-FC-006",
+   "name": "POG_CATGY_DIR_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Planogram System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Build",
+   "status": "Pending Review",
+   "cplx": "Low",
+   "owner": "Dhanish",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "6/18: Per MZ in review 5/21: JF As used for EA1045 Planogram Category Directory Report which has been deprecated. Oracle data can be copied to Snowflake to preserve, data will not need to be updated on a schedule.\n  Per MZ Tabled until further review\n  5/19: JF researching who uses this table 4/29: Oracle's count has increased by 1,892 records. Oracle's max FISCAL_WK_END_DT_KEY is now 2/25/23. It was 2/18/23 prior to today."
+  },
+  {
+   "id": "TBL-MKT-DM-005",
+   "name": "CLUB_CARD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Loyalty / Offer Engine",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "7/13: Counts will change. SF now report 7 more rows than Oracle. 7 rows are from Unapproved Sales Line. 6/11: Researching records in Oracle that dont appear in SF 5/22: Duplicates cleared. SF/WMBI should sync over the weekend. Points earned isse is causing duplicates 5/20: There are duplicates in Snowflake. The REC_CREATE_SRC_SYS is 'Unapproved: POS_POINTS_EARN_F' for all 592 rows.\n 5/18: Issue with client token secrete 5/13: Will confirm table is in synch 4/27: 0 varience AMS synch researching and monitor for 2wks. 4/14:Rewriting SUNOCO Fuel Partner Program then watch for 1 week. 4/7: Monitor for 1 week 4/6: There are still discrepancies in the PREASGN_STORE_NUM, BSKT_DISC_OPT_FL, EARN_POINTS_FL & HOUSEHOLD_ID_OLD values in CLUB_CARD_DIM Monitor until 4/8 flag update pending 3/26: Variance back to 0 due to timing 3/19: Monitor for a week. 3/18: 2 Cleared will research 4 new that appeared 3/17: There are 2 CLUB_CARD_IDs that aren't flagged with HOUSE_HOLD_EMPLYE_FL = Y 3/16: Moved flags to Bronze check 3/17 3/13: Synched Silver table of what changed observe til 3/16 3/12: Gold table update 3/11: NULL values need turned into a flag and tested 3/10: HS updated code will verify update for Gold card on 3/11 3/9: the issue with HOUSE_HOLD_EMPLYE_FL still exists. 3/5: Monitor for 1 week HS Cleaned up TX dates this was a delayed record check a time stamp rather a date check. a handful of records will be out of synch (23) showing off. 3/5 3/2:Source table had a space and running a test AMS_Points_Act_F feed HS completing final code update for testing of unapproved process 2/27 Code updated, checking job that didn't run that left 1 row. HS 4 flags that have to be researched 2/25: HS Will meet with Mike to discuss business decisions needed some tables in Oracle not updated since 2020 HS May be a timing. 2/13 The counts are off for 2/11/26. SF - 440, Oracle 732. I tested both 2/10 & 2/11 and found that the same issues exist with the values either missing or mismatched in the FIRST_TX_DT, EMAIL_ADDR, EMPLYE_FL, CARD_ISSUE_DT, BSKT_DISC_OPT_FL, EARN_POINTS_FL, MID_NM, PHONE, APPRV_REC_IND, CUST_ID, LAST_NM, FIRST_NM, HOUSEHOLD_ID, ST_ADDR_LN1, CITY, ST, ZIP1 & GOLD_CARD_FL columns.2/5: Researching rows that are being inserted (1) item remaining 1/27: 2 issue 1 Azure and WMBI issue(3) rows rewrote AMS_TX_REWARDS process which is working now researching WMBI stide will replicate on Azure side down to (6) rowsremediating unapproved process for remaining rows 1/23: 8 rows remining will continue to research 1/22: Reseaching 171 row appeared checking old code. 1/20: Checking 9 addtl rows for resolution 1/19: HS is Testing unapproved CC's update from various systems doing analysis check 1/22 10/21: SF continues to have more records than Oracle. There are still issues with the FIRST_TX_DT, CARD_ISSUE_DT, BSKT_DISC_OPT_FL, HOUSE_HOLD_GOLD_CARD_FL, EARN_POINTS_FL, HOUSE_HOLD_EMPLYE_FL, PREASGN_STORE_NUM, HOUSEHOLD_ID_OLD fields 10/20 The variance is unapproved club cards from various systesm will research 10/17: Running manuel process to see if only unapproved changes remaining will do reconciliation process on Monday 9/24 Issues with several\"Blank and Null\" fields not matching. See email and DevOps card for details 9/19: Variance is due to a cardholder is linked to a households which caused duplicates 9/18: Variance may be new club card customers Rewrote SQL code and testing results 9/16: Testing rewritten code there are multiple club_card_ids for transactions. Will review the DM code. Issues with several fields. SF count is higher than Oracle's.7/8: HS There are 3 post processes First_TX done, Household FL & Points Earn FL TBD (to be done), 7/2: Disabling Gold to Silver Synch to remove duplicates 7/1: HS Created a custom query check 7/2: 6/30: HS researching possible query issue 6/23: same issues with missing data in some cases in the customer data is in Oracle and not in SF. 6/19: Ready for testing 6/20 Cleared filter that didn't match origianl code6/2: HS - Researching variances between SF and Oracle"
+  },
+  {
+   "id": "TBL-STO-FC-001",
+   "name": "DAX_STOCK_COUNT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "Itasca",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Build",
+   "status": "Not Started (Mike mentioned in 2/11 WS that will no longer exist)",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/27: Most recent data is 2021 copy Oracle to SF no Notebook required"
+  },
+  {
+   "id": "TBL-MER-FC-011",
+   "name": "SALES_POS_LN_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4",
+    "BC5"
+   ],
+   "bcn": 5,
+   "layer": "T3 Facts",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "Prachinnath",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "5/28/26: - Per Datavail table is ready for testing 1/20: SELLING_UNIT mismatches from 1/15 still exist\n 1/19: tested data for 1/15 and found issues with SELLING_UNIT. Will review some same trx on 1/20 to see if they've reconciled\n 11/6: Ron completed the Selling_Unit table JME to test 8/20: Reviewed BAR_CD, LINK_CD and RSN_IDs for 8/19 trx and found some minor discrepancies with the BAR_CD and LINK_CDs that likely have to do with the timing of Harry's updates with the tables. RSN_IDs look good. Will review again tomorrow & report back any issues. \n 8/4: JME documenting issues for HS 7/10: JME barcodes missing HS will research 7/8: I still see the issues with the GL_ACCT_ID and ITEM_SCAN_CD_ID mismatches. There's also an issue with RSN_ID and BAR_CD mismatches.\n 7/2: Rolling back data"
+  },
+  {
+   "id": "TBL-MER-FC-012",
+   "name": "SALES_POS_TX_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC4"
+   ],
+   "bcn": 3,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Passed",
+   "cplx": "High",
+   "owner": "Prachinnath",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-004"
+   ],
+   "inwf": true,
+   "note": "5/28/26: - Per Datavail table is ready for testing 5/8/26: counts and values are off intermittently. Values look good on days where counts match\n 11/4: I tested a couple transactions that Ron manually approved, and everything matches across databases. I'll do more testing later in the week.\n 10/22: I ran some tests against the table going back 6 or 7 days. Everything looks ok.\n 9/2: JME testing failed updated ticket 8/22: JME tax amount issue 8/15: There's a count discrepancy for 8/14. I'll continue to monitor through next week.The issue with missing CLUB_CARD_IDs when joined with the CLUB_CARD_DIM table still exists. I think we should hold off on marking as complete until this issue is resolved because it will require more testing. \n 8/14: JME is testing previous issues before marking complete 5/30: issue with data missing in Snowflake that's in the bronze table, but not in Silver/Gold.It looks like the issue started around 5"
+  },
+  {
+   "id": "TBL-STO-FC-002",
+   "name": "INV_AS_COUNTED_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "Itasca",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2"
+   ],
+   "bcn": 2,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "Reassign",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/2/26: Last COUNT_DT_KEY in Snowflake is 45896 (8/27/25) where Oracle's is 2/2/26\n 8/28: JME Unit_Cost Oracle has Null where SF has 0 \n 8/25: mismatches due to Item_Dim 8/20: Table will be ready for testing once ITEM_DIM issue is resolved8/19: Testing incremental load is working will monitor for a few days 8/14: Issue with binary fixed and reloading table 8/8: still no data after 4/9"
+  },
+  {
+   "id": "TBL-PRM-FC-001",
+   "name": "AD_ITEM_PLACEMENT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Promo",
+   "type": "Fact",
+   "src": "Ad/Promo Planning System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: No data since 2019 MZ No notebook"
+  },
+  {
+   "id": "TBL-FIN-FC-001",
+   "name": "AP_VCHR_DISTB_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Fact",
+   "src": "ERP (AP)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/15/24: jme - No need to test. No data in either database's table."
+  },
+  {
+   "id": "TBL-MER-OT-001",
+   "name": "BEERTXS",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "",
+   "src": "Regulatory / Alcohol Sales Extract (from POS)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "Excluded"
+  },
+  {
+   "id": "TBL-HUM-FC-001",
+   "name": "COVID19_RAW_LABOR_COST_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Human Capital",
+   "type": "Fact",
+   "src": "Special Tracking / HR+Payroll",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: Pandemic over not needed"
+  },
+  {
+   "id": "TBL-REF-OT-001",
+   "name": "EXCHG",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Reference",
+   "type": "",
+   "src": "Treasury / FX Rates Feed",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "No Notebook",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-REF-OT-002",
+   "name": "EXCHG_NP",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Reference",
+   "type": "",
+   "src": "Treasury / FX Rates Feed",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/15/24 - jme - No need to test. No data in either database's table."
+  },
+  {
+   "id": "TBL-FIN-FC-002",
+   "name": "GL_BUDGET_PER_TX_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Fact",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_ALL_DB_TO_LANDING"
+   ],
+   "pipeIds": [
+    "PL-004"
+   ],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-FIN-SN-001",
+   "name": "GL_DEPT_DAILY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "SNAP",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/28/24 lara Can't find notebook. Task Removed"
+  },
+  {
+   "id": "TBL-FIN-FC-003",
+   "name": "GL_DEPT_ITEM_WEEKLY_SUM_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Fact",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-FIN-FC-004",
+   "name": "GL_JOURNAL_ENT_TX_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Fact",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-FIN-SN-002",
+   "name": "GL_PER_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "SNAP",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook"
+  },
+  {
+   "id": "TBL-FIN-SN-003",
+   "name": "GL_PER_ZERO_BALANCE_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "SNAP",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook"
+  },
+  {
+   "id": "TBL-FIN-SN-004",
+   "name": "GL_WKLY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "SNAP",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook"
+  },
+  {
+   "id": "TBL-ITS-OT-001",
+   "name": "GLOSSARY",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "IT",
+   "type": "",
+   "src": "BI / Data Catalog / Definitions",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: No process needed No Notebook"
+  },
+  {
+   "id": "TBL-MER-DM-005",
+   "name": "ITEM_ATTRIB_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Item Attributes",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "No Notebook",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-STO-FC-003",
+   "name": "ITEM_INV_ACTIVITY_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "Itasca",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/18/24 - jme - No need to test. No data in either table."
+  },
+  {
+   "id": "TBL-PRC-FC-006",
+   "name": "LOC_PENDG_DSD_INVOICE_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "DSD Invoice Processing",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/20/24 - jme - No need to test. No data in either table."
+  },
+  {
+   "id": "TBL-DST-FC-001",
+   "name": "LOC_PENDG_TRANSFER_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Distribution",
+   "type": "Fact",
+   "src": "RMS",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "No Notebook",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "Compares shouldn't be done on this table. It's loading table for LOC_TRANSFER_F"
+  },
+  {
+   "id": "TBL-PRC-DM-004",
+   "name": "LOC_SUPPL_ITEM_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Biceps",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/19: Per MZ exclude, the last record create or record update date was from 2020 1/16: jme - Although the counts match, there are 5 LOC_SUPPL_ITEM_KEYs that have a mismatch in the SUPPL_ITEM_DESC_1 values. There's a question mark in Snowflake and an upside-down question mark in Oracle."
+  },
+  {
+   "id": "TBL-PRC-FC-007",
+   "name": "LOC_SUPPL_PURCH_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "Biceps",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/17: jme - The counts and values match. There is no data in the tables after December 2019\n 1/16: Per MZ check to see if data is stale"
+  },
+  {
+   "id": "TBL-MKT-OT-001",
+   "name": "MEGA_SALE_ITEM_BILLING_CDS",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "",
+   "src": "Vendor Funding / Promo Billing",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "Jeff",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: Old promotional program no longer exists"
+  },
+  {
+   "id": "TBL-MER-OT-002",
+   "name": "PLAN_TABLE",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "",
+   "src": "Planning/Budgeting System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Dev Session Information"
+  },
+  {
+   "id": "TBL-MER-SN-001",
+   "name": "POS_DEPT_DAILY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "SNAP",
+   "src": "POS System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook"
+  },
+  {
+   "id": "TBL-MER-SN-002",
+   "name": "POS_DEPT_ITEM_DAILY_COST_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "SNAP",
+   "src": "POS System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "High",
+   "owner": "Harry",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/31: Per Jeff, Build a SNAP table in SF 2/28: Harry to Research how SNAP is built in Oracle"
+  },
+  {
+   "id": "TBL-MER-SN-003",
+   "name": "POS_ITEM_LOC_YR_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "SNAP",
+   "src": "POS System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook"
+  },
+  {
+   "id": "TBL-MER-OT-003",
+   "name": "PRIVATEBRAND",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "",
+   "src": "Private Label/Brand Master",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: Doesn't meet standards this is a utility table"
+  },
+  {
+   "id": "TBL-FIN-DM-008",
+   "name": "PROD_GL_DEPT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "Product→GL Dept Mapping",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: Old data from a copy no recent dates"
+  },
+  {
+   "id": "TBL-MER-DM-021",
+   "name": "PROD_POS_DEPT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Product→POS Dept Mapping",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: Old data from a copy no recent dates"
+  },
+  {
+   "id": "TBL-ITS-DM-002",
+   "name": "RPT_GRP_ITEM_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "IT",
+   "type": "Dimension",
+   "src": "BI / Reporting Layer",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Medium",
+   "owner": "Mousumi\\Nod",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "9/11: No development needed replicate from WMBI There's no schedule.Sourced from WMBI. Oracle table is manually updated.\n 3/10: Verifying duplicates found possible Nod fixed. Sent to Mousumi\n 3/6: Manually removed QUOTATION MARKS will research how to disable for future record updates with Nod 3/3: counts and values match, ready to mark complete.\n 2/21: Monitor until 2/26 2/20: Per Jeff manually remove quotes from the notbook, will be manually updated in SF, Jeff will follow up with Ron jme-issue with one record having no quotation marks in Oracle and having them in Snowflake in the User_Comment field.\n 2/17: Monitor until 2/24 Reviewing several issues even though counts match 2/13(Mousumi) : Bypassed the additional partition file which was causing 4 extra records. Now Snowflake is matching with Oracle.\n \n\n 02/13: Will manually delete files one time resolution (Mousumi): There are 4 records more in Snowflake than Oracle. I identified the partition file in raw where this data came. There is a partition file received on 01/31/2025(abfss://raw@azdlsdsdwhprd01.dfs.core.windows.net/sc_p_ex1_scan/wmbi/wmbi/rpt_grp_item_xref/part-00000-3e6a0604-ec06-4378-8d5e-3ab56d930f54.c000.snappy.parquet). I have checked this file alone, it has 4 same records which are extra in snowflake."
+  },
+  {
+   "id": "TBL-ITS-DM-004",
+   "name": "RPT_GRP_VENDOR_ITEM_CD_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "IT",
+   "type": "Dimension",
+   "src": "BI / Reporting Layer",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/20:current sourcing of WMBI needs to be modified in Notebooks; JJF to follow up Jeff to research 11/21/24 - jme - No need to test. No data in either table."
+  },
+  {
+   "id": "TBL-PHR-FC-001",
+   "name": "RX_DAILY_EXTRACT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Pharmacy",
+   "type": "Fact",
+   "src": "Pharmacy Management System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/21/24 - jme - No need to test. No data in either table."
+  },
+  {
+   "id": "TBL-PHR-FC-003",
+   "name": "RX_WKLY_SCRIPT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Pharmacy",
+   "type": "Fact",
+   "src": "Pharmacy Management System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: No recent data since 2020"
+  },
+  {
+   "id": "TBL-FAC-DM-001",
+   "name": "SALES_AREA",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Facilities",
+   "type": "Dimension",
+   "src": "Sales Area / Store Layout Master",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "Sri",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "1/17: jme - Sri updated the Snowflake table with the missing record. All counts and values now match.\n 1/13: jme - SALES_AREA_ID 319 is still missing from Snowflake even though the table shows as being updated on a regular basis through ETL Grp 6\n 12/18: Manually maintained in Oracle"
+  },
+  {
+   "id": "TBL-FAC-OT-001",
+   "name": "SALES_AREA_ASSIGN",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Facilities",
+   "type": "",
+   "src": "Sales Area / Store Layout Master",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "Sri",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "1/17: jme - Sri updated the Snowflake table with the missing data. All counts and values now match.\n 1/13: jme - SALES_AREA_ID 319 is missing values in the LASTCHGBY and LASTCHGDATE fields.\n Manually maintained"
+  },
+  {
+   "id": "TBL-FIN-DM-009",
+   "name": "SCAN_ALLOW_ACCT_MAP_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "Accounting Map for Scan Allowances",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "No Notebook",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "Should be excluded"
+  },
+  {
+   "id": "TBL-MKT-DM-008",
+   "name": "SPECIAL_EVENTS_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Special Events / Marketing Ops",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "High",
+   "owner": "Kaustubh Mhapsekar",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003"
+   ],
+   "inwf": true,
+   "note": "3/28: no new events added since 2020.3/26: HS sent back to Datavail for further review 3/20: Harry to research HQ. Found variances in THRESHOLD_QTY & REDEMPTION_VAL. Will test in smaller chunks \n 3/13: Per Nod issue resolved 3/11: Jeff will F/U with Nod 3/7: Final test on 3/11 3/4: Nod is testing code 2/27: Table has recent data, table needs to be assigned. There is an Armeta notebook that pulls from HQ Analytics. Hand off to DatAvail per Harry.\n Notebook pulls from WMBI"
+  },
+  {
+   "id": "TBL-MER-SN-004",
+   "name": "STORE_DAILY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "SNAP",
+   "src": "?",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook table 1/2: Will do analysis on table line 96 is dependent on this table"
+  },
+  {
+   "id": "TBL-MER-SN-005",
+   "name": "STORE_HOURLY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "SNAP",
+   "src": "?",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "SNAP",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/9: View only no notebook"
+  },
+  {
+   "id": "TBL-MER-DM-025",
+   "name": "TERMINAL_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Build",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/31 Harry to truncate and reload table to resolve issue with mismatched descriptions which affects SALES_POS_LN_F and TX_F tables\n 1/20: jme - tested after changes-counts and values match. \n 1/17: jme - TERMINAL_ID 777 is missing from Snowflake"
+  },
+  {
+   "id": "TBL-LEG-FC-004",
+   "name": "WAZAGUA_LOC_AUDIT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Legal",
+   "type": "Fact",
+   "src": "Risk / Safety / Claims System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-LEG-FC-005",
+   "name": "WAZAGUA_LOC_INJ_LIAB_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Legal",
+   "type": "Fact",
+   "src": "Risk / Safety / Claims System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-MKT-OT-002",
+   "name": "WB_SPECIAL_EVENT_EXCEPTIONS",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "",
+   "src": "Special Events / Marketing Ops",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-MKT-DM-009",
+   "name": "WEISBOWL_GOAL_STORE_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Special Events / Marketing Ops",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-MKT-OT-003",
+   "name": "WEISBOWL_SPECIAL_EVENTS",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "",
+   "src": "Special Events / Marketing Ops",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-MER-OT-004",
+   "name": "WM_SALE_AUDIT",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "",
+   "src": "POS Exceptions / Loss Prevention",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "No Notebook"
+  },
+  {
+   "id": "TBL-WHS-FC-003",
+   "name": "WU_SEND_RECEIVE_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Warehouse",
+   "type": "Fact",
+   "src": "WMS",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Out of Scope",
+   "status": "Excluded",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/21/24 - jme - Neither table has been updated since 12/8/17. Assume this isn't used anymore?"
+  },
+  {
+   "id": "TBL-PRC-FC-004",
+   "name": "ITEM_COST_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "Biceps",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2"
+   ],
+   "bcn": 2,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "5/1: JME random days are missing but data matches for days that have consistent counts\n  2/9 Snowflake displays the 3 decimal places, but the third decimal place isn't being populated which causes cost summaries to be off.\n 1/27 Some SHIPMENT_RECAP_UNIT_ADJ, WHSE_AVG_CASE_COST, WHSE_AVG_UNIT_COST & NET_UNIT_COST_LVL_1 values display in Snowflake with only 2 decimal places where they show 3 in Oracle. The data types in both databases are NUMBER(20,3), but it looks like Snowflake's values are rounded up.\n 7/14 SHIPMENT_RECAP_UNIT_ADJ, WHSE_AVG_CASE_COST, WHSE_AVG_UNIT_COST, NET_UNIT_COST_LVL_1 fields look to be rounded in SF\n 6/12: where the counts and other costs have no variances, the SHIPMENT_RECAP_UNIT_ADJ values are off\n 6/10: HS to backfil Oracle 5/8: HS to rework raw & bronze tables to fix issue with some of the number fields. HS will backfil days 5/2 and 5/3 5/2: Backfil January thru March 2025 4/14: - HS changed schedule to 10amHS changing schedule 4/9: Variances from Jan 2025 onward Need to know where script is coming from"
+  },
+  {
+   "id": "TBL-STO-FC-004",
+   "name": "LABOR_DAILY_BUDGET_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "UKG (Actual) + Forecast (Ops)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 5",
+   "disp": "Build",
+   "status": "Blocked",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-MKT-FC-008",
+   "name": "POINTS_EARNED_REDEEMED_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "Loyalty / Offer Engine",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "In Progress",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "5/29: Changing source to Azure from WMBI_ETL 5/6: Researching issue may require a support ticket 5/5 Synched days will check 5/6 4/29: JME research why the count is doubled in spreadsheet. script failed and is being updated by HS tomorrow 4/13: Synched on 4/10 waiting for processing today 2/10: Counts are off for January. Issue with CLUB_CARD_ID when joined with CLUB_CARD_DIM. Snowflake has Oracle's CLUB_CARD_IDs which don't exist in Snowflake's DIM table. Everything else looks OK \n 2/2: counts and values match beginning 1/28\n 1/27 There are discrepancies in the values of NUM_GALS_PURCH & DISC_AMT. Oracle displays 3 decimal places with a data type of NUMBER and Snowflake has a data type of NUMBER(22,2) for both columns.\n 10/2: the number formats for the NUM_GALS_PURCH and DISC_AMT fields need to be changed in Snowflake to match Oracle's\n 9/2: Dependancy on SALE_POS_LN_F and _TX"
+  },
+  {
+   "id": "TBL-MER-DM-012",
+   "name": "NDC_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Drug Reference (NDC)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/6: HS SUPPLY_LOGIX's needs fixed will check next week. 3/5/26: SF NDC synced with Oracle. 2/2/26: Last REC_CREATE_DT is 8/19/25. Snowflake isn't getting updated\n 8/14: The data variance in Supply_Logix impacts this table Nod is researching 8/8: Counts and values match\n 6/27: data matches Oracle. Will monitor for at least a week to ensure nothing changes.\n 6/25: HS Data missing see SUPLYLOGIX 4/1: Watch until 4/7 Oracle has 1 more record, which is due to timing of table update.\n 3/26: Dependant on SUPPLYLOGIX Table 2/27: Table is in scope no Dev session 2/4: Jeff and Harry will review information from Supply Logic"
+  },
+  {
+   "id": "TBL-MER-FC-008",
+   "name": "POS_TX_TENDER_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "POS System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "5/15: things look ok for the past few days, excluding current day\n 3/3: CLUB_CARD_IDs aren't consistently populating. See DevOps for some examples.\n 1/26: Counts are off for months. Snowflake has more records in most cases. Sent Datavail January dates.\n 10/6: Counts off as of 11/2024 & prior to 1/2024. Missing CLUB_CARD_IDs when joined with CLUB_CARD_DIM\n 7/25: Transactions from 7/23/25 are missing CLUB_CARD_IDs when joined with CLUB_CARD_DIM in Snowflake\n 7/23 HS, identified the tran_id filter is using string and not converting to integer, updated filter to ACCT_EFF_DT_KEY. 6/23: HS researching original code 6/18: no data after 6/2 in Snowflake\n 6/2: HS to update SF TODAY for JME testing 5/28: Data is missing for 4/2,4/3,4/17-5/13 and from 5/23 on. Ran a summary and found counts off beginning 10/2024. Will reload the table once the AMS issue is resolved. \n 5/19: HS convert transaction date to TRAN ID's and reseach decouple WMBI tables 4/14: Found variances in counts and amounts beginning in January 2025\n 1/2: Harry and Nod working on EAM_TRANS table The Oracle table contains vendor name with a pipe in the name '|X-BROGLIE 4' causes failure to load. Updated in DB..."
+  },
+  {
+   "id": "TBL-MER-FC-004",
+   "name": "ITEM_PRICE_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Pricing Book",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2",
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 3,
+   "layer": "T3 Facts",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "Testing",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "5/1/26: Table is updating now, but counts are off\n 2/19/26: Snowflake's last REC_CREATE_DT was 12/5/25. The table isn't being updated.\n 6/23: Sri reseaching time stamp hour values are not present HS to work with Sri to test with objective eyes 6/18: status code mismatch has been resolved. Count is off for ITEM_PRICE_START_DT_KEYs of March 2025. These should be resolved with a reload of data. HS Record and status code mismatch between Oracle and SF 6/13: JF and HS will conduct a design session on why SF isn't matching Oracle 6/10: JME will monitor 6/11 and 6/12 HS researching AD_GRP_DIM issue 6/4:JME - Retest failed, found additional issues HS is researching HS to do an update today for JME to retest 5/29: found discrepancies in the ITEM_PRICE_CASE_COST, YOUR_CASE_COST, NET_CASE_COST, UNIT_COST_WITH_ADJ, ITEM_PRICE_GR_MARGIN, GR_MARGIN_WITH_ADJ, GR_MARGIN_EFF_DT values. The SRC_REC_STAT_CDs match across all 3 databases. Snowflake's values match HQ Analytics for the most part."
+  },
+  {
+   "id": "TBL-PRC-FC-005",
+   "name": "LOC_DSD_INVOICE_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "DSD Invoice Processing",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2"
+   ],
+   "bcn": 2,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/2/26: Last ACCT_EFF_DT_KEY in Snowflake is 45923 (9/23/25)\n 9/4: HS will research record increase 8/8: Snowflake continues to have more records than Oracle.\n 7/21: JME Possible duplicates in this table caused by duplicates in Vendor Item XREF 7/15: JF will grant access to Nod to review issue could be due to timing. 7/11: No data in Snowflake after 3/29/25\n 6/23 Merge key was wrong researching each one 6/19: Nod to research why more records in SF 5/22: Ready for testing 5/15: HS Completed the X-REF Tablle 5/12: HS updated X-REF table 5/7: HS to research X-REF 4/15: Will review and update DSD code, possibly from DataMigrator No Notebook"
+  },
+  {
+   "id": "TBL-MKT-FC-009",
+   "name": "POS_POINTS_EARN_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "POS + Loyalty Integration",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Reassign",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/3/26: See Harry's note in Datavail's card. Needs follow-up/review\n 2/3/26: No data in SF after 5/31/25. Harry & Prachin are working on resoving duplicate issue\n 9/3: Confirmed that there's still no data in Snowflake after 5/31/25.\n 7/15: There's no data in Snowflake after TX_DT 5/31/25 and there are slight variances beginning in April 2025\n 6/18: Part of AMS load 5/19: JME will rerun 2025 to check for variences 4/8: JME - Oracle missing transaction dates that are in SF went back to Jan 2024 1/2: Harry will do a reload12/10: Nod was working on this UNIQUE INDEX (TX_DT_KEY,LOC_KEY,TERMINAL_KEY,CLUB_CARD_KEY,TX_ID); TX_DT_KEY (joins with DT_DIM)"
+  },
+  {
+   "id": "TBL-FIN-DM-001",
+   "name": "AP_SUPPL_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "ERP (AP) (Masterpiece)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/10: **Counts will fluctuate due to update timing. Ready to mark complete.\n 1/28:Watch counts until 2/6 jme - counts and values match\n 1/20: Per Mike Don't delete rows from Dim tables 12/20: How to handle deletions in the AR list. databricks and SF update.  \n Note offending record deleted in source system. id_vend like '%BROGLIE%' does not return '|X-BROGLIE 4' Please retest. 12/19:The Oracle table contains vendor name with a pipe in the name '|X-BROGLIE 4' causes failure to load. Updated in DB..."
+  },
+  {
+   "id": "TBL-FIN-DM-002",
+   "name": "AR_VENDOR_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "ERP (AR)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "High",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003"
+   ],
+   "inwf": true,
+   "note": "3/19: jme sent list of vendors with extra characters. The variance of 1 is due to a record being added to Oracle on 3/19 & not in SF yet.\n 2/17: JME will send Mike the vendors with the character set differences for review 1/30 jme- found discrepancies with question marks & quotation marks in the AR_VENDOR_CONTACT_NM, ACCT_VENDOR_NUM and WM_AP_VENDOR_NUM fields as well as one mismatched LAST_DT_INVOICED value. Snowflake matches the values in CAT_Analytics.AR_VENDOR_MASTER with the exception of the LAST_DT_INVOICED for D999333.\n 1/28: Resolved date issue watch until 2/6 1/24: Refreshed from Oracle ready for testing1/21: Increased email length to 255 in SF 1/16: JME to work with Harry on discrepancies 12/20: Oracle email address fields are 40 characters, sql server 255, sf: 40. This needs to be corrected in SF to handle full values of email address variance. 12/19: Will research ar_vendor_key = 15694 has 2nd email address with carriage return. Cleared it from Silver and Gold"
+  },
+  {
+   "id": "TBL-MER-DM-002",
+   "name": "BAR_CD_TYPE_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Barcode Types",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/13 - jme - counts/values match, sched runs daily,last updated 12/13\n 12/4/24 - jme - confirmed Snowflake table last updated 12/4/2 and counts & values match.\n 11/18/24 - jme - Counts and values match"
+  },
+  {
+   "id": "TBL-LEG-FC-003",
+   "name": "BBM_AUDIT_LUMPSUM_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Legal",
+   "type": "Fact",
+   "src": "Audit / Vendor Funding Module (BBM)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Nod",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "4/3: counts and values match. \n 3/26: Check schedules with Nod - Watch until 4/2 counts and values match\n 3/17: Watch til 3/24 to test again. Counts and values match.\n 3/14: Sri is on leave reassigned to Nod 3/11: Reviewing notebook schedule 3/3: Oracle has over 1200 more records. SF has last table update date as 2/21.\n 2/24: counts and values match. Will monitor until 3/3.\n 2/21: Test on 2/24 Nod loaded data from 1/2024 to present ready for running code and testing 2/13:building files from the FTP site Source file are from SFTP need process.2/12: Correct table name in scheduler to include \"AUDIT\" Pulls from Oracle WMBI. Sync only"
+  },
+  {
+   "id": "TBL-PRC-FC-001",
+   "name": "BBM_HDR_HIST_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "Vendor Funding / Deductions Module (BBM)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/20 jme-passed monitoring phase-ready to mark Complete.\n 2/14: Monitor until 2/20 2/13: jme tested-counts and values match. Will monitor for a week. 2/13: Realigning BBM_TYPE_DIM \n 2/11: Development complete 2/10: Table mapped, confirming data for testing by JME 2/8: Will map ID's with Oracle 2/6: Will discuss with Jeff and team 2/3: Will review BBM_TYPE_DIM table 1/31: Code update works will monitor move to testing 1/30: Doing a record compare to diagnose issue 1/29: jme reviewed and discovered all the records in the CAT_Analytics table have a status of 4. Needs more research as to why these aren't in Oracle. Per Harry this has a 4 and status 4 means deleted he will review jme-there are over 26k records in Snowflake that aren't in Oracle. They all have a STAT of 4, which I think is deleted. They exist in the CAT_Analytics table. \n 1/28: Will move data to SF form testing 1/27: Sri us re-running the job from raw to silver 1/24: Jeff to review DataMigrator process 1/22: Dates in SF but not Oracle will discuss with Jeff 1/22: Source table not being picked up 1/14: Per JME schedule is failing. Needs reviewed. 1/13: Testing failed rework in progress. There's a discrepancy with the UNCHGD_SINCE_LAST_GP_UPDT and APPRV_INVOICE_UNBILLED_ACCR_WK fields. There's also an issue with some GP_UPDT_LAST_PRORATE_F values\n 1/9: Checking silver notebook due to duplicates 1/7: Fixed decimal data type in bronze 1/6: Bronze Databricks table data type issue 1/3 Preparing to validate rows for testing. 1/2: Issue with duplicates Review schedule and research 12/20 jme - there are still duplicates and there's also a mismatch of BBM_TYPE_KEYs. SF rounds TTL fields and Oracle doesn't so totals will be off.\n 12/18: Will correct incremental issue Will run pipeline and review for variance 12/10: Harry will work on silver merge 12/3:Issue with historical key value"
+  },
+  {
+   "id": "TBL-PRC-DM-002",
+   "name": "BBM_TYPE_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Vendor Funding / Deductions Module (BBM)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/13: Sri updated the table to align keys with Oracle. Tested - everything looks good. 2/13: Realign table so keys match \n 12/16/24 - jme - The counts and values match. Confirmed table is included in a schedule and updating on a regular basis.\n 12/4 - jme - Counts and values match. Confirmed SF table last updated 12/3"
+  },
+  {
+   "id": "TBL-WHS-FC-002",
+   "name": "WAREHOUSE_SHIPT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Warehouse",
+   "type": "Fact",
+   "src": "WMS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 4",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-MKT-FC-002",
+   "name": "AMS_POS_POINTS_EARN_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "AMS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/2: Snowflake's table isn't updating consistently\n 1/29/26: Snowflake's Max TX_DT_KEY is 45904 (9/4/25). It looks like the last full day of trx was 9/3/25. There's also an issue with the time portion of TX_DTTM missing in Snowflake\n 9/8: HS to go directly to HQ instead of Oracle 9/5: In progress Ready for testing 9/8 HS, SF counts off. Pls update and test. 9/4: Researching code from Armeta to compare DataMigrator code 9/3: Will synch DataMigrator code with Databricks fortesting 9/4 7/31: the notebook was pulling from incorrect schema. It should have been eme not wmbi_etl. Updated. Refreshed. 7/23: HS Nod reviewing AMS_LOAD, HS activated separate job for testing 7/10: Counts are off beginning February 2025. Missing data beginning in May.\n 6/18: Daily AMS extract needs to be Bullet-proof 6/5: counts off beginning February 2025\n 5/7: HS will backfil SF ready for testing 5/8 2/10 There is an unapproved CLUB_CARD_DIM process running that will greatly reduce the variance UNIQUE INDEX (TX_DT_KEY,LOC_KEY,TERMINAL_KEY,CLUB_CARD_KEY,TX_ID); TX_DT_KEY (joins with DT_DIM)"
+  },
+  {
+   "id": "TBL-MER-FC-013",
+   "name": "SUNOCO_FUEL_PRTNR_PRGM_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Fuel POS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "In Progress",
+   "cplx": "High",
+   "owner": "HS",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "4/29: Watch for 1 week, Job runs at 4am but doesn't update until 9am 4/27: Databricks correct but didn't move to SF researching 4/20: tested trx beginning 1/1/24 and found some records where the CLUB_CARD_ID doesn't match Oracle's when the table is joined with CLUB_CARD_DIM. \n 4/17: HS Moved from in-progress to testing. 1/1/25: HS Max date in Oracle WMBI is 2021-08-05 Can backfil from Oracle. We should not be working on this table"
+  },
+  {
+   "id": "TBL-MKT-FC-003",
+   "name": "AMS_TX_REWARD_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "AMS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "Testing",
+   "cplx": "High",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/4/26: Snowflake is missing data for 1/14- 1/17. CLUB_CARD_IDs missing when joined with CLUB_CARD_DIM & missing AMS_OFFER_IDs when joined with AMS_OFFER_DIM\n 9/15: Issues with CLUB_CARD_IDs and AMS_OFFER_IDs when joined with DIM tables still exist. Ready for testing Will create a new notebook 9/8: Pulling Oracle Club Card Keys instead of Azure Club Card Keys 9/5: Test 9/8 HS, club_cards updated. Test on Monday. 9/3: JME there are transactions without Club Card ID's 8/25: The data looks good from 8/23 on, but there are several thousand CLUB_CARD_IDs missing in Snowflake when joined with CLUB_CARD_DIM for the testing timeframe.\n 8/22: Ready for testing. 8/21: Updated code will run 1hr S/B ready for testing 8/22 8/20: HS identified MoveData code running separately from DM. Updating Azure code to match. 7/9: HS to send notbook link to Nod for review. 7/8: Working on this 6/5: SF Missing data from April and May. CC IDs are also missing.\n 5/5: Added to the AMS Load monitor for 3 days 2/10 There is an unapproved CLUB_CARD_DIM process running that will greatly reduce the variance 1/9: Corrected PSTG query. Testing build UNIQUE INDEX (AMS_TX_REWARD_KEY,ACCT_EFF_DT_KEY); ACCT_EFF_DT_KEY (joins with DT_DIM)"
+  },
+  {
+   "id": "TBL-MER-FC-001",
+   "name": "DAILY_LOC_FUEL_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Fuel POS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "In Progress",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/19/26: Snowflake's last REC_CREATE_DT is 10/8/25\n 9/10: Reviewd table-counts are off beginning June 2024\n 3/20: FTP rows appear in each file that's not in Oracle HS no duplicates for past 2 months 3/19: Harry to review DataMigrator code 2/17: Mike to review for decision on additional line of 0's created in table when customer buys fuel 2/13:Will review duplicates 12/4: Waiting for business Ready for testing Needs coordination between SFTP load to push to SF. 11/13: Ready for testing; 11/21: Waiting on Business for guidance on duplicate rows"
+  },
+  {
+   "id": "TBL-MER-FC-002",
+   "name": "FUEL_PRTNR_PRGM_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Fuel POS",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "Dhanish",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/2/26: was marked Complete in January 2025. Counts are off sporadically beginning 08/2025 with Snowflake sometimes having more records than Oracle\n 1/2/25 counts match. **The missing record is accounted for. Leaving as is and marking complete since Snowflake matches the source.\n 12/31 The source, FUELREWARDS.WMBI_THIRD_PARTY_FUEL doesn't have question marks so Snowflake matches the source. \n 12/26 jme - there are 2,913 records in Oracle that aren't in Snowflake. Snowflake's table hasn't been updated since 12/16. 2,912 records added since then. AUTHN_CD 110OSF with a transaction date of 12/15 @ 9:29am is in Oracle and not in Snowflake. There are records where the PRDCT_DESCs do not match. Snowflake has a '-' between words. Oracle has a '?'. \n 12/10 Mousumi was working this Oracle is missing records"
+  },
+  {
+   "id": "TBL-FIN-DM-003",
+   "name": "GL_ACCT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/24 jme - no change to testing results.\n 12/18 jme - counts & values match. Confirmed table is included in a schedule and is updating on a regular basis. Table last updated 9/27/24"
+  },
+  {
+   "id": "TBL-FIN-DM-004",
+   "name": "GL_BIZ_UNIT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/12/24 - jme - The counts and values match across databases. Confirmed table is included in a schedule and updating on a regular basis.\n 11/25/24 - jme - The counts and values match across databases including the GL_BIZ_UNIT_KEYs.\n Changed the CREATE and Update DTTM to DT. GOLD to SF was failing earlier. Now after the fix SF is matching with Oracle."
+  },
+  {
+   "id": "TBL-FIN-DM-006",
+   "name": "GL_ORG_UNIT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "ERP (GL)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Dhanish",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/27: Test on 2/28 when counts will be in synch 2/26: new row added through unapproved process. Need to replicate process. \n 12/13/24 - jme - confirmed Snowflake table last updated 12/13/24.\n 12/4/24 - jme - confirmed Snowflake table last updated 12/4/24.\n 12/2: Confirm scheduled tested \n 11/22/24 - jme - The counts and values match across databases including the GL_ORG_UNIT_KEYs."
+  },
+  {
+   "id": "TBL-MKT-FC-005",
+   "name": "MANUAL_POINT_ADJ_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "Loyalty / Offer Engine",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/2/26: Snowflake's last REC_CREATE_DTTM = 8/27/25\n 8/8: Snowflake is missing data for 7/22 - 7/25. Missing CLUB_CARD_ID issue needs to be addressed.\n 8/5: CLUB_CARD_IDs missing when joined with CLUB_CARD_DIM\n 8/4: Nod is testing the manual load items are matching. JF to consult Nod for help. 8/1: Snowflake has more than twice as many records as Oracle\n 7/9: counts and values are off beginning in February. Snowflake has more records\n 1/21: CLUB_CARD_DIM resolution will resolve this table 12/9: Needs code built from scratch.12/10-hile loading the bronze table there are duplicate records.The reason for this is Club Card Dim for a club card ID\n there are multiple club card keys. I checked few cases in Oracle which has only 1 key per ID. I beieve club card dim needs to fixed first--Mousumi\n 12/18: This will self resolve when club card dim is corrected."
+  },
+  {
+   "id": "TBL-STO-FC-006",
+   "name": "SHK_DAILY_LABOR_EXPORT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "Workforce Mgmt / Store Ops Export (SHK)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 5",
+   "disp": "Refactor",
+   "status": "Not Started",
+   "cplx": "Low",
+   "owner": "Reassign",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "6/17:HS sees note that this depends on SALES_POS_LN_F."
+  },
+  {
+   "id": "TBL-MER-DM-013",
+   "name": "OPERATOR_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 5",
+   "disp": "Refactor",
+   "status": "Testing",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003"
+   ],
+   "inwf": true,
+   "note": "3/6: Researching OVERRIDES_ALERTS no update since 1/7 and checking Unapproved 2/2/26: Tested excluding \"Unapproved..\" OPERATOR_DESC - IDs and count of each OPERATOR_DESC match\n 10/3: There are records missing in SF beginning 6/18. The issue is related to the OVERRIDES_ALERTS_F table (priority 33).\n 9/19: HS will check sFTP link 6digits instead of 4. Data matches with the exception of 309 records not in Snowflake. \n 9/18: Ready for testing 9/22 There is a bug in the Override_Alerts/Unapproved_Override_Alrters_Operator_dim procedure. Operator_ID is of length 4. Both OA/Unapproved_Operators need review. 9/17: There are 438 OPERATOR_IDs in Snowflake that aren't in Oracle and 305 in Oracle that aren't in Snowflake. They all were created beginning 6/17/25\n 8/22: JME records appearing in SF not in Oracle - Was marked \"Complete\" back on 12/13/24 12/13/24 - jme - counts and values matched. Confirmed SF table was updated on 12/13.\n 12/9: Harry will copy rows\n 10/18: Databricks reports source is WEISPOS.eamtran_operator_dim. Data hasn't updated in over a week. 554 rows. New source needed?"
+  },
+  {
+   "id": "TBL-STO-DM-004",
+   "name": "LOC_LINK_CD_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Dimension",
+   "src": "Store Master",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 2,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "In Progress",
+   "cplx": "High",
+   "owner": "Reassign",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/19/26: Snowflake's last REC_CREATE_DT is 10/8/24. Snowflake's PRICE_LVL_DESC values have trailing spaces where Oracle's do not\n UNIQUE INDEX (LINK_CD_ID,LOC_KEY,START_DT_KEY,PRICE_LVL_KEY,PRICE_TYPE_KEY). START_DT_KEY (joins with DT_DIM)"
+  },
+  {
+   "id": "TBL-FIN-DM-007",
+   "name": "LOC_GL_DEPT_OVERRIDE_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "Finance Overrides by Location+Dept",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Sergio",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "12/11/24 - jme - table last updated 11/15/24. Counts and values match. It's not included in any schedule.\n Another very old notebook that required work to replace hive names with actual delta table names"
+  },
+  {
+   "id": "TBL-MKT-FC-006",
+   "name": "MARKETFORCE_SURV_RESP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "MarketForce (CX survey vendor)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "Nod",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/26: No schedule required"
+  },
+  {
+   "id": "TBL-MER-DM-011",
+   "name": "MGR_OVERRIDE_RSN_CD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS Manager Override Reasons",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "12/13/24 - jme - Counts and values match. Per Harry, this is in sched 10 which runs daily.\n 11/25/24 - jme - The counts and values match.\n Schedule should be changed to 0-9"
+  },
+  {
+   "id": "TBL-MER-DM-014",
+   "name": "POS_AREA_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS Area/Zone Config",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/18 no change.\n 12/13 - jme - counts/values match, sched runs daily,last updated 12/13\n 11/25/24 - jme - The counts and values match.\n Oracle has a default record labeled BI DEFAULT RECORD with no dates"
+  },
+  {
+   "id": "TBL-MKT-DM-001",
+   "name": "AMS_OFFER_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "AMS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 2,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "3/2: Snowflake's last REC_CREATE_DTTM is 9/12/25\n 1/26/26: Snowflake has 31 records that aren't in Oracle and Oracle has 219 records that aren't in Snowflake\n  8/29: Research if records are now routed to AMS_OFFER_XREF 8/11: Activated old schedule SF now has more rows that Oracle SF matches HQ 8/8: There are 9 more records in Oracle. It looks like the Snowflake table hasn't been updated since 7/30/25.\n 8/4: Counts match watch until 8/8 8/1: Counts & values match for records created prior to 7/31. The current variance of 6 more records in Oracle is because they were created 7/31 & 8/1. They should be in SF after the next table load.\n 7/30: Refreshed and set the update column to AMS_OFFER_ID from AMS_OFFER_KEY. 7/8: There are discrepancies in the values for several fields. PIPELINE are running , counts might not be matching because of timing but can be tested6/10: Blocked 6/3: Will monitor until 6/9 then decide if ready for testing 5/28: Harry is checking oracle source code 5/20: Nod will review issue 5/5: Added to the AMS Load monitor for 3 days 4/16: HS testing on 4/17 3/17: Jeff will review and notify the team 3/14: Sri is on leave reassigned to Nod 2/25: 30 rows of offers in HQ but not in Oracle send list to Jeff to review 2/10: Jeff to submit ticket for JME access for testing 1/13: jme - per Harry test to see if all rows from SQL cpe_incentives are Oracle & Snowflake\n  11/27 Review DataMigrator process \n 11/2/24 - jme - records in Snowflake, not in Oracle. Mismatched INCENTIVE_NMs & missing TEST_END_DTs. See details in 11/25 email.\n Gold and Silver out of Synch Sri reports there are null rows in Oracle. Which do not appear in Snowflake."
+  },
+  {
+   "id": "TBL-MER-DM-016",
+   "name": "POS_ENT_MTHD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/27 jme - counts/values match. No schedule.\n 11/21/24 - jme - Values match across databases"
+  },
+  {
+   "id": "TBL-FIN-DM-005",
+   "name": "GL_DEPT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Finance",
+   "type": "Dimension",
+   "src": "ERP (GL)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC4"
+   ],
+   "bcn": 3,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Sri",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "1/8/26 Snowflake has a period (.) as the GL_DEPT_ID_ORIG where Oracle has 24.\n 12/13/24 - jme - counts/values match, sched runs daily,last updated 12/10\n 11/25/24 - jme - counts and values match\n SF synced with Oracle"
+  },
+  {
+   "id": "TBL-PRC-FC-008",
+   "name": "VENDOR_ITEM_ADJ_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "Biceps",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Medium",
+   "owner": "Sri",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/6/26: Found same discrepancies in the 4 columns noted in August. Need to review and determine if we're leaving as is\n 8/7: Found discrepancies in the ADJ_END_DT_KEY, WEIS_ARRIVAL_END_DT, ADJ_AMT and SRC_REC_STAT_CD values. Need to confirm if we're leaving status codes as is or change to match Oracle.\n 7/23: JME Delay testing until VENDOR_ITEM_XREF duplicates are resolved 7/21: Table is now in synch with the source in HQ Analytics issue resolved with status codes 7/10: Will document and correct in SF 7/9: showing incorrect status code will synch table to Oracle and look for differences 7/7: Schedule working issue with ADJ AMT column is getting zero's checking query 7/2: Schedule failing, researching notebook assoc. with this table 5/19: HS to review SRC_REC_STAT_CD, ADJ_END_DT_KEY, COST_ZONE, ADJ_AMT and ADJ_DESC values\n 5/28: HS to review original source in HQ and DataMigrator - Datavail has the VENDOR_ITEM_ADF_F table on their list for us to test. There's a mismatch with values in the REC_CREATE_SRC_SYS field and also some SRC_REC_STAT_CD, ADJ_END_DT_KEY, COST_ZONE, ADJ_AMT and ADJ_DESC values. *Snowflake has 5 different REC_CREATE_SRC values where Oracle only has 'HQ' as the source."
+  },
+  {
+   "id": "TBL-PRC-DM-007",
+   "name": "VENDOR_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "HQ",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC4"
+   ],
+   "bcn": 3,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-004"
+   ],
+   "inwf": true,
+   "note": "3/31: HS DM code has a condition to look at buyer record status date. This was not in the Databricks notebook. This has been updated. JF will research why this is out of synch. Need to research why BUYER changes don't flow from HQ to Snowflake  \n 3/30: Discuss with Supply Chain to see how often this changes. Possible mark complete after research Counts and values match with the exception of 2 records that have a NULL in Oracles's VENDOR_ZIP2 field and blank in Snowflake. Need decision/approval to leave as is. OK to leave NULLs versus blank per Jeff 3/31/26.\n 3/27: JE will confirm 0 variance 3/13: monitor until 3/17 \n 3/10/26: Buyers don't match for many vendors. There are 4 IDs that have multiple records in SF\n 9/30: Buyer's match and \"Nulls\" and \"Blanks\" appearing 9/25: 25 Buyers don't match \n 2/14/25: Marked Complete\n 1/22: Mismatch with vendor group name in Oracle, SF not completing update \n 12/18 jme - confirm with Jeff\n 12/11/24 - jme - One vendor is missing a vendor_grp_nm. Leaving as is per Jeff. Counts match. Table last updated 12/11.\n 12/11: Testing gold to SF change \n 12/2/24 - jme - no changes to testing results. Need to confirm if we're making changes - see 12/2 email for details.SF had slashes in VENDOR_ST_ADDR_LN! where Oracle didn't\n 11/22/24 - jme - there are differences in the VENDOR_ADDR_LN1 for 8 vendors and a mismatch in the VENDOR_GRP_NM for 1 vendor.\n Revisit Date Logic Oracle Sf records matched"
+  },
+  {
+   "id": "TBL-PRC-DM-008",
+   "name": "VENDOR_ITEM_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Vendor-Item Crosswalk",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC4"
+   ],
+   "bcn": 3,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Passed",
+   "cplx": "Low",
+   "owner": "Sri",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-004"
+   ],
+   "inwf": true,
+   "note": "4/6: Duplicates identified in Gold HS is researching 3/18: No Dups but additional rows will monitor 3/17: Duplicates are being created TR_SCHED_DAILY_917_VENDOR_ITEM_XREF has been failing for the past several weeks with the exception of 3/13/26.\n 3/13: Waiting for Oracle to process, review on 3/16 should go back to 0 3/11: Testing this impacts ITEM_COST_F \n 2/11: no data in Snowflake after REC_CREATE_DTTM 1/16, issues with values in several fields not matching\n 10/14: Everything looks OK with the exception of the known issue with mismatched characters in the MFR_ITEM_CD values\n 10/8: JME Item codes missing in Oracle will check HQ. Oracle matches HQ Analytics 10/7: Looks good with the exception of the known issue with slashes. Will monitor for a week.\n 10/3 Silver merge issue 10/1: variances in WEIS_MARKETS_GUARANTEED_FRESH, WAREHOUSE_SUPPL_ID, CASE_UPC,CASE_PACK, PRICE_ASSOC_CD_ID, PRICE_ASSOC_MASTER_ITEM_SCAN_CD_ID, PRICE_ASSOC_MASTER_VENDOR_ID & VENDOR_ITEM_CD. PRICE_ASSOC_CD_DESC is excluded from testing due to mismatched characters. \n 9/29: VENDOR_KEYS are now in synch with Oracle and Gold table 9/25: Vendor_ID is in SF but the keys are different 9/15 documenting issues with odd characters 9/9: There are 5 records missing VENDOR_ID when joined with VENDOR_DIM. Likely a timing issue. Will review again tomorrow. There's a known issue where the character sets in each database are different, so some of the variances with question marks (?), apostrophes (') and accent marks (`) have been excluded from testing. **Need approval to make sure it's OK to exclude. \n 9/8 Fixed \"/\" ready for testing 9/4:Enabled filter that accessed silver to correct gold table that imports into SF ID's not appearing in Oracle 9/3: Ready for testing 9/2: HS - Sri will update record status then ready for testing 9/4 8/28: Removed duplicate records from Silver and Gold 8/27: Scan Code ID's and Warehouse_SUPPL_ID are missing in SF when joined with DIM tables\n  8/25: column MFR Item code had blanks in SF replaced with nulls to match Oracle 8/19: Oracle has 1 space in the WEIS_VENDOR_ITEM_CD field and SF is blank. Per Jeff OK to exclude that field from testing. \n 8/15: Status code issue pending. Possible complete 8/18 8/14: Researching Weis_Markets_Fresh column values don't match in a few columns 7/31: The MFR_ITEM_CD has nulls in Oracle and blanks in Snowflake in some instances. Issue with missing values in WEIS_MKTS_GUARANTEED_FRESH field. The WEIS_VENDOR_CD has a space in Oracle where Snowflake doesn't in some cases."
+  },
+  {
+   "id": "TBL-ITS-DM-001",
+   "name": "RPT_GRP_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "IT",
+   "type": "Dimension",
+   "src": "BI / Reporting Layer",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Sergio",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/18 no change\n 12/13/24 - jme - counts & values match, part of sched 5 which runs daily, last updated 12/13/24.\n 12/10: Mousumi was assigned\n 11/20/24 - jme - Values match across databases\n Create Parquet file. Snowflake now has 677 records after loading data from gold."
+  },
+  {
+   "id": "TBL-ITS-DM-003",
+   "name": "RPT_GRP_LOC_AREA_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "IT",
+   "type": "Dimension",
+   "src": "BI / Reporting Layer",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/24: counts and values match. Will monitor until 3/3\n 2/19: No scheduled needed maintained in SF 1/20: current sourcing of WMBI needs to be modified in Notebooks; JJF to follow up Jeff will research"
+  },
+  {
+   "id": "TBL-MER-DM-022",
+   "name": "RSN_CD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS Reason Codes / UI Config",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "1/16: jme - counts and values match."
+  },
+  {
+   "id": "TBL-PHR-FC-002",
+   "name": "RX_DAILY_SCRIPT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Pharmacy",
+   "type": "Fact",
+   "src": "Pharmacy Management System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/5: Check for variance 3/6 Harry researching Oracle No Notebook available will test today and Monday, If not being updated we will mark it complete"
+  },
+  {
+   "id": "TBL-FAC-DM-002",
+   "name": "SALES_AREA_TYPE",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Facilities",
+   "type": "Dimension",
+   "src": "Sales Area / Store Layout Master",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/13 - jme - counts/values match, sched runs daily,last updated 12/13\n 11/15/24 - jme - Values match across databases\n Manually maintained"
+  },
+  {
+   "id": "TBL-MER-FC-009",
+   "name": "RECLM_SCAN_DETAIL_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "POS Exceptions / Loss Prevention",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 2",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Reassign",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "4/2 although the table looks like it's being updated on a regular basis, counts are off. The issue with mismatched USER_INFO & BILL_FL values still exists.\n 7/17: There are still issues with the USER_INFO & BILL_FL values. Counts are off beginning 5/25 SF has more records\n 6/3: HS Scheduled changed to Monday morning (6/9) at 6am Variances in quanties, values and counts 5/28: Ready for testing , will monitor it for a few days 4/11: found mismatches in the USER_INFO and BILL_FL fields.\n 3/18: Test on 3/23 \n 3/14: Assigned to Nod from Sri 3/4: Issue with SCAN_DETAIL KEY 2/24: Has a dependency on ITEM_DIM 2/20: Will update raw folder and retest 2/19: Reviewing staging table with Gold 2/17: Reviewing tables and code 11/26/24 - jme - Counts are off again. See details and doc in 11/26 email.\n Merge key fixed currently testing"
+  },
+  {
+   "id": "TBL-MKT-DM-006",
+   "name": "CUSTOMER_ATTR_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Customer Master",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 3",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/27: Most recent data is 2019 copy Oracle to SF no Notebook required"
+  },
+  {
+   "id": "TBL-STO-DM-001",
+   "name": "ITEM_MARKDOWN_DEFAULT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Dimension",
+   "src": "No data source - manually maintained",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2",
+    "BC4"
+   ],
+   "bcn": 2,
+   "layer": "T4 External / Other",
+   "wave": "Wave 3",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-PHR-DM-001",
+   "name": "SUPPLYLOGIX_SRC_FILE_NM_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Pharmacy",
+   "type": "Dimension",
+   "src": "Supplylogix (Pharmacy vendor)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Nod",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "4/2: Watch until 4/8 3/26 Nod is working on this - Dependant on line 127"
+  },
+  {
+   "id": "TBL-MER-DM-024",
+   "name": "TENDER_VARIETY_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS Tender Config",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "1/17: jme - data has been updated-counts and values match\n 1/15: JME 1 record in SF not in Oracle and vice-versa"
+  },
+  {
+   "id": "TBL-HUM-FC-002",
+   "name": "LABOR_PREM_COST_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Human Capital",
+   "type": "Fact",
+   "src": "Labor Costing / Payroll Integration",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T3 Facts",
+   "wave": "Wave 5",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-STO-DM-003",
+   "name": "LOC_ID_EXCL_DT_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Dimension",
+   "src": "Store Master",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Wave 4",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/14: Two stores that were closed and reopened due to fire and incident #154/191 Vlookup needs work...there is no schedule for this."
+  },
+  {
+   "id": "TBL-STO-DM-002",
+   "name": "LOC_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Dimension",
+   "src": "Store Master",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4",
+    "BC5"
+   ],
+   "bcn": 5,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "Pending Review",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "9/4: Oracle dates are 8086 ignore fields per Tim Gottschall pending Mike's review for approval of SAME_STORE_START_DATE and OPEN_DATE  8/4: Need HS to fix 0226 Loc ID begin date different 8/1: store 0226 has a different LOC_ID_BEGIN_DT\n  7/29: Set CMPRTV fields to coaless 7/28: Fields are defined as dates in Oracle and SF. Display of fields are formated differently 7/25: issues with open/close times, date/datetime data type & mismatched LOC_CMPRTV_START_DT and LOC_ID_BEGIN_DT values\n 7/24: HS Enabled filtering that was only on for new rows added to Azure side to match what Oracle was doing 7/7: There are discrepancies in the values in several fields. JME to test \n 5/2: Schedule activated and data backfilled"
+  },
+  {
+   "id": "TBL-PRM-DM-001",
+   "name": "AD_GRP_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Promo",
+   "type": "Dimension",
+   "src": "Ad/Promo Planning System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 2,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Prachinnath",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/13/24 - jme - confirmed Snowflake table last updated 12/13/24 and counts & values match."
+  },
+  {
+   "id": "TBL-PRC-DM-001",
+   "name": "ADJ_CD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Adjust Codes",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2"
+   ],
+   "bcn": 2,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 2",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/10: counts and values match. Nothing has changed. OK to mark complete.\n 2/28: Table has been updated. Counts and values match. Will monitor to ensure that old records are not added back in. JME will send 20 records to Jeff for review and a decision 1/14: Mike will consider additional data in SF1/13: jme - per Harry, sourced from HQ Analytics. It builds 20 more rows. Can we leave as is and mark complete?\n 12/19: Synch with Oracle 11/12/24 - jme - 2 records have non-matching descriptions. There are 20 more records in Snowflake that aren't in Oracle, but are in HQ Analytics"
+  },
+  {
+   "id": "TBL-MER-DM-003",
+   "name": "CATGY_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Category Master",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 4,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/16 - jme - no mismatches after retest\n 12/13 - jme - there are 16 CATGY_IDs that have mismatched SRC_REC_STAT_CDs. Will recheck 12/1612/4/24 - jme - Counts & values match. Confirmed SF table last updated 12/4/24 \n 11/21/24 - jme Counts and values match except for CATGY_KEYs, which do not match across databases.\n CATGY_DIM is part of ETL Group 5. It orchestrates under PL_ORCH_SRC_TO_SF_ETL_GROUPS pipeline by TR_SCHED_GROUP_5 trigger. Since TR_SCHED_GROUP_5 never went to success since 08/26 snowflake is missing 3 records which are present in Oracle."
+  },
+  {
+   "id": "TBL-MER-FC-003",
+   "name": "ITEM_DAILY_BUDGET_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Merch/FP&A Budgeting",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "Sri",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/30/26: Counts are off beginning May 2025. The last ACCT_EFF_DT_KEY is 45892 (8/23/25) and the last REC_CREATE_DT is 10/22/25\n 10/23: Primary key column was out of synch ready for testing  Still no data after ACCT_EFF_DT 5/24/25\n 10/22: Ready for testing 10/20: implementing code updates 10/17 Cleaning up \"Nulls\" in the data value10/15: Date formatting issue 10/14: Smart key issue 10/8: Job is failing silver date and timestamp 9/30 Files received and development in progress 9/25: JF will provide files.8/8: Still no data after 5/24/25\n 7/14: SF has no data after ACCT EFF Dt 5/24/25\n 6/18: SF has no data after the end of April. Oracle has almost 186k more records. Need to know who is going to load data on a monthly basis.\n 6/10: HS current process is manual, JS will research 5/2: Variance 0 test again the last week of May - Only updates once a month 4/23: Check Oracle to confirm its in synch 4/17: HS-Send back to Datavail due to creation of smartkey Weis doesn’t use smartkey's.\n For Weis to address-This is updated manually. Needs to be addressed. \n 4/7: Datavail to run job and push data into SF - Harry built the table in SF"
+  },
+  {
+   "id": "TBL-MER-DM-007",
+   "name": "ITEM_POS_AREA_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS + Store Layout Mapping",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Medium",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/17/26: the values in the WIC_ELIGIBLE_FL and SRC_REC_STAT_CD fields don't match. \n 8/8: Snowflake has more records than Oracle.\n 7/1: Synced with Oracle, activated separate schedule. Will investigate if SF has newer data than Orale.6/5: Updated extract code to filter out record status records > max record status date in gold (aka only newer rows). Note: this should be part of the AMS_LOAD. Will disable individual schedule when AMS_LOAD works correctly"
+  },
+  {
+   "id": "TBL-MER-DM-004",
+   "name": "CATGY_RPT_COMP",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Reporting Hierarchy Layer",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 3",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/16/24 - jme - The counts and values match. Confirmed table is included in a schedule and updating on a regular basis.\n 12/4/24 - jme - confirmed Snowflake table last updated 12/4/24 and counts & values match."
+  },
+  {
+   "id": "TBL-STO-FC-005",
+   "name": "POTENTIAL_LOST_SALES_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "BI / Analytics Output",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "In Progress",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/21: STORE_DAILY_SNAP table needs fixed first 1/9: Remediating Daily_Snap 1/2: Will remediate SNAP table first 12/14: Table discrepencies in one of the source table. 12/10 Jeff to research Notebook pulls from WMBI store_daily_snap_f. First store_daily_snap_f table needs to be fixed."
+  },
+  {
+   "id": "TBL-MKT-DM-003",
+   "name": "CLUB_CARD_ATTRIB_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Loyalty / Offer Engine",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 3",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/16/24 - jme - The counts and values match. Confirmed table is included in a schedule and updating on a regular basis.\n 12/4/24 - jme - confirmed Snowflake table last updated 12/4/24 and counts & values match.\n 11/19/24 - jme - counts and values match"
+  },
+  {
+   "id": "TBL-MKT-DM-007",
+   "name": "CUSTOMER_SGM_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Brideye (3rd party vendor)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 3",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/16 - jme counts & values match. Confirmed table is included in a schedule and updating on a regular basis.\n 12/4/24 - jme - confirmed Snowflake table last updated 12/4/24 and counts & values match."
+  },
+  {
+   "id": "TBL-WHS-DM-001",
+   "name": "DT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Warehouse",
+   "type": "Dimension",
+   "src": "Enterprise Data Warehouse (Calendar/Date Dim)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4",
+    "BC5"
+   ],
+   "bcn": 5,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "12/16/24 - jme - The counts and values match. Confirmed table is included in a schedule and updating on a regular basis.\n 11/19/24 - jme - counts and values match"
+  },
+  {
+   "id": "TBL-PRC-DM-003",
+   "name": "LINK_CD_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Link Codes / PLU-like",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Sri",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "2/26: Harry will resolve duplicate issue. \n 2/24: Check 2/25 should have a 1 row variance. Unapproved process needs to be updated to use effective dates. Harry is updating the code today will review 2/25 JME will inform Mike on the unapproved records that arent being replicated in SF 2/13- marked Complete \n 2/13: retested. There are 11 more records in Oracle that were created today. There will likely be a fluctuation in the record counts due to timing of updates.\n 2/6: Monitor until 2/13 2/5: Will confirm validation on 2/6 jme - variance of 32 records more in Oracle. This is likely due to timing of SF update and comparison. Will check again on 2/6.\n 2/4: Data refresh in progress 2/3: Silver to Gold not updating 1/29: Reviewing variances 12/17: Nod - Will review varaince Ready for testing Jayne will update counts 12/11: Gold and SF out of synch 12/11 Data updated pushed to Prod for review 12/10: Per Harry Table needed, Coping over from Oracle 12/3: Direct source from WMBI"
+  },
+  {
+   "id": "TBL-MKT-FC-007",
+   "name": "MARKETFORCE_WEIS2GO_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "MarketForce (CX survey vendor)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing",
+   "cplx": "Medium",
+   "owner": "Sri",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/5: Counts are off for several months beginning in October 2025. Snowflake is missing data for most days in January 2026. I tested days where counts do match and everything looks good. *ASSOC_NM, ONLN_ORDER_LR, QUAL_AND_FRESH_LR and NOT_DELVD_ON_TM_OE have been excluded from testing because they have random extra spaces within the text in Snowflake.\n 10/20: JME Looks good, monitor for 2 weeks Counts match 9/30: Snowflake has 1 duplicated record that reappeared possible CLUB_CARD_ID issue\n 9/23: Counts and values match. 0 variance monitor until 9/30 \n 9/22:Review 54 records difference in silver (duplicates) will be ready for testing today 44 records with Club_Card_Keys are out of synch HS will review 9/18: Ready for testing 9/19 Runs on Sunday mornings. Rewrote code will test today. 9/17: Insert \"Unknown\", Trim spaces in name field. 9/16: Decide on edited version or map directly to the source and monitor pipeline that runs on sundays at 8pm. Working on random spaces, filenames Reviewing associate names field in Oracle and SF 8/12: Correcting formatting issue with data 9/11: Testing pipeline researching date issue File in ADLS but not moving to raw 9/10: Copying data to Silver and Gold tables ready for testing 9/11 9/5: There's an issue with about 475+ SURV_IDs that have mismatches in the ASSOC_NM and CO_PROC_WORKED_WELL values.**Some ASSOC_NM have a trailing space in Snowflake and some have different values\n 7/16: CO_PROC_WORKED_WELL has different values in some cases. ASSOC_NM has trailing spaces or mismatched values, QUAL_AND_FRESH_LR has extra spaces in text and/or at end of text block"
+  },
+  {
+   "id": "TBL-MER-FC-007",
+   "name": "POG_INV_LOC_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "Planogram System",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "4/16/26: the last rec_create_dttm in Snowflake was 7/30/25\n 7/9: SF SP created, new schedule created to run at 7am. 7/8: SF process needs to mirror the Oracle process. Snowflake continues to have duplicates and the count is more than double Oracle's count.\n 5/15: HS reseach DataMigrator to see if Oracle truncates 4/29: Assigning to HS due to internal knowledge Variance is a timing issue researching Oracle 4/16: Truncate and load 4/15: data is appending to the table again.\n 4/14: Updated Databricks Item Location table 1/15: JME Table should be truncated and reloaded;records appear to be appending instead of overwriting 12/27 per Harry, job should be a trunc & reload"
+  },
+  {
+   "id": "TBL-MER-DM-008",
+   "name": "LOC_AD_GRP_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Ads by Location",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 2,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/7: Monitor until 2/12 Validating data for final testing 2/6: Writing code to bring missing data (5K) from Oracle to SF 2/4: jme - identified extra records in Oracle. The majority of records have a STAT_CD of 3 (soft-delete) \n 1/29: SF is matching with source. Ready for testing 1/28: JME will send a list of issues found 1/24: tested and found 105,688 records with a null LOC_AD_GRP_KEY. Mousumi will reload data. \n 1/24: Data in SF is from 2020 onward, Oracle has some older records JME to test \n 1/23: Will work with Jeff. 1/22: Will esearch table today silver and gold have different counts will rerun source More records in Oracle that are not in the source HQ Analytics; Source matches Snowflake"
+  },
+  {
+   "id": "TBL-MER-DM-009",
+   "name": "LOC_CATGY_PRICING_STRAT_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Merch/Pricing Strategy",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3"
+   ],
+   "bcn": 1,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Nod",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "9/26: table isn't being updated\n 4/7: File change is rare continue to monitor unitl 5/1 4/1: jme tested and found no issues. Counts and values match as of 4/1. No notebook. Schedule created and disabled HS will turn on scheduler after testing. Refreshed from Oracle. 3/28: Reload from 10/1/2024 and needs schedule added Mike is researching servers to determine why data isn't current 12/12 Coming from HQ Analyrics 12/10: Harry was working on this Nod created in Dev"
+  },
+  {
+   "id": "TBL-MER-DM-010",
+   "name": "LOC_DEPT_PRICING_STRAT_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Merch/Pricing Strategy",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3"
+   ],
+   "bcn": 1,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "High",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/17: Monitor until 2/21 2/14: Will be in synch on 2/17 when JME runs the update 2/13:Reseaching additional records possible soft deletes Harry is confused... Databricks definition says source is HQ_Analytics. However, base query from HQ_Analyics show 5887 rows. Comparing WMBI shows more rows with today's dates; SF synced with Oracle; 10/21 update. Reviewed DM code. DB matches it exactly and generates more rows."
+  },
+  {
+   "id": "TBL-MER-DM-015",
+   "name": "POS_DEPT_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4",
+    "BC5"
+   ],
+   "bcn": 5,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Harry",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/18 no change\n 12/13 - jme - counts/values match, sched runs daily,last updated 10/7\n 11/25/24 - jme - The counts and values match.\n Oracle has a default record labeled BI DEFAULT RECORD with no dates"
+  },
+  {
+   "id": "TBL-MER-DM-017",
+   "name": "POS_ITEM_TYPE_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2"
+   ],
+   "bcn": 1,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 4",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/18 - jme - Counts & values match, confirmed it's included in a sched which runs daily. Table last updated 12/18/24."
+  },
+  {
+   "id": "TBL-MER-DM-018",
+   "name": "POS_TAX_CLASS_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC4"
+   ],
+   "bcn": 3,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 2",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/18 - jme - Counts & values match, confirmed it's included in a sched which runs daily. Table last updated 12/18/24."
+  },
+  {
+   "id": "TBL-MER-DM-019",
+   "name": "PRICE_LVL_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS Pricing Config",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 4,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "12/18 - jme - Snowflake's PRICE_LVL_DESC values have extra spaces at the end of the string. Per Jeff, \"Just reviewed the table – the spaces should not have any impact as it is a non-index varchar field.\""
+  },
+  {
+   "id": "TBL-MER-DM-020",
+   "name": "PRICE_TYPE_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS Pricing Config",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2",
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 4,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+    "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS"
+   ],
+   "pipeIds": [
+    "PL-003",
+    "PL-002"
+   ],
+   "inwf": true,
+   "note": "1/16: jme - counts and values match."
+  },
+  {
+   "id": "TBL-MER-DM-023",
+   "name": "SCENARIO_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "Planning/Budgeting System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2",
+    "BC3",
+    "BC4",
+    "BC5"
+   ],
+   "bcn": 4,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "12/31 jme - same results. Table hasn't been updated since Feb 2024. \n 12/19 jme - The counts and values for the 5 records in the tables match across databases. \n There is no schedule or notebook.\n 11/20/24 - jme - Values match across databases"
+  },
+  {
+   "id": "TBL-PRC-DM-005",
+   "name": "SHIPPER_ITEM_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Shipper/Case Mapping",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2"
+   ],
+   "bcn": 2,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 2",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Sergio",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "4/8: counts and values still match\n 4/2: Watch until 4/8 4/1: counts and values match.\n 3/17: Harry reloaded Oracle data. Will check on 3/18.\n 3/14: JME working with Harry to reload table /3/4: JME - Issue with the beginning effective begin date. Also, item_dim not picking up changes from HQ Analytics Item Master. Needs review.\n 2/21: Harry to add content to missing items in ITEM_DIM"
+  },
+  {
+   "id": "TBL-STO-FC-007",
+   "name": "SHK_DAILY_ORDER_EXPORT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Store Ops",
+   "type": "Fact",
+   "src": "Workforce Mgmt / Store Ops Export (SHK)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/4/26: Counts are off and both Oracle and Snowflake are missing data for several months. Oracle's last REC_CREATE_DT is 10/21/25. Snowflake's is 12/1.\n 10/6: Counts are off beginning 6/2025. Also found mismatched values in the CARRY_OUT_NTFYN_RCVD_DTTM field and two Delivery dates w/ trx in SF but not in Oracle\n  7/7: counts off for 6/27 & 7/4. Records missing CC IDs have a leading '-' in CLUB_CARD_KEY values. JME to test and report findings if the variance is old data or not to HS \n 6/24: Schedule updated review 6/25 6/23: JME-Data is missing for 6/17, 6/19 & 6/21 order deliver dates missing may need HS to load a couple of days 6/20: jme tested-everything looks good. Will test again next week to make sure nothing changes. CC ID's updated. Source data seems delayed from Oracle Prestage tables. Scheduled job crashed at 7:30 due to server overload. Moved to 7:15.  Check on Monday. 6/18: CC IDs sporadically missing beginning 5/24. 6/16: HS Matching DataMigrator code 5/19: HS need unapproved CLUB_CARD_PROC 4/8: issue with CC_IDs missing in SF sporadically beginning 2/17/25\n  4/1: issue with incorrect CLUB_CARD_KEYs for some records.\n 3/17: Harry reloaded Oracle data. Will check on 3/18.\n 3/10: Club card ID's are missing from this table 2/25: Monitor until 3/4 variance is due to timing of database timings 2/21: Test on 2/23 Raw and bronze tables bringing in decimals from 5 fields 2/20 status changed to Testing:Failed\n 2/19: jme-There's an issue with the values in the EST_TTL, CHARGE_AMT, ACTUAL_TTL & the ITEM_CNT_ACTUAL fields. It looks like Snowflake doesn't contain any data after the decimal point.\n Changed the CREATE and Update DTTM to DT. GOLD to SF was failing earlier. Now after the fix SF is matching with Oracle."
+  },
+  {
+   "id": "TBL-PHR-FC-004",
+   "name": "SUPPLYLOGIX_RX_ACT_DETAIL_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Pharmacy",
+   "type": "Fact",
+   "src": "Supplylogix (Pharmacy vendor)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Reassign",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "2/23 (Impacts NDC_DIM)The last ACCT_EFF_DT_KEY in Snowflake is 45889 (8/20/25) and Oracle's is 45930 (9/30/25).\n 9/3: The counts are off for several days & there are a few mismatched SHIPG_STAT values for 2023 & 2024, but no recent dates.\n 8/25: JME Issue resolved will monitor until 9/4 8/21: The issue with SHIPG_STAT still exists for some records with a status date of 8/6 as well as missing records from 8/6 & 7/17. Record counts are off for June & July.\n 8/20: Timing issue resolved. 8/19: possible timing issue with Oracle\n 8/18: Found discrepancies in the SHIPG_STAT for LAST_SHIPG_STAT_DTTM for 8/6/25. Everything else looks good. JME Shiiping status issue on going after retest THIS IMPACTS NCD_DIM  \n 8/14: Will check variance in Oracle and SF 8/8: Counts are off for May & July. Three invoices have different SHIPG_STATs.\n 7/25: sFTP issue resolved 7/17: Snowflake is missing data. The pipeline has failed a few times over the past week.\n 6/27: counts and values match. Will monitor for a week or 2 to ensure nothing changes.\n 6/25: counts are off beginning with ACCT_EFF_DT_KEY 45791(5/14/25). It looks like SF isn't being updated.\n 5:30 tested-counts and values match. Will test again next week\n 5/29: Nod - Hardcoded Notebook The issue with the RCVD_QTY being off by 1 still exists.\n 5/28: This is a daily file and ready for testing \n 5/22: The RCVD_QTY doesn't match across databases. Snowflake has 1 less that Oracle even though they appear to come from the same source.\n 4/8: RCVD_QTY values don't match. Nod is researching.\n 3/26 Nod is working on this 3/24 - Pull back from Datavail"
+  },
+  {
+   "id": "TBL-LEG-FC-001",
+   "name": "BBM_AUDIT_DETAIL_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Legal",
+   "type": "Fact",
+   "src": "Audit / Vendor Funding Module (BBM)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "4/6/26: issue with discrepancies in the ACTIVE_FL still exists\n 9/15: The same code is used in both Data Migrator and the notebook. Reviewed source data and found that Snowflake matches BILL_AMT with 3 decimal places. Oracle is rounding up to 2 in some instances. Need to make a decision whether or not to match SFTP source or Oracle. \n 9/3: Will confirm data type in Oracle There are still issues with the ACTIVE_FL and also with BILL_AMT. In some cases Oracle is rounded up to 2 decimal places where Snowflake has 3. \n 6/27: The ACTIVE_FL doesn't match across databases\n 6/19: Manually removed duplicates test and monitor for every Tuesday for 3 weeks 6/11: Duplicates appearing is researching 6/3: JF to check with Duane on Build Back Files 5/28: 4/07 and4/14 data is not matching and i am working on it 4/3: Issue with non-matching ITEM_KEYs still exists.HS researching ITEM_DIM 3/21: counts match, SCAN_CD_IDs are still off for 10/24-12/24. Will review again once ITEM_DIM is complete\n 3/11: Per Nod, Once ITEM_DIM gets fixed, BBM_AUDIT_DETAIL_F will start running successfully .\n 3/10: Notebook is failing but numbers match. Variances for Oct-Dec are scan ID's and bill amount 3/5: Reseaching why its failing 3/3: jme - table is included in SCHED 6, and has been failing to update.\n 1/13: Should work when ITEM_DIM is fixed by Datavail 12/16 - jme - counts are off for October & November\n 12/2/24 - jme - counts match, but there are ITEM_KEYs missing from Snowflake's ITEM_DIM table. See 12/2/24 email.\n 11/18/24 - jme - Counts are off. Oracle was last updated 11/12/24. Snowflake last updated 10/22/24.\n UNIQUE INDEX (FORMATTED_INVOICE_NUM,LOC_KEY,ITEM_KEY), FILE_DT (joins with DT_DIM)"
+  },
+  {
+   "id": "TBL-MKT-FC-004",
+   "name": "DHAT_PROMO_HIST_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "Merchandising Promo Module / Promo Engine (DHAT)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "Reassign",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "8/8: SF's count is still increasing.\n 6/18: SF's count is increasing where Oracle's is not. \n 6/4: Oracle's record count has been the same since 1/2/25. Snowflake's count had been the same until 5/28 with the count matching Oracle. It changed on 5/29/25 and has been the same since then. HS checked the source, Job ran today but no data 6/3: JF Check why Oracle schedule isn't running 5/28: Ready for testing, will also monitor it for a few days 4/15: JF will confirm table is still active 4/14: The counts haven't changed in either database since 1/2/25."
+  },
+  {
+   "id": "TBL-FAC-DM-003",
+   "name": "STORE_START_END_DATE",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Facilities",
+   "type": "Dimension",
+   "src": "Store Ops fact table",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3",
+    "BC5"
+   ],
+   "bcn": 2,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "1/2:*** Must be manually maintained***\n 12/31 jme - same results. Table hasn't been updated since Feb 2024. \n 12/19 JME - The counts and values match across databases. \n There is no schedule or notebook \n 11/20/24 - jme - Values match across databases"
+  },
+  {
+   "id": "TBL-MKT-FC-001",
+   "name": "AMS_POINT_ACT_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Fact",
+   "src": "AMS",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/27: Snowflake's table isn't updating consistently\n 1/26/26: Counts and POINT_VAL values are off beginning July 2025\n 8/28: the counts and values match at EOD test. The issues I saw were when joined with the AMS_OFFER_DIM table. Oracle & SF have different values for INCENTIVE_NM & INCENTIVE_DESC. SF matches LogixRT CPE_Incentives table. Leaving status as Testing for now.\n 7/30 update: recognized prestage data not being truncated before load. set truncate flag. observe updates for next week. 7/30: Will trin data down to 2yrs to increase performance 7/28: Issue with data not pushed out to SF 7/25: HS Removed dups updated code rerun 7/23: HS Nod reviewing AMS_LOAD, HS activated separate job for testing7/10: counts and values are off beginning February 2025 no data in Snowflake after effective date 5/27\n 7/8: PIPLINE are running , counts might not be matching because of timing but can be tested5/19: HS Will test AMS Load for 5am5/5: Added to the AMS Load monitor for 3 days 3/17: Snowflake data is updated from a pre-stage table in Oracle (should this be changed to pull from HQ Analytics?). Schedule changed to run after pre-stage table is updated in Oracle so they're in alignment. Will check on 3/18.\n 3/11: Review schedule for possible modification to synch with this table 3/10: HS to review DM schedule 3/7 counts and values match through 2/25. Snowflake has no data after 2/25. Back to DatAvail.\n 3/3: counts are off for December - February\n 2/21: Harry will backfil tables to a later date retest on 2/24 2/10 There is an unapproved CLUB_CARD_DIM process running that needs tested that will drop variance significantly 2/3: jme - found 9800+ records with CC Keys that don't have a match in SF's CLUB_CARD_DIM table. Sent list to Harry.\n UNIQUE INDEX (AMS_POINT_ACT_F_KEY,ACCT_EFF_DT_KEY); ACCT_EFF_DT_KEY (joins with DT_DIM)"
+  },
+  {
+   "id": "TBL-MER-DM-026",
+   "name": "TX_TYPE_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Dimension",
+   "src": "POS System",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC3",
+    "BC5"
+   ],
+   "bcn": 3,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Jayne",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+    "PL_ORCH_ALL_DB_TO_LANDING_WORK"
+   ],
+   "pipeIds": [
+    "PL-001",
+    "PL-003"
+   ],
+   "inwf": true,
+   "note": "12/13/24 - jme counts/values match, sched runs daily, last updated 12/13/24\n 11/21/24 - jme - Values match across databases"
+  },
+  {
+   "id": "TBL-DST-FC-002",
+   "name": "LOC_TRANSFER_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Distribution",
+   "type": "Fact",
+   "src": "RMS",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "In Progress",
+   "cplx": "Low",
+   "owner": "Reassign",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "3/30/26: Snowflake has more records. Issue with missing WAREHOUSE_SUPPL_KEYs\n 5/12/25: MZ - Transfer documents that have multiple batch ID's in Oracle. Possible cleanup needs done."
+  },
+  {
+   "id": "TBL-PRC-DM-006",
+   "name": "VENDOR_COST_ZONE_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Vendor Cost Zones",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 2",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Medium",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "12/12/24 - jme - counts and values match. Confirmed table is included in a schedule and updating on a regular basis.\n 11/20/24 - jme - Values match across databases with the exception of VENDOR_COST_ZONE_KEYs, which were in alignment before recent changes.\n Revisit Date logic Revisit incremental load"
+  },
+  {
+   "id": "TBL-MER-FC-005",
+   "name": "OVERRIDES_ALERTS_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Merchandising",
+   "type": "Fact",
+   "src": "POS Exceptions / Loss Prevention",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Medium",
+   "owner": "Reassign",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/6: Snowflake's last REC_CREATE_DT is 1/6/26. Oracle's is 1/7/26.\n 2/2/26: counts are still off beginning June 2025, OPERATOR_ID mismatch as well\n 10/6: Operator_Dim depends on table. Counts are off as of 6/2025\n 8/22: The counts are off for June and July. There's an issue with OPERATOR_IDs when joined with OPERATOR_DIM. OPERATOR_DIM currently has more records in Snowflake. \n JME to begin testing today \n 7/25 sFTP site issue resolved. 7/16: There are extra spaces in Snowflake in the NTFYN_DESC values\n 6/13: missing OPERATOR_IDs when joined with OPERATOR_DIM. Counts are off. SF has extra records with null ACTIVITY_DTTMs.\n 6/10: Nod corrected pipeline issue 6/5: Nod to correct issues with missing files & ACTIVITY_DTTM. Will retest after all the data is loaded. HS will check ACTIVITY_DTTM"
+  },
+  {
+   "id": "TBL-PRC-DM-009",
+   "name": "VENDOR_LOC_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Procurement",
+   "type": "Dimension",
+   "src": "Vendor-Location Crosswalk",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 2",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "High",
+   "owner": "Mousumi",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "3/4: It looks like the issue with delivery status was due to timing of updates. OK to mark complete again.\n 2/28: Monitor until 3/4 2/27: Ready for testing Remove rows and update the logic 2/26: Monitor until 3/7 2/25: Oracle not reflecting HQ_Analytics status Jeff to review to make final decision on variance the source does match SF for the statuses and extra records 2/24: jme-Are we leaving as is and ignoring the extra records in Snowflake and the differences in the delivery statuses?\n 2/18: Some records present in SF not in Oracle is researching 2/17: several hundred records with mismatched delivery statuses, 34 records in Oracle not in Snowflake. 118 records in SF, not in Oracle. JME will work with Mousumi on each scenario for the 84 records \n 2/11: 4 records are from an index that wont match but are valid per JF 2/10: Work with Jeff to Prevent soft deletes in Oracle from going to SF 2/3: Jeff will assist to determine soft deletes Research revealed source of tables is in HQ_Analytics 1/31:Jeff will research DataMigrator Source matches SF JME will review 1/30: Researching 331 records which have mis-matched delivery status 1/28 Snowflake has 114 records not in Oracle: Oracle has 4 records that aren't in SF. There are 331 KEYs with mismatched delivery statuses.\n 1/21: JME to monitor table until 1/24 to confirm development is complete 1/20: jme - per Harry, refresh table from Oracle and monitor\n 1/15: Possible SF data is more accurate than Oracle 1/14: Writing script Oracle and SF keys don't match 1/13: Researching variances10/22: schedule 10 created an added this table. Runs at 10am.\n Source of this table is HQ Analytics in SQL Server.\n First step is to create bronze table from 4 raw tables (Vendor_store_table, vendor_master, store_table, tci_domain_lookups) using a query mentioned in databricks notebook.\n When I took the same query and executed in SQL server I got 80,906 records which means source has only 80,906 records which is less than Oracle.\n Then I ran the databricks notebook after commenting out RECORD_STATUS_DATE > CURRENT_DATE()-1 to laod into bronze table. Bronze table has 80,906 which is matching with source.\n The same notebook merges data into silver from bronze. I checked now silver has 80,903 which is 3 records less than source/bronze. The reason for this is there are 3 records with NULL LOC in source.\n Since we always matching against our LOC_DIM table these 3 records are not loaded into silver which is correct.\n Now the last question was what are the records that are present in Oracle but not in source or bronze or silver are some duplicate records in Oracle. I have founs all those records but since \n these records are not present in the source itself, I believe that Oracle has some incorrect data in it."
+  },
+  {
+   "id": "TBL-LEG-FC-002",
+   "name": "BBM_AUDIT_HDR_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Legal",
+   "type": "Fact",
+   "src": "Audit / Vendor Funding Module (BBM)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "Refactor",
+   "status": "Testing:Failed",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "5/1/26: Snowflake's last REC_CREATE_DT is 9/17/25. Files exist in Storage Explorer, but aren't getting to Snowflake\n 9/24: JME Column discrepancies \n 9/23: value discrepancies found in 10 columns. Details are in DevOps\n 9/22: Will manually remove duplicate for testing today a file was producing the duplicates. SF now has duplicates.\n 9/15: Will provide JF sample data Gold data intact but not loading into SF FORMATTED_INVOICE_NUM will trim data due to large size 9/3: Still no data after 4/9\n 8/7: noticed that the SF count still hasn't changed since 4/10. Nod is looking into\n 7/14: Snowflake's record count hasn't changed since 4/10/25.\n 6/2: HS verified issue sending to Nod to correct Will pull file names of the incorrect sFTP files 4/3: issue with missing INVOICE_DT and mismatch of END_DTs."
+  },
+  {
+   "id": "TBL-WHS-DM-002",
+   "name": "WAREHOUSE_SUPPL_DIM",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Warehouse",
+   "type": "Dimension",
+   "src": "WMS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1",
+    "BC2"
+   ],
+   "bcn": 2,
+   "layer": "T1 Dimensions",
+   "wave": "Wave 2",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "Low",
+   "owner": "Mousumi",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "2/4: Retested and found that the issues were cleared up.JME is checking one vendor that's changed name 1/21: Complete - JME will monitor until 1/24Checking present status of this table silver table had the same row as Oracle after apply trim in warehouse_suppl_id while merging. Manually ran the Silver to GOLD merge query. Now the counts are matching till snowflake."
+  },
+  {
+   "id": "TBL-MKT-DM-002",
+   "name": "AMS_OFFER_GRP_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "AMS",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3",
+    "BC4"
+   ],
+   "bcn": 2,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 1",
+   "disp": "Refactor",
+   "status": "Pending Review",
+   "cplx": "Low",
+   "owner": "Reassign",
+   "pipes": [
+    "PL_ORCH_SRC_TO_SF_ETL_GROUPS"
+   ],
+   "pipeIds": [
+    "PL-001"
+   ],
+   "inwf": true,
+   "note": "8/29:Per JF Approved to leave as is pending future review 7/14: We need to decide if we're leaving as is since Snowflake matches the source. \n 7/10: JF Oracle issue with DataMigrator JME Rows don't match with the source - Updates to Oracle are failing due to incorrect indexes 7/8: PIPELINE are running , counts might not be matching because of timing but can be tested6/9: Will refresh Oracle and run record status filter 6/5:: HS Will test AMS Load for 5am 5/6: There are 10 records with mismatched FOLDER_INCENTIVE_NMs or START/END_DTs and also 232 records that are in Oracle and cpe_incentives, but not in Snowflake's AMS_OFFER_GRP_XREF table\n 5/5: There's still an issue with mismatches in the FOLDER_INCENTIVE_NM and START/END_DT fields. Snowflake's count hasn't changed in months while Oracle's has increased.\n 2/12: Service account request for DataMigrator server in progress1/22: Harry to F/U with Jacob Lapley for assistance with Orphans and duplicates JME optional"
+  },
+  {
+   "id": "TBL-MKT-DM-004",
+   "name": "CLUB_CARD_ATTRIB_XREF",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "Marketing",
+   "type": "Dimension",
+   "src": "Loyalty / Offer Engine",
+   "scope": "In Scope",
+   "bcs": [
+    "BC4"
+   ],
+   "bcn": 1,
+   "layer": "T2 Cross-reference",
+   "wave": "Wave 3",
+   "disp": "Refactor",
+   "status": "Pending Review",
+   "cplx": "High",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": "11/28: The Armeta code is incomplete. DM shows two separate jobs to populate: ecoupon enrollment and points EOD balance. EOD balance is not included in the Armeta code. 7/11: Table not being built. Looks like table left in devleopment. Reset to Schedule 901. Will monitor. 7/9: Snowflake has no data after February 17th\n 7/8: PIPLINE are running , counts might not be matching because of timing but can be tested2/21: Research which tables are in use 2/19: HS provided Nod info from DataMigrator to begin development 2/11: Issue with join has a Club_Card_Dim dependency 1/2: Working with Harry on Databricks 12/10: Work with Jeff\\Nod duplicates Final testing today 11/25 Binary issue\\Needs Schedule; 11/18: testing in ADF"
+  },
+  {
+   "id": "TBL-HUM-FC-003",
+   "name": "Organization",
+   "schema": "",
+   "db": "",
+   "domain": "Human Capital",
+   "type": "Fact",
+   "src": "Workday",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Parallel",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-HUM-FC-004",
+   "name": "Supervisory Organization",
+   "schema": "",
+   "db": "",
+   "domain": "Human Capital",
+   "type": "Fact",
+   "src": "Workday",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Parallel",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-HUM-FC-005",
+   "name": "Worker",
+   "schema": "",
+   "db": "",
+   "domain": "Human Capital",
+   "type": "Fact",
+   "src": "Workday",
+   "scope": "In Scope",
+   "bcs": [
+    "BC5"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Parallel",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-PRC-FC-002",
+   "name": "Historical Purchase Order Cost",
+   "schema": "",
+   "db": "",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "Retalix (Biceps)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC1"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Parallel",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-PRC-FC-003",
+   "name": "Historical Purchases",
+   "schema": "",
+   "db": "",
+   "domain": "Procurement",
+   "type": "Fact",
+   "src": "Retalix (Biceps)",
+   "scope": "In Scope",
+   "bcs": [
+    "BC2"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Parallel",
+   "disp": "Build",
+   "status": "Not Started",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-FIN-BD-001",
+   "name": "SALES PLAN SPREADSHEET INPUTS",
+   "schema": "",
+   "db": "",
+   "domain": "Finance",
+   "type": "Budget",
+   "src": "Manual Plan CSVs",
+   "scope": "In Scope",
+   "bcs": [
+    "BC3"
+   ],
+   "bcn": 1,
+   "layer": "T4 External / Other",
+   "wave": "Wave 1",
+   "disp": "Keep As Is",
+   "status": "Complete",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": true,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-001",
+   "name": "DAILY_LOC_FUEL_F_BACKUP",
+   "schema": "",
+   "db": "",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-002",
+   "name": "GL_DEPT_HOURLY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-003",
+   "name": "GL_DEPT_ITEM_DAILY_SUM_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-004",
+   "name": "INV_AS_COUNTED_F_OG",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-005",
+   "name": "ITEM_INV_ACTIVITY_DTS",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-006",
+   "name": "ONHAND_INV_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-007",
+   "name": "POG_INV_LOC_F_BACKUP",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-008",
+   "name": "POS_DEPT_ITEM_DAILY_COMPARE_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  },
+  {
+   "id": "TBL-GEN-OT-009",
+   "name": "POS_DEPT_ITEM_DAILY_SNAP_F",
+   "schema": "WMBI",
+   "db": "BI_PROD",
+   "domain": "(BI_PROD Table Status-)",
+   "type": "",
+   "src": "(BI_PROD Table Status-)",
+   "scope": "Out of Scope",
+   "bcs": [],
+   "bcn": 0,
+   "layer": "",
+   "wave": "",
+   "disp": "",
+   "status": "",
+   "cplx": "",
+   "owner": "",
+   "pipes": [],
+   "pipeIds": [],
+   "inwf": false,
+   "note": ""
+  }
+ ],
+ "pipelines": [
+  {
+   "id": "PL-001",
+   "name": "PL_ORCH_SRC_TO_SF_ETL_GROUPS",
+   "tool": "Azure Data Factory",
+   "freq": [
+    "Daily",
+    "Weekdays",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "src": "",
+   "tgt": "ADLS; Snowflake",
+   "tables": [
+    "TBL-DST-FC-001",
+    "TBL-DST-FC-002",
+    "TBL-FAC-DM-001",
+    "TBL-FAC-DM-002",
+    "TBL-FAC-OT-001",
+    "TBL-FIN-DM-001",
+    "TBL-FIN-DM-002",
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-005",
+    "TBL-FIN-DM-006",
+    "TBL-ITS-DM-001",
+    "TBL-ITS-DM-002",
+    "TBL-LEG-FC-001",
+    "TBL-MER-DM-002",
+    "TBL-MER-DM-003",
+    "TBL-MER-DM-004",
+    "TBL-MER-DM-006",
+    "TBL-MER-DM-007",
+    "TBL-MER-DM-008",
+    "TBL-MER-DM-010",
+    "TBL-MER-DM-013",
+    "TBL-MER-DM-014",
+    "TBL-MER-DM-015",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-018",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-026",
+    "TBL-MER-FC-002",
+    "TBL-MER-FC-004",
+    "TBL-MER-FC-007",
+    "TBL-MER-FC-008",
+    "TBL-MER-FC-011",
+    "TBL-MER-FC-012",
+    "TBL-MER-FC-013",
+    "TBL-MKT-DM-001",
+    "TBL-MKT-DM-002",
+    "TBL-MKT-DM-003",
+    "TBL-MKT-DM-005",
+    "TBL-MKT-DM-007",
+    "TBL-MKT-DM-008",
+    "TBL-MKT-FC-001",
+    "TBL-MKT-FC-002",
+    "TBL-MKT-FC-003",
+    "TBL-MKT-FC-004",
+    "TBL-MKT-FC-005",
+    "TBL-MKT-FC-009",
+    "TBL-PRC-DM-001",
+    "TBL-PRC-DM-002",
+    "TBL-PRC-DM-003",
+    "TBL-PRC-DM-005",
+    "TBL-PRC-DM-006",
+    "TBL-PRC-DM-007",
+    "TBL-PRC-DM-008",
+    "TBL-PRC-FC-001",
+    "TBL-PRC-FC-004",
+    "TBL-PRM-DM-001",
+    "TBL-STO-DM-002",
+    "TBL-STO-DM-004",
+    "TBL-STO-FC-006",
+    "TBL-STO-FC-007",
+    "TBL-WHS-DM-002"
+   ],
+   "jobs": [
+    "DAILY_DIM_DATAFLOWS",
+    "TR_SCHED_DAILY_CYCLE4_DIM_RELOAD_FROM_EXADATA",
+    "TR_SCHED_DAILY_DIM",
+    "TR_SCHED_DAILY_ITEM_COST_F",
+    "TR_SCHED_DAILY_SRC_TABLES",
+    "TR_SCHED_GROUP_0",
+    "TR_SCHED_GROUP_1",
+    "TR_SCHED_GROUP_11",
+    "TR_SCHED_GROUP_2",
+    "TR_SCHED_GROUP_22",
+    "TR_SCHED_GROUP_3",
+    "TR_SCHED_GROUP_4",
+    "TR_SCHED_GROUP_5",
+    "TR_SCHED_GROUP_6",
+    "TR_SCHED_GROUP_8",
+    "TR_SCHED_HOURLY_CYCLE_4_FACTS"
+   ],
+   "fromDiagram": false
+  },
+  {
+   "id": "PL-002",
+   "name": "PL_RELOAD_ALL_CYCLE4_DIMS_WMBI_ADLS",
+   "tool": "Azure Data Factory",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "src": "ADLS landing (Parquet)",
+   "tgt": "ADLS gold (Delta)",
+   "tables": [
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-005",
+    "TBL-MER-DM-001",
+    "TBL-MER-DM-006",
+    "TBL-MER-DM-015",
+    "TBL-MER-DM-016",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-020",
+    "TBL-MER-DM-022",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-025",
+    "TBL-MKT-DM-001",
+    "TBL-MKT-DM-005",
+    "TBL-PRC-DM-003",
+    "TBL-STO-DM-002"
+   ],
+   "jobs": [
+    "DAILY_DIM_DATAFLOWS",
+    "TR_SCHED_DAILY_CYCLE4_DIM_RELOAD_FROM_EXADATA",
+    "TR_SCHED_DAILY_DIM",
+    "TR_SCHED_DAILY_ITEM_COST_F",
+    "TR_SCHED_GROUP_0",
+    "TR_SCHED_GROUP_1",
+    "TR_SCHED_GROUP_2",
+    "TR_SCHED_GROUP_3",
+    "TR_SCHED_GROUP_5"
+   ],
+   "fromDiagram": true
+  },
+  {
+   "id": "PL-003",
+   "name": "PL_ORCH_ALL_DB_TO_LANDING_WORK",
+   "tool": "Azure Data Factory",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "src": "",
+   "tgt": "ADLS; Snowflake",
+   "tables": [
+    "TBL-FIN-DM-002",
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-005",
+    "TBL-MER-DM-001",
+    "TBL-MER-DM-013",
+    "TBL-MER-DM-015",
+    "TBL-MER-DM-016",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-020",
+    "TBL-MER-DM-022",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-026",
+    "TBL-MKT-DM-008"
+   ],
+   "jobs": [
+    "DAILY_DIM_DATAFLOWS",
+    "TR_SCHED_DAILY_CYCLE4_DIM_RELOAD_FROM_EXADATA",
+    "TR_SCHED_DAILY_DIM",
+    "TR_SCHED_DAILY_SRC_TABLES",
+    "TR_SCHED_GROUP_1",
+    "TR_SCHED_GROUP_4",
+    "TR_SCHED_GROUP_5"
+   ],
+   "fromDiagram": false
+  },
+  {
+   "id": "PL-004",
+   "name": "PL_ORCH_ALL_DB_TO_LANDING",
+   "tool": "Azure Data Factory",
+   "freq": [
+    "Daily",
+    "Monthly",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "src": "",
+   "tgt": "ADLS; Snowflake",
+   "tables": [
+    "TBL-FIN-FC-002",
+    "TBL-MER-DM-006",
+    "TBL-MER-FC-012",
+    "TBL-PRC-DM-007",
+    "TBL-PRC-DM-008"
+   ],
+   "jobs": [
+    "TR_SCHED_DAILY_CYCLE4_DIM_RELOAD_FROM_EXADATA",
+    "TR_SCHED_DAILY_ITEM_COST_F",
+    "TR_SCHED_GROUP_0",
+    "TR_SCHED_GROUP_1",
+    "TR_SCHED_GROUP_11",
+    "TR_SCHED_HOURLY_CYCLE_4_FACTS",
+    "TR_SCHED_MANUAL_TEST"
+   ],
+   "fromDiagram": false
+  },
+  {
+   "id": "PL-005",
+   "name": "PL_ORCH_WMMAMSAG01_TO_DB",
+   "tool": "Azure Data Factory",
+   "freq": [],
+   "status": "Unknown",
+   "src": "SQL Server (Logix)",
+   "tgt": "ADLS landing",
+   "tables": [],
+   "jobs": [],
+   "fromDiagram": true
+  },
+  {
+   "id": "PL-006",
+   "name": "PL_COPY_WMMAMSAG01_LogixXS_LANDING",
+   "tool": "Azure Data Factory",
+   "freq": [],
+   "status": "Unknown",
+   "src": "SQL Server LogixXS.dbo",
+   "tgt": "ADLS raw (Delta)",
+   "tables": [],
+   "jobs": [],
+   "fromDiagram": true
+  },
+  {
+   "id": "PL-007",
+   "name": "PL_ORCH_RAW_TO_SNOWFLAKE",
+   "tool": "Azure Data Factory",
+   "freq": [],
+   "status": "Unknown",
+   "src": "ADLS raw",
+   "tgt": "Snowflake stage",
+   "tables": [],
+   "jobs": [],
+   "fromDiagram": true
+  },
+  {
+   "id": "PL-008",
+   "name": "PL_COPY_WMBI_GOLD_C4_DIMS",
+   "tool": "Azure Data Factory",
+   "freq": [],
+   "status": "Unknown",
+   "src": "Oracle WMBI",
+   "tgt": "ADLS landing (Parquet)",
+   "tables": [],
+   "jobs": [],
+   "fromDiagram": true
+  },
+  {
+   "id": "PL-009",
+   "name": "PL_ORCH_RELOAD_SRC_TABLES",
+   "tool": "Azure Data Factory",
+   "freq": [],
+   "status": "Unknown",
+   "src": "",
+   "tgt": "",
+   "tables": [],
+   "jobs": [],
+   "fromDiagram": true
+  }
+ ],
+ "triggers": [
+  {
+   "id": "TRG-007",
+   "name": "TR_SCHED_GROUP_0",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-MER-DM-006",
+    "TBL-MER-FC-004",
+    "TBL-MKT-DM-007",
+    "TBL-MKT-FC-002",
+    "TBL-PRC-DM-002",
+    "TBL-PRC-DM-007",
+    "TBL-PRC-FC-004",
+    "TBL-STO-DM-002",
+    "TBL-WHS-DM-002"
+   ]
+  },
+  {
+   "id": "TRG-003",
+   "name": "TR_SCHED_DAILY_CYCLE4_DIM_RELOAD_FROM_EXADATA",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-003",
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-005",
+    "TBL-MER-DM-001",
+    "TBL-MER-DM-006",
+    "TBL-MER-DM-015",
+    "TBL-MER-DM-016",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-020",
+    "TBL-MER-DM-022",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-025",
+    "TBL-MKT-DM-001",
+    "TBL-MKT-DM-005",
+    "TBL-PRC-DM-003",
+    "TBL-STO-DM-002"
+   ]
+  },
+  {
+   "id": "TRG-001",
+   "name": "DAILY_DIM_DATAFLOWS",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-003"
+   ],
+   "tables": [
+    "TBL-FIN-DM-002",
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-005",
+    "TBL-MER-DM-001",
+    "TBL-MER-DM-013",
+    "TBL-MER-DM-015",
+    "TBL-MER-DM-016",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-020",
+    "TBL-MER-DM-022",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-026"
+   ]
+  },
+  {
+   "id": "TRG-004",
+   "name": "TR_SCHED_DAILY_DIM",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-003"
+   ],
+   "tables": [
+    "TBL-FIN-DM-002",
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-005",
+    "TBL-MER-DM-001",
+    "TBL-MER-DM-013",
+    "TBL-MER-DM-015",
+    "TBL-MER-DM-016",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-020",
+    "TBL-MER-DM-022",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-026"
+   ]
+  },
+  {
+   "id": "TRG-005",
+   "name": "TR_SCHED_DAILY_ITEM_COST_F",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-MER-DM-006",
+    "TBL-PRC-DM-007",
+    "TBL-PRC-DM-008"
+   ]
+  },
+  {
+   "id": "TRG-014",
+   "name": "TR_SCHED_GROUP_5",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-003"
+   ],
+   "tables": [
+    "TBL-FAC-DM-002",
+    "TBL-FAC-OT-001",
+    "TBL-FIN-DM-001",
+    "TBL-FIN-DM-003",
+    "TBL-FIN-DM-004",
+    "TBL-FIN-DM-006",
+    "TBL-ITS-DM-001",
+    "TBL-ITS-DM-002",
+    "TBL-MER-DM-002",
+    "TBL-MER-DM-003",
+    "TBL-MER-DM-004",
+    "TBL-MER-DM-013",
+    "TBL-MER-DM-014",
+    "TBL-MER-DM-017",
+    "TBL-MER-DM-018",
+    "TBL-MER-DM-019",
+    "TBL-MER-DM-024",
+    "TBL-MER-DM-026",
+    "TBL-MER-FC-007",
+    "TBL-MKT-DM-003",
+    "TBL-PRC-DM-001",
+    "TBL-PRM-DM-001"
+   ]
+  },
+  {
+   "id": "TRG-008",
+   "name": "TR_SCHED_GROUP_1",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002",
+    "PL-003",
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-FIN-DM-002",
+    "TBL-FIN-DM-005",
+    "TBL-MKT-DM-001",
+    "TBL-PRC-DM-006",
+    "TBL-PRC-DM-008"
+   ]
+  },
+  {
+   "id": "TRG-015",
+   "name": "TR_SCHED_GROUP_6",
+   "freq": [
+    "Weekly"
+   ],
+   "status": "Started",
+   "pipes": [
+    "PL-001"
+   ],
+   "tables": [
+    "TBL-FAC-DM-001",
+    "TBL-LEG-FC-001",
+    "TBL-MER-FC-013",
+    "TBL-MKT-FC-001",
+    "TBL-MKT-FC-003",
+    "TBL-MKT-FC-004",
+    "TBL-PRC-FC-001",
+    "TBL-STO-DM-004",
+    "TBL-STO-FC-006",
+    "TBL-STO-FC-007"
+   ]
+  },
+  {
+   "id": "TRG-010",
+   "name": "TR_SCHED_GROUP_2",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002"
+   ],
+   "tables": [
+    "TBL-MER-DM-007",
+    "TBL-MER-FC-008",
+    "TBL-MKT-DM-002",
+    "TBL-MKT-DM-005"
+   ]
+  },
+  {
+   "id": "TRG-012",
+   "name": "TR_SCHED_GROUP_3",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-002"
+   ],
+   "tables": [
+    "TBL-MKT-FC-009",
+    "TBL-PRC-DM-003"
+   ]
+  },
+  {
+   "id": "TRG-013",
+   "name": "TR_SCHED_GROUP_4",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-003"
+   ],
+   "tables": [
+    "TBL-DST-FC-001",
+    "TBL-DST-FC-002",
+    "TBL-MER-DM-008",
+    "TBL-MER-FC-002",
+    "TBL-MKT-DM-008",
+    "TBL-MKT-FC-005",
+    "TBL-PRC-DM-005"
+   ]
+  },
+  {
+   "id": "TRG-016",
+   "name": "TR_SCHED_GROUP_8",
+   "freq": [
+    "Weekdays"
+   ],
+   "status": "Started",
+   "pipes": [
+    "PL-001"
+   ],
+   "tables": [
+    "TBL-MER-DM-010"
+   ]
+  },
+  {
+   "id": "TRG-011",
+   "name": "TR_SCHED_GROUP_22",
+   "freq": [
+    "Weekly"
+   ],
+   "status": "Started",
+   "pipes": [
+    "PL-001"
+   ],
+   "tables": [
+    "TBL-MER-FC-011"
+   ]
+  },
+  {
+   "id": "TRG-009",
+   "name": "TR_SCHED_GROUP_11",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-MER-FC-012"
+   ]
+  },
+  {
+   "id": "TRG-017",
+   "name": "TR_SCHED_HOURLY_CYCLE_4_FACTS",
+   "freq": [
+    "Daily",
+    "Weekly"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-MER-FC-012"
+   ]
+  },
+  {
+   "id": "TRG-018",
+   "name": "TR_SCHED_MANUAL_TEST",
+   "freq": [
+    "Monthly"
+   ],
+   "status": "Stopped",
+   "pipes": [
+    "PL-004"
+   ],
+   "tables": [
+    "TBL-FIN-FC-002"
+   ]
+  },
+  {
+   "id": "TRG-006",
+   "name": "TR_SCHED_DAILY_SRC_TABLES",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Mixed",
+   "pipes": [
+    "PL-001",
+    "PL-003"
+   ],
+   "tables": [
+    "TBL-MKT-DM-008"
+   ]
+  },
+  {
+   "id": "TRG-002",
+   "name": "TR_SCHED_DAILY_911_CLUB_CARD_DIM",
+   "freq": [
+    "Daily"
+   ],
+   "status": "Stopped",
+   "pipes": [
+    "PL-007"
+   ],
+   "tables": []
+  }
+ ],
+ "flow": {
+  "table": "CLUB_CARD_DIM",
+  "id": "TBL-MKT-DM-005",
+  "nodes": [
+   {
+    "zone": "SQL Server",
+    "label": "LogixXS",
+    "detail": "Four operational tables in the dbo schema of the LogixXS database.",
+    "pipe": "PL_COPY_WMMAMSAG01_LogixXS_LANDING",
+    "side": [
+     {
+      "label": "dbo.CardIDs",
+      "kind": "origin"
+     },
+     {
+      "label": "dbo.Customers",
+      "kind": "origin"
+     },
+     {
+      "label": "dbo.CustomerExt",
+      "kind": "origin"
+     },
+     {
+      "label": "dbo.CustomerPreferences",
+      "kind": "origin"
+     }
+    ]
+   },
+   {
+    "zone": "Landing",
+    "label": "STG_CLUB_CARD_DIM.parquet",
+    "detail": "Extract dropped as Parquet in the landing container.",
+    "pipe": "PL_COPY_WMMAMSAG01_LogixXS_LANDING"
+   },
+   {
+    "zone": "Raw",
+    "label": "stg_club_card_dim",
+    "detail": "Delta table. Upsert merged on CLUB_CARD_ID and HOUSEHOLD_ID. The Parquet is archived after the load.",
+    "pipe": "PL_COPY_WMMAMSAG01_LogixXS_LANDING"
+   },
+   {
+    "zone": "Bronze",
+    "label": "pstg / club_card_dim",
+    "detail": "Clean snapshot of the day.",
+    "pipe": "PL_ORCH_RAW_TO_SNOWFLAKE"
+   },
+   {
+    "zone": "Bronze",
+    "label": "club_card_dim",
+    "detail": "Accumulated dimension. This is where the history is kept.",
+    "pipe": "PL_ORCH_RAW_TO_SNOWFLAKE",
+    "side": [
+     {
+      "label": "gold / club_card_dim",
+      "kind": "reads"
+     },
+     {
+      "label": "gold / sales_pos_tx_f",
+      "kind": "reads",
+      "id": "TBL-MER-FC-012"
+     },
+     {
+      "label": "gold / dt_dim",
+      "kind": "reads",
+      "id": "TBL-WHS-DM-001"
+     },
+     {
+      "label": "silver / club_card_dim",
+      "kind": "reads"
+     }
+    ]
+   },
+   {
+    "zone": "Silver",
+    "label": "club_card_dim",
+    "detail": "Conformed. Notebook /Shared/SILVER/Cycle_4_Dimensions/CLUB_CARD_DIM",
+    "pipe": "PL_ORCH_RAW_TO_SNOWFLAKE",
+    "side": [
+     {
+      "label": "gold / club_card_dim",
+      "kind": "reads"
+     }
+    ]
+   },
+   {
+    "zone": "Gold",
+    "label": "club_card_dim",
+    "detail": "Only changed records are processed. Notebook /Shared/GOLD/SILVER_TO_GOLD_IU",
+    "pipe": "PL_ORCH_RAW_TO_SNOWFLAKE"
+   },
+   {
+    "zone": "CSV",
+    "label": "club_card_dim.csv",
+    "detail": "Gold exported to CSV for the Snowflake load.",
+    "pipe": "PL_ORCH_RAW_TO_SNOWFLAKE"
+   },
+   {
+    "zone": "Snowflake",
+    "label": "TEMP.CLUB_CARD_DIM",
+    "detail": "Staging table inside Snowflake.",
+    "pipe": "ADF_INTEGRATION_COPY_AND_MERGE"
+   },
+   {
+    "zone": "Snowflake",
+    "label": "BI_PROD.WMBI.CLUB_CARD_DIM",
+    "detail": "Published table. Merged by COPY_AND_MERGE_V5.",
+    "pipe": "ADF_INTEGRATION_COPY_AND_MERGE"
+   }
+  ],
+  "keys": [
+   "CLUB_CARD_ID",
+   "HOUSEHOLD_ID"
+  ],
+  "legacy": [
+   {
+    "label": "Oracle WMBI.CLUB_CARD_DIM",
+    "detail": "Oracle gold layer copy, landed to ADLS by PL_COPY_WMBI_GOLD_C4_DIMS."
+   },
+   {
+    "label": "TRUNCATE_LOAD_LANDING_PARQUET_TO_GOLD_DELTA",
+    "detail": "Notebook. Reads Parquet from landing and transient, writes an intermediate Delta in Gold, then truncates and reloads the final table."
+   }
+  ],
+  "downstream": "Not evidenced. The end to end diagram notes the table does not appear in ETL_METADATA, so no consuming process could be confirmed.",
+  "openPoints": [
+   "Which columns the joins use at each layer.",
+   "Whether the non-primary tables stay in the picture or come out."
+  ]
+ },
+ "meta": {
+  "inScope": 63,
+  "total": 159,
+  "pipelines": 9,
+  "triggers": 18
+ }
+}
