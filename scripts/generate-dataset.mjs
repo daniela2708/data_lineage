@@ -1,5 +1,4 @@
 import { readFile, writeFile } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
 import XLSX from 'xlsx'
 
 const workbookPath = new URL('../public/Data Catalog V1.xlsx', import.meta.url)
@@ -12,7 +11,7 @@ const businessCases = (value) => {
   return [...new Set(matches.map((item) => item.replace(/\s+/g, '').replace(/^UC/, 'BC')))]
 }
 
-const workbook = XLSX.readFile(fileURLToPath(workbookPath), { cellDates: true })
+const workbook = XLSX.read(await readFile(workbookPath), { cellDates: true })
 const worksheet = workbook.Sheets[SHEET]
 
 if (!worksheet) {

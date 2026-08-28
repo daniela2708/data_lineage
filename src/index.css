@@ -58,7 +58,7 @@ h1{font-family:var(--mono);text-transform:uppercase;font-weight:700;font-size:cl
 .stats{background:var(--white);border-bottom:1px solid var(--n-darker);overflow-x:auto}
 .stats-inner{display:flex;padding:0 var(--gutter)}
 .stat{padding:14px 26px 15px;border-right:1px solid var(--n-darker);min-width:118px}
-.stat:first-child{padding-left:0}
+.stat:first-child{padding-left:26px;border-left:1px solid var(--n-darker)}
 .stat b{display:block;font-family:var(--mono);font-size:21px;line-height:1.1;font-weight:700}
 .stat i{font-style:normal;font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;
   color:var(--n-darkest);font-family:var(--mono)}
