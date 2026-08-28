@@ -20,7 +20,7 @@ export default function App() {
       <footer>
         <div className="page-shell footer-inner">
           <span>Proprietary and confidential</span>
-          <span>{DATA.meta.total} tables · {DATA.meta.pipelines} pipelines · source: Data Catalog V1.xlsx · lineage documented on the ADF side only</span>
+          <span>{DATA.meta.total} catalog tables · 3 table-level lineage references · source: Data Catalog V1.xlsx + public/*_lineage.html</span>
         </div>
       </footer>
     </>

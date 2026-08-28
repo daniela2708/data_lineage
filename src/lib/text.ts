@@ -41,3 +41,31 @@ export function wrapLabel(s: string, max: number, maxLines = 3): string[] {
 export function joinDot(parts: (string | undefined | false)[]): string {
   return parts.filter(Boolean).join(' · ')
 }
+
+/**
+ * Split a qualified name at its first dot, so a card can show the database or
+ * schema quietly above the object it actually points at.
+ */
+export function splitQualifiedName(name: string): { qualifier: string; object: string } {
+  const cut = name.indexOf('.')
+  return cut === -1 ? { qualifier: '', object: name } : { qualifier: name.slice(0, cut), object: name.slice(cut + 1) }
+}
+
+/**
+ * Cut a technical name after each separator. Rendering the pieces with a <wbr>
+ * between them lets a narrow card wrap at CLUBCARD_ / SRC_FEED rather than
+ * mid-token, which is the only place a reader can follow the break.
+ */
+export function splitOnSeparators(name: string): string[] {
+  const parts: string[] = []
+  let current = ''
+  for (const char of name) {
+    current += char
+    if (char === '_' || char === '.' || char === '/') {
+      parts.push(current)
+      current = ''
+    }
+  }
+  if (current) parts.push(current)
+  return parts
+}

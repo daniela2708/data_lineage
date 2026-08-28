@@ -10,8 +10,8 @@ export default function Header() {
           <span className="eyebrow">Data platform modernization · Discovery</span>
           <h1>Data Lineage Explorer</h1>
           <p className="sub">
-            Follow the documented path for CLUB_CARD_DIM from its source tables to publication,
-            including its dependencies, related pipelines, and known downstreams.
+            Explore how data moves through Weis today, from source systems and load processes to
+            downstream tables and reports, grounded in verified code and data evidence.
           </p>
         </div>
         <div className="brand" aria-label="Weis Markets in collaboration with Wizeline">

@@ -1,18 +1,12 @@
-import { DATA } from '../data/dataset'
-import { ORACLE_LINEAGE } from '../data/oracleLineage'
+import { TABLE_LINEAGES } from '../data/tableLineages'
 
 /** Counts that frame the whole prototype. Every one is derived, none is typed in. */
 export default function StatStrip() {
-  const tracedTable = DATA.tables.find((table) => table.id === DATA.flow.id)
-  const interactingPipelines = new Set([
-    ...(tracedTable?.pipeIds.map((id) => DATA.pipelines.find((pipeline) => pipeline.id === id)?.name ?? id) ?? []),
-    ...DATA.flow.nodes.flatMap((node) => (node.pipe ? [node.pipe] : [])),
-  ])
   const stats: [string, number][] = [
-    ['End-to-end trace', 1],
-    ['Documented steps', DATA.flow.nodes.length],
-    ['Interacting workflows', interactingPipelines.size + ORACLE_LINEAGE.liveFlows.length + 1],
-    ['Business cases', tracedTable?.bcs.length ?? 0],
+    ['Tables available', TABLE_LINEAGES.length],
+    ['Live process nodes', TABLE_LINEAGES.reduce((total, table) => total + table.liveFlow.length, 0)],
+    ['Related relationships', TABLE_LINEAGES.reduce((total, table) => total + table.relatedGroups.reduce((count, group) => count + group.items.length, 0), 0)],
+    ['Pending validations', TABLE_LINEAGES.reduce((total, table) => total + table.pendingValidation.length, 0)],
   ]
 
   return (
