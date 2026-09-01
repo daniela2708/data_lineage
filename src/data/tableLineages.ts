@@ -65,7 +65,7 @@ const clubDownstreams = [
   'POINTS_EARN_REDEEM_FV2', 'POS_POINTS_EARNED_REDEEMED_VWM', 'POS_POINTS_EARN_F',
   'POS_POINTS_EARN_VWM', 'POS_TX_TENDER_F', 'SALES_POS_LN_F', 'SALES_POS_TX_F',
   'SHK_DAILY_ORDER_EXPORT_F', 'SUNOCO_FUEL_PRTNR_PRGM_F',
-].map((name) => ({ name, detail: 'Confirmed in code.' }))
+].map((name) => ({ name, detail: 'Potential dependency identified from the available evidence. Lineage validation pending.' }))
 
 export const TABLE_LINEAGES: TableLineage[] = [
   {
@@ -99,7 +99,7 @@ export const TABLE_LINEAGES: TableLineage[] = [
       { id: 'legacy', label: 'Legacy / inactive path', description: 'Historical EME chain; last execution 2020-08-12.', tone: 'legacy', items: [
         { name: 'WMBI_ETL.STG_CLUB_CARD_DIM → WMBI.CLUB_CARD_DIM', detail: 'Frozen EME chain; 15,019,410 historical rows.' },
       ] },
-      { id: 'downstreams', label: 'Confirmed downstream dependencies', description: 'Tables confirmed in code to depend on this target.', tone: 'dependency', items: clubDownstreams },
+      { id: 'downstreams', label: 'Downstream dependencies (pending confirmation)', description: 'Potential downstream dependencies identified from the available evidence. Lineage validation pending.', tone: 'dependency', items: clubDownstreams },
     ],
     findings: [
       'Two different loading processes have fed this table. The old one stopped in 2020; the current one runs daily.',
@@ -107,7 +107,7 @@ export const TABLE_LINEAGES: TableLineage[] = [
       'Serious: the points-earning correction also only compares against the frozen 2020 staging table.',
       'Confirmed: the final upsert overwrites basket discount and points earning flags with staging values, which are empty from the true source.',
       'Confirmed: the change fingerprint uses name, address and contact fields only; benefit-only changes are not detected.',
-      '26 other tables depend on this one, including the two largest transaction tables in the warehouse.',
+      '26 potential downstream dependencies were identified, including two large transaction tables. Lineage validation is pending.',
     ],
     pendingValidation: [
       'Whether CLUB_CARD_DIM should move to Wave 2 is still pending a decision.',
@@ -139,7 +139,7 @@ export const TABLE_LINEAGES: TableLineage[] = [
       { id: 'legacy', label: 'Superseded one-time load', description: 'Historical Run Once path; last execution 2013-08-21.', tone: 'legacy', items: [
         { name: 'WMBI_ETL.STG_ITEM → WMBI.ITEM_DIM', detail: 'df_wmbi_upsert_item_dim; superseded one-time load.' },
       ] },
-      { id: 'downstreams', label: 'Inferred downstreams', description: 'Candidates inferred from naming; verification required.', tone: 'dependency', items: ['ITEM_COST_F','ITEM_PRICE_F','INV_AS_COUNTED_F','LOC_DSD_INVOICE_F','RECLM_SCAN_DETAIL_F','SALES_POS_LN_F','VENDOR_ITEM_XREF','WAREHOUSE_SHIPT_F'].map((name) => ({ name: `WMBI.${name}`, detail: 'Inferred from naming; not confirmed.' })) },
+      { id: 'downstreams', label: 'Downstream dependencies (pending confirmation)', description: 'Potential downstream dependencies identified from the available evidence. Lineage validation pending.', tone: 'dependency', items: ['ITEM_COST_F','ITEM_PRICE_F','INV_AS_COUNTED_F','LOC_DSD_INVOICE_F','RECLM_SCAN_DETAIL_F','SALES_POS_LN_F','VENDOR_ITEM_XREF','WAREHOUSE_SHIPT_F'].map((name) => ({ name: `WMBI.${name}`, detail: 'Potential dependency. Lineage validation pending.' })) },
     ],
     findings: [
       '4.3 percent of rows (32,643) are not a clean approved member from the main load.',
@@ -182,7 +182,7 @@ export const TABLE_LINEAGES: TableLineage[] = [
       { id: 'legacy', label: 'Dead staging path', description: 'Last execution 2021-08-06; never reaches the target.', tone: 'legacy', items: [
         { name: 'PSTG_VENDOR_ITEM_XREF → STG_VENDOR_ITEM_XREF', detail: 'df_wmbi_load_vendor_item_xref; resolved surrogate keys, then dead end.' },
       ] },
-      { id: 'downstreams', label: 'Inferred downstreams', description: 'Candidates inferred from naming; verification required.', tone: 'dependency', items: ['WMBI.ITEM_COST_F','WMBI.LOC_DSD_INVOICE_F','WMBI.VENDOR_ITEM_ADJ_F'].map((name) => ({ name, detail: 'Inferred from naming; not confirmed.' })) },
+      { id: 'downstreams', label: 'Downstream dependencies (pending confirmation)', description: 'Potential downstream dependencies identified from the available evidence. Lineage validation pending.', tone: 'dependency', items: ['WMBI.ITEM_COST_F','WMBI.LOC_DSD_INVOICE_F','WMBI.VENDOR_ITEM_ADJ_F'].map((name) => ({ name, detail: 'Potential dependency. Lineage validation pending.' })) },
     ],
     findings: [],
     pendingValidation: ["The full text of the two 'Unapproved val originated in' source labels was truncated by the DBeaver grid and has not been captured."],

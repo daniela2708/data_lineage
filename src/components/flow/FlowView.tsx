@@ -26,21 +26,18 @@ function FilterBox({ label, options, selected, onSelect, allLabel }: { label: st
 }
 
 function TableSelector({ value, onChange }: { value: string; onChange: (name: string) => void }) {
-  const [schema, setSchema] = useState('')
   const [source, setSource] = useState('')
   const options = TABLE_LINEAGES.map((lineage) => ({
     lineage,
     table: DATA.tables.find((item) => item.name === lineage.tableName),
   }))
-  const schemas = [...new Set(options.map(({ table }) => table?.schema).filter(Boolean))]
   const sources = [...new Set(options.map(({ table }) => table?.src).filter(Boolean))]
   const visibleOptions = options.filter(({ table }) =>
-    (!schema || table?.schema === schema) && (!source || table?.src === source),
+    !source || table?.src === source,
   )
 
   return <section className="table-selector-card" aria-label="Lineage filters">
     <FilterBox label="Source system" options={sources as string[]} selected={source} onSelect={setSource} allLabel="All source systems" />
-    <FilterBox label="Schema" options={schemas as string[]} selected={schema} onSelect={setSchema} allLabel="All schemas" />
     <FilterBox label="Table name" options={visibleOptions.map(({ lineage }) => lineage.tableName)} selected={value} onSelect={onChange} />
   </section>
 }
@@ -49,6 +46,7 @@ function TableSummary({ table, lineage }: { table?: TableRec; lineage: TableLine
   const metadata = [['Database', table?.db], ['Schema', table?.schema], ['Source system', table?.src], ['Business cases', table?.bcs.join(', ')], ['Wave', table?.wave], ['Complexity', table?.cplx], ['Technical owner', table?.owner], ['Status', table?.status]]
   return <section className="card table-summary-card">
     <div className="summary-title"><div><span className="flow-kicker">Selected table</span><div className="title-row"><h3>{lineage.tableName}</h3><span className="tid">{table?.id}</span></div></div><div className="summary-volume">{lineage.rowCount?.toLocaleString('en-US')} rows <span>·</span> {lineage.columnCount} columns</div></div>
+    <h2>Table details</h2>
     <div className="meta">{metadata.map(([label, value]) => <div key={label}><dt>{label}</dt><dd className={value ? undefined : 'empty'}>{value || 'Not documented'}</dd></div>)}</div>
   </section>
 }
@@ -101,11 +99,11 @@ function DownstreamNode({ group, index, selected, onSelect }: { group?: RelatedG
   >
     <span className="node-head">
       <b>{String(index + 1).padStart(2, '0')}</b>
-      <span className="node-role">Downstream impact</span>
+      <span className="node-role">Potential downstream dependencies</span>
     </span>
     <span className="node-body">
-      <strong className="node-object">{items.length} dependent {items.length === 1 ? 'object' : 'objects'}</strong>
-      {group ? <span className="node-detail">{group.description}</span> : <span className="node-detail">No downstreams documented</span>}
+      <strong className="node-object">{items.length} potential {items.length === 1 ? 'dependency' : 'dependencies'}</strong>
+      {group ? <span className="node-detail">Pending confirmation</span> : <span className="node-detail">No downstreams documented</span>}
       {preview.length ? <span className="node-keys">
         {preview.map((item) => <code key={item.name}>{item.name.replace(/^WMBI\./, '')}</code>)}
         {items.length > preview.length ? <code>+{items.length - preview.length} more</code> : null}
@@ -118,7 +116,7 @@ function DownstreamNode({ group, index, selected, onSelect }: { group?: RelatedG
 }
 
 function SupportGateway({ group, selected, onToggle }: { group: RelatedGroup; selected: boolean; onToggle: () => void }) {
-  const action = group.id === 'injections' ? 'Explore inputs' : group.id === 'legacy' ? 'Open legacy path' : 'View dependencies'
+  const action = group.id === 'injections' ? 'Explore inputs' : 'View dependencies'
   const preview = group.items.slice(0, 2).map((item) => item.name).join(' · ')
 
   return <button type="button" aria-pressed={selected} className={`support-tile ${group.tone}`} onClick={onToggle}>
@@ -133,6 +131,17 @@ function SupportGateway({ group, selected, onToggle }: { group: RelatedGroup; se
   </button>
 }
 
+function catalogPipelinesFor(name: string): string[] {
+  const objectName = name.split('.').at(-1)?.trim()
+  if (!objectName) return []
+  const table = DATA.tables.find((candidate) => candidate.name.toUpperCase() === objectName.toUpperCase())
+  if (!table) return []
+  return table.pipeIds.flatMap((pipelineId) => {
+    const pipeline = DATA.pipelines.find((candidate) => candidate.id === pipelineId)
+    return pipeline ? [pipeline.name] : []
+  })
+}
+
 function GroupDetail({ group, onClose }: { group: RelatedGroup; onClose: () => void }) {
   const [query, setQuery] = useState('')
   const deferredQuery = useDeferredValue(query.trim().toLowerCase())
@@ -141,7 +150,14 @@ function GroupDetail({ group, onClose }: { group: RelatedGroup; onClose: () => v
     <div className="detail-heading"><div><span>Now exploring · {group.tone} relationship</span><h3>{group.label}</h3><p>{group.description}</p></div><button type="button" onClick={onClose}>Back to main flow</button></div>
     <div className="layer-content">
       {group.items.length >= 8 ? <label className="dependency-filter"><span>Filter dependencies</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Name or relationship" /></label> : null}
-      <div className="layer-list">{visibleItems.map((item) => <article key={`${group.id}-${item.name}`}><strong>{item.name}</strong>{item.detail ? <p>{item.detail}</p> : null}</article>)}{!visibleItems.length ? <p className="empty-results">No matching dependencies.</p> : null}</div>
+      <div className="layer-list">{visibleItems.map((item) => {
+        const pipelines = catalogPipelinesFor(item.name)
+        return <article key={`${group.id}-${item.name}`}>
+          <strong>{item.name}</strong>
+          <span className="dependency-pipeline"><i>Loaded by</i><b>{pipelines.length ? pipelines.join(', ') : 'Pending validation'}</b></span>
+          {item.detail ? <p>{item.detail}</p> : null}
+        </article>
+      })}{!visibleItems.length ? <p className="empty-results">No matching dependencies.</p> : null}</div>
     </div>
   </section>
 }
@@ -155,7 +171,7 @@ function LineageView({ lineage }: { lineage: TableLineage }) {
   const [selectedGroup, setSelectedGroup] = useState<string | null>(null)
   const [showEvidence, setShowEvidence] = useState(false)
   const downstream = lineage.relatedGroups.find((group) => group.id === 'downstreams')
-  const supportingGroups = lineage.relatedGroups.filter((group) => group.id !== 'downstreams')
+  const supportingGroups = lineage.relatedGroups.filter((group) => group.id !== 'downstreams' && group.id !== 'legacy')
   const activeGroup = lineage.relatedGroups.find((group) => group.id === selectedGroup)
   const stage = selectedStage === null ? null : lineage.liveFlow[selectedStage]
   const reads = selectedStage === null ? null : lineage.liveFlow[selectedStage - 1]
@@ -163,17 +179,17 @@ function LineageView({ lineage }: { lineage: TableLineage }) {
 
   return <section className="architecture-workspace">
     <div className="architecture-toolbar">
-      <div><span className="flow-kicker">Interactive architecture map</span><h2>{lineage.title}</h2><p>Follow the data from its source, through the active load, into {lineage.tableName} and its downstream impact.</p></div>
+      <div><span className="flow-kicker">Interactive architecture map</span><h2>{lineage.title}</h2><p>Follow the data from its source, through the active load, into {lineage.tableName} and its potential downstream dependencies.</p></div>
       <div className="architecture-orchestrator"><span>Main load pipeline</span><strong>{lineage.orchestrator}</strong><small>{lineage.cadence}</small></div>
     </div>
-    <div className="architecture-legend"><span><i className="live" />Live/current</span><span><i className="injection" />Injection</span><span><i className="dependency" />Dependency</span><span><i className="target" />Target</span><span><i className="legacy" />Legacy</span></div>
+    <div className="architecture-legend"><span><i className="live" />Live/current</span><span><i className="injection" />Contextual input</span><span><i className="dependency" />Dependency</span><span><i className="target" />Selected table</span></div>
 
     <div className="architecture-canvas">
       <div className="pipeline-view integrated-map">
-        <section className="support-rail" aria-label="Supporting relationships">
+        <section className="support-rail" aria-label="Source and key dependencies">
           <header className="support-rail-head">
-            <span>Supporting relationships</span>
-            <small>Gateways around the main chain. Select one to inspect it.</small>
+            <span>Source and key dependencies</span>
+            <small>Open a group only when you need its details.</small>
           </header>
           <div className="support-tiles">
             {supportingGroups.map((group) => <SupportGateway
@@ -187,8 +203,8 @@ function LineageView({ lineage }: { lineage: TableLineage }) {
 
         <section aria-label="Main data path">
           <header className="pipeline-head">
-            <div><span className="flow-kicker">Main data path</span><strong>{lineage.liveFlow.length} stages from source to published table, then downstream impact</strong></div>
-            <p>Select a stage to see what it reads and writes.</p>
+            <div><span className="flow-kicker">Main data path</span><strong>{lineage.liveFlow.length} stages from source to published table, then potential downstream dependencies</strong></div>
+            <p>Select a stage to see what it reads, which process moves it, and what comes next.</p>
           </header>
           <div className={`pipeline-path${selectedStage !== null ? ' has-selection' : ''}`}>
             <span className="pipe-rail" aria-hidden="true"><span className="pipe-pulse" /></span>
@@ -234,6 +250,5 @@ export default function FlowView({ active: _active }: { active: boolean }) {
     <TableSummary table={table} lineage={lineage} />
     <LineageView key={lineage.tableName} lineage={lineage} />
     <section className="evidence-grid" aria-label="Findings and pending validation"><EvidencePanel label="Findings" items={lineage.findings} /><EvidencePanel label="Pending validation" items={lineage.pendingValidation} pending /></section>
-    <section className="card technical-details"><h2>Orchestrator and schedule details</h2><div className="meta"><div><dt>Flow</dt><dd>{lineage.orchestrator}</dd></div><div><dt>Schedule in header</dt><dd>{lineage.cadence}</dd></div><div><dt>Schedule observed</dt><dd>{lineage.scheduleObserved}</dd></div><div><dt>Alerts to</dt><dd>{lineage.alerts}</dd></div><div><dt>Steps that never run</dt><dd>{lineage.neverRuns}</dd></div><div><dt>Technical evidence</dt><dd>{lineage.evidence}</dd></div></div></section>
   </div>
 }
