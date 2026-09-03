@@ -12,7 +12,7 @@ import {
   type LineageSource,
   type TextAtom,
 } from './types';
-import { enumerateRawInformationCarriersFromRoot } from './rawDomCarriers';
+import { enumerateRawInformationCarriersFromRoot, enumerateRegisteredElementsFromRoot } from './rawDomCarriers';
 
 const MAX_FILE_BYTES = 2 * 1024 * 1024;
 const ROLE_BY_STROKE: Readonly<Record<string, DiagramRole>> = {
@@ -110,6 +110,11 @@ export class HtmlLineageSource implements LineageSource {
     }
 
     const root = parse(input, { lowerCaseTagName: false, comment: false });
+    const unknownElements = enumerateRegisteredElementsFromRoot(root).filter(({ disposition }) => disposition === 'unhandled');
+    if (unknownElements.length > 0) {
+      throw new LineageParseError(unknownElements.map(({ role, fragment, tagName }) =>
+        alert('UNKNOWN_ELEMENT', `Unsupported ${role ?? tagName} element`, fragment)));
+    }
     const svg = root.querySelector('svg');
     if (svg === null) throw new LineageParseError([alert('TRUNCATED_HTML', 'The report has no closing SVG document')]);
     if (svg.querySelectorAll('rect').length === 0 || svg.querySelectorAll('text').length === 0) {

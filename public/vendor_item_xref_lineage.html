@@ -114,6 +114,10 @@ svg{min-width:1200px}</style>
 <tr><td class='group-item'><code>WMBI.WAREHOUSE_SUPPL_DIM: resolves WAREHOUSE_SUPPL_KEY. Also written to: pf_vendor_xref_master_driver</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification.</p><table><tr><td><code>WMBI.ITEM_COST_F</code></td></tr>
 <tr><td><code>WMBI.LOC_DSD_INVOICE_F</code></td></tr>
 <tr><td><code>WMBI.VENDOR_ITEM_ADJ_F</code></td></tr></table>
+<h2>Dead chains / inactive processes</h2><table><tr><td class='group-head'>Dead staging path. Last execution: 2021-08-06</td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_VENDOR_ITEM_XREF</code>: same source table read by the live upsert</td></tr>
+<tr><td class='group-item'><code>ITEM_SCAN_CD_ID</code></td></tr>
+<tr><td class='group-item'><code>df_wmbi_load_vendor_item_xref</code> → <code>WMBI_ETL.STG_VENDOR_ITEM_XREF</code>: resolved surrogate keys, a dead end. Never reaches VENDOR_ITEM_XREF</td></tr></table>
 
 <h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>The full text of the two &#x27;Unapproved val originated in&#x27; source labels was truncated by the DBeaver grid and has not been captured.</li></ul>
 <p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

@@ -1,9 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { parse } from 'node-html-parser';
 import { describe, expect, it } from 'vitest';
 import { HtmlLineageSource, LineageParseError } from './HtmlLineageSource';
-import { enumerateRawInformationCarriers } from './rawDomCarriers';
+import { enumerateRawInformationCarriers, enumerateRegisteredElements } from './rawDomCarriers';
 
 const source = new HtmlLineageSource(() => new Date('2026-09-02T00:00:00.000Z'));
 const fixtureNames = [
@@ -73,11 +72,18 @@ describe('HtmlLineageSource', () => {
     expectAlert(() => source.parse(input, 'unknown-color.html'), 'UNKNOWN_COLOR');
   });
 
+  it('rejects an unregistered SVG element role', () => {
+    const input = fixture(fixtureNames[0]).replace('</svg>', '<circle cx="1" cy="1" r="1"/></svg>');
+    expectAlert(() => source.parse(input, 'unknown-element.html'), 'UNKNOWN_ELEMENT');
+  });
+
   it('documents the current rejection of the legacy club card report', () => {
     const input = legacyFixture();
-    const markerPaths = parse(input).querySelectorAll('svg path[marker-end]');
+    const markerPaths = enumerateRegisteredElements(input).filter(({ role, element }) =>
+      role === 'svg-arrow-path' && element.getAttribute('marker-end') !== undefined);
 
     expect(markerPaths).toHaveLength(3);
-    expectAlert(() => source.parse(input, 'CLUB_CARD_DIM_lineage_Oracle.html'), 'MISSING_SECTION');
+    expect(markerPaths.every(({ disposition }) => disposition === 'unhandled')).toBe(true);
+    expectAlert(() => source.parse(input, 'CLUB_CARD_DIM_lineage_Oracle.html'), 'UNKNOWN_ELEMENT');
   });
 });

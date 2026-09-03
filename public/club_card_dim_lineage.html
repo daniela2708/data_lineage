@@ -181,6 +181,8 @@ svg{min-width:2070px}</style>
 <tr><td><code>SALES_POS_TX_F</code></td></tr>
 <tr><td><code>SHK_DAILY_ORDER_EXPORT_F</code></td></tr>
 <tr><td><code>SUNOCO_FUEL_PRTNR_PRGM_F</code></td></tr></table>
+<h2>Dead chains / inactive processes</h2><table><tr><td class='group-head'>Dead: EME chain. Last execution: 2020-08-12</td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_CLUB_CARD_DIM</code>: frozen</td></tr></table>
 <h2>Findings</h2><ul class='findings'><li>Two different loading processes have fed this table over the years. The old one stopped running in 2020 (15,019,410 rows, frozen). The current one runs daily and touched data again this morning (6,958,825 rows)</li>
 <li>Serious: the step meant to keep household level benefit flags correct only looks at households that still exist in the staging table frozen since 2020. Any household created or changed since then is silently skipped, its benefit flags never get re-evaluated</li>
 <li>Serious, same root cause: the step meant to correct a card&#x27;s points earning flag also only compares against that same frozen 2020 staging table. For any card active since then, there is no working mechanism left in this table&#x27;s process to ever fix that flag once it goes wrong</li>

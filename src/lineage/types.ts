@@ -63,7 +63,7 @@ export type LineageDoc = {
 
 export type IngestAlert = {
   severity: 'WARN' | 'CRITICAL';
-  code: 'INVALID_INPUT' | 'TRUNCATED_HTML' | 'EMPTY_SVG' | 'MISSING_SECTION' | 'UNKNOWN_COLOR' | 'UNPARSED_CONTENT';
+  code: 'INVALID_INPUT' | 'TRUNCATED_HTML' | 'EMPTY_SVG' | 'MISSING_SECTION' | 'UNKNOWN_COLOR' | 'UNKNOWN_ELEMENT' | 'UNPARSED_CONTENT';
   message: string;
   context: Record<string, unknown>;
 };

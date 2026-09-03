@@ -14,6 +14,7 @@
     "build": "npm run generate:data && tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "validate:lineage-html": "python3 scripts/validate_lineage_html_content.py",
     "typecheck": "tsc --noEmit",
     "lint": "tsc --noEmit"
   },
