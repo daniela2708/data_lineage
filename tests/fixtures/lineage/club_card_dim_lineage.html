@@ -1,0 +1,204 @@
+<meta charset="utf-8">
+<title>WMBI.CLUB_CARD_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:2070px}</style>
+<h1>WMBI.CLUB_CARD_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/club_card_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 2070 810" width="2070" height="810" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">Live chain: AMS process, daily  ·  orchestrator: pf_ams_club_card_dim_process</text>
+<rect x="20" y="46" width="215" height="92" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="104" x2="235" y2="104" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">AMS_PROD.LogixXS.dbo</text>
+<text x="30" y="79" font-size="10.5" fill="#2E5FA3">CardIDs, Customers, CustomerExt,</text>
+<text x="30" y="95" font-size="10.5" fill="#2E5FA3">CustomerPreferences</text>
+<text x="30" y="122" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<rect x="455" y="46" width="215" height="76" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H455z" fill="#E1F5EE"/>
+<line x1="455" y1="88" x2="670" y2="88" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="465" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="465" y="79" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">PSTG_AMS_CLUBCARD_SRC_FEED</text>
+<text x="465" y="106" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<rect x="890" y="46" width="215" height="76" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M890 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H890z" fill="#E1F5EE"/>
+<line x1="890" y1="72" x2="1105" y2="72" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="900" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_CLUB_CARD_DIM</text>
+<text x="900" y="90" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CHECKSUM_VAL</text>
+<text x="900" y="106" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<rect x="1325" y="46" width="215" height="70" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M1325 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z" fill="#E1F5EE"/>
+<line x1="1325" y1="72" x2="1540" y2="72" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="1335" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_CLUB_CARD_DIM_AMS</text>
+<text x="1335" y="90" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_KEY</text>
+<line x1="235" y1="92.0" x2="451" y2="84.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="274" y="71" width="142" height="34" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="84" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">move_data/wmbi_pstg_</text>
+<text x="345" y="97" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">ams_clubcard_src_feed</text>
+<line x1="670" y1="84.0" x2="886" y2="84.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="691" y="74" width="178" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="780" y="86" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_pstg_club_card_dim</text>
+<line x1="1105" y1="84.0" x2="1321" y2="81.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="1129" y="72" width="172" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="1215" y="85" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_stg_club_card_dim</text>
+<line x1="1540" y1="81.0" x2="1756" y2="81.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="1582" y="64" width="136" height="34" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="1650" y="77" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_insert_</text>
+<text x="1650" y="90" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">update_club_card_dim</text>
+<text x="1325" y="174" font-size="12.5" font-weight="500" fill="#854F0B">Injection: survey load</text>
+<rect x="1325" y="182" width="215" height="101" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M1325 186a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H1325z" fill="#FAEEDA"/>
+<line x1="1325" y1="224" x2="1540" y2="224" stroke="#854F0B" stroke-width="0.6"/>
+<text x="1335" y="199" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="1335" y="215" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">STG_MARKETFORCE_SURV_RESP</text>
+<text x="1335" y="242" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<line x1="1325" y1="252" x2="1540" y2="252" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="1335" y="266" font-size="10.5" fill="#854F0B">Injects placeholder members</text>
+<line x1="1540" y1="232.5" x2="1756" y2="232.5" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="1573" y="216" width="154" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="1650" y="228" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_ins_unappr_val_club_</text>
+<text x="1650" y="242" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">card_dim_no_date_param</text>
+<text x="1325" y="319" font-size="12.5" font-weight="500" fill="#854F0B">Injection: POS points load</text>
+<rect x="1325" y="327" width="215" height="77" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M1325 331a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H1325z" fill="#FAEEDA"/>
+<line x1="1325" y1="369" x2="1540" y2="369" stroke="#854F0B" stroke-width="0.6"/>
+<text x="1335" y="344" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="1335" y="360" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">STG_POS_POINTS_EARNED_F</text>
+<line x1="1325" y1="373" x2="1540" y2="373" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="1335" y="387" font-size="10.5" fill="#854F0B">Injects placeholder members</text>
+<line x1="1540" y1="365.5" x2="1756" y2="365.5" stroke="#854F0B" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<text x="1325" y="440" font-size="12.5" font-weight="500" fill="#993C1D">Fact: transaction history</text>
+<rect x="1325" y="448" width="215" height="70" rx="4" fill="#fff" stroke="#993C1D" stroke-width="0.6"/>
+<path d="M1325 452a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z" fill="#FAECE7"/>
+<line x1="1325" y1="474" x2="1540" y2="474" stroke="#993C1D" stroke-width="0.6"/>
+<text x="1335" y="465" font-size="10.5" font-weight="500" fill="#4A1B0C" font-family="ui-monospace,Menlo,monospace">WMBI.SALES_POS_TX_F</text>
+<text x="1335" y="492" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_KEY</text>
+<line x1="1540" y1="483.0" x2="1756" y2="483.0" stroke="#993C1D" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="1561" y="472" width="178" height="21" rx="3" fill="#fff" stroke="#F5C4B3" stroke-width="0.6"/>
+<text x="1650" y="486" font-size="10" fill="#993C1D" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_update_first_tx_dt</text>
+<text x="1325" y="554" font-size="12.5" font-weight="500" fill="#993C1D">Fact: calendar</text>
+<rect x="1325" y="562" width="215" height="70" rx="4" fill="#fff" stroke="#993C1D" stroke-width="0.6"/>
+<path d="M1325 566a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z" fill="#FAECE7"/>
+<line x1="1325" y1="588" x2="1540" y2="588" stroke="#993C1D" stroke-width="0.6"/>
+<text x="1335" y="579" font-size="10.5" font-weight="500" fill="#4A1B0C" font-family="ui-monospace,Menlo,monospace">WMBI.DT_DIM</text>
+<text x="1335" y="606" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ACCT_EFF_DT_KEY</text>
+<line x1="1540" y1="597.0" x2="1756" y2="597.0" stroke="#993C1D" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="1561" y="586" width="178" height="21" rx="3" fill="#fff" stroke="#F5C4B3" stroke-width="0.6"/>
+<text x="1650" y="600" font-size="10" fill="#993C1D" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_update_first_tx_dt</text>
+<text x="1325" y="668" font-size="12.5" font-weight="500" fill="#B4B2A9">Dead: EME chain.  Last execution: 2020-08-12</text>
+<rect x="1325" y="676" width="215" height="70" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M1325 680a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z" fill="#F1EFE8"/>
+<line x1="1325" y1="702" x2="1540" y2="702" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="1335" y="693" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_CLUB_CARD_DIM</text>
+<line x1="1325" y1="706" x2="1540" y2="706" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="1335" y="720" font-size="10.5" fill="#B4B2A9">frozen</text>
+<line x1="1540" y1="711.0" x2="1756" y2="711.0" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="1760" y="46" width="290" height="700" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M1760 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="1760" y1="83" x2="2050" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="1772" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.CLUB_CARD_DIM</text>
+<text x="1772" y="78" font-size="10.5" fill="#534AB7">13,109,987 rows · 41 columns</text>
+<text x="1772" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_KEY</text>
+<text x="2038" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK</text>
+<text x="1772" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CLUB_CARD_ID</text>
+<text x="2038" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK</text>
+<text x="1772" y="136" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CHECKSUM_VAL</text>
+<text x="2038" y="136" font-size="10" fill="#5F5E5A" text-anchor="end">UK</text>
+<line x1="1760" y1="150" x2="2050" y2="150" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1772" y="166" font-size="11" font-weight="500" fill="#26215C">Post-load steps, on the loaded table</text>
+<text x="1772" y="182" font-size="10.5" fill="#534AB7">1. df_build_update_household_fl (DEP_4). Only</text>
+<text x="1772" y="198" font-size="10.5" fill="#534AB7">re-evaluates households</text>
+<text x="1772" y="214" font-size="10.5" fill="#534AB7">still present in the frozen staging table,</text>
+<text x="1772" y="230" font-size="10.5" fill="#534AB7">dead since 2020.</text>
+<text x="1772" y="246" font-size="10.5" fill="#534AB7">2. df_build_update_first_tx_dt (DEP_5). Reads</text>
+<text x="1772" y="262" font-size="10.5" fill="#534AB7">SALES_POS_TX_F for FIRST_TX_DT</text>
+<text x="1772" y="278" font-size="10.5" fill="#534AB7">3. df_build_update_points_earn_fl (DEP_6).</text>
+<text x="1772" y="294" font-size="10.5" fill="#534AB7">Same frozen table limit as step 1.</text>
+<line x1="1760" y1="308" x2="2050" y2="308" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1772" y="324" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="1772" y="340" font-size="10.5" fill="#534AB7">Assigns CLUB_CARD_KEY automatically on every</text>
+<text x="1772" y="356" font-size="10.5" fill="#534AB7">insert, enabled.</text>
+<text x="1772" y="372" font-size="10.5" fill="#534AB7">The frozen sibling table has a matching</text>
+<text x="1772" y="388" font-size="10.5" fill="#534AB7">trigger.</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>pf_ams_club_card_dim_process</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>Recurring, Continuous Type. Every 1 day. Start 2020/08/27 05:00:00</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td></td></tr><tr><th style='width:240px'>Alerts to</th><td>tscott@weismarkets.com</td></tr><tr><th style='width:240px'>Steps that never run</th><td>DEP_0 / df_build_pstg_ams_clubcard_src_feed</td></tr></table>
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>move_data/wmbi_pstg_ams_clubcard_src_feed</code> &rarr; <code>WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED</code></td></tr>
+<tr><td class='group-head'>Loaded by <code>df_build_pstg_club_card_dim</code> &rarr; <code>WMBI_ETL.PSTG_CLUB_CARD_DIM</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_CLUB_CARD_DIM</code></td></tr>
+<tr><td class='group-head'>Loaded by <code>df_build_stg_club_card_dim</code> &rarr; <code>WMBI_ETL.STG_CLUB_CARD_DIM_AMS</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_CLUB_CARD_DIM_AMS</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td class='group-head'>Loaded by <code>move_data/wmbi_pstg_ams_clubcard_src_feed</code> &rarr; <code>WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED</code></td></tr>
+<tr><td class='group-item'><code>AMS_PROD.LogixXS.dbo: the actual source, on SQL Server, external to the warehouse</code></td></tr>
+<tr><td class='group-head'>Loaded by <code>df_build_update_first_tx_dt</code> &rarr; <code>WMBI.CLUB_CARD_DIM</code></td></tr>
+<tr><td class='group-item'><code>WMBI.SALES_POS_TX_F: computes FIRST_TX_DT. Must be loaded first, but nothing verifies it</code></td></tr>
+<tr><td class='group-item'><code>WMBI.DT_DIM: turns ACCT_EFF_DT_KEY into a calendar date</code></td></tr>
+<tr><td class='group-head'>Loaded by <code>df_ins_unappr_val_club_card_dim_no_date_param</code> &rarr; <code>WMBI_ETL.STG_MARKETFORCE_SURV_RESP</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_MARKETFORCE_SURV_RESP: injects placeholder members for unrecognized card numbers</code></td></tr>
+<tr><td><code>WMBI_ETL.STG_POS_POINTS_EARNED_F: the POS points load injects placeholder members. Not yet confirmed in code, the file that does it has not been identified</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.</p><table><tr><td><code>AMS_POINT_ACT_F</code></td></tr>
+<tr><td><code>AMS_POS_POINTS_EARN_F</code></td></tr>
+<tr><td><code>AMS_TX_REWARD_F</code></td></tr>
+<tr><td><code>CLUB_CARD_ATTRIB_XREF</code></td></tr>
+<tr><td><code>CLUB_CARD_DIM_BKUP_PRE_AMS</code></td></tr>
+<tr><td><code>CLUB_CARD_VWM</code></td></tr>
+<tr><td><code>CUSTOMER_ATTR_XREF</code></td></tr>
+<tr><td><code>FUEL_PRTNR_PRGM_F</code></td></tr>
+<tr><td><code>HOUSEHOLD_40_DAY_TOP_20_VWM</code></td></tr>
+<tr><td><code>ITEM_LOC_CUST_SALES_YTD_MVW</code></td></tr>
+<tr><td><code>MANUAL_POINT_ADJ_F</code></td></tr>
+<tr><td><code>MARKETFORCE_SURV_RESP_F</code></td></tr>
+<tr><td><code>MARKETFORCE_WEIS2GO_F</code></td></tr>
+<tr><td><code>MEGA_SALE_AMS_TX_IDS_VWM</code></td></tr>
+<tr><td><code>MEGA_SALE_TX_IDS_VWM</code></td></tr>
+<tr><td><code>MLOG$_SALES_POS_TX_F</code></td></tr>
+<tr><td><code>POINTS_EARNED_REDEEMED_F</code></td></tr>
+<tr><td><code>POINTS_EARN_REDEEM_FV2</code></td></tr>
+<tr><td><code>POS_POINTS_EARNED_REDEEMED_VWM</code></td></tr>
+<tr><td><code>POS_POINTS_EARN_F</code></td></tr>
+<tr><td><code>POS_POINTS_EARN_VWM</code></td></tr>
+<tr><td><code>POS_TX_TENDER_F</code></td></tr>
+<tr><td><code>SALES_POS_LN_F</code></td></tr>
+<tr><td><code>SALES_POS_TX_F</code></td></tr>
+<tr><td><code>SHK_DAILY_ORDER_EXPORT_F</code></td></tr>
+<tr><td><code>SUNOCO_FUEL_PRTNR_PRGM_F</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>Two different loading processes have fed this table over the years. The old one stopped running in 2020 (15,019,410 rows, frozen). The current one runs daily and touched data again this morning (6,958,825 rows)</li>
+<li>Serious: the step meant to keep household level benefit flags correct only looks at households that still exist in the staging table frozen since 2020. Any household created or changed since then is silently skipped, its benefit flags never get re-evaluated</li>
+<li>Serious, same root cause: the step meant to correct a card&#x27;s points earning flag also only compares against that same frozen 2020 staging table. For any card active since then, there is no working mechanism left in this table&#x27;s process to ever fix that flag once it goes wrong</li>
+<li>Confirmed: the final step into this table inserts new cards and updates existing ones by matching the internal key. Every update also overwrites the basket discount and points earning flags with whatever the staging table has, which, as found above, is empty from the true source. This is not a hypothesis anymore, it is confirmed in code: any card touched by today&#x27;s process loses these two settings</li>
+<li>Confirmed: the step that copies data from the raw feed into the next staging table always marks every card as approved, and computes a fingerprint used to detect what changed. That fingerprint is built from name, address and contact fields only. A card whose only change is to its discount or points settings would not be picked up as changed at all</li>
+<li>26 other tables depend on this one, including the two largest transaction tables in the warehouse. This table has to be migrated before any of them</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Whether CLUB_CARD_DIM should move to Wave 2 is still pending a decision (proposal in deliverables/catalog_review.md).</li>
+<li>df_build_update_first_tx_dt (DEP_5) has not been read yet.</li>
+<li>The file that injects placeholders from STG_POS_POINTS_EARNED_F has not been identified.</li>
+<li>The orchestrator that calls df_ins_unappr_val_club_card_dim_no_date_param has not been identified.</li>
+<li>Whether SRC_REC_STAT_CD is populated only for EME sourced rows, or the matching count (11,052,636 both) is a coincidence, has not been confirmed.</li>
+<li>How many rows have BSKT_DISC_OPT_FL or EARN_POINTS_FL blank versus a real value, split by recency of last touch, has not been measured.</li>
+<li>CLUB_CARD_DIM&#x27;s real observed run schedule, from a log rather than the header, is still unknown.</li>
+<li>The 15,183 stub member figure from references/anomaly-checklist.md has not been reconciled against this session&#x27;s 240,954.</li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

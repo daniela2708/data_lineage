@@ -1,0 +1,2029 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HtmlLineageSource > parses club_card_dim_lineage.html with complete carrier coverage 1`] = `
+{
+  "dependencies": [
+    {
+      "heading": "Built exclusively to load this table",
+      "id": "dependency-group_ed8eabfb1f556247e164",
+      "intro": "Nothing outside this chain reads them.",
+      "items": [
+        {
+          "id": "dependency-item_a34b6a3ee86e20ebd4c9",
+          "text": "Loaded by move_data/wmbi_pstg_ams_clubcard_src_feed → WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED",
+        },
+        {
+          "id": "dependency-item_e3c5fca4094e71b1cb22",
+          "text": "WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED",
+        },
+        {
+          "id": "dependency-item_df454ad4029049c07d41",
+          "text": "Loaded by df_build_pstg_club_card_dim → WMBI_ETL.PSTG_CLUB_CARD_DIM",
+        },
+        {
+          "id": "dependency-item_0b248d295d66cf5a9731",
+          "text": "WMBI_ETL.PSTG_CLUB_CARD_DIM",
+        },
+        {
+          "id": "dependency-item_f65ae80caab0b16cf156",
+          "text": "Loaded by df_build_stg_club_card_dim → WMBI_ETL.STG_CLUB_CARD_DIM_AMS",
+        },
+        {
+          "id": "dependency-item_f68020aedf85f5b0d443",
+          "text": "WMBI_ETL.STG_CLUB_CARD_DIM_AMS",
+        },
+      ],
+    },
+    {
+      "heading": "Owned by other processes",
+      "id": "dependency-group_362e48c417fce8b1bcc0",
+      "intro": "Not created for this table, but it reads from them or receives rows through them.",
+      "items": [
+        {
+          "id": "dependency-item_089f8e7c8c073758edf1",
+          "text": "Loaded by move_data/wmbi_pstg_ams_clubcard_src_feed → WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED",
+        },
+        {
+          "id": "dependency-item_a5cb64309f6c277b3c49",
+          "text": "AMS_PROD.LogixXS.dbo: the actual source, on SQL Server, external to the warehouse",
+        },
+        {
+          "id": "dependency-item_75165a1584a16438281a",
+          "text": "Loaded by df_build_update_first_tx_dt → WMBI.CLUB_CARD_DIM",
+        },
+        {
+          "id": "dependency-item_76aee592d6f1416a6999",
+          "text": "WMBI.SALES_POS_TX_F: computes FIRST_TX_DT. Must be loaded first, but nothing verifies it",
+        },
+        {
+          "id": "dependency-item_131635f0e99ac0b06c7c",
+          "text": "WMBI.DT_DIM: turns ACCT_EFF_DT_KEY into a calendar date",
+        },
+        {
+          "id": "dependency-item_ea78220357c65b36e551",
+          "text": "Loaded by df_ins_unappr_val_club_card_dim_no_date_param → WMBI_ETL.STG_MARKETFORCE_SURV_RESP",
+        },
+        {
+          "id": "dependency-item_5445e9fd041073163104",
+          "text": "WMBI_ETL.STG_MARKETFORCE_SURV_RESP: injects placeholder members for unrecognized card numbers",
+        },
+        {
+          "id": "dependency-item_a92a3fa873d229067e1e",
+          "text": "WMBI_ETL.STG_POS_POINTS_EARNED_F: the POS points load injects placeholder members. Not yet confirmed in code, the file that does it has not been identified",
+        },
+      ],
+    },
+    {
+      "heading": "Depends on this table, inferred from naming",
+      "id": "dependency-group_d68434762ccbd1ebf049",
+      "intro": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.",
+      "items": [
+        {
+          "id": "dependency-item_490dafdb2f0e3889a3ef",
+          "text": "AMS_POINT_ACT_F",
+        },
+        {
+          "id": "dependency-item_689f58682e34abe57b57",
+          "text": "AMS_POS_POINTS_EARN_F",
+        },
+        {
+          "id": "dependency-item_d829e623b34183861823",
+          "text": "AMS_TX_REWARD_F",
+        },
+        {
+          "id": "dependency-item_5b69dc2f8f06e65cecbf",
+          "text": "CLUB_CARD_ATTRIB_XREF",
+        },
+        {
+          "id": "dependency-item_e8974f7180a3f6a4ea1d",
+          "text": "CLUB_CARD_DIM_BKUP_PRE_AMS",
+        },
+        {
+          "id": "dependency-item_c41e6e229cc79429099f",
+          "text": "CLUB_CARD_VWM",
+        },
+        {
+          "id": "dependency-item_3bb9f9a86496dd0c72d3",
+          "text": "CUSTOMER_ATTR_XREF",
+        },
+        {
+          "id": "dependency-item_d92b27ddd17eba647d3e",
+          "text": "FUEL_PRTNR_PRGM_F",
+        },
+        {
+          "id": "dependency-item_92d9687a25c4eb71dfcf",
+          "text": "HOUSEHOLD_40_DAY_TOP_20_VWM",
+        },
+        {
+          "id": "dependency-item_95307da475f1a1e76092",
+          "text": "ITEM_LOC_CUST_SALES_YTD_MVW",
+        },
+        {
+          "id": "dependency-item_10b91eb85621498df45c",
+          "text": "MANUAL_POINT_ADJ_F",
+        },
+        {
+          "id": "dependency-item_ea60303132ef2b3f1529",
+          "text": "MARKETFORCE_SURV_RESP_F",
+        },
+        {
+          "id": "dependency-item_b75ffa23f4a9c74eb0a7",
+          "text": "MARKETFORCE_WEIS2GO_F",
+        },
+        {
+          "id": "dependency-item_bb5dfc50d4b8ac54e4d7",
+          "text": "MEGA_SALE_AMS_TX_IDS_VWM",
+        },
+        {
+          "id": "dependency-item_ace9c9f9c9e18ed85c13",
+          "text": "MEGA_SALE_TX_IDS_VWM",
+        },
+        {
+          "id": "dependency-item_58f5f3d79b1022c4045e",
+          "text": "MLOG$_SALES_POS_TX_F",
+        },
+        {
+          "id": "dependency-item_107541c9c53045c463e3",
+          "text": "POINTS_EARNED_REDEEMED_F",
+        },
+        {
+          "id": "dependency-item_1863c9628d61acc4723b",
+          "text": "POINTS_EARN_REDEEM_FV2",
+        },
+        {
+          "id": "dependency-item_7ce015d83dbfe0511001",
+          "text": "POS_POINTS_EARNED_REDEEMED_VWM",
+        },
+        {
+          "id": "dependency-item_4f27705e6728cdc284ae",
+          "text": "POS_POINTS_EARN_F",
+        },
+        {
+          "id": "dependency-item_3f1c567a33eaea4bfc56",
+          "text": "POS_POINTS_EARN_VWM",
+        },
+        {
+          "id": "dependency-item_1286cd910acd643a2ae5",
+          "text": "POS_TX_TENDER_F",
+        },
+        {
+          "id": "dependency-item_070436dacbf46869afa0",
+          "text": "SALES_POS_LN_F",
+        },
+        {
+          "id": "dependency-item_69ab119d7b75af3b1946",
+          "text": "SALES_POS_TX_F",
+        },
+        {
+          "id": "dependency-item_dc89789ae2e37cd8088e",
+          "text": "SHK_DAILY_ORDER_EXPORT_F",
+        },
+        {
+          "id": "dependency-item_11ec91bae18c99075ce8",
+          "text": "SUNOCO_FUEL_PRTNR_PRGM_F",
+        },
+      ],
+    },
+  ],
+  "edges": [
+    {
+      "flowLabel": "move_data/wmbi_pstg_ams_clubcard_src_feed",
+      "fromNodeId": "node_9c10d3cb73ae2a74aff9",
+      "id": "edge_445b80e8f84f4135d28a",
+      "style": "solid",
+      "toNodeId": "node_065ec999ab1111a1f6cd",
+    },
+    {
+      "flowLabel": "df_build_pstg_club_card_dim",
+      "fromNodeId": "node_065ec999ab1111a1f6cd",
+      "id": "edge_f93f5175eff8794f8b48",
+      "style": "solid",
+      "toNodeId": "node_c034ef41d853fb202a3b",
+    },
+    {
+      "flowLabel": "df_build_stg_club_card_dim",
+      "fromNodeId": "node_c034ef41d853fb202a3b",
+      "id": "edge_ed2a707cb4e5da524954",
+      "style": "solid",
+      "toNodeId": "node_816c0d52912d4ca0e109",
+    },
+    {
+      "flowLabel": "df_build_insert_update_club_card_dim",
+      "fromNodeId": "node_816c0d52912d4ca0e109",
+      "id": "edge_d2e75b271a4ae3c12a09",
+      "style": "solid",
+      "toNodeId": "node_c2d43286b4a6354ac98d",
+    },
+    {
+      "flowLabel": "df_ins_unappr_val_club_card_dim_no_date_param",
+      "fromNodeId": "node_fb61f0d613d3c6ff7552",
+      "id": "edge_016f3c522ff4f1a3cc66",
+      "style": "solid",
+      "toNodeId": "node_c2d43286b4a6354ac98d",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_7e4412912369a68d9a64",
+      "id": "edge_69e4a450500e43809854",
+      "style": "dashed",
+      "toNodeId": "node_c2d43286b4a6354ac98d",
+    },
+    {
+      "flowLabel": "df_build_update_first_tx_dt",
+      "fromNodeId": "node_8a46d3eca355ce95ce01",
+      "id": "edge_dc1814595b6e95662f96",
+      "style": "solid",
+      "toNodeId": "node_c2d43286b4a6354ac98d",
+    },
+    {
+      "flowLabel": "df_build_update_first_tx_dt",
+      "fromNodeId": "node_9007df15f40f0606eb21",
+      "id": "edge_a2583298371a0890ebcf",
+      "style": "solid",
+      "toNodeId": "node_c2d43286b4a6354ac98d",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_5aa794d1ee713e90521e",
+      "id": "edge_e8452f08c1790e0465df",
+      "style": "dashed",
+      "toNodeId": "node_c2d43286b4a6354ac98d",
+    },
+  ],
+  "findings": [
+    {
+      "id": "findings_f3855a3dc002867772ae",
+      "text": "Two different loading processes have fed this table over the years. The old one stopped running in 2020 (15,019,410 rows, frozen). The current one runs daily and touched data again this morning (6,958,825 rows)",
+    },
+    {
+      "id": "findings_2d6ef3d7032115507cd0",
+      "text": "Serious: the step meant to keep household level benefit flags correct only looks at households that still exist in the staging table frozen since 2020. Any household created or changed since then is silently skipped, its benefit flags never get re-evaluated",
+    },
+    {
+      "id": "findings_ca9c2832ca50f2775228",
+      "text": "Serious, same root cause: the step meant to correct a card's points earning flag also only compares against that same frozen 2020 staging table. For any card active since then, there is no working mechanism left in this table's process to ever fix that flag once it goes wrong",
+    },
+    {
+      "id": "findings_5990ce180b6278f8dad0",
+      "text": "Confirmed: the final step into this table inserts new cards and updates existing ones by matching the internal key. Every update also overwrites the basket discount and points earning flags with whatever the staging table has, which, as found above, is empty from the true source. This is not a hypothesis anymore, it is confirmed in code: any card touched by today's process loses these two settings",
+    },
+    {
+      "id": "findings_bf03407a749634a7ea39",
+      "text": "Confirmed: the step that copies data from the raw feed into the next staging table always marks every card as approved, and computes a fingerprint used to detect what changed. That fingerprint is built from name, address and contact fields only. A card whose only change is to its discount or points settings would not be picked up as changed at all",
+    },
+    {
+      "id": "findings_38bce940215784c76b32",
+      "text": "26 other tables depend on this one, including the two largest transaction tables in the warehouse. This table has to be migrated before any of them",
+    },
+  ],
+  "groups": [
+    {
+      "id": "group_4818529de1cecdde0d96",
+      "label": "Live chain: AMS process, daily · orchestrator: pf_ams_club_card_dim_process",
+      "nodeIds": [
+        "node_9c10d3cb73ae2a74aff9",
+        "node_065ec999ab1111a1f6cd",
+        "node_c034ef41d853fb202a3b",
+        "node_816c0d52912d4ca0e109",
+      ],
+      "role": "LIVE",
+    },
+    {
+      "id": "group_96c6dead5aae452647ab",
+      "label": "Injection: survey load",
+      "nodeIds": [
+        "node_fb61f0d613d3c6ff7552",
+      ],
+      "role": "INJECTION",
+    },
+    {
+      "id": "group_2a219802d6c97861852b",
+      "label": "Injection: POS points load",
+      "nodeIds": [
+        "node_7e4412912369a68d9a64",
+      ],
+      "role": "INJECTION",
+    },
+    {
+      "id": "group_6dac43d47da90bc491b2",
+      "label": "Fact: transaction history",
+      "nodeIds": [
+        "node_8a46d3eca355ce95ce01",
+      ],
+      "role": "FACT",
+    },
+    {
+      "id": "group_5d229195af2709f0a91d",
+      "label": "Fact: calendar",
+      "nodeIds": [
+        "node_9007df15f40f0606eb21",
+      ],
+      "role": "FACT",
+    },
+    {
+      "id": "group_263cbac7e44fcd911687",
+      "label": "Dead: EME chain. Last execution: 2020-08-12",
+      "nodeIds": [
+        "node_5aa794d1ee713e90521e",
+      ],
+      "role": "DEAD",
+    },
+  ],
+  "meta": {
+    "ingestedAt": "2026-09-02T00:00:00.000Z",
+    "sourceFile": "club_card_dim_lineage.html",
+    "sourceSha256": "0863727d97c1990a8e9e25c0dd08ebbac05763b0ee020427ec3fbf97c6cf99b8",
+    "table": "WMBI.CLUB_CARD_DIM",
+  },
+  "nodes": [
+    {
+      "columns": [],
+      "id": "node_9c10d3cb73ae2a74aff9",
+      "keyBadges": [],
+      "name": "AMS_PROD.LogixXS.dbo",
+      "notes": [
+        {
+          "id": "note_34be9e1c1c383d328c2f",
+          "text": "CLUB_CARD_ID",
+        },
+      ],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_c1d6c052c2b35e913354",
+          "text": "CardIDs, Customers, CustomerExt,",
+        },
+        {
+          "id": "subtitle_660d2b65e33b64090609",
+          "text": "CustomerPreferences",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_065ec999ab1111a1f6cd",
+      "keyBadges": [],
+      "name": "WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED",
+      "notes": [
+        {
+          "id": "note_76ecdfa3d77b8a0b3459",
+          "text": "CLUB_CARD_ID",
+        },
+      ],
+      "role": "LIVE",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_c034ef41d853fb202a3b",
+      "keyBadges": [],
+      "name": "WMBI_ETL.PSTG_CLUB_CARD_DIM",
+      "notes": [
+        {
+          "id": "note_0c0303cf838a458de2f6",
+          "text": "CHECKSUM_VAL",
+        },
+        {
+          "id": "note_a40b457d6064af2d7e7a",
+          "text": "CLUB_CARD_ID",
+        },
+      ],
+      "role": "LIVE",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_816c0d52912d4ca0e109",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_CLUB_CARD_DIM_AMS",
+      "notes": [
+        {
+          "id": "note_d7e6323524d47a04b922",
+          "text": "CLUB_CARD_KEY",
+        },
+      ],
+      "role": "LIVE",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_5c09a04de32a9eb65c7d",
+          "name": "CLUB_CARD_ID",
+        },
+      ],
+      "id": "node_fb61f0d613d3c6ff7552",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_MARKETFORCE_SURV_RESP",
+      "notes": [
+        {
+          "id": "note_09467ef71c924cae9b97",
+          "text": "Injects placeholder members",
+        },
+      ],
+      "role": "INJECTION",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_7e4412912369a68d9a64",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_POS_POINTS_EARNED_F",
+      "notes": [
+        {
+          "id": "note_3b1fb87b4103f0240dcb",
+          "text": "Injects placeholder members",
+        },
+      ],
+      "role": "INJECTION",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_8a46d3eca355ce95ce01",
+      "keyBadges": [],
+      "name": "WMBI.SALES_POS_TX_F",
+      "notes": [
+        {
+          "id": "note_3793f835f9a17f5bc4b8",
+          "text": "CLUB_CARD_KEY",
+        },
+      ],
+      "role": "FACT",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_9007df15f40f0606eb21",
+      "keyBadges": [],
+      "name": "WMBI.DT_DIM",
+      "notes": [
+        {
+          "id": "note_1889cada59fee9927846",
+          "text": "ACCT_EFF_DT_KEY",
+        },
+      ],
+      "role": "FACT",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_5aa794d1ee713e90521e",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_CLUB_CARD_DIM",
+      "notes": [
+        {
+          "id": "note_8ccc181b5b7537c2599d",
+          "text": "frozen",
+        },
+      ],
+      "role": "DEAD",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_6a9f69928324e66e2e26",
+          "name": "CLUB_CARD_KEY",
+        },
+        {
+          "id": "column_cf4c677c8efab29451e4",
+          "name": "CLUB_CARD_ID",
+        },
+        {
+          "id": "column_92aef42812f2e79cd5b3",
+          "name": "CHECKSUM_VAL",
+        },
+      ],
+      "id": "node_c2d43286b4a6354ac98d",
+      "keyBadges": [
+        {
+          "badge": "PK",
+          "column": "CLUB_CARD_KEY",
+          "id": "badge_27a438a76d539a9715e3",
+        },
+        {
+          "badge": "UK",
+          "column": "CLUB_CARD_ID",
+          "id": "badge_2c0774aff041bf9af05f",
+        },
+        {
+          "badge": "UK",
+          "column": "CHECKSUM_VAL",
+          "id": "badge_6fd58c3e14fb740335e3",
+        },
+      ],
+      "name": "WMBI.CLUB_CARD_DIM",
+      "notes": [
+        {
+          "id": "note_8864f8b2605a7aa0d3c1",
+          "text": "Post-load steps, on the loaded table",
+        },
+        {
+          "id": "note_82d4ab1c69866a77aab0",
+          "text": "1. df_build_update_household_fl (DEP_4). Only",
+        },
+        {
+          "id": "note_44be525ae242a47a30c7",
+          "text": "re-evaluates households",
+        },
+        {
+          "id": "note_4717c0a996d38d5f1085",
+          "text": "still present in the frozen staging table,",
+        },
+        {
+          "id": "note_0c494b0fdbcdfab752a3",
+          "text": "dead since 2020.",
+        },
+        {
+          "id": "note_57693a1c210f56fae68d",
+          "text": "2. df_build_update_first_tx_dt (DEP_5). Reads",
+        },
+        {
+          "id": "note_9423e86f4f09a6336cab",
+          "text": "SALES_POS_TX_F for FIRST_TX_DT",
+        },
+        {
+          "id": "note_2c5e14b05110e80a2a40",
+          "text": "3. df_build_update_points_earn_fl (DEP_6).",
+        },
+        {
+          "id": "note_c2b0eb2b6db27b0f8776",
+          "text": "Same frozen table limit as step 1.",
+        },
+        {
+          "id": "note_abf1110208ae94eb5315",
+          "text": "Trigger",
+        },
+        {
+          "id": "note_bb44f09055d1de202d31",
+          "text": "Assigns CLUB_CARD_KEY automatically on every",
+        },
+        {
+          "id": "note_8b635ef58f6038a55992",
+          "text": "insert, enabled.",
+        },
+        {
+          "id": "note_31dc1716a4c9e54ae5b0",
+          "text": "The frozen sibling table has a matching",
+        },
+        {
+          "id": "note_18ede579cd7727d936fb",
+          "text": "trigger.",
+        },
+      ],
+      "role": "TARGET",
+      "subtitleLines": [
+        {
+          "id": "subtitle_e4b6e05c620d6f12305c",
+          "text": "13,109,987 rows · 41 columns",
+        },
+      ],
+    },
+  ],
+  "orchestrator": [
+    {
+      "id": "orchestrator_f29105de4a7af7a42667",
+      "key": "Flow",
+      "value": "pf_ams_club_card_dim_process",
+    },
+    {
+      "id": "orchestrator_a263c9a9550ca169ff08",
+      "key": "Schedule in the file header",
+      "value": "Recurring, Continuous Type. Every 1 day. Start 2020/08/27 05:00:00",
+    },
+    {
+      "id": "orchestrator_de65fede4d0d53dddcd6",
+      "key": "Schedule observed in the data",
+      "value": "",
+    },
+    {
+      "id": "orchestrator_b252b33ce4c7331fc043",
+      "key": "Alerts to",
+      "value": "tscott@weismarkets.com",
+    },
+    {
+      "id": "orchestrator_92739ca9aba0b610f1e3",
+      "key": "Steps that never run",
+      "value": "DEP_0 / df_build_pstg_ams_clubcard_src_feed",
+    },
+  ],
+  "pendingValidation": [
+    {
+      "id": "pending-validation_2ea79365825f7a49349c",
+      "text": "Whether CLUB_CARD_DIM should move to Wave 2 is still pending a decision (proposal in deliverables/catalog_review.md).",
+    },
+    {
+      "id": "pending-validation_8e8e2a5fd64c51197283",
+      "text": "df_build_update_first_tx_dt (DEP_5) has not been read yet.",
+    },
+    {
+      "id": "pending-validation_d9951bfc4bbe48fbccfc",
+      "text": "The file that injects placeholders from STG_POS_POINTS_EARNED_F has not been identified.",
+    },
+    {
+      "id": "pending-validation_2f1e9edeebe05ff979ff",
+      "text": "The orchestrator that calls df_ins_unappr_val_club_card_dim_no_date_param has not been identified.",
+    },
+    {
+      "id": "pending-validation_9fc4ad13285da8544657",
+      "text": "Whether SRC_REC_STAT_CD is populated only for EME sourced rows, or the matching count (11,052,636 both) is a coincidence, has not been confirmed.",
+    },
+    {
+      "id": "pending-validation_570e83b0dafc8bfa3934",
+      "text": "How many rows have BSKT_DISC_OPT_FL or EARN_POINTS_FL blank versus a real value, split by recency of last touch, has not been measured.",
+    },
+    {
+      "id": "pending-validation_8a701db584ab225c658e",
+      "text": "CLUB_CARD_DIM's real observed run schedule, from a log rather than the header, is still unknown.",
+    },
+    {
+      "id": "pending-validation_0336bb59feca605cf39d",
+      "text": "The 15,183 stub member figure from references/anomaly-checklist.md has not been reconciled against this session's 240,954.",
+    },
+  ],
+}
+`;
+
+exports[`HtmlLineageSource > parses item_dim_lineage.html with complete carrier coverage 1`] = `
+{
+  "dependencies": [
+    {
+      "heading": "Built exclusively to load this table",
+      "id": "dependency-group_5f9b4f1fabdd22003bb4",
+      "intro": "Nothing outside this chain reads them.",
+      "items": [
+        {
+          "id": "dependency-item_80264a5044218aa61d07",
+          "text": "Loaded by df_preload_item_dim → WMBI_ETL.STG_ITEM",
+        },
+        {
+          "id": "dependency-item_0858949ecabd3565ce87",
+          "text": "WMBI_ETL.STG_ITEM: truncated and reloaded daily",
+        },
+      ],
+    },
+    {
+      "heading": "Owned by other processes",
+      "id": "dependency-group_068fa0d5fc46066f37c6",
+      "intro": "Not created for this table, but it reads from them or receives rows through them.",
+      "items": [
+        {
+          "id": "dependency-item_81c81c4de36bc37b3ca3",
+          "text": "Loaded by df_preload_item_dim → WMBI_ETL.STG_ITEM",
+        },
+        {
+          "id": "dependency-item_4f93c528f4e28484ea42",
+          "text": "HQAnalytics.ITEM_MASTER: the actual source, on SQL Server, external to the warehouse.",
+        },
+        {
+          "id": "dependency-item_6680b4cfe906fdaa87c8",
+          "text": "HQAnalytics.TCI_DOMAIN_LOOKUPS: feeds ITEM_SCAN_CD_FORMAT, ITEM_STAT_DESC and ITEM_TYPE_DESC.",
+        },
+        {
+          "id": "dependency-item_3e00f9c6fa3ea2ae2ee8",
+          "text": "HQAnalytics.BUYERS: feeds ITEM_BUYER_NM and ITEM_MERCHANDISER_NM.",
+        },
+        {
+          "id": "dependency-item_f3313b1e19e5f866d713",
+          "text": "HQAnalytics.STORE_DEPARTMENT: feeds ITEM_POS_DEPT_DESC.",
+        },
+        {
+          "id": "dependency-item_afc9272ad8dd19471ce0",
+          "text": "HQAnalytics.CATEGORY: feeds ITEM_CATGY_DESC, ITEM_SUB_CATGY_DESC and ITEM_MERCHANDISER_NUM.",
+        },
+        {
+          "id": "dependency-item_5f9726ab67e18d23871a",
+          "text": "HQAnalytics.PRIVATE_LABEL_TYPE: joined but unused, feeds nothing. See findings.",
+        },
+        {
+          "id": "dependency-item_17f1bd52f21986c1423e",
+          "text": "HQAnalytics.UNITS_OF_MEASURE: feeds ITEM_SIZE_DESC.",
+        },
+        {
+          "id": "dependency-item_384432781a36a69b60df",
+          "text": "HQAnalytics.CONTROL_SUBSTANCES: feeds ITEM_CTRL_SUBSTANCE_CD and ITEM_CTRL_SUBSTANCE_DESC.",
+        },
+        {
+          "id": "dependency-item_0d2ba5a7a845e1660e26",
+          "text": "HQAnalytics.VENDOR_ITEM: feeds ITEM_WAREHOUSE_CD.",
+        },
+        {
+          "id": "dependency-item_8d3c8d5fff069ec570e5",
+          "text": "HQAnalytics.POS_TAX_CLASSES: feeds ITEM_SNAP_FL.",
+        },
+        {
+          "id": "dependency-item_96f37a370a6cb40877f1",
+          "text": "HQAnalytics.ITEM_SCALE_FLAGS: feeds SCALE_PLU, SCALE_DESC, SCALE_CLASS, SMR_SCALE_DESC_2, SMR_FIXED_WEIGHT_AMT.",
+        },
+        {
+          "id": "dependency-item_62db65fb61e08a866798",
+          "text": "Loaded by df_ins_unappr_val_item_dim_param → WMBI.ITEM_DIM",
+        },
+        {
+          "id": "dependency-item_24094e71592dbb98b66d",
+          "text": "WMBI_ETL.PSTG_VENDOR_ITEM_XREF: one of several callers of this reusable template. See findings.",
+        },
+        {
+          "id": "dependency-item_78a3bf279d7d0112ed39",
+          "text": "WMBI_ETL.PSTG_SALES_POS_LINE: read by df_wmbi_new_unapproved_vals_item_dim_121521",
+        },
+      ],
+    },
+    {
+      "heading": "Depends on this table, inferred from naming",
+      "id": "dependency-group_659060657b07401cb667",
+      "intro": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.",
+      "items": [
+        {
+          "id": "dependency-item_3f4d39f73bface24da1e",
+          "text": "WMBI.ITEM_COST_F",
+        },
+        {
+          "id": "dependency-item_ed4c59c06aba9339ea8d",
+          "text": "WMBI.ITEM_PRICE_F",
+        },
+        {
+          "id": "dependency-item_81cf6f4f4e05adc9b60c",
+          "text": "WMBI.INV_AS_COUNTED_F",
+        },
+        {
+          "id": "dependency-item_7c434f07ecd796c89718",
+          "text": "WMBI.LOC_DSD_INVOICE_F",
+        },
+        {
+          "id": "dependency-item_2e408ae32ffcb24fcdb8",
+          "text": "WMBI.RECLM_SCAN_DETAIL_F",
+        },
+        {
+          "id": "dependency-item_ef807803620a82d5f383",
+          "text": "WMBI.SALES_POS_LN_F",
+        },
+        {
+          "id": "dependency-item_22a16640476c0d68f031",
+          "text": "WMBI.VENDOR_ITEM_XREF",
+        },
+        {
+          "id": "dependency-item_73241eea101c8d244a30",
+          "text": "WMBI.WAREHOUSE_SHIPT_F",
+        },
+      ],
+    },
+  ],
+  "edges": [
+    {
+      "flowLabel": "df_preload_item_dim",
+      "fromNodeId": "node_5a34ef707ebcda8c8c80",
+      "id": "edge_d5802e44df9b386eb227",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_8f19fb557e44a2388c92",
+      "id": "edge_ef9052d708780a651d70",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_249eb61f1bf31083df33",
+      "id": "edge_4096f8d2cd2e6111d26f",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_2962355e717e69bd2d31",
+      "id": "edge_f424f9251b1a3f928eed",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_7e736f5b8d1ec22757eb",
+      "id": "edge_3b6eeeab3f5669ba9cab",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_16d81328c902f9f5992d",
+      "id": "edge_c69853ce86d17640949c",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_77b68d0f183a53bd6523",
+      "id": "edge_4b644dce11759c11faf4",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_f1de46e3a40a9dfe6e79",
+      "id": "edge_52f3f0bed6f1f2f1d9f7",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_d8a572cd6efc87c05e1f",
+      "id": "edge_b8557fa8f0151bb8db6d",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_6212c5daa4871f1ec5c1",
+      "id": "edge_df03f69de069db300d4a",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_2cf4d00b1b87d2733ca9",
+      "id": "edge_26ac42db0c0bbc7423c2",
+      "style": "solid",
+      "toNodeId": "node_2e9b34407bef53626348",
+    },
+    {
+      "flowLabel": "df_upsert_item_dim",
+      "fromNodeId": "node_2e9b34407bef53626348",
+      "id": "edge_a9fd88bbeaed0f4260d6",
+      "style": "solid",
+      "toNodeId": "node_af748afbcc2e3d3b7af1",
+    },
+    {
+      "flowLabel": "df_wmbi_upsert_item_dim",
+      "fromNodeId": "node_39cfaf90fcb27af6de38",
+      "id": "edge_933970537a96c1a0db77",
+      "style": "dashed",
+      "toNodeId": "node_af748afbcc2e3d3b7af1",
+    },
+    {
+      "flowLabel": "df_ins_unappr_val_item_dim_param",
+      "fromNodeId": "node_acd983dbf35ef07ed7a5",
+      "id": "edge_055beafbac1cb29d2830",
+      "style": "solid",
+      "toNodeId": "node_af748afbcc2e3d3b7af1",
+    },
+    {
+      "flowLabel": "df_wmbi_new_unapproved_vals_item_dim_121521",
+      "fromNodeId": "node_b25dadd4a638ced9595a",
+      "id": "edge_7d09b3c68e37b3e4520e",
+      "style": "solid",
+      "toNodeId": "node_af748afbcc2e3d3b7af1",
+    },
+  ],
+  "findings": [
+    {
+      "id": "findings_e2c9e767d5d385c79474",
+      "text": "4.3 percent of rows, 32,643 of them, are not a clean approved member from the main load. The main load itself creates 9,346 placeholder rows, in addition to the three dedicated injection sources",
+    },
+    {
+      "id": "findings_586fad1d6a77691fa1d9",
+      "text": "One writer source is recorded two different ways, 'UNAPPROVED_VAL' and 'UNAPPROVED VAL', with a space instead of an underscore. Both are active today. Whether this is one flow with inconsistent logging or two separate flows has not been confirmed",
+    },
+    {
+      "id": "findings_0f0b93800f1695e501fb",
+      "text": "One column, CORE_POS_ITEM_FL, is populated on 99.9 percent of rows but does not appear anywhere in the column list of either confirmed live flow. Something else maintains it, and that process has not been identified",
+    },
+    {
+      "id": "findings_781c9ff8705ae492ad83",
+      "text": "A recovery variant of that same nightly driver still has a working, reachable path to the decommissioned 2013 flow, unlike the normal driver where the same step is disconnected. Whether this recovery path is ever actually run has not been confirmed",
+    },
+    {
+      "id": "findings_f366844b27d39be95681",
+      "text": "The live upsert step looks up each item's existing surrogate key by its scan code. When no match is found, it defaults the key to -1, this project's known sentinel for an unresolved key, expecting the ITEM_SEQ_TR trigger to override it with a real value on insert. One row in the live table still carries an invalid key, so this override does not always happen",
+    },
+    {
+      "id": "findings_d399cce16b3703597a2d",
+      "text": "A master driver, pf_do_unapproved_dim_procedures, runs a placeholder-injection step for nine dimensions in sequence, including one named for this table. But the file that step actually calls writes to LOC_DIM, not ITEM_DIM: its target variable, its SQL and its MODIFY FILE block all name loc_dim, sourced from pstg_sales_pos_line. This does not explain the UNAPPROVED_VAL rows measured in this table; that source is still unidentified. The driver itself has no schedule of its own, so whether it runs at all in production is also unconfirmed",
+    },
+  ],
+  "groups": [
+    {
+      "id": "group_fa80f09ae1635cd11532",
+      "label": "HQ item master load · orchestrator: df_preload_item_dim",
+      "nodeIds": [
+        "node_5a34ef707ebcda8c8c80",
+        "node_8f19fb557e44a2388c92",
+        "node_249eb61f1bf31083df33",
+        "node_2962355e717e69bd2d31",
+        "node_7e736f5b8d1ec22757eb",
+        "node_16d81328c902f9f5992d",
+        "node_77b68d0f183a53bd6523",
+        "node_f1de46e3a40a9dfe6e79",
+        "node_d8a572cd6efc87c05e1f",
+        "node_6212c5daa4871f1ec5c1",
+        "node_2cf4d00b1b87d2733ca9",
+        "node_2e9b34407bef53626348",
+      ],
+      "role": "LIVE",
+    },
+    {
+      "id": "group_d7f3ef1e8f043115cd36",
+      "label": "Superseded one-time load. Last execution: 2013-08-21",
+      "nodeIds": [
+        "node_39cfaf90fcb27af6de38",
+      ],
+      "role": "DEAD",
+    },
+    {
+      "id": "group_fac8c77978a88cc42604",
+      "label": "Injection: reusable parameterized template",
+      "nodeIds": [
+        "node_acd983dbf35ef07ed7a5",
+      ],
+      "role": "INJECTION",
+    },
+    {
+      "id": "group_18459724d22fd7793ebb",
+      "label": "Injection: POS line staging",
+      "nodeIds": [
+        "node_b25dadd4a638ced9595a",
+      ],
+      "role": "INJECTION",
+    },
+  ],
+  "meta": {
+    "ingestedAt": "2026-09-02T00:00:00.000Z",
+    "sourceFile": "item_dim_lineage.html",
+    "sourceSha256": "3a3027b2953ad7cd64cc7c1432dd029712d9de0ff3e75c5acf20e6e88e8eb96e",
+    "table": "WMBI.ITEM_DIM",
+  },
+  "nodes": [
+    {
+      "columns": [
+        {
+          "id": "column_82d471f16457cf00d883",
+          "name": "ITEM_ID",
+        },
+      ],
+      "id": "node_5a34ef707ebcda8c8c80",
+      "keyBadges": [],
+      "name": "HQAnalytics.ITEM_MASTER",
+      "notes": [
+        {
+          "id": "note_9496c060fdfb143182bc",
+          "text": "incremental, by change date",
+        },
+      ],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_88a62fc51683e4988260",
+          "text": "external, SQL Server. The main",
+        },
+        {
+          "id": "subtitle_64728f7fb4059284b20a",
+          "text": "source",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_8f19fb557e44a2388c92",
+      "keyBadges": [],
+      "name": "HQAnalytics.TCI_DOMAIN_LOOKUPS",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_ffa4fee37e38a1bbe36c",
+          "text": "feeds ITEM_SCAN_CD_FORMAT,",
+        },
+        {
+          "id": "subtitle_4704506331ed343d6be6",
+          "text": "ITEM_STAT_DESC, ITEM_TYPE_DESC",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_249eb61f1bf31083df33",
+      "keyBadges": [],
+      "name": "HQAnalytics.BUYERS",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_da0cf0758c935122de41",
+          "text": "feeds ITEM_BUYER_NM,",
+        },
+        {
+          "id": "subtitle_3af5743e77a200459e55",
+          "text": "ITEM_MERCHANDISER_NM",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_2962355e717e69bd2d31",
+      "keyBadges": [],
+      "name": "HQAnalytics.STORE_DEPARTMENT",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_e0f471c9a76086580dc1",
+          "text": "feeds ITEM_POS_DEPT_DESC",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_7e736f5b8d1ec22757eb",
+      "keyBadges": [],
+      "name": "HQAnalytics.CATEGORY",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_2bab71836bb6299357a1",
+          "text": "feeds ITEM_CATGY_DESC,",
+        },
+        {
+          "id": "subtitle_6ee29e6d6ea14da40a91",
+          "text": "ITEM_SUB_CATGY_DESC,",
+        },
+        {
+          "id": "subtitle_b6df64e0016f35e77f73",
+          "text": "ITEM_MERCHANDISER_NUM",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_16d81328c902f9f5992d",
+      "keyBadges": [],
+      "name": "HQAnalytics.PRIVATE_LABEL_TYPE",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_30e81c3824553c3365a9",
+          "text": "joined but unused. See findings",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_77b68d0f183a53bd6523",
+      "keyBadges": [],
+      "name": "HQAnalytics.UNITS_OF_MEASURE",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_8c5093e8f9e4d55297f3",
+          "text": "feeds ITEM_SIZE_DESC",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_f1de46e3a40a9dfe6e79",
+      "keyBadges": [],
+      "name": "HQAnalytics.CONTROL_SUBSTANCES",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_0513f4207814d2e8bc11",
+          "text": "feeds ITEM_CTRL_SUBSTANCE_CD,",
+        },
+        {
+          "id": "subtitle_f9a0cd69fe2f51d514ee",
+          "text": "ITEM_CTRL_SUBSTANCE_DESC",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_d8a572cd6efc87c05e1f",
+      "keyBadges": [],
+      "name": "HQAnalytics.VENDOR_ITEM",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_9677fc4e86b0ad99a399",
+          "text": "feeds ITEM_WAREHOUSE_CD",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_6212c5daa4871f1ec5c1",
+      "keyBadges": [],
+      "name": "HQAnalytics.POS_TAX_CLASSES",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_3bf212c53ffe1a44013b",
+          "text": "feeds ITEM_SNAP_FL",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_2cf4d00b1b87d2733ca9",
+      "keyBadges": [],
+      "name": "HQAnalytics.ITEM_SCALE_FLAGS",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_d680fb4d4d3a8c15773c",
+          "text": "feeds SCALE_PLU, SCALE_DESC,",
+        },
+        {
+          "id": "subtitle_c6d007a54ce61d2e861e",
+          "text": "SCALE_CLASS and 2 more",
+        },
+      ],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_a287648ac9765e8a88dd",
+          "name": "ITEM_SCAN_CD_ID",
+        },
+      ],
+      "id": "node_2e9b34407bef53626348",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_ITEM",
+      "notes": [
+        {
+          "id": "note_619e413631c16183853b",
+          "text": "truncated and reloaded daily,",
+        },
+        {
+          "id": "note_1f3f9a81925f0153802d",
+          "text": "02:00",
+        },
+      ],
+      "role": "LIVE",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_dcea4b0dfadc152a8c0d",
+          "name": "ITEM_KEY",
+        },
+      ],
+      "id": "node_39cfaf90fcb27af6de38",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_ITEM",
+      "notes": [
+        {
+          "id": "note_347122a7e4fe3cb3f952",
+          "text": "wmbi_dim_procs, not",
+        },
+        {
+          "id": "note_5752edb19a41a73795b0",
+          "text": "wmbi_dim/item. Run Once,",
+        },
+        {
+          "id": "note_b3c8049e39539217eb7b",
+          "text": "2013-08-21",
+        },
+      ],
+      "role": "DEAD",
+      "subtitleLines": [
+        {
+          "id": "subtitle_d5011975aacfd16ad939",
+          "text": "same source table as the live",
+        },
+        {
+          "id": "subtitle_9cc8799d61d9b488c5b9",
+          "text": "chain",
+        },
+      ],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_298637eca37e6906c135",
+          "name": "ITEM_SCAN_CD_ID",
+        },
+      ],
+      "id": "node_acd983dbf35ef07ed7a5",
+      "keyBadges": [],
+      "name": "WMBI_ETL.PSTG_VENDOR_ITEM_XREF",
+      "notes": [
+        {
+          "id": "note_efa98ca44331027469c2",
+          "text": "REC_UPDT_SRC_SYS hardcoded to",
+        },
+        {
+          "id": "note_d487aa8943323aad3027",
+          "text": "'UNAPPROVED_VAL'",
+        },
+      ],
+      "role": "INJECTION",
+      "subtitleLines": [
+        {
+          "id": "subtitle_e369f065c4ca0c8a471b",
+          "text": "one of several confirmed callers,",
+        },
+        {
+          "id": "subtitle_ba853db6c49d1d324ae5",
+          "text": "via VENDOR_ITEM_XREF's",
+        },
+        {
+          "id": "subtitle_bfd04789fe563d544b1b",
+          "text": "orchestrator",
+        },
+      ],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_b0e395f746b9eb6dd48d",
+          "name": "ITEM_SCAN_CD_ID",
+        },
+      ],
+      "id": "node_b25dadd4a638ced9595a",
+      "keyBadges": [],
+      "name": "WMBI_ETL.PSTG_SALES_POS_LINE",
+      "notes": [
+        {
+          "id": "note_e3ac5edde4c25c8201f9",
+          "text": "REC_UPDT_SRC_SYS hardcoded to",
+        },
+        {
+          "id": "note_cb05b700c6a00b6f69e6",
+          "text": "'UNAPPROVED VAL' (space)",
+        },
+      ],
+      "role": "INJECTION",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_b9d9844d829c39b6daa9",
+          "name": "ITEM_KEY",
+        },
+        {
+          "id": "column_299585d6e91bb7af4288",
+          "name": "ITEM_SCAN_CD_ID",
+        },
+      ],
+      "id": "node_af748afbcc2e3d3b7af1",
+      "keyBadges": [
+        {
+          "badge": "PK",
+          "column": "ITEM_KEY",
+          "id": "badge_ae9e61cf222868814dfe",
+        },
+        {
+          "badge": "UK",
+          "column": "ITEM_SCAN_CD_ID",
+          "id": "badge_da3504e6b2b4678dee13",
+        },
+      ],
+      "name": "WMBI.ITEM_DIM",
+      "notes": [
+        {
+          "id": "note_5fd2a564d7fa096721a0",
+          "text": "Trigger",
+        },
+        {
+          "id": "note_0ff7df3510f196e42fd6",
+          "text": "ITEM_SEQ_TR assigns ITEM_KEY on insert, so",
+        },
+        {
+          "id": "note_51d8932b5ad8d352d4f8",
+          "text": "values are not",
+        },
+        {
+          "id": "note_4a79f578b1d4e3e832a4",
+          "text": "reproducible in another platform and must be",
+        },
+        {
+          "id": "note_756ebb9cd947e64f87df",
+          "text": "migrated as they are.",
+        },
+      ],
+      "role": "TARGET",
+      "subtitleLines": [
+        {
+          "id": "subtitle_da8f6c0fd3fad9b788ad",
+          "text": "758,653 rows · 52 columns",
+        },
+      ],
+    },
+  ],
+  "orchestrator": [
+    {
+      "id": "orchestrator_4af0d4663bd66f3cc736",
+      "key": "Flow",
+      "value": "df_preload_item_dim",
+    },
+    {
+      "id": "orchestrator_df2e30bcb4b3bb895306",
+      "key": "Schedule in the file header",
+      "value": "Recurring, daily 02:00, starting 2016-01-27",
+    },
+    {
+      "id": "orchestrator_983e9d386bc19006dcc5",
+      "key": "Schedule observed in the data",
+      "value": "STG_ITEM last_run 2026-08-26 02:01:36.839 (queries.sql query 2), matches",
+    },
+    {
+      "id": "orchestrator_330be6031d5f65020588",
+      "key": "Alerts to",
+      "value": "Jeffery.Farrington@weismarkets.com, %user_email",
+    },
+    {
+      "id": "orchestrator_df3e2c177bfa21014aed",
+      "key": "Steps that never run",
+      "value": "none found",
+    },
+  ],
+  "pendingValidation": [
+    {
+      "id": "pending-validation_5da9284fd32281b9781a",
+      "text": "Which flow writes the STORE_INVENTORY source has not been identified.",
+    },
+    {
+      "id": "pending-validation_61e2af6e34dc0e87e7a7",
+      "text": "Which process populates CORE_POS_ITEM_FL has not been identified.",
+    },
+    {
+      "id": "pending-validation_52546f53f4927039eb49",
+      "text": "Whether the recovery variant of the nightly driver (pf_wmbi_01_1030_etl_driver_aov_recov) that can still reach the decommissioned 2013 flow is ever actually invoked has not been confirmed.",
+    },
+  ],
+}
+`;
+
+exports[`HtmlLineageSource > parses vendor_item_xref_lineage.html with complete carrier coverage 1`] = `
+{
+  "dependencies": [
+    {
+      "heading": "Built exclusively to load this table",
+      "id": "dependency-group_7d0bb4a4989edb6b3ec1",
+      "intro": "Nothing outside this chain reads them.",
+      "items": [
+        {
+          "id": "dependency-item_4eeeb42a1ebbfa653536",
+          "text": "Loaded by df_preload_vendor_item_xref → WMBI_ETL.PSTG_VENDOR_ITEM_XREF",
+        },
+        {
+          "id": "dependency-item_2be01d182d599f196ad5",
+          "text": "WMBI_ETL.PSTG_VENDOR_ITEM_XREF: truncated and reloaded daily",
+        },
+      ],
+    },
+    {
+      "heading": "Owned by other processes",
+      "id": "dependency-group_265223bb49c1cd004310",
+      "intro": "Not created for this table, but it reads from them or receives rows through them.",
+      "items": [
+        {
+          "id": "dependency-item_7c276dca3a1d876aa3d3",
+          "text": "Loaded by df_preload_vendor_item_xref → WMBI_ETL.PSTG_VENDOR_ITEM_XREF",
+        },
+        {
+          "id": "dependency-item_a0783967d911b423b196",
+          "text": "HQAnalytics.VENDOR_ITEM: the actual source, on SQL Server, external to the warehouse.",
+        },
+        {
+          "id": "dependency-item_22ba69773a3e5b6987a9",
+          "text": "HQAnalytics.ITEM_MASTER: resolves the direct item and the price-association master item.",
+        },
+        {
+          "id": "dependency-item_25563457a50ca6d9aa95",
+          "text": "HQAnalytics.VENDOR_MASTER: resolves the direct vendor and the price-association master vendor.",
+        },
+        {
+          "id": "dependency-item_433ccba5c8a8a52e7370",
+          "text": "HQAnalytics.WHSE_VENDOR_ITEM: feeds WAREHOUSE_VENDOR_ITEM_SRC_ID and MFR_ITEM_CD.",
+        },
+        {
+          "id": "dependency-item_b22ee601cf1767fb1245",
+          "text": "HQAnalytics.WHSE_SUPPLIER: feeds WAREHOUSE_SUPPL_CD.",
+        },
+        {
+          "id": "dependency-item_81b5ed922494cba33d88",
+          "text": "HQAnalytics.PRICE_ASSOCIATION_CODE: feeds PRICE_ASSOC_CD_ID and PRICE_ASSOC_CD_DESC.",
+        },
+        {
+          "id": "dependency-item_6b28bac8cebc2dcbe28c",
+          "text": "HQAnalytics.PRICE_ASSOCIATED_ITEMS: resolves the price-association master item and vendor.",
+        },
+        {
+          "id": "dependency-item_75b9814b2748ce4d7535",
+          "text": "HQAnalytics.COST_ASSOCIATION_CODE: feeds COST_ASSOC_CD_ID and COST_ASSOC_CD_DESC.",
+        },
+        {
+          "id": "dependency-item_4e3a01c475ca7eb689ad",
+          "text": "HQAnalytics.COST_ASSOCIATED_ITEMS: resolves the cost-association master item.",
+        },
+        {
+          "id": "dependency-item_a4482776e7f36e6e4dd0",
+          "text": "Loaded by df_upsert_vendor_item_xref → WMBI.VENDOR_ITEM_XREF",
+        },
+        {
+          "id": "dependency-item_66e80faa4e32df740aec",
+          "text": "WMBI.ITEM_DIM: resolves ITEM_KEY. Also written to: pf_vendor_xref_master_driver",
+        },
+        {
+          "id": "dependency-item_530b001b6e9ee107db80",
+          "text": "WMBI.VENDOR_DIM: resolves VENDOR_KEY. Also written to: pf_vendor_xref_master_driver",
+        },
+        {
+          "id": "dependency-item_e17efc460b3d5b5c438f",
+          "text": "WMBI.WAREHOUSE_SUPPL_DIM: resolves WAREHOUSE_SUPPL_KEY. Also written to: pf_vendor_xref_master_driver",
+        },
+      ],
+    },
+    {
+      "heading": "Depends on this table, inferred from naming",
+      "id": "dependency-group_16ff2d12a66c82cc69da",
+      "intro": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.",
+      "items": [
+        {
+          "id": "dependency-item_3f4d39f73bface24da1e",
+          "text": "WMBI.ITEM_COST_F",
+        },
+        {
+          "id": "dependency-item_7c434f07ecd796c89718",
+          "text": "WMBI.LOC_DSD_INVOICE_F",
+        },
+        {
+          "id": "dependency-item_604af8515b40ac0e0b5f",
+          "text": "WMBI.VENDOR_ITEM_ADJ_F",
+        },
+      ],
+    },
+  ],
+  "edges": [
+    {
+      "flowLabel": "df_preload_vendor_item_xref",
+      "fromNodeId": "node_b59b863a32906bc14e90",
+      "id": "edge_78fa7803f93edf565993",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_0a5c373dacbd81f64447",
+      "id": "edge_8cf4931fa9df8d0ebcea",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_a471cbe98973b2d73581",
+      "id": "edge_f550da04d6f10204d3b2",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_efbce7394e100014b117",
+      "id": "edge_497541fdb3bbfdc5d99e",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_22c9837b42262bb80045",
+      "id": "edge_7a928446da25d4851967",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_ea12bd37af441e856c29",
+      "id": "edge_de6dd649f91233d7847b",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_0b81bdad998068082908",
+      "id": "edge_6bf1925a919af826be54",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_8894dd504d888fd60d86",
+      "id": "edge_1d5e4042e43ead4754c3",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_02bddfe7b55f0e59dd86",
+      "id": "edge_66088e947b3f008f4211",
+      "style": "solid",
+      "toNodeId": "node_15102db64d6898682fea",
+    },
+    {
+      "flowLabel": "df_upsert_vendor_item_xref",
+      "fromNodeId": "node_15102db64d6898682fea",
+      "id": "edge_3f538fe4ca0bc0f6ddc5",
+      "style": "solid",
+      "toNodeId": "node_24012082ff147587eb87",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_7627c280c2db15d29797",
+      "id": "edge_1ff77cb0116951c564d8",
+      "style": "solid",
+      "toNodeId": "node_24012082ff147587eb87",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_38b2b6163850141b15d4",
+      "id": "edge_633c3d6b1b87670680c3",
+      "style": "solid",
+      "toNodeId": "node_24012082ff147587eb87",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_7e760b2eef75fd4511e0",
+      "id": "edge_2d3693e443cb2d300b6c",
+      "style": "solid",
+      "toNodeId": "node_24012082ff147587eb87",
+    },
+    {
+      "flowLabel": "df_wmbi_load_vendor_item_xref",
+      "fromNodeId": "node_9b413277b6204f8f1dfb",
+      "id": "edge_727f1f4d79ac2e2a2c80",
+      "style": "dashed",
+      "toNodeId": "node_136c773b848c3f1ebc79",
+    },
+    {
+      "flowLabel": "",
+      "fromNodeId": "node_136c773b848c3f1ebc79",
+      "id": "edge_7c29434c42f6bbd540d1",
+      "style": "dashed",
+      "toNodeId": "node_24012082ff147587eb87",
+    },
+  ],
+  "findings": [],
+  "groups": [
+    {
+      "id": "group_415b5b5a5ba28e3a7ce7",
+      "label": "HQ vendor item load · orchestrator: pf_vendor_xref_master_driver",
+      "nodeIds": [
+        "node_b59b863a32906bc14e90",
+        "node_0a5c373dacbd81f64447",
+        "node_a471cbe98973b2d73581",
+        "node_efbce7394e100014b117",
+        "node_22c9837b42262bb80045",
+        "node_ea12bd37af441e856c29",
+        "node_0b81bdad998068082908",
+        "node_8894dd504d888fd60d86",
+        "node_02bddfe7b55f0e59dd86",
+        "node_15102db64d6898682fea",
+        "node_7627c280c2db15d29797",
+        "node_38b2b6163850141b15d4",
+        "node_7e760b2eef75fd4511e0",
+      ],
+      "role": "LIVE",
+    },
+    {
+      "id": "group_0b2467365ebccec41a49",
+      "label": "Dead staging path. Last execution: 2021-08-06",
+      "nodeIds": [
+        "node_9b413277b6204f8f1dfb",
+        "node_136c773b848c3f1ebc79",
+      ],
+      "role": "DEAD",
+    },
+  ],
+  "meta": {
+    "ingestedAt": "2026-09-02T00:00:00.000Z",
+    "sourceFile": "vendor_item_xref_lineage.html",
+    "sourceSha256": "bfd77fe88dd8d01acbb395d2c59e2ac616ee2b40a8e12a50883eb5c2d76ee7c3",
+    "table": "WMBI.VENDOR_ITEM_XREF",
+  },
+  "nodes": [
+    {
+      "columns": [
+        {
+          "id": "column_a14fe15d10166ec13683",
+          "name": "VI_ID",
+        },
+      ],
+      "id": "node_b59b863a32906bc14e90",
+      "keyBadges": [],
+      "name": "HQAnalytics.VENDOR_ITEM",
+      "notes": [
+        {
+          "id": "note_a6664bd6ffa9207ac274",
+          "text": "incremental, by change date",
+        },
+      ],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_b247fc7b53c00c1812b1",
+          "text": "external, SQL Server. The main",
+        },
+        {
+          "id": "subtitle_840eb14eda0810864179",
+          "text": "source",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_0a5c373dacbd81f64447",
+      "keyBadges": [],
+      "name": "HQAnalytics.ITEM_MASTER",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_712a510104a87d940786",
+          "text": "resolves the direct item and the",
+        },
+        {
+          "id": "subtitle_313afc1c55d7563436d6",
+          "text": "price-association master item",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_a471cbe98973b2d73581",
+      "keyBadges": [],
+      "name": "HQAnalytics.VENDOR_MASTER",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_3c3edad8f15168862513",
+          "text": "resolves the direct vendor and",
+        },
+        {
+          "id": "subtitle_4257d8e560e1a0c53ee1",
+          "text": "the price-association master",
+        },
+        {
+          "id": "subtitle_1a7d049b26e5e0bbf478",
+          "text": "vendor",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_efbce7394e100014b117",
+      "keyBadges": [],
+      "name": "HQAnalytics.WHSE_VENDOR_ITEM",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_05e8cab550e56041168a",
+          "text": "feeds",
+        },
+        {
+          "id": "subtitle_3c1e9aa44a70e25412eb",
+          "text": "WAREHOUSE_VENDOR_ITEM_SRC_ID,",
+        },
+        {
+          "id": "subtitle_bf6d080bc02e92a0b1a8",
+          "text": "MFR_ITEM_CD",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_22c9837b42262bb80045",
+      "keyBadges": [],
+      "name": "HQAnalytics.WHSE_SUPPLIER",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_5f786f99dcc842132722",
+          "text": "feeds WAREHOUSE_SUPPL_CD",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_ea12bd37af441e856c29",
+      "keyBadges": [],
+      "name": "HQAnalytics.PRICE_ASSOCIATION_CODE",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_924b2642c62c2d9d5af2",
+          "text": "feeds PRICE_ASSOC_CD_ID,",
+        },
+        {
+          "id": "subtitle_2ba56f334dd3dea24a00",
+          "text": "PRICE_ASSOC_CD_DESC",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_0b81bdad998068082908",
+      "keyBadges": [],
+      "name": "HQAnalytics.PRICE_ASSOCIATED_ITEMS",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_897236e1fec28318fa77",
+          "text": "resolves the price-association",
+        },
+        {
+          "id": "subtitle_83a9307ccefbc472e1cc",
+          "text": "master item and vendor",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_8894dd504d888fd60d86",
+      "keyBadges": [],
+      "name": "HQAnalytics.COST_ASSOCIATION_CODE",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_6fa2e0faf031bab8f017",
+          "text": "feeds COST_ASSOC_CD_ID,",
+        },
+        {
+          "id": "subtitle_a6300b946dbaca7783bd",
+          "text": "COST_ASSOC_CD_DESC",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_02bddfe7b55f0e59dd86",
+      "keyBadges": [],
+      "name": "HQAnalytics.COST_ASSOCIATED_ITEMS",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_9fea663e9087093d1d14",
+          "text": "resolves the cost-association",
+        },
+        {
+          "id": "subtitle_34d3d33d4f18a6d45b13",
+          "text": "master item",
+        },
+      ],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_809ac8e40df7e12e0e83",
+          "name": "ITEM_SCAN_CD_ID",
+        },
+      ],
+      "id": "node_15102db64d6898682fea",
+      "keyBadges": [],
+      "name": "WMBI_ETL.PSTG_VENDOR_ITEM_XREF",
+      "notes": [
+        {
+          "id": "note_d8e70a318133fcd07b5b",
+          "text": "truncated and reloaded daily,",
+        },
+        {
+          "id": "note_31ff4db92274ce53684a",
+          "text": "02:15",
+        },
+      ],
+      "role": "LIVE",
+      "subtitleLines": [],
+    },
+    {
+      "columns": [],
+      "id": "node_7627c280c2db15d29797",
+      "keyBadges": [],
+      "name": "WMBI.ITEM_DIM",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_7e8e9bf21f037d8dbf36",
+          "text": "resolves ITEM_KEY. Also written",
+        },
+        {
+          "id": "subtitle_0917684db5bddad57710",
+          "text": "to: pf_vendor_xref_master_driver",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_38b2b6163850141b15d4",
+      "keyBadges": [],
+      "name": "WMBI.VENDOR_DIM",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_7e2a1b640d4381c3fc48",
+          "text": "resolves VENDOR_KEY. Also written",
+        },
+        {
+          "id": "subtitle_dbbdbc77bce7327b3730",
+          "text": "to: pf_vendor_xref_master_driver",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_7e760b2eef75fd4511e0",
+      "keyBadges": [],
+      "name": "WMBI.WAREHOUSE_SUPPL_DIM",
+      "notes": [],
+      "role": "EXTERNAL",
+      "subtitleLines": [
+        {
+          "id": "subtitle_f788c018d2a98078175a",
+          "text": "resolves WAREHOUSE_SUPPL_KEY.",
+        },
+        {
+          "id": "subtitle_5214ad56f18516aa43f2",
+          "text": "Also written to:",
+        },
+        {
+          "id": "subtitle_3820dec53b9922f3b72a",
+          "text": "pf_vendor_xref_master_driver",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_9b413277b6204f8f1dfb",
+      "keyBadges": [],
+      "name": "WMBI_ETL.PSTG_VENDOR_ITEM_XREF",
+      "notes": [
+        {
+          "id": "note_9d9bd7e1e61b0f445180",
+          "text": "ITEM_SCAN_CD_ID",
+        },
+      ],
+      "role": "DEAD",
+      "subtitleLines": [
+        {
+          "id": "subtitle_ed97121deee3a6fcd094",
+          "text": "same source table read by the",
+        },
+        {
+          "id": "subtitle_ed39e7fc14785bcb6547",
+          "text": "live upsert",
+        },
+      ],
+    },
+    {
+      "columns": [],
+      "id": "node_136c773b848c3f1ebc79",
+      "keyBadges": [],
+      "name": "WMBI_ETL.STG_VENDOR_ITEM_XREF",
+      "notes": [],
+      "role": "DEAD",
+      "subtitleLines": [
+        {
+          "id": "subtitle_d1f9689ae718fcaa16e5",
+          "text": "resolved surrogate keys, a dead",
+        },
+        {
+          "id": "subtitle_f1ad3fea7f1735d2cc24",
+          "text": "end. Never reaches",
+        },
+        {
+          "id": "subtitle_97bf50b7af106f55825f",
+          "text": "VENDOR_ITEM_XREF",
+        },
+      ],
+    },
+    {
+      "columns": [
+        {
+          "id": "column_d804f3d14f81b5a2dd99",
+          "name": "VENDOR_ITEM_KEY",
+        },
+        {
+          "id": "column_d99dd065ce028ba7a913",
+          "name": "VENDOR_ITEM_ID",
+        },
+        {
+          "id": "column_e9fd460b384b341c85f1",
+          "name": "ITEM_KEY",
+        },
+        {
+          "id": "column_1610e95ddf6b8530fd38",
+          "name": "VENDOR_KEY",
+        },
+      ],
+      "id": "node_24012082ff147587eb87",
+      "keyBadges": [
+        {
+          "badge": "PK",
+          "column": "VENDOR_ITEM_KEY",
+          "id": "badge_1071819bba8d0ed0500c",
+        },
+        {
+          "badge": "UK",
+          "column": "VENDOR_ITEM_ID",
+          "id": "badge_2cf11756d72fe5f407bc",
+        },
+        {
+          "badge": "UK",
+          "column": "ITEM_KEY",
+          "id": "badge_bd66ad1a700b3a550678",
+        },
+        {
+          "badge": "UK",
+          "column": "VENDOR_KEY",
+          "id": "badge_135fcc64d42b985cb3fc",
+        },
+      ],
+      "name": "WMBI.VENDOR_ITEM_XREF",
+      "notes": [
+        {
+          "id": "note_3786a3bd676d32a662f8",
+          "text": "Trigger",
+        },
+        {
+          "id": "note_a229e2422c331bd9a948",
+          "text": "VENDOR_ITEM_XREF_SEQ_TR assigns",
+        },
+        {
+          "id": "note_11f47a17582f07c8591e",
+          "text": "VENDOR_ITEM_KEY on insert, so",
+        },
+        {
+          "id": "note_8ebf67097d60c9a54ba3",
+          "text": "values are not reproducible in another",
+        },
+        {
+          "id": "note_1b8b18386303ec340575",
+          "text": "platform and must be",
+        },
+        {
+          "id": "note_ffea725063109f547ee0",
+          "text": "migrated as they are.",
+        },
+      ],
+      "role": "TARGET",
+      "subtitleLines": [
+        {
+          "id": "subtitle_c4fc4b39bab8e390325c",
+          "text": "1,012,418 rows · 28 columns",
+        },
+      ],
+    },
+  ],
+  "orchestrator": [
+    {
+      "id": "orchestrator_433bf4475e34112a596a",
+      "key": "Flow",
+      "value": "pf_vendor_xref_master_driver",
+    },
+    {
+      "id": "orchestrator_551777fd90e4764bd848",
+      "key": "Schedule in the file header",
+      "value": "Recurring, daily 02:15, starting 2015-09-23",
+    },
+    {
+      "id": "orchestrator_6a23945a965a406e121f",
+      "key": "Schedule observed in the data",
+      "value": "VENDOR_ITEM_XREF REC_UPDT_DTTM max 2026-08-26 04:04:36.096 (queries.sql query 1), a plausible run window after 02:15",
+    },
+    {
+      "id": "orchestrator_d15af23a671b20c3af6a",
+      "key": "Alerts to",
+      "value": "not recorded",
+    },
+    {
+      "id": "orchestrator_df3e2c177bfa21014aed",
+      "key": "Steps that never run",
+      "value": "none found",
+    },
+  ],
+  "pendingValidation": [
+    {
+      "id": "pending-validation_abc3320fef628d4ca440",
+      "text": "The full text of the two 'Unapproved val originated in' source labels was truncated by the DBeaver grid and has not been captured.",
+    },
+  ],
+}
+`;

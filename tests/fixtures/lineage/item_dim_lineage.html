@@ -1,0 +1,219 @@
+<meta charset="utf-8">
+<title>WMBI.ITEM_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:1200px}</style>
+<h1>WMBI.ITEM_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/item_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 1200 1608" width="1200" height="1608" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">HQ item master load  ·  orchestrator: df_preload_item_dim</text>
+<rect x="20" y="46" width="215" height="117" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="104" x2="235" y2="104" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.ITEM_MASTER</text>
+<text x="30" y="79" font-size="10.5" fill="#2E5FA3">external, SQL Server. The main</text>
+<text x="30" y="95" font-size="10.5" fill="#2E5FA3">source</text>
+<text x="30" y="122" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_ID</text>
+<line x1="20" y1="132" x2="235" y2="132" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="146" font-size="10.5" fill="#2E5FA3">incremental, by change date</text>
+<rect x="20" y="177" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 181a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="235" x2="235" y2="235" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="194" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.TCI_DOMAIN_LOOKUPS</text>
+<text x="30" y="210" font-size="10.5" fill="#2E5FA3">feeds ITEM_SCAN_CD_FORMAT,</text>
+<text x="30" y="226" font-size="10.5" fill="#2E5FA3">ITEM_STAT_DESC, ITEM_TYPE_DESC</text>
+<rect x="20" y="261" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 265a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="319" x2="235" y2="319" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="278" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.BUYERS</text>
+<text x="30" y="294" font-size="10.5" fill="#2E5FA3">feeds ITEM_BUYER_NM,</text>
+<text x="30" y="310" font-size="10.5" fill="#2E5FA3">ITEM_MERCHANDISER_NM</text>
+<rect x="20" y="345" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 349a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#EAF0FB"/>
+<line x1="20" y1="387" x2="235" y2="387" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="362" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.STORE_DEPARTMENT</text>
+<text x="30" y="378" font-size="10.5" fill="#2E5FA3">feeds ITEM_POS_DEPT_DESC</text>
+<rect x="20" y="429" width="215" height="84" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 433a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#EAF0FB"/>
+<line x1="20" y1="503" x2="235" y2="503" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="446" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.CATEGORY</text>
+<text x="30" y="462" font-size="10.5" fill="#2E5FA3">feeds ITEM_CATGY_DESC,</text>
+<text x="30" y="478" font-size="10.5" fill="#2E5FA3">ITEM_SUB_CATGY_DESC,</text>
+<text x="30" y="494" font-size="10.5" fill="#2E5FA3">ITEM_MERCHANDISER_NUM</text>
+<rect x="20" y="527" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 531a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#EAF0FB"/>
+<line x1="20" y1="569" x2="235" y2="569" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="544" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.PRIVATE_LABEL_TYPE</text>
+<text x="30" y="560" font-size="10.5" fill="#2E5FA3">joined but unused. See findings</text>
+<rect x="20" y="611" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 615a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#EAF0FB"/>
+<line x1="20" y1="653" x2="235" y2="653" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="628" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.UNITS_OF_MEASURE</text>
+<text x="30" y="644" font-size="10.5" fill="#2E5FA3">feeds ITEM_SIZE_DESC</text>
+<rect x="20" y="695" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 699a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="753" x2="235" y2="753" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="712" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.CONTROL_SUBSTANCES</text>
+<text x="30" y="728" font-size="10.5" fill="#2E5FA3">feeds ITEM_CTRL_SUBSTANCE_CD,</text>
+<text x="30" y="744" font-size="10.5" fill="#2E5FA3">ITEM_CTRL_SUBSTANCE_DESC</text>
+<rect x="20" y="779" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 783a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#EAF0FB"/>
+<line x1="20" y1="821" x2="235" y2="821" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="796" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.VENDOR_ITEM</text>
+<text x="30" y="812" font-size="10.5" fill="#2E5FA3">feeds ITEM_WAREHOUSE_CD</text>
+<rect x="20" y="863" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 867a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#EAF0FB"/>
+<line x1="20" y1="905" x2="235" y2="905" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="880" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.POS_TAX_CLASSES</text>
+<text x="30" y="896" font-size="10.5" fill="#2E5FA3">feeds ITEM_SNAP_FL</text>
+<rect x="20" y="947" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 951a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="1005" x2="235" y2="1005" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="964" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">HQAnalytics.ITEM_SCALE_FLAGS</text>
+<text x="30" y="980" font-size="10.5" fill="#2E5FA3">feeds SCALE_PLU, SCALE_DESC,</text>
+<text x="30" y="996" font-size="10.5" fill="#2E5FA3">SCALE_CLASS and 2 more</text>
+<rect x="455" y="46" width="215" height="100" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H455z" fill="#E1F5EE"/>
+<line x1="455" y1="72" x2="670" y2="72" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="465" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_ITEM</text>
+<text x="465" y="90" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_SCAN_CD_ID</text>
+<line x1="455" y1="100" x2="670" y2="100" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="465" y="114" font-size="10.5" fill="#0F6E56">truncated and reloaded daily,</text>
+<text x="465" y="129" font-size="10.5" fill="#0F6E56">02:00</text>
+<line x1="235" y1="104.5" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="280" y="90" width="130" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="103" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_preload_item_dim</text>
+<line x1="235" y1="212.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="296.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="380.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="471.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="562.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="646.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="730.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="814.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="898.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="235" y1="982.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<line x1="670" y1="96.0" x2="886" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="718" y="86" width="124" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="780" y="98" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_upsert_item_dim</text>
+<text x="455" y="1053" font-size="12.5" font-weight="500" fill="#B4B2A9">Superseded one-time load.  Last execution: 2013-08-21</text>
+<rect x="455" y="1061" width="215" height="147" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M455 1065a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H455z" fill="#F1EFE8"/>
+<line x1="455" y1="1119" x2="670" y2="1119" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="465" y="1078" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_ITEM</text>
+<text x="465" y="1094" font-size="10.5" fill="#B4B2A9">same source table as the live</text>
+<text x="465" y="1110" font-size="10.5" fill="#B4B2A9">chain</text>
+<text x="465" y="1137" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_KEY</text>
+<line x1="455" y1="1147" x2="670" y2="1147" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="465" y="1161" font-size="10.5" fill="#B4B2A9">wmbi_dim_procs, not</text>
+<text x="465" y="1176" font-size="10.5" fill="#B4B2A9">wmbi_dim/item. Run Once,</text>
+<text x="465" y="1191" font-size="10.5" fill="#B4B2A9">2013-08-21</text>
+<line x1="670" y1="1134.5" x2="886" y2="1134.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="703" y="1124" width="154" height="21" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="780" y="1137" font-size="10" fill="#B4B2A9" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_upsert_item_dim</text>
+<text x="20" y="1244" font-size="12.5" font-weight="500" fill="#854F0B">Injection: reusable parameterized template</text>
+<rect x="20" y="1252" width="215" height="148" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 1256a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#FAEEDA"/>
+<line x1="20" y1="1326" x2="235" y2="1326" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="1269" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_VENDOR_ITEM_XREF</text>
+<text x="30" y="1285" font-size="10.5" fill="#854F0B">one of several confirmed callers,</text>
+<text x="30" y="1301" font-size="10.5" fill="#854F0B">via VENDOR_ITEM_XREF&#x27;s</text>
+<text x="30" y="1317" font-size="10.5" fill="#854F0B">orchestrator</text>
+<text x="30" y="1344" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_SCAN_CD_ID</text>
+<line x1="20" y1="1354" x2="235" y2="1354" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="1368" font-size="10.5" fill="#854F0B">REC_UPDT_SRC_SYS hardcoded to</text>
+<text x="30" y="1383" font-size="10.5" fill="#854F0B">&#x27;UNAPPROVED_VAL&#x27;</text>
+<line x1="235" y1="1326.0" x2="886" y2="1326.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="500" y="1309" width="124" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="562" y="1322" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_ins_unappr_val_</text>
+<text x="562" y="1335" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">item_dim_param</text>
+<text x="20" y="1436" font-size="12.5" font-weight="500" fill="#854F0B">Injection: POS line staging</text>
+<rect x="20" y="1444" width="215" height="100" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 1448a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#FAEEDA"/>
+<line x1="20" y1="1470" x2="235" y2="1470" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="1461" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_SALES_POS_LINE</text>
+<text x="30" y="1488" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_SCAN_CD_ID</text>
+<line x1="20" y1="1498" x2="235" y2="1498" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="1512" font-size="10.5" fill="#854F0B">REC_UPDT_SRC_SYS hardcoded to</text>
+<text x="30" y="1527" font-size="10.5" fill="#854F0B">&#x27;UNAPPROVED VAL&#x27; (space)</text>
+<line x1="235" y1="1494.0" x2="886" y2="1494.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="486" y="1477" width="154" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="562" y="1490" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_new_unapproved_</text>
+<text x="562" y="1503" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">vals_item_dim_121521</text>
+<rect x="890" y="46" width="290" height="1498" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M890 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="890" y1="83" x2="1180" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="902" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.ITEM_DIM</text>
+<text x="902" y="78" font-size="10.5" fill="#534AB7">758,653 rows · 52 columns</text>
+<text x="902" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_KEY</text>
+<text x="1168" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK</text>
+<text x="902" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_SCAN_CD_ID</text>
+<text x="1168" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK</text>
+<line x1="890" y1="134" x2="1180" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="902" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="902" y="166" font-size="10.5" fill="#534AB7">ITEM_SEQ_TR assigns ITEM_KEY on insert, so</text>
+<text x="902" y="182" font-size="10.5" fill="#534AB7">values are not</text>
+<text x="902" y="198" font-size="10.5" fill="#534AB7">reproducible in another platform and must be</text>
+<text x="902" y="214" font-size="10.5" fill="#534AB7">migrated as they are.</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>df_preload_item_dim</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>Recurring, daily 02:00, starting 2016-01-27</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>STG_ITEM last_run 2026-08-26 02:01:36.839 (queries.sql query 2), matches</td></tr><tr><th style='width:240px'>Alerts to</th><td>Jeffery.Farrington@weismarkets.com, %user_email</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>df_preload_item_dim</code> &rarr; <code>WMBI_ETL.STG_ITEM</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_ITEM: truncated and reloaded daily</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td class='group-head'>Loaded by <code>df_preload_item_dim</code> &rarr; <code>WMBI_ETL.STG_ITEM</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.ITEM_MASTER: the actual source, on SQL Server, external to the warehouse.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.TCI_DOMAIN_LOOKUPS: feeds ITEM_SCAN_CD_FORMAT, ITEM_STAT_DESC and ITEM_TYPE_DESC.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.BUYERS: feeds ITEM_BUYER_NM and ITEM_MERCHANDISER_NM.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.STORE_DEPARTMENT: feeds ITEM_POS_DEPT_DESC.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.CATEGORY: feeds ITEM_CATGY_DESC, ITEM_SUB_CATGY_DESC and ITEM_MERCHANDISER_NUM.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.PRIVATE_LABEL_TYPE: joined but unused, feeds nothing. See findings.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.UNITS_OF_MEASURE: feeds ITEM_SIZE_DESC.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.CONTROL_SUBSTANCES: feeds ITEM_CTRL_SUBSTANCE_CD and ITEM_CTRL_SUBSTANCE_DESC.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.VENDOR_ITEM: feeds ITEM_WAREHOUSE_CD.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.POS_TAX_CLASSES: feeds ITEM_SNAP_FL.</code></td></tr>
+<tr><td class='group-item'><code>HQAnalytics.ITEM_SCALE_FLAGS: feeds SCALE_PLU, SCALE_DESC, SCALE_CLASS, SMR_SCALE_DESC_2, SMR_FIXED_WEIGHT_AMT.</code></td></tr>
+<tr><td class='group-head'>Loaded by <code>df_ins_unappr_val_item_dim_param</code> &rarr; <code>WMBI.ITEM_DIM</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_VENDOR_ITEM_XREF: one of several callers of this reusable template. See findings.</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_SALES_POS_LINE: read by df_wmbi_new_unapproved_vals_item_dim_121521</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.</p><table><tr><td><code>WMBI.ITEM_COST_F</code></td></tr>
+<tr><td><code>WMBI.ITEM_PRICE_F</code></td></tr>
+<tr><td><code>WMBI.INV_AS_COUNTED_F</code></td></tr>
+<tr><td><code>WMBI.LOC_DSD_INVOICE_F</code></td></tr>
+<tr><td><code>WMBI.RECLM_SCAN_DETAIL_F</code></td></tr>
+<tr><td><code>WMBI.SALES_POS_LN_F</code></td></tr>
+<tr><td><code>WMBI.VENDOR_ITEM_XREF</code></td></tr>
+<tr><td><code>WMBI.WAREHOUSE_SHIPT_F</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>4.3 percent of rows, 32,643 of them, are not a clean approved member from the main load. The main load itself creates 9,346 placeholder rows, in addition to the three dedicated injection sources</li>
+<li>One writer source is recorded two different ways, &#x27;UNAPPROVED_VAL&#x27; and &#x27;UNAPPROVED VAL&#x27;, with a space instead of an underscore. Both are active today. Whether this is one flow with inconsistent logging or two separate flows has not been confirmed</li>
+<li>One column, CORE_POS_ITEM_FL, is populated on 99.9 percent of rows but does not appear anywhere in the column list of either confirmed live flow. Something else maintains it, and that process has not been identified</li>
+<li>A recovery variant of that same nightly driver still has a working, reachable path to the decommissioned 2013 flow, unlike the normal driver where the same step is disconnected. Whether this recovery path is ever actually run has not been confirmed</li>
+<li>The live upsert step looks up each item&#x27;s existing surrogate key by its scan code. When no match is found, it defaults the key to -1, this project&#x27;s known sentinel for an unresolved key, expecting the ITEM_SEQ_TR trigger to override it with a real value on insert. One row in the live table still carries an invalid key, so this override does not always happen</li>
+<li>A master driver, pf_do_unapproved_dim_procedures, runs a placeholder-injection step for nine dimensions in sequence, including one named for this table. But the file that step actually calls writes to LOC_DIM, not ITEM_DIM: its target variable, its SQL and its MODIFY FILE block all name loc_dim, sourced from pstg_sales_pos_line. This does not explain the UNAPPROVED_VAL rows measured in this table; that source is still unidentified. The driver itself has no schedule of its own, so whether it runs at all in production is also unconfirmed</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Which flow writes the STORE_INVENTORY source has not been identified.</li>
+<li>Which process populates CORE_POS_ITEM_FL has not been identified.</li>
+<li>Whether the recovery variant of the nightly driver (pf_wmbi_01_1030_etl_driver_aov_recov) that can still reach the decommissioned 2013 flow is ever actually invoked has not been confirmed.</li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>
