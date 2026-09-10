@@ -1,9 +1,10 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import AccessGate, { hasSessionAccess } from './components/AccessGate'
 import Header from './components/Header'
 import StatStrip from './components/StatStrip'
-import FlowView from './components/flow/FlowView'
-import { DATA } from './data/dataset'
+import { LINEAGE_REPORT_SUMMARY } from './data/lineageReportSummary'
+
+const FlowView = lazy(() => import('./components/flow/FlowView'))
 
 export default function App() {
   const [hasAccess, setHasAccess] = useState(hasSessionAccess)
@@ -15,12 +16,12 @@ export default function App() {
       <Header />
       <StatStrip />
       <div className="page-shell wrap wide">
-        <main><FlowView active /></main>
+        <main><Suspense fallback={<p className="lineage-loading">Loading lineage reports…</p>}><FlowView active /></Suspense></main>
       </div>
       <footer>
         <div className="page-shell footer-inner">
           <span>Proprietary and confidential</span>
-          <span>{DATA.meta.total} catalog tables · 3 table-level lineage references · source: Data Catalog V1.xlsx + public/*_lineage.html</span>
+          <span>{LINEAGE_REPORT_SUMMARY.catalogTableCount} catalog tables · {LINEAGE_REPORT_SUMMARY.reportCount} table-level lineage reports · source: Data Catalog V1.xlsx + diagramas_html/*.html</span>
         </div>
       </footer>
     </>

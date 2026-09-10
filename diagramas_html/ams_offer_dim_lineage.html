@@ -1,0 +1,131 @@
+<meta charset="utf-8">
+<title>WMBI.AMS_OFFER_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:1200px}</style>
+<h1>WMBI.AMS_OFFER_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/ams_offer_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 1200 652" width="1200" height="652" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#B4B2A9">HQ dimension load.  Last execution: 2023-02-27</text>
+<rect x="20" y="46" width="215" height="124" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#F1EFE8"/>
+<line x1="20" y1="120" x2="235" y2="120" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">AMS_PROD.logixrt.dbo.</text>
+<text x="30" y="79" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">CPE_INCENTIVES</text>
+<text x="30" y="95" font-size="10.5" fill="#B4B2A9">SQL Server, HQAnalytics</text>
+<text x="30" y="111" font-size="10.5" fill="#B4B2A9">connection</text>
+<line x1="20" y1="124" x2="235" y2="124" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="138" font-size="10.5" fill="#B4B2A9">source outside the files we have,</text>
+<text x="30" y="153" font-size="10.5" fill="#B4B2A9">break location unconfirmed</text>
+<rect x="455" y="46" width="215" height="76" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H455z" fill="#F1EFE8"/>
+<line x1="455" y1="72" x2="670" y2="72" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="465" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_AMS_OFFER_DIM</text>
+<line x1="455" y1="76" x2="670" y2="76" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="465" y="90" font-size="10.5" fill="#B4B2A9">no per-row DTTM columns;</text>
+<text x="465" y="105" font-size="10.5" fill="#B4B2A9">last_analyzed 2024-11-28</text>
+<line x1="235" y1="108.0" x2="451" y2="84.0" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="259" y="86" width="172" height="21" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="345" y="98" font-size="10" fill="#B4B2A9" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_load_pstg_ams_offer_dim</text>
+<line x1="670" y1="84.0" x2="886" y2="84.0" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="703" y="74" width="154" height="21" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="780" y="86" font-size="10" fill="#B4B2A9" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_upsert_ams_offer_dim</text>
+<text x="20" y="206" font-size="12.5" font-weight="500" fill="#854F0B">BMSM FolderLoad injection</text>
+<rect x="20" y="214" width="215" height="76" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 218a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#FAEEDA"/>
+<line x1="20" y1="256" x2="235" y2="256" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="231" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="30" y="247" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">PSTG_AMS_OFFER_GRP_XREF</text>
+<text x="30" y="274" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">AMS_OFFER_ID</text>
+<line x1="235" y1="252.0" x2="886" y2="252.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="486" y="235" width="154" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="562" y="248" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_build_ams_offer_grp_</text>
+<text x="562" y="261" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">xref_unapprvd_offer</text>
+<text x="20" y="326" font-size="12.5" font-weight="500" fill="#854F0B">UNAPPROVED LINE FACT injection</text>
+<rect x="20" y="334" width="215" height="70" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 338a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#FAEEDA"/>
+<line x1="20" y1="360" x2="235" y2="360" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="351" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_SALES_POS_LINE</text>
+<text x="30" y="378" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">AMS_OFFER_ID</text>
+<line x1="235" y1="369.0" x2="886" y2="369.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="498" y="352" width="130" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="562" y="365" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_</text>
+<text x="562" y="378" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">ams_offer_dim</text>
+<text x="20" y="440" font-size="12.5" font-weight="500" fill="#854F0B">AMS_Point_Act_F injection</text>
+<rect x="20" y="448" width="215" height="140" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 452a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v86H20z" fill="#FAEEDA"/>
+<line x1="20" y1="538" x2="235" y2="538" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="465" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">AMS_Point_Act_F</text>
+<text x="30" y="481" font-size="10.5" fill="#854F0B">not found anywhere in the files</text>
+<text x="30" y="497" font-size="10.5" fill="#854F0B">we have, even after 5 of 6</text>
+<text x="30" y="513" font-size="10.5" fill="#854F0B">candidate folders were exported</text>
+<text x="30" y="529" font-size="10.5" fill="#854F0B">and searched</text>
+<line x1="20" y1="542" x2="235" y2="542" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="556" font-size="10.5" fill="#854F0B">unconfirmed in code; ams/ remains</text>
+<text x="30" y="571" font-size="10.5" fill="#854F0B">the one unexported lead</text>
+<line x1="235" y1="518.0" x2="886" y2="518.0" stroke="#854F0B" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="890" y="46" width="290" height="542" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M890 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="890" y1="83" x2="1180" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="902" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.AMS_OFFER_DIM</text>
+<text x="902" y="78" font-size="10.5" fill="#534AB7">6,658 rows · 93 columns</text>
+<text x="902" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">AMS_OFFER_KEY</text>
+<text x="1168" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, surrogate, sequence via…</text>
+<text x="902" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">AMS_OFFER_ID</text>
+<text x="1168" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK, business key, XAK1AMS_OFF…</text>
+<line x1="890" y1="134" x2="1180" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="902" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="902" y="166" font-size="10.5" fill="#534AB7">AMS_OFFER_DIM_SEQ_TR, BEFORE INSERT, assigns</text>
+<text x="902" y="182" font-size="10.5" fill="#534AB7">AMS_OFFER_KEY</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>pf_upsert_ams_offer_dim</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>DM_SCHDSTRT=202008270100, recurring daily, started 2020-08-27 01:00</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>HQ writes stopped 2023-02-27; no run since per REC_UPDT_DTTM</td></tr><tr><th style='width:240px'>Alerts to</th><td>tscott@weismarkets.com</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>df_load_pstg_ams_offer_dim (dead)</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_AMS_OFFER_DIM</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>AMS_PROD.logixrt.dbo.CPE_INCENTIVES: the source, on SQL Server, external to the warehouse (dead)</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_AMS_OFFER_GRP_XREF: read by df_build_ams_offer_grp_xref_unapprvd_offer</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_SALES_POS_LINE: read by df_wmbi_unapproved_ams_offer_dim</code></td></tr>
+<tr><td><code>AMS_Point_Act_F: confirmed live in data, loader file not located</code></td></tr></table><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td><code>WMBI.AMS_OFFER_GRP_XREF (via STG_AMS_OFFER_GRP_XREF): resolved by df_build_ams_offer_grp_xref_stg</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.</p><table><tr><td><code>WMBI.AMS_POINT_ACT_F: carries AMS_OFFER_KEY, loader not located</code></td></tr>
+<tr><td><code>WMBI.AMS_TX_REWARD_F: carries AMS_OFFER_KEY, loader not located</code></td></tr>
+<tr><td><code>WMBI.SALES_POS_LN_F: carries AMS_OFFER_KEY, loader not located</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The process that supplies this table&#x27;s real offer details stopped updating it in early 2023. Since then, only placeholder-creating processes have written to the table.</li>
+<li>Three columns (CLIENT_OFFER_ID, BUYER_ID, SCORE_CARD_ID) are completely empty across every row in this table</li>
+<li>A related backup table (AMS_OFFER_DIM_BAK) also stopped updating around the same time, two days before this table&#x27;s real data feed stopped. No process referencing this backup table has been found.</li>
+<li>One of the loading files carries an internal warning about an incomplete step, but that step is just unused logging, not the actual data extract. It does not explain why the table&#x27;s real data stopped updating in 2023.</li>
+<li>The staging table behind this dimension does not record a per-row update time, so its last recorded activity date is the only available signal for how fresh it is</li>
+<li>One of the placeholder-creating processes marks its rows with a third status value (&#x27;0&#x27;), outside the usual Yes/No convention used elsewhere</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>The process that creates a specific set of placeholder rows (confirmed present in the data) has not been located, even after an extensive search. One remaining folder of process files has not yet been made available and may hold the answer<br><span class='why'>Needed to confirm every process updating this table is accounted for, and whether it will keep running after the migration</span></li>
+<li>The backup table AMS_OFFER_DIM_BAK has not been traced to any process, using the same search<br><span class='why'>Unclear whether it needs to be migrated, or is leftover from the process that stopped in 2023</span></li>
+<li>Why the table&#x27;s real data feed stopped updating in February 2023 has not been confirmed; the break appears to sit in an external source system outside the available files<br><span class='why'>Determines whether the table&#x27;s real attributes can be refreshed again under the current process, or only after it is rebuilt</span></li>
+<li>Three related tables reference this table&#x27;s key, but the processes that load them have not been located<br><span class='why'>Needed to confirm whether one of them shares the same unlocated placeholder-creating process already flagged, or uses a separate one</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: which process loads this table.<br><span class='why'>One of this table&#x27;s sources is active and contributing real, current data, but we have not yet found the specific program that loads it.</span></li>
+<li>Still unknown: whether every available file was checked.<br><span class='why'>We searched every set of files made available to us and found no match. One more folder exists that has not been shared with us yet, so this cannot be called fully closed.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

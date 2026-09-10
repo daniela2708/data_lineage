@@ -1,0 +1,58 @@
+<meta charset="utf-8">
+<title>WMBI.CATGY_RPT_COMP lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.CATGY_RPT_COMP: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/catgy_rpt_comp/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 148" width="765" height="148" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="455" y="46" width="290" height="82" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.CATGY_RPT_COMP</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">1 rows · 5 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CATGY_RPT_COMP_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">UK only (system-genera…</text>
+</svg>
+</div>
+
+
+<h2>Findings</h2><ul class='findings'><li>No available process file mentions this table, and no other table links to it by key. This does not rule out a report reading it directly, or a loading process in a part of the system not yet reviewed</li>
+<li>The table holds a single row defining a this-year-vs-last-year comparison date window. The comparison skips a year entirely, jumping from 2019 directly to 2021</li>
+<li>The table has no formally declared primary key, only a system-generated one, suggesting it was never deliberately set up with a named key</li>
+<li>Unlike every other table looked at in this project, this table has no record of who or what created or updated its row. There is no way to determine its origin from the data itself</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>No process that writes or reads this table has been found in the material reviewed so far<br><span class='why'>Whether this single row is fed by a report parameter screen, a one-time manual setup, or a process not yet reviewed is unresolved. This matters for the migration plan: a table frozen since 2021 may be unused, or may still support a report Weis runs today</span></li>
+<li>Whether this table is still used by any active category report is unconfirmed<br><span class='why'>If nothing reads it, this table may not need to migrate at all; if something does, its date window will need a real refresh process, since it has not changed since 2021</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: which process loads this table.<br><span class='why'>This table has no audit columns at all, so even the data itself gives no clue who writes it. No writer was found anywhere in the files we could search.</span></li>
+<li>Still unknown: who gets notified if this process fails.<br><span class='why'>Same root cause as writers_identified: without the loading program identified, we have no way to see who is notified if it fails.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>Same root cause as writers_identified: without the loading program identified, we have no way to confirm how often it runs.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

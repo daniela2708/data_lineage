@@ -1,0 +1,83 @@
+<meta charset="utf-8">
+<title>WMBI.CATGY_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.CATGY_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/catgy_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 292" width="765" height="292" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">catgy dim upsert  ·  orchestrator: df_upsert_catgy_dim.fex</text>
+<rect x="20" y="46" width="215" height="84" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#EAF0FB"/>
+<line x1="20" y1="120" x2="235" y2="120" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">category</text>
+<text x="30" y="79" font-size="10.5" fill="#2E5FA3">external HQ category master, the</text>
+<text x="30" y="95" font-size="10.5" fill="#2E5FA3">main source, self-joined for the</text>
+<text x="30" y="111" font-size="10.5" fill="#2E5FA3">parent category description</text>
+<rect x="20" y="144" width="215" height="84" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 148a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#EAF0FB"/>
+<line x1="20" y1="218" x2="235" y2="218" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="161" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.CATGY_DIM</text>
+<text x="30" y="177" font-size="10.5" fill="#2E5FA3">self-join, resolves the existing</text>
+<text x="30" y="193" font-size="10.5" fill="#2E5FA3">CATGY_KEY for an update, or -1</text>
+<text x="30" y="209" font-size="10.5" fill="#2E5FA3">for a new category</text>
+<line x1="235" y1="88.0" x2="451" y2="88.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="283" y="71" width="124" height="34" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="84" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_upsert_catgy_</text>
+<text x="345" y="97" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">dim.fex (DEP_MAIN)</text>
+<line x1="235" y1="186.0" x2="451" y2="186.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="455" y="46" width="290" height="182" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.CATGY_DIM</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">3,578 rows · 17 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CATGY_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, surrogate, by trigger, only…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CATGY_ID</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK, the category code</text>
+<line x1="455" y1="134" x2="745" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="166" font-size="10.5" fill="#534AB7">CATGY_DIM_SEQ_TR, BEFORE EACH ROW, INSERT,</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">ENABLED</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>df_upsert_catgy_dim.fex</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>DM_SCHDSTRT=201511120200, recurring, every 1 day</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>newest REC_UPDT_DTTM for approved rows 2026-09-02 02:00:04, matches daily schedule</td></tr><tr><th style='width:240px'>Alerts to</th><td>not recorded</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td class='group-head'>Loaded by <code>df_upsert_catgy_dim.fex (DEP_MAIN)</code> &rarr; <code>WMBI.CATGY_DIM</code></td></tr>
+<tr><td class='group-item'><code>category: the main source, self-joined for the parent category description</code></td></tr>
+<tr><td class='group-item'><code>WMBI.CATGY_DIM: self-join, resolves the existing key</code></td></tr></table><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td><code>WMBI.LOC_CATGY_PRICING_STRAT_XREF: INNER JOIN in df_loc_catgy_pricing_strat_xref_upsert.fex</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>One column (GL_ACCT_ID) has values in only a handful of rows, and the current loading process never writes to it. These values are leftover from an earlier process, not something the current system produces.</li>
+<li>This table loads directly from an external HQ category source, with no intermediate staging step, the same pattern used by two other similar tables. Confirmed by directly checking: no object named &#x27;category&#x27; exists anywhere in this Oracle environment, under any schema or object type.</li>
+<li>Unlike two other similar loading processes on this project, this one&#x27;s own internal logging is correctly labeled with its own name. Those two mislabel their logging with a different process&#x27;s name.</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Where the small number of populated GL_ACCT_ID values came from is not confirmed.<br><span class='why'>Small in row count, but worth a direct answer from Weis on whether this column is still meaningful or a leftover from a retired process, before deciding whether to migrate it.</span></li>
+<li>This table&#x27;s loading process has no orchestrating wrapper or external caller found among the available files, the same gap already seen on two other similar tables.<br><span class='why'>Worth confirming directly with the scheduling system that this process genuinely runs on its own.</span></li></ul>
+
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

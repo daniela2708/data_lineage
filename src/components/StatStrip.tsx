@@ -1,10 +1,10 @@
-import { TABLE_LINEAGES } from '../data/tableLineages'
+import { LINEAGE_REPORT_SUMMARY } from '../data/lineageReportSummary'
 
 /** Counts that frame the whole prototype. Every one is derived, none is typed in. */
 export default function StatStrip() {
   const stats: [string, number][] = [
-    ['Tables available', TABLE_LINEAGES.length],
-    ['Live process nodes', TABLE_LINEAGES.reduce((total, table) => total + table.liveFlow.length, 0)],
+    ['Tables available', LINEAGE_REPORT_SUMMARY.reportCount],
+    ['Tables in catalog', LINEAGE_REPORT_SUMMARY.catalogTableCount],
   ]
 
   return (

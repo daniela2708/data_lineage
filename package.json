@@ -8,13 +8,15 @@
     "node": ">=20"
   },
   "scripts": {
-    "generate:data": "node scripts/generate-dataset.mjs",
+    "generate:catalog": "node scripts/generate-dataset.mjs",
+    "generate:reports": "node scripts/generate-lineage-reports.mjs",
+    "generate:data": "npm run generate:catalog && npm run generate:reports",
     "predev": "npm run generate:data",
     "dev": "vite",
     "build": "npm run generate:data && tsc --noEmit && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "validate:lineage-html": "python3 scripts/validate_lineage_html_content.py",
+    "validate:lineage-html": "npm run generate:reports && python3 scripts/validate_lineage_html_content.py",
     "typecheck": "tsc --noEmit",
     "lint": "tsc --noEmit"
   },

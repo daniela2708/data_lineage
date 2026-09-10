@@ -1,0 +1,96 @@
+<meta charset="utf-8">
+<title>WMBI.CUSTOMER_ATTR_XREF lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.CUSTOMER_ATTR_XREF: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/customer_attr_xref/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 396" width="765" height="396" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#B4B2A9">One-time DATALOGX batch load (2019).  Last execution: 2019-04-11</text>
+<rect x="20" y="46" width="215" height="154" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#F1EFE8"/>
+<line x1="20" y1="120" x2="235" y2="120" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="30" y="79" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">STG_CUSTOMER_ATTR_XREF</text>
+<text x="30" y="95" font-size="10.5" fill="#B4B2A9">frozen since 2019-04-10; no file</text>
+<text x="30" y="111" font-size="10.5" fill="#B4B2A9">in the files we have loads it</text>
+<line x1="20" y1="124" x2="235" y2="124" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="138" font-size="10.5" fill="#B4B2A9">writer stamp &#x27;ORACLE/DATALOGX&#x27; on</text>
+<text x="30" y="153" font-size="10.5" fill="#B4B2A9">the target, same vendor that</text>
+<text x="30" y="168" font-size="10.5" fill="#B4B2A9">loaded CUSTOMER_SGM_DIM the day</text>
+<text x="30" y="183" font-size="10.5" fill="#B4B2A9">before</text>
+<rect x="20" y="214" width="215" height="91" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 218a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#F1EFE8"/>
+<line x1="20" y1="240" x2="235" y2="240" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="231" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI.CUSTOMER_SGM_DIM</text>
+<line x1="20" y1="244" x2="235" y2="244" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="258" font-size="10.5" fill="#B4B2A9">resolves CUSTOMER_SGM_KEY; all</text>
+<text x="30" y="273" font-size="10.5" fill="#B4B2A9">244 distinct values used resolve,</text>
+<text x="30" y="288" font-size="10.5" fill="#B4B2A9">0 orphans</text>
+<line x1="235" y1="123.0" x2="451" y2="123.0" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="259.5" x2="451" y2="259.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="455" y="46" width="290" height="330" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.CUSTOMER_ATTR_XREF</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">124,295,522 rows · 12 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CUSTOMER_ATTR_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, single-column surro…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">3-column business key</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK: CUSTOMER_ID_TYP…</text>
+<line x1="455" y1="134" x2="745" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="166" font-size="10.5" fill="#534AB7">CUSTOMER_ATTR_XREF_SEQ_TR, BEFORE EACH ROW</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">INSERT, assigns CUSTOMER_ATTR_KEY</text>
+<line x1="455" y1="196" x2="745" y2="196" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="212" font-size="11" font-weight="500" fill="#26215C">Anomaly</text>
+<text x="467" y="228" font-size="10.5" fill="#534AB7">No declared FK exists on CLUB_CARD_KEY or</text>
+<text x="467" y="244" font-size="10.5" fill="#534AB7">CUSTOMER_SGM_KEY, despite both looking like</text>
+<text x="467" y="260" font-size="10.5" fill="#534AB7">foreign keys by naming and both being part of</text>
+<text x="467" y="276" font-size="10.5" fill="#534AB7">the declared unique key. CUSTOMER_SGM_KEY was</text>
+<text x="467" y="292" font-size="10.5" fill="#534AB7">checked directly: all 244 distinct values</text>
+<text x="467" y="308" font-size="10.5" fill="#534AB7">used resolve against CUSTOMER_SGM_DIM, 0</text>
+<text x="467" y="324" font-size="10.5" fill="#534AB7">orphans. CLUB_CARD_KEY was not independently</text>
+<text x="467" y="340" font-size="10.5" fill="#534AB7">checked</text>
+</svg>
+</div>
+
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>ORACLE/DATALOGX (dead)</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_CUSTOMER_ATTR_XREF</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>WMBI.CUSTOMER_SGM_DIM: resolves via CUSTOMER_SGM_KEY</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>All 124 million rows were loaded in a single batch on 2019-04-11 by the same outside vendor, DATALOGX, that also loaded CUSTOMER_SGM_DIM the day before. Nothing has touched this table since, about 7.4 years ago</li>
+<li>A separate, older row-count figure for this table differs slightly from the fresh count taken here. Reconciled: the older figure was based on a partial sample, not an exact count, and is not evidence of any activity after 2019</li>
+<li>No available file mentions this table or the DATALOGX vendor by name. Unlike CUSTOMER_SGM_DIM, no matching landing table for this data was found either</li>
+<li>Two columns that look like they should link to other tables by their naming carry no formal link constraint. One of the two was checked directly and every value used does successfully match its related table, with no mismatches</li>
+<li>No invalid keys and no duplicate records exist across all 124 million rows. Every row is marked approved; no placeholder rows exist</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Whether the DATALOGX vendor relationship ended after this one 2019 load, or a refresh is expected at some point, has not been confirmed.<br><span class='why'>Determines whether the migration needs to replace a real recurring process, or whether this table is a frozen historical snapshot to migrate once. The same question applies to CUSTOMER_SGM_DIM, since both tables were loaded by the same vendor on consecutive days</span></li></ul>
+
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

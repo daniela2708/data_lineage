@@ -2,9 +2,9 @@
 
 Interactive prototype for the data platform modernization discovery. React + Vite + TypeScript.
 
-It presents a single interactive story for `CLUB_CARD_DIM`: an animated end-to-end trace,
-the tables created or required along the way, known downstreams, key catalog details, and the
-pipelines that interact with it.
+It presents every table-level lineage report found in `diagramas_html`: the source diagram,
+orchestrator details, dependencies, findings, pending validations and important notes. The table
+selector combines those reports with the catalog metadata from the client workbook.
 
 ## Running it
 
@@ -12,6 +12,7 @@ pipelines that interact with it.
 npm install
 npm run dev        # http://localhost:5173
 npm run generate:data # refresh the report from public/Data Catalog V1.xlsx
+npm run validate:lineage-html # prove complete semantic coverage for every HTML report
 ```
 
 ```bash
@@ -24,7 +25,7 @@ Node 20 or newer.
 
 ## Deploying on Vercel
 
-Import the GitHub repository into Vercel. The included `vercel.json` installs with `npm ci`, runs the production build, and publishes `dist`. No environment variables are required. The source workbook is used during the build but is removed from the public deployment output.
+Import the GitHub repository into Vercel. The included `vercel.json` installs with `npm ci`, runs the production build, and publishes `dist`. No environment variables are required. The source workbook is used during the build but is removed from the public deployment output. Every source report is copied from `diagramas_html` to `dist/diagramas_html` so its original HTML remains available from the deployed viewer.
 
 ## Structure
 
@@ -34,6 +35,8 @@ src/
   types.ts                   the dataset contract, documented field by field
   data/
     lineage.json             generated browser-ready cache of the Excel catalog
+    lineageReports.json      generated structured content from every lineage HTML
+    lineageReportSummary.json small summary used before the report module loads
     dataset.ts               typed access plus the derived slices used everywhere
   lib/
     tokens.ts                palette, fonts, and the two colour rules
@@ -43,7 +46,7 @@ src/
     useFlowTimeline.ts       one requestAnimationFrame loop, play, pause, speed
   components/
     Header, StatStrip
-    flow/    FlowView, FlowRail, StepCard
+    flow/    FlowView and the generated report renderer
     table/   TableView, LineageGraph
     estate/  EstateView
   index.css                  design tokens as custom properties, plus layout
@@ -55,26 +58,13 @@ src/
 
 **Zone colour** walks the layers from dark to red as the data moves towards published: SQL Server, Landing, Raw, Bronze, Silver, Gold, CSV, Snowflake. Also in `lib/tokens.ts` as `zoneColor()`.
 
-## Traced table model
+## HTML lineage ingestion
 
-The animated diagram is generated from the `flow` list of steps rather than drawn by hand.
-`FlowView` currently presents the single curated `CLUB_CARD_DIM` trace. Nothing in
-`flowLayout.ts` is specific to that table: the band above the rail grows a row per side input,
-the rail grows a column per step, and the timeline recomputes.
-
-A step looks like this:
-
-```json
-{
-  "zone": "Bronze",
-  "label": "club_card_dim",
-  "detail": "Accumulated dimension. This is where the history is kept.",
-  "pipe": "PL_ORCH_RAW_TO_SNOWFLAKE",
-  "side": [{ "label": "gold / dt_dim", "kind": "reads", "id": "TBL-WHS-DM-001" }]
-}
-```
-
-`kind` is `origin` for the operational sources at the start of the chain and `reads` for a lookup consumed at that layer.
+`scripts/generate-lineage-reports.mjs` discovers every `*_lineage.html` file in
+`diagramas_html`. It retains the original SVG, headings, paragraphs, tables and lists as typed
+report data. The build fails if a source information carrier is not represented exactly once.
+`scripts/validate_lineage_html_content.py` independently compares all generated report content
+with all source HTML files and can also verify the exact files published in `dist` with `--dist`.
 
 ## Rules the data follows
 
@@ -94,7 +84,7 @@ The workbook is authoritative for the table fields below. The lineage fields tha
 | Scope and business cases | Derived directly from `Tiene Use Case` and `Use Case - TA` in that tab |
 | Disposition, status, complexity, owner, comment history | `Data Catalog V1.xlsx`, tab `Hoja 1` |
 | Stable IDs, presentation layers, waves, pipeline links and legacy-reporting flags | Curated application metadata retained across catalog refreshes |
-| The traced chain for `CLUB_CARD_DIM` | Curated application metadata |
+| Table-level diagrams, orchestrators, dependencies, findings and open points | Every `diagramas_html/*_lineage.html` file |
 
 Known limits, both visible in the app: lineage is complete on the Azure Data Factory side only, since the legacy orchestration layer appears in none of the source files, and 24 of the tables in scope have no pipeline recorded at all.
 

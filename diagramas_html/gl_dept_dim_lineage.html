@@ -1,0 +1,164 @@
+<meta charset="utf-8">
+<title>WMBI.GL_DEPT_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.GL_DEPT_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/gl_dept_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 1047" width="765" height="1047" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#B4B2A9">MASTERPIECE feed.  Last execution: unconfirmed, no .fex found</text>
+<rect x="20" y="46" width="215" height="123" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#F1EFE8"/>
+<line x1="20" y1="104" x2="235" y2="104" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">MASTERPIECE</text>
+<text x="30" y="79" font-size="10.5" fill="#B4B2A9">system name only; no source table</text>
+<text x="30" y="95" font-size="10.5" fill="#B4B2A9">or connection identified</text>
+<line x1="20" y1="108" x2="235" y2="108" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="122" font-size="10.5" fill="#B4B2A9">confirmed live in data</text>
+<text x="30" y="137" font-size="10.5" fill="#B4B2A9">(created/updated today), absent</text>
+<text x="30" y="152" font-size="10.5" fill="#B4B2A9">from all the files we have</text>
+<line x1="235" y1="107.5" x2="451" y2="107.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<text x="20" y="205" font-size="12.5" font-weight="500" fill="#B4B2A9">2013 setup (dead candidate).  Last execution: 2013-08-21, Run Once</text>
+<rect x="20" y="213" width="215" height="115" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 217a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#F1EFE8"/>
+<line x1="20" y1="239" x2="235" y2="239" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="230" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_GL_DEPT</text>
+<text x="30" y="257" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">GL_DEPT_ID</text>
+<line x1="20" y1="267" x2="235" y2="267" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="281" font-size="10.5" fill="#B4B2A9">1,714 rows, last_analyzed</text>
+<text x="30" y="296" font-size="10.5" fill="#B4B2A9">2016-02-09; explicitly</text>
+<text x="30" y="311" font-size="10.5" fill="#B4B2A9">decommissioned in code</text>
+<line x1="235" y1="270.5" x2="451" y2="270.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="259" y="260" width="172" height="21" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="345" y="273" font-size="10" fill="#B4B2A9" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_upsert_gl_dept_dim</text>
+<text x="20" y="364" font-size="12.5" font-weight="500" fill="#854F0B">unapproved value injection (POS sales line)</text>
+<rect x="20" y="372" width="215" height="70" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 376a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#FAEEDA"/>
+<line x1="20" y1="398" x2="235" y2="398" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="389" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_SALES_POS_LINE</text>
+<line x1="235" y1="407.0" x2="451" y2="407.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="256" y="390" width="178" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="345" y="403" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_vals_gl_</text>
+<text x="345" y="416" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">dept_dim.fex (DEP_MAIN)</text>
+<text x="20" y="478" font-size="12.5" font-weight="500" fill="#854F0B">unapproved value injection (receiving line)</text>
+<rect x="20" y="486" width="215" height="76" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 490a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#FAEEDA"/>
+<line x1="20" y1="512" x2="235" y2="512" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="503" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_LOC_RCV_LN_F</text>
+<line x1="20" y1="516" x2="235" y2="516" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="530" font-size="10.5" fill="#854F0B">called twice, for debit and</text>
+<text x="30" y="545" font-size="10.5" fill="#854F0B">credit GL columns</text>
+<line x1="235" y1="524.0" x2="451" y2="524.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="259" y="507" width="172" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="345" y="520" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_ins_unappr_val_gl_dept_</text>
+<text x="345" y="533" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">dim_param.fex (DEP_MAIN)</text>
+<text x="20" y="598" font-size="12.5" font-weight="500" fill="#854F0B">unapproved value injection (GL journal entries)</text>
+<rect x="20" y="606" width="215" height="107" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 610a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#FAEEDA"/>
+<line x1="20" y1="648" x2="235" y2="648" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="623" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="30" y="639" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">PSTG_GL_JOURNAL_ENT_TX_F</text>
+<line x1="20" y1="652" x2="235" y2="652" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="666" font-size="10.5" fill="#854F0B">retail and non-retail variants,</text>
+<text x="30" y="681" font-size="10.5" fill="#854F0B">each confirmed called by its own</text>
+<text x="30" y="696" font-size="10.5" fill="#854F0B">live asmbly orchestrator</text>
+<line x1="235" y1="659.5" x2="451" y2="659.5" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="250" y="630" width="190" height="60" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="345" y="642" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_dept_vals_</text>
+<text x="345" y="656" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">glje_retail.fex (DEP_MAIN)</text>
+<text x="345" y="668" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_dept_vals_</text>
+<text x="345" y="682" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">glje_nonretail.fex (DEP_MAIN)</text>
+<text x="20" y="749" font-size="12.5" font-weight="500" fill="#854F0B">unapproved value injection (GL budget)</text>
+<rect x="20" y="757" width="215" height="91" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 761a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#FAEEDA"/>
+<line x1="20" y1="783" x2="235" y2="783" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="774" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_GL_BUDGET</text>
+<line x1="20" y1="787" x2="235" y2="787" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="801" font-size="10.5" fill="#854F0B">retail and non-retail variants,</text>
+<text x="30" y="816" font-size="10.5" fill="#854F0B">each confirmed called by its own</text>
+<text x="30" y="831" font-size="10.5" fill="#854F0B">live asmbly orchestrator</text>
+<line x1="235" y1="802.5" x2="451" y2="802.5" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="247" y="772" width="196" height="60" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="345" y="786" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_dept_vals_</text>
+<text x="345" y="798" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">glbud_retail.fex (DEP_MAIN)</text>
+<text x="345" y="812" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_dept_vals_</text>
+<text x="345" y="824" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">glbud_nonretail.fex (DEP_MAIN)</text>
+<text x="20" y="884" font-size="12.5" font-weight="500" fill="#854F0B">unapproved value injection (GL beginning balances)</text>
+<rect x="20" y="892" width="215" height="91" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 896a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#FAEEDA"/>
+<line x1="20" y1="918" x2="235" y2="918" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="909" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_GL_BEG_BALANCES</text>
+<line x1="20" y1="922" x2="235" y2="922" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="936" font-size="10.5" fill="#854F0B">retail and non-retail variants,</text>
+<text x="30" y="951" font-size="10.5" fill="#854F0B">each confirmed called by its own</text>
+<text x="30" y="966" font-size="10.5" fill="#854F0B">live asmbly orchestrator</text>
+<line x1="235" y1="937.5" x2="451" y2="937.5" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="245" y="908" width="200" height="60" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="345" y="920" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_dept_vals_</text>
+<text x="345" y="934" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">zerobal_retail.fex (DEP_MAIN)</text>
+<text x="345" y="946" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_unapproved_dept_vals_</text>
+<text x="345" y="960" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">zerobal_nonretail.fex (DEP_MAIN)</text>
+<rect x="455" y="46" width="290" height="937" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.GL_DEPT_DIM</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">5,935 rows · 15 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">GL_DEPT_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, surrogate, sequence via GL…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">UK (composite, 4 columns)</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">GL_DEPT_ID, GL…</text>
+<line x1="455" y1="134" x2="745" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="166" font-size="10.5" fill="#534AB7">GL_DEPT_DIM_SEQ_TR, BEFORE INSERT, assigns</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">GL_DEPT_KEY</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>pf_do_gl_dept_dim_maint</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>Run Once, 2013-08-21 (this candidate only)</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>MASTERPIECE rows created/updated today (2026-09-03);</td></tr><tr><th style='width:240px'>Alerts to</th><td>alan_vogt@ibi.com</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>df_wmbi_preload_gl_dept / df_wmbi_load_gl_dept (dead)</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_GL_DEPT</code></td></tr>
+<tr><td><code>MASTERPIECE: no loader identified</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>WMBI_ETL.PSTG_SALES_POS_LINE: read by df_wmbi_unapproved_vals_gl_dept_dim</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_LOC_RCV_LN_F: read by df_ins_unappr_val_gl_dept_dim_param (likely dead)</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_GL_JOURNAL_ENT_TX_F: read by df_wmbi_unapproved_dept_vals_glje_retail / _nonretail</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_GL_BUDGET: read by df_wmbi_unapproved_dept_vals_glbud_retail / _nonretail</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_GL_BEG_BALANCES: read by df_wmbi_unapproved_dept_vals_zerobal_retail / _nonretail</code></td></tr></table><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td><code>WMBI.GL_JOURNAL_ENT_TX_F (and its TXV2/TXV3 variants): resolves GL_DEPT_KEY via df_wmbi_prep_gl_journal_entry_tx_facts.fex</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.</p><table><tr><td><code>WMBI.PROD_GL_DEPT_DIM: carries GL_DEPT_KEY, possible duplicate-family sibling</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The table&#x27;s current, active source is a system called MASTERPIECE, which updated 241 rows today. A search across all available files found that name only once, tied to a completely different table (a supplier dimension). It is a real external system, but no process that loads this table from it was found anywhere in the available material</li>
+<li>This dimension is a widely shared GL lookup: roughly 45 other tables in this warehouse, mostly GL and POS fact/snapshot tables, carry its key. Only one of those, GL_JOURNAL_ENT_TX_F, is individually confirmed by code; the rest were not traced one by one</li>
+<li>8 confirmed processes insert placeholder members into this dimension when another process cannot match a department to a real one, more than were initially found. They cover general ledger journal entries, budgets, beginning balances, and receiving line items</li>
+<li>Two more reusable placeholder-creation templates exist with no caller identified anywhere in the available material</li>
+<li>The only load process found for this table is a one-time setup from 2013, the same reusable pattern already found on other dimensions in this project, built by the same author. Confirmed to have no active schedule and no live path that reaches it in the process files that reference it: it is a historical setup template, not the table&#x27;s real ongoing load process</li>
+<li>Most rows (5,318 of 5,935) carry a blank placeholder instead of a real system name, confirmed to be the default value left behind when a writing process never records which system it is</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>What the MASTERPIECE system is, and what process loads GL_DEPT_DIM from it today, has not been identified.<br><span class='why'>This is the only active source as of today, and nothing in the available material describes it. Needed to plan what the migration actually needs to replace</span></li>
+<li>Whether a similarly named general ledger department table is a duplicate or an earlier version of this one has not been confirmed.<br><span class='why'>It carries the same key and a similar row count, but was not analysed; worth ruling in or out before deciding which general ledger department table is authoritative</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: which process loads this table.<br><span class='why'>The table&#x27;s current source is a system called MASTERPIECE, confirmed real and active in the data, but no program that loads this table from it exists anywhere in the files we have.</span></li>
+<li>Still unknown: who gets notified if this process fails.<br><span class='why'>Same root cause as writers_identified: without the real loading program, we have no way to see who is notified if it fails.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>Same root cause as writers_identified: without the real loading program, we have no way to confirm how often it runs.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>
