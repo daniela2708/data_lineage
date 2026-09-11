@@ -1,0 +1,102 @@
+<meta charset="utf-8">
+<title>WMBI.SHIPPER_ITEM_XREF lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:2070px}</style>
+<h1>WMBI.SHIPPER_ITEM_XREF: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/shipper_item_xref/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 2070 232" width="2070" height="232" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">HQ recurring upsert  ·  orchestrator: df_shipper_item_xref_upsert</text>
+<rect x="20" y="46" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="104" x2="235" y2="104" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">SHIPPER_CONTENT / ITEM_MASTER</text>
+<text x="30" y="79" font-size="10.5" fill="#2E5FA3">external, via the HQAnalytics SQL</text>
+<text x="30" y="95" font-size="10.5" fill="#2E5FA3">Server connection</text>
+<rect x="455" y="46" width="215" height="92" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H455z" fill="#E1F5EE"/>
+<line x1="455" y1="88" x2="670" y2="88" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="465" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_SHIPPER_ITEM_XREF</text>
+<text x="465" y="79" font-size="10.5" fill="#0F6E56">truncated and reloaded every run</text>
+<text x="465" y="106" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">SHIPPER_ITEM_SCAN_CD_ID</text>
+<text x="465" y="122" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CONTENT_ITEM_SCAN_CD_ID</text>
+<rect x="890" y="46" width="215" height="100" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M890 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H890z" fill="#EAF0FB"/>
+<line x1="890" y1="72" x2="1105" y2="72" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="900" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.ITEM_DIM (twice)</text>
+<text x="900" y="90" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ITEM_SCAN_CD_ID</text>
+<line x1="890" y1="100" x2="1105" y2="100" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="900" y="114" font-size="10.5" fill="#2E5FA3">resolves both SHIPPER_ITEM_KEY</text>
+<text x="900" y="129" font-size="10.5" fill="#2E5FA3">and CONTENT_ITEM_KEY</text>
+<rect x="1325" y="46" width="215" height="76" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M1325 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z" fill="#EAF0FB"/>
+<line x1="1325" y1="72" x2="1540" y2="72" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="1335" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.DT_DIM (twice)</text>
+<line x1="1325" y1="76" x2="1540" y2="76" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="1335" y="90" font-size="10.5" fill="#2E5FA3">resolves both EFF_BEGIN_DT_KEY</text>
+<text x="1335" y="105" font-size="10.5" fill="#2E5FA3">and EFF_END_DT_KEY</text>
+<line x1="235" y1="81.0" x2="451" y2="92.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="265" y="76" width="160" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="89" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_shipper_item_xref_stg</text>
+<line x1="670" y1="92.0" x2="886" y2="96.0" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="1105" y1="96.0" x2="1321" y2="84.0" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="1540" y1="84.0" x2="1756" y2="84.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="1561" y="74" width="178" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="1650" y="86" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_shipper_item_xref_upsert</text>
+<rect x="1760" y="46" width="290" height="166" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M1760 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="1760" y1="83" x2="2050" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="1772" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.SHIPPER_ITEM_XREF</text>
+<text x="1772" y="78" font-size="10.5" fill="#534AB7">61,526 rows · 17 columns</text>
+<text x="1772" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">SHIPPER_ITEM_XREF_KEY</text>
+<text x="2038" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, surrogate, sequ…</text>
+<text x="1772" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">CONTENT_ID</text>
+<text x="2038" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK, business key</text>
+<line x1="1760" y1="134" x2="2050" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1772" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="1772" y="166" font-size="10.5" fill="#534AB7">SHIPPER_ITEM_XREF_SEQ_TR, BEFORE INSERT,</text>
+<text x="1772" y="182" font-size="10.5" fill="#534AB7">assigns SHIPPER_ITEM_XREF_KEY</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>df_shipper_item_xref_upsert</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>Recurring, Every 01 Day(s), since 2017-05-19 02:15:00</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>newest row 2026-09-03 (today); live</td></tr><tr><th style='width:240px'>Alerts to</th><td>ETLLOG, E-Mail (header only, no specific recipient list found)</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>df_shipper_item_xref_stg</code> &rarr; <code>WMBI_ETL.STG_SHIPPER_ITEM_XREF</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_SHIPPER_ITEM_XREF</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td class='group-head'>Loaded by <code>df_shipper_item_xref_upsert</code> &rarr; <code>WMBI.SHIPPER_ITEM_XREF</code></td></tr>
+<tr><td class='group-item'><code>WMBI.ITEM_DIM: feeds SHIPPER_ITEM_KEY, CONTENT_ITEM_KEY</code></td></tr>
+<tr><td class='group-item'><code>WMBI.DT_DIM: feeds EFF_BEGIN_DT_KEY, EFF_END_DT_KEY</code></td></tr>
+<tr><td><code>SHIPPER_CONTENT, ITEM_MASTER: read via the HQAnalytics SQL Server connection, by df_shipper_item_xref_stg</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.</p><table><tr><td><code>WMBI.WAREHOUSE_SHIPT_F: carries SHIPPER_ITEM_KEY (naming match only, join unconfirmed)</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The cost factor column is populated on only about 0.3 percent of rows, while every other column checked is populated on all or nearly all rows. This is not a missing source, but a real sparseness worth asking about</li>
+<li>This table has a single confirmed loading process, running daily since 2017, with no competing or duplicate source</li>
+<li>The full path this data takes is confirmed end to end. It comes from a headquarters system, lands in a staging table that is refreshed every run, and is matched against both the item reference table and the date reference table to resolve the shipper item, the content item, and the effective date range</li>
+<li>No duplicate or invalid key values were found</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Whether it is expected for the cost factor field to be populated on only about 0.3 percent of rows, or whether this points to a data quality gap, is not confirmed<br><span class='why'>This matters if the cost factor feeds any downstream cost calculation; if it is expected to be mostly blank for most content types, this is not an issue, but that has not been confirmed</span></li></ul>
+
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

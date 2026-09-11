@@ -1,0 +1,78 @@
+<meta charset="utf-8">
+<title>WMBI.POS_TAX_CLASS_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.POS_TAX_CLASS_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/pos_tax_class_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 242" width="765" height="242" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">Upsert  ·  orchestrator: df_upsert_pos_tax_class_dim</text>
+<rect x="20" y="46" width="215" height="132" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#EAF0FB"/>
+<line x1="20" y1="104" x2="235" y2="104" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">pos_tax_classes</text>
+<text x="30" y="79" font-size="10.5" fill="#2E5FA3">does not resolve in this Oracle</text>
+<text x="30" y="95" font-size="10.5" fill="#2E5FA3">environment</text>
+<text x="30" y="122" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">POS_TAX_CLASS_ID</text>
+<line x1="20" y1="132" x2="235" y2="132" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="146" font-size="10.5" fill="#2E5FA3">matches all live data exactly</text>
+<text x="30" y="161" font-size="10.5" fill="#2E5FA3">(REC_UPDT_SRC_SYS=&#x27;HQ&#x27;)</text>
+<line x1="235" y1="112.0" x2="451" y2="112.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="256" y="102" width="178" height="21" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="114" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_upsert_pos_tax_class_dim</text>
+<rect x="455" y="46" width="290" height="166" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.POS_TAX_CLASS_DIM</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">19 rows · 17 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">POS_TAX_CLASS_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, surrogate, sequence…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">POS_TAX_CLASS_ID</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK, business key</text>
+<line x1="455" y1="134" x2="745" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="166" font-size="10.5" fill="#534AB7">POS_TAX_CLASS_DIM_SEQ_TR, BEFORE INSERT,</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">assigns POS_TAX_CLASS_KEY</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>df_upsert_pos_tax_class_dim</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>Recurring, Every 01 Day(s), since 2015-08-09 02:00:00</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>newest row 2023-02-25, about 3.5 years before this</td></tr><tr><th style='width:240px'>Alerts to</th><td>ETLLOG, E-Mail (header only, no specific recipient list found)</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>pos_tax_classes: read by df_upsert_pos_tax_class_dim</code></td></tr></table><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td><code>WMBI.ITEM_POS_AREA_XREF: read by df_item_pos_area_xref_upsert.fex, carries POS_TAX_CLASS_KEY</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The loader&#x27;s own source system cannot be located anywhere in the Oracle environment, the same unresolved-source pattern already found on several other lookup tables in this project (ADJ_CD_DIM, AD_GRP_DIM, VENDOR_DIM). No separate placeholder-creating process targets this table</li>
+<li>A single process loads this table daily and accounts for 18 of its 19 rows, matching all current data exactly. No competing process exists</li>
+<li>The table has not been touched in about 3.5 years. On a table this small (19 rows, a fixed list of tax classes), this is plausibly a stable reference list rather than evidence the job itself has stopped; not confirmed either way</li>
+<li>One deliberate default row exists for unmatched cases, the same convention already found on PRICE_TYPE_DIM, distinct from the sentinel pattern used on most other lookup tables in this project</li>
+<li>This table was not part of the 2015-2016 wave of table retirements documented elsewhere in this project. That documentation itself carries a warning that it may be incomplete, so this absence is a weaker signal than a positive match would be</li>
+<li>Clean by every structural check: no duplicate tax class codes, no column missing its source</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>The loading process&#x27;s source system cannot be found anywhere in the Oracle environment, and nothing in the available material says where it actually lives<br><span class='why'>This is the confirmed real loader (matches all live data exactly, no competing process), so confirming its true source system matters for planning what the migration needs to replace</span></li>
+<li>Whether the 3.5-year freeze reflects a stable list or a stopped process is unconfirmed<br><span class='why'>Lower priority than on a larger, actively-referenced table, since this is a 19-row reference table where no new values may simply be needed</span></li></ul>
+
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

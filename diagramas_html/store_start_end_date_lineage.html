@@ -1,0 +1,58 @@
+<meta charset="utf-8">
+<title>WMBI.STORE_START_END_DATE lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.STORE_START_END_DATE: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/store_start_end_date/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 148" width="765" height="148" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect x="455" y="46" width="290" height="82" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.STORE_START_END_DATE</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">250 rows · 8 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">STORE_NUM</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">UK only (XAK1STORE_START_END_DAT…</text>
+</svg>
+</div>
+
+<h2>Dependencies</h2><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td><code>WMBI.LOC_DIM: read by df_upsert_loc_dim.fex</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>This table is confirmed to exist and be directly queryable, correcting an earlier analysis of LOC_DIM that had assumed it was not accessible</li>
+<li>Most rows were historically updated by named individual employees, spanning 2010 through 2025. The 6 most recent rows are instead tagged with a system-style label. No automated loading process was found for either pattern</li>
+<li>The recent, system-tagged rows are real, current store events: one store&#x27;s opening date matches the table&#x27;s most recent update exactly, and another store shows both a real opening and closing date. A far-future placeholder date is used to mean a store is still open</li>
+<li>This table&#x27;s own last-updated date is one of several conditions that determine whether the store reference table needs to be refreshed</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>What application or process writes this table today, given the system-style tag on the most recent rows and no automated loading process found<br><span class='why'>This table gates the store reference table&#x27;s refresh and supplies its comparable-period reporting dates; the migration plan needs to know the real system of record, not just that it is not the DataMigrator pipeline</span></li>
+<li>Whether store master data was historically maintained by named individuals working directly against the database, before whatever now writes the system-tagged rows took over<br><span class='why'>Affects whether older historical rows need any special handling compared to the current process&#x27;s rows</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: which process loads this table.<br><span class='why'>We could not find the program that loads this table anywhere in the files we have. Recent rows carry a system-style tag, suggesting something automated updates it today, but the actual system is outside what we could access.</span></li>
+<li>Still unknown: who gets notified if this process fails.<br><span class='why'>Same root cause as writers_identified: without the loading program itself, we have no way to see who is notified if it fails.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>Same root cause as writers_identified: without the loading program itself, we have no way to confirm how often it runs.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

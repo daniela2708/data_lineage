@@ -1,0 +1,141 @@
+<meta charset="utf-8">
+<title>WMBI.RECLM_SCAN_DETAIL_F lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:1200px}</style>
+<h1>WMBI.RECLM_SCAN_DETAIL_F: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/reclm_scan_detail_f/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 1200 835" width="1200" height="835" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#B4B2A9">IRC feed, stalled since April 2026.  Last execution: 2026-04-25/26</text>
+<rect x="20" y="46" width="215" height="170" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v86H20z" fill="#F1EFE8"/>
+<line x1="20" y1="136" x2="235" y2="136" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="30" y="79" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">PSTG_RECLM_SCAN_DETAIL_F</text>
+<text x="30" y="95" font-size="10.5" fill="#B4B2A9">97,680 rows; SCAN_DATE ranges</text>
+<text x="30" y="111" font-size="10.5" fill="#B4B2A9">only 2026-04-19 to 2026-04-25,</text>
+<text x="30" y="127" font-size="10.5" fill="#B4B2A9">despite last_analyzed 2026-08-18</text>
+<line x1="20" y1="140" x2="235" y2="140" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="154" font-size="10.5" fill="#B4B2A9">writer stamp &#x27;IRC&#x27; on the target;</text>
+<text x="30" y="169" font-size="10.5" fill="#B4B2A9">scheduled daily since 2020-06-09,</text>
+<text x="30" y="184" font-size="10.5" fill="#B4B2A9">but not confirmed as this table&#x27;s</text>
+<text x="30" y="199" font-size="10.5" fill="#B4B2A9">specific loader</text>
+<rect x="455" y="46" width="215" height="139" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H455z" fill="#F1EFE8"/>
+<line x1="455" y1="120" x2="670" y2="120" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="465" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="465" y="79" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">STG_RECLM_SCAN_DETAIL_F</text>
+<text x="465" y="95" font-size="10.5" fill="#B4B2A9">no REC_CREATE_DTTM/REC_UPDT_DTTM</text>
+<text x="465" y="111" font-size="10.5" fill="#B4B2A9">column, same as PSTG</text>
+<line x1="455" y1="124" x2="670" y2="124" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="465" y="138" font-size="10.5" fill="#B4B2A9">also marked &#x27;live&#x27;, last_analyzed</text>
+<text x="465" y="153" font-size="10.5" fill="#B4B2A9">2026-08-18; likely the same stale</text>
+<text x="465" y="168" font-size="10.5" fill="#B4B2A9">reload, not new data</text>
+<line x1="235" y1="131.0" x2="451" y2="115.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="670" y1="115.5" x2="886" y2="115.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<text x="20" y="252" font-size="12.5" font-weight="500" fill="#0F6E56">Dimension keys (carried, not confirmed by code)  ·  orchestrator: flow-irc-data.fex</text>
+<rect x="20" y="260" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 264a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="286" x2="235" y2="286" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="277" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.ITEM_DIM</text>
+<line x1="20" y1="290" x2="235" y2="290" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="304" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="319" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="334" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="365" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 369a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="391" x2="235" y2="391" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="382" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.LOC_DIM</text>
+<line x1="20" y1="395" x2="235" y2="395" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="409" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="424" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="439" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="470" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 474a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="496" x2="235" y2="496" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="487" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.POS_DEPT_DIM</text>
+<line x1="20" y1="500" x2="235" y2="500" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="514" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="529" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="544" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="575" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 579a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="601" x2="235" y2="601" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="592" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.VENDOR_DIM</text>
+<line x1="20" y1="605" x2="235" y2="605" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="619" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="634" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="649" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="680" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 684a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="706" x2="235" y2="706" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="697" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.WAREHOUSE_SUPPL_DIM</text>
+<line x1="20" y1="710" x2="235" y2="710" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="724" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="739" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="754" font-size="10.5" fill="#2E5FA3">we have</text>
+<line x1="235" y1="305.5" x2="886" y2="305.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="410.5" x2="886" y2="410.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="515.5" x2="886" y2="515.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="620.5" x2="886" y2="620.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="725.5" x2="886" y2="725.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="890" y="46" width="290" height="725" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M890 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="890" y1="83" x2="1180" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="902" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.RECLM_SCAN_DETAIL_F</text>
+<text x="902" y="78" font-size="10.5" fill="#534AB7">48,879,662 rows · 24 columns</text>
+<text x="902" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">RECLM_SCAN_DETAIL_KEY, SCAN_DT_KEY</text>
+<text x="1168" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK,…</text>
+<text x="902" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">10-column business key</text>
+<text x="1168" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK: SCAN_DT_KEY, L…</text>
+<line x1="890" y1="134" x2="1180" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="902" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="902" y="166" font-size="10.5" fill="#534AB7">RECLM_SCAN_DETAIL_F_SEQ_TR, BEFORE EACH ROW</text>
+<text x="902" y="182" font-size="10.5" fill="#534AB7">INSERT, assigns RECLM_SCAN_DETAIL_KEY</text>
+</svg>
+</div>
+<h2>Orchestrator</h2><table><tr><th style='width:240px'>Flow</th><td>flow-irc-data.fex</td></tr><tr><th style='width:240px'>Schedule in the file header</th><td>DM_SCHDSTRT=202006091700, Recurring, Every 01 Day(s), since 2020-06-09 17:00</td></tr><tr><th style='width:240px'>Schedule observed in the data</th><td>real business data (PSTG SCAN_DATE) stops at</td></tr><tr><th style='width:240px'>Alerts to</th><td>not recorded</td></tr><tr><th style='width:240px'>Steps that never run</th><td>none found</td></tr></table>
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>flow-irc-data.fex (likely dead)</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_RECLM_SCAN_DETAIL_F</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_RECLM_SCAN_DETAIL_F</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>WMBI.ITEM_DIM: provides item identification, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.LOC_DIM: provides store location, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.POS_DEPT_DIM: provides POS department, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.VENDOR_DIM: provides vendor identification, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.WAREHOUSE_SUPPL_DIM: provides warehouse supplier, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>New reclamation scan data has not been added since roughly April 25-26, 2026, more than four months before this analysis. The staging tables looked current on paper, but that was misleading: the underlying scan dates themselves had not moved past that same window, meaning the most recent refresh most likely reloaded the same old data rather than adding anything new</li>
+<li>The feed&#x27;s own schedule shows no sign of being turned off, yet the actual reclamation scan data stopped updating around April 25-26, 2026. If this is indeed the feed that loads this table, the schedule staying active while the data stalled points to a silent failure somewhere upstream, not a deliberate shutdown</li>
+<li>All rows in this table come from a single feed, IRC, which matches a real, still-scheduled data integration that has run daily since 2020. That integration calls out to an external system. A related feed confirms IRC-branded integrations pull from a real database on the HQ side, which supports that this is a genuine, active feed, though it is not yet confirmed that this specific integration is the one loading this table</li>
+<li>No duplicate or invalid key values were found across all 48.9 million rows, based on the primary key check performed</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Has the reclamation scan feed actually stopped since late April 2026, or is there a valid business reason for no new scans since then? This is easy to miss because the staging tables looked current<br><span class='why'>This is a large loss-prevention data set; a silently stalled feed affects the migration plan and whether current operational reporting is already out of date</span></li>
+<li>Does the IRC data feed load this table specifically, or a different reclamation-related table?<br><span class='why'>Confirming this would settle who is responsible for maintaining this table&#x27;s load process</span></li></ul>
+
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

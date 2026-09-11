@@ -1,0 +1,201 @@
+<meta charset="utf-8">
+<title>WMBI.SALES_POS_LN_F lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.SALES_POS_LN_F: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/sales_pos_ln_f/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 1404" width="765" height="1404" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">Line fact load</text>
+<rect x="20" y="46" width="215" height="100" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#E1F5EE"/>
+<line x1="20" y1="72" x2="235" y2="72" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.STG_SALES_POS_LINE</text>
+<text x="30" y="90" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">SALES_POS_LN_KEY</text>
+<line x1="20" y1="100" x2="235" y2="100" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="114" font-size="10.5" fill="#0F6E56">REFUND_RSN_KEY column mismatch,</text>
+<text x="30" y="129" font-size="10.5" fill="#0F6E56">see findings</text>
+<rect x="20" y="160" width="215" height="100" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 164a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v86H20z" fill="#EAF0FB"/>
+<line x1="20" y1="250" x2="235" y2="250" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="177" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.LINK_CD_DIM</text>
+<text x="30" y="193" font-size="10.5" fill="#2E5FA3">LEFT JOIN fallback when staging&#x27;s</text>
+<text x="30" y="209" font-size="10.5" fill="#2E5FA3">own LINK_CD_KEY_APPROVED is null,</text>
+<text x="30" y="225" font-size="10.5" fill="#2E5FA3">matched on unapproved</text>
+<text x="30" y="241" font-size="10.5" fill="#2E5FA3">(APPRV_REC_IND=&#x27;N&#x27;) members</text>
+<line x1="235" y1="96.0" x2="451" y2="96.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="274" y="79" width="142" height="34" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="92" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_insert_sales_</text>
+<text x="345" y="105" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">pos_line_facts</text>
+<line x1="235" y1="210.0" x2="451" y2="210.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<text x="20" y="296" font-size="12.5" font-weight="500" fill="#0F6E56">Dimension keys (carried, not confirmed by code)</text>
+<rect x="20" y="304" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 308a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="330" x2="235" y2="330" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="321" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.AMS_OFFER_DIM</text>
+<line x1="20" y1="334" x2="235" y2="334" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="348" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="363" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="378" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="409" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 413a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="435" x2="235" y2="435" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="426" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.CLUB_CARD_DIM</text>
+<line x1="20" y1="439" x2="235" y2="439" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="453" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="468" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="483" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="514" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 518a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="540" x2="235" y2="540" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="531" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.GL_DEPT_DIM</text>
+<line x1="20" y1="544" x2="235" y2="544" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="558" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="573" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="588" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="619" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 623a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="645" x2="235" y2="645" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="636" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.ITEM_DIM</text>
+<line x1="20" y1="649" x2="235" y2="649" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="663" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="678" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="693" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="724" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 728a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="750" x2="235" y2="750" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="741" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.LOC_DIM</text>
+<line x1="20" y1="754" x2="235" y2="754" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="768" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="783" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="798" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="829" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 833a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="855" x2="235" y2="855" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="846" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.POS_DEPT_DIM</text>
+<line x1="20" y1="859" x2="235" y2="859" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="873" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="888" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="903" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="934" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 938a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="960" x2="235" y2="960" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="951" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.POS_ITEM_TYPE_DIM</text>
+<line x1="20" y1="964" x2="235" y2="964" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="978" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="993" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="1008" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="1039" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 1043a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="1065" x2="235" y2="1065" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="1056" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.PRICE_LVL_DIM</text>
+<line x1="20" y1="1069" x2="235" y2="1069" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="1083" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="1098" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="1113" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="1144" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 1148a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="1170" x2="235" y2="1170" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="1161" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.PRICE_TYPE_DIM</text>
+<line x1="20" y1="1174" x2="235" y2="1174" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="1188" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="1203" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="1218" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="1249" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 1253a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="1275" x2="235" y2="1275" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="1266" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.TX_TYPE_DIM</text>
+<line x1="20" y1="1279" x2="235" y2="1279" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="1293" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="1308" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="1323" font-size="10.5" fill="#2E5FA3">we have</text>
+<line x1="235" y1="349.5" x2="451" y2="349.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="454.5" x2="451" y2="454.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="559.5" x2="451" y2="559.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="664.5" x2="451" y2="664.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="769.5" x2="451" y2="769.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="874.5" x2="451" y2="874.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="979.5" x2="451" y2="979.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="1084.5" x2="451" y2="1084.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="1189.5" x2="451" y2="1189.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="1294.5" x2="451" y2="1294.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="455" y="46" width="290" height="1294" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.SALES_POS_LN_F</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">20,108,474,680 rows · 39 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">SALES_POS_LN_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK (composite with ACCT_…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ACCT_EFF_DT_KEY</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">PK (composite), also the p…</text>
+<text x="467" y="136" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ORDINAL</text>
+<text x="733" y="136" font-size="10" fill="#5F5E5A" text-anchor="end">UK (composite with TX_ID and ACCT_E…</text>
+<line x1="455" y1="150" x2="745" y2="150" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="166" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">None. Same as SALES_POS_TX_F, no sequence</text>
+<text x="467" y="198" font-size="10.5" fill="#534AB7">trigger exists on this table</text>
+</svg>
+</div>
+
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td><code>WMBI_ETL.STG_SALES_POS_LINE</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>WMBI.AMS_OFFER_DIM: provides offer, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.CLUB_CARD_DIM: provides loyalty account, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.GL_DEPT_DIM: provides GL department coding, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.ITEM_DIM: provides item identification, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.LOC_DIM: provides store location, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.POS_DEPT_DIM: provides POS department, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.POS_ITEM_TYPE_DIM: provides POS item type, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.PRICE_LVL_DIM: provides price level, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.PRICE_TYPE_DIM: provides price type, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.TX_TYPE_DIM: provides transaction type, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.LINK_CD_DIM: LEFT JOIN fallback for LINK_CD_KEY when staging&#x27;s own approved key is null, read by df_wmbi_insert_sales_pos_line_facts</code></td></tr></table><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td class='group-head'>Loaded by <code>pf_do_unapproved_dim_procedures</code></td></tr>
+<tr><td class='group-item'><code>WMBI.CLUB_CARD_DIM: df_wmbi_unapproved_vals_club_card_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.LOC_DIM: df_wmbi_unapproved_vals_loc_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.ITEM_DIM: df_wmbi_unapproved_vals_item_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.TERMINAL_DIM: df_wmbi_unapproved_vals_terminal_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.POS_ITEM_TYPE_DIM: df_wmbi_unapproved_vals_pos_item_type_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.POS_DEPT_DIM: df_wmbi_unapproved_vals_pos_dept_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.GL_ACCT_DIM: df_wmbi_unapproved_vals_gl_acct_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.GL_BIZ_UNIT_DIM: df_wmbi_unapproved_vals_gl_biz_unit_dim, placeholder members</code></td></tr>
+<tr><td class='group-item'><code>WMBI.GL_DEPT_DIM: df_wmbi_unapproved_vals_gl_dept_dim, placeholder members</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The column recording when a row was last updated is populated for virtually every row, but the confirmed loading process does not set it; something else fills it in afterward. That process has not been located</li>
+<li>Four columns related to AMS offers and coupons are roughly 62 percent empty across the table, and the confirmed loading process does not populate them at all. Whatever fills them in today has not been identified</li>
+<li>The only known loading process for this table refers to a column name that no longer exists in the database; the current table uses a differently named column instead. It is not resolved whether this means the process being reviewed is out of date, or whether the current column is not actually being populated by any confirmed process</li>
+<li>This table is organized by day, the same approach used for the related transaction table, through today</li>
+<li>This table has no automatic key-assignment mechanism, the same as the related transaction table</li>
+<li>Of the 9 reference tables that receive placeholder entries from this table&#x27;s data, all but one read this table&#x27;s staging data directly; one instead reads a different staging table, despite being part of the same overall process</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>The only known loading process for this table references a column that does not exist in the current database; a differently named column exists instead<br><span class='why'>Since the table is loading successfully every day, either a newer version of this process exists that was not reviewed, or the current column is silently going unpopulated. This affects whether that column&#x27;s data can be trusted for migration</span></li>
+<li>Four columns related to AMS offers and coupons are not populated by the only known loading process, despite existing on the table<br><span class='why'>Needed to find whatever process actually determines the offer applied to a line item</span></li>
+<li>The process that actually schedules and runs this table&#x27;s load has not been reviewed; it lives in a folder that was never provided<br><span class='why'>Needed to confirm how often it runs and who is alerted if it fails</span></li>
+<li>What actually fills in the last-updated timestamp on this table has not been identified, since the known loading process leaves it blank<br><span class='why'>A process significant enough to touch every row should be identifiable; not finding it points to a gap in the material reviewed so far</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: who gets notified if this process fails.<br><span class='why'>The actual caller of this process sits in a folder that was never made available to us, so we cannot see who is alerted if it fails.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>The same missing folder would show the real schedule; what we can see gives no schedule information either way.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

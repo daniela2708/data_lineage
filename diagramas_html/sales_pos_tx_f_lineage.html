@@ -1,0 +1,122 @@
+<meta charset="utf-8">
+<title>WMBI.SALES_POS_TX_F lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.SALES_POS_TX_F: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/sales_pos_tx_f/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 629" width="765" height="629" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">Transaction fact load</text>
+<rect x="20" y="46" width="215" height="76" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z" fill="#E1F5EE"/>
+<line x1="20" y1="88" x2="235" y2="88" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="30" y="79" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">STG_SALES_POS_TRANSACTION</text>
+<text x="30" y="106" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">TX_ID</text>
+<rect x="20" y="136" width="215" height="84" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 140a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z" fill="#EAF0FB"/>
+<line x1="20" y1="210" x2="235" y2="210" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="153" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.PSTG_SALES_POS_LINE</text>
+<text x="30" y="169" font-size="10.5" fill="#2E5FA3">read only for MEGA_DISC_AMT /</text>
+<text x="30" y="185" font-size="10.5" fill="#2E5FA3">SUPER_MEGA_DISC_AMT, by AMS offer</text>
+<text x="30" y="201" font-size="10.5" fill="#2E5FA3">vendor coupon code</text>
+<line x1="235" y1="84.0" x2="451" y2="84.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="280" y="67" width="130" height="34" rx="3" fill="#fff" stroke="#9FE1CB" stroke-width="0.6"/>
+<text x="345" y="80" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_wmbi_insert_</text>
+<text x="345" y="93" font-size="10" fill="#0F6E56" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">sales_pos_txn_facts</text>
+<line x1="235" y1="178.0" x2="451" y2="178.0" stroke="#0F6E56" stroke-width="1.1" marker-end="url(#a)"/>
+<text x="20" y="256" font-size="12.5" font-weight="500" fill="#0F6E56">Dimension keys (carried, not confirmed by code)</text>
+<rect x="20" y="264" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 268a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="290" x2="235" y2="290" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="281" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.CLUB_CARD_DIM</text>
+<line x1="20" y1="294" x2="235" y2="294" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="308" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="323" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="338" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="369" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 373a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="395" x2="235" y2="395" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="386" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.LOC_DIM</text>
+<line x1="20" y1="399" x2="235" y2="399" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="413" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="428" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="443" font-size="10.5" fill="#2E5FA3">we have</text>
+<rect x="20" y="474" width="215" height="91" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 478a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z" fill="#EAF0FB"/>
+<line x1="20" y1="500" x2="235" y2="500" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="491" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.TX_TYPE_DIM</text>
+<line x1="20" y1="504" x2="235" y2="504" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="518" font-size="10.5" fill="#2E5FA3">key column present; no join to</text>
+<text x="30" y="533" font-size="10.5" fill="#2E5FA3">this dimension found in the files</text>
+<text x="30" y="548" font-size="10.5" fill="#2E5FA3">we have</text>
+<line x1="235" y1="309.5" x2="451" y2="309.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="414.5" x2="451" y2="414.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="235" y1="519.5" x2="451" y2="519.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="455" y="46" width="290" height="519" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.SALES_POS_TX_F</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">1,722,522,220 rows · 66 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">SALES_POS_TX_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK (composite with ACCT_…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">ACCT_EFF_DT_KEY</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">PK (composite), also the p…</text>
+<text x="467" y="136" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">TX_ID</text>
+<text x="733" y="136" font-size="10" fill="#5F5E5A" text-anchor="end">UK (composite with ACCT_EFF_DT_KEY),…</text>
+<line x1="455" y1="150" x2="745" y2="150" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="166" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">None. Unlike every dimension analysed so far,</text>
+<text x="467" y="198" font-size="10.5" fill="#534AB7">no sequence trigger exists on this table</text>
+</svg>
+</div>
+
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td><code>WMBI_ETL.STG_SALES_POS_TRANSACTION</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>WMBI.CLUB_CARD_DIM: provides loyalty account, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.LOC_DIM: provides store location, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI.TX_TYPE_DIM: provides transaction type, inferred (key column present in the target, no join to this dimension found in the files we have)</code></td></tr>
+<tr><td><code>WMBI_ETL.PSTG_SALES_POS_LINE: feeds MEGA_DISC_AMT, SUPER_MEGA_DISC_AMT, read by df_wmbi_insert_sales_pos_txn_facts</code></td></tr></table><h3>Depends on this table, confirmed in code</h3><p class='intro'></p><table><tr><td class='group-head'>Loaded by <code>pf_do_unapproved_dim_procedures2</code></td></tr>
+<tr><td class='group-item'><code>WMBI.LOC_DIM</code></td></tr>
+<tr><td class='group-item'><code>WMBI.TERMINAL_DIM</code></td></tr>
+<tr><td class='group-item'><code>WMBI.TX_TYPE_DIM</code></td></tr>
+<tr><td class='group-item'><code>WMBI.CLUB_CARD_DIM</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The MEGA35_DISC_AMT column does not appear in the confirmed loading process or anywhere else reviewed; no source for it has been found</li>
+<li>Two files with the same names as the ones used for this analysis exist elsewhere in the archive, but with completely different, unrelated content, loading a different table entirely</li>
+<li>This table is organized by day, one segment per day, through today</li>
+<li>The last-updated timestamp is never populated on this table; every row is inserted once and never changed afterward</li>
+<li>This table has no automatic key-assignment mechanism, unlike every reference table reviewed so far</li>
+<li>The transaction-deleted flag never changes value across a large sample of rows; if deleted transactions are tracked at all, it is not through this flag</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>The process that actually schedules and runs this table&#x27;s load has not been reviewed; it is believed to live in a folder that was never provided<br><span class='why'>Needed to confirm how often it runs and who is alerted if it fails, separate from the placeholder-creation process which is already confirmed</span></li>
+<li>The MEGA35_DISC_AMT column has no known source anywhere in the material reviewed<br><span class='why'>It may be a column whose loading logic sits in an unreviewed process, or a discount tier that was planned but never implemented; matters for whether it is worth migrating</span></li>
+<li>Whether two similarly named placeholder-creation processes are both currently active, given they overlap on the same four reference tables from the same staging data<br><span class='why'>If both run, the placeholder logic may be duplicated; if only one is active, the other should be flagged as retired rather than migrated</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: who gets notified if this process fails.<br><span class='why'>The only mail step we found sends to unresolved placeholder addresses, not real recipients, and the actual writer process has no confirmed caller with its own alert.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>The real caller is believed to sit in a folder that was never made available to us, so we cannot confirm the true schedule.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

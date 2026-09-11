@@ -1,4 +1,4 @@
-import { useDeferredValue, useId, useLayoutEffect, useRef, useState } from 'react'
+import { useDeferredValue, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import { DATA } from '../../data/dataset'
 import { LINEAGE_REPORTS, type LineageReport, type ReportBlock } from '../../data/lineageReports'
 import type { TableRec } from '../../types'
@@ -9,6 +9,15 @@ const REPORT_OPTIONS = LINEAGE_REPORTS.map((report) => ({
 }))
 const SOURCE_OPTIONS = [...new Set(REPORT_OPTIONS.map(({ table }) => table?.src).filter((source): source is string => Boolean(source)))].sort()
 const PAIRED_SECTION_TITLES = new Set(['Dependencies', 'Findings', 'Pending validation', 'Important notes'])
+const SVG_VIEWBOX = /viewBox=["'](?:-?[\d.]+\s+){2}([\d.]+)\s+([\d.]+)["']/i
+
+function isTallDiagram(svg: string): boolean {
+  const viewBox = svg.match(SVG_VIEWBOX)
+  if (!viewBox) return false
+  const width = Number(viewBox[1])
+  const height = Number(viewBox[2])
+  return width > 0 && height / width >= 0.78
+}
 
 function fitDiagramText(root: HTMLDivElement): void {
   const svg = root.querySelector('svg')
@@ -56,16 +65,59 @@ function fitDiagramText(root: HTMLDivElement): void {
   }
 }
 
+function centerIsolatedTable(root: HTMLDivElement): void {
+  const svg = root.querySelector('svg')
+  if (!(svg instanceof SVGSVGElement)) return
+
+  const tableBoxes = [...svg.children].filter((element): element is SVGRectElement => {
+    if (!(element instanceof SVGRectElement)) return false
+    const width = Number(element.getAttribute('width'))
+    const height = Number(element.getAttribute('height'))
+    return element.hasAttribute('stroke') && width >= 60 && height >= 18
+  })
+  if (tableBoxes.length !== 1) return
+
+  const viewBox = svg.viewBox.baseVal
+  const table = tableBoxes[0]
+  const tableCenter = Number(table.getAttribute('x')) + Number(table.getAttribute('width')) / 2
+  if (!Number.isFinite(tableCenter) || viewBox.width <= 0) return
+
+  svg.setAttribute('viewBox', `${tableCenter - viewBox.width / 2} ${viewBox.y} ${viewBox.width} ${viewBox.height}`)
+  svg.dataset.centered = 'isolated-table'
+}
+
 function FilterBox({ label, options, selected, onSelect, allLabel }: { label: string; options: string[]; selected: string; onSelect: (value: string) => void; allLabel?: string }) {
   const inputId = useId()
+  const filterRef = useRef<HTMLElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
   const deferredQuery = useDeferredValue(query.trim().toLowerCase())
   const visibleOptions = deferredQuery ? options.filter((option) => option.toLowerCase().includes(deferredQuery)) : options
 
-  return <section className="filter-box" aria-labelledby={`${inputId}-label`}>
+  useEffect(() => {
+    if (!open) return
+
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !filterRef.current?.contains(event.target)) setOpen(false)
+    }
+    const closeWithEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return
+      setOpen(false)
+      triggerRef.current?.focus()
+    }
+
+    document.addEventListener('pointerdown', closeOutside)
+    document.addEventListener('keydown', closeWithEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOutside)
+      document.removeEventListener('keydown', closeWithEscape)
+    }
+  }, [open])
+
+  return <section ref={filterRef} className="filter-box" aria-labelledby={`${inputId}-label`}>
     <strong id={`${inputId}-label`}>{label}</strong>
-    <button className="filter-dropdown-trigger" type="button" aria-expanded={open} aria-controls={`${inputId}-menu`} onClick={() => setOpen((visible) => !visible)}><span>{selected || allLabel || `Choose ${label.toLowerCase()}`}</span><i aria-hidden="true" /></button>
+    <button ref={triggerRef} className="filter-dropdown-trigger" type="button" aria-haspopup="listbox" aria-expanded={open} aria-controls={`${inputId}-menu`} onClick={() => setOpen((visible) => !visible)}><span>{selected || allLabel || `Choose ${label.toLowerCase()}`}</span><i aria-hidden="true" /></button>
     {open ? <div className="filter-dropdown-menu" id={`${inputId}-menu`}>
       <div className="filter-box-search"><i aria-hidden="true" /><input id={inputId} aria-label={`Search ${label}`} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={`Search ${label.toLowerCase()}`} autoComplete="off" autoFocus /></div>
       <div className="filter-options-list" role="listbox" aria-labelledby={`${inputId}-label`}>
@@ -100,11 +152,20 @@ function TableSummary({ table, report }: { table?: TableRec; report: LineageRepo
     ? `${report.rowCount.toLocaleString('en-US')} rows · ${report.columnCount.toLocaleString('en-US')} columns`
     : 'Volume not documented in report'
 
-  return <section className="card table-summary-card">
-    <div className="summary-title"><div><span className="flow-kicker">Selected table</span><div className="title-row"><h3>{report.tableName}</h3><span className="tid">{table?.id}</span></div></div><div className="summary-volume">{volume}</div></div>
-    <h2>Catalog details</h2>
-    <div className="meta">{metadata.map(([label, value]) => <div key={label}><dt>{label}</dt><dd className={value ? undefined : 'empty'}>{value || 'Not documented'}</dd></div>)}</div>
-  </section>
+  return <details className="card table-summary-card table-summary-disclosure">
+    <summary>
+      <div className="summary-identity"><span className="flow-kicker">Selected table</span><div className="title-row"><h3>{report.tableName}</h3><span className="tid">{table?.id}</span></div></div>
+      <div className="summary-glance">
+        <span className="summary-source">{table?.src || 'Source not documented'}</span>
+        <span className="summary-volume">{volume}</span>
+        <span className="summary-toggle"><i aria-hidden="true" />Catalog details</span>
+      </div>
+    </summary>
+    <div className="summary-details">
+      <h2>Catalog details</h2>
+      <div className="meta">{metadata.map(([label, value]) => <div key={label}><dt>{label}</dt><dd className={value ? undefined : 'empty'}>{value || 'Not documented'}</dd></div>)}</div>
+    </div>
+  </details>
 }
 
 function ReportBlockView({ block }: { block: ReportBlock }) {
@@ -137,7 +198,7 @@ function ReportSections({ sections }: { sections: LineageReport['sections'] }) {
 
   return <div className="report-sections">
     {standalone.map((section) => <ReportSection section={section} key={section.title} />)}
-    {dependencies || findings ? <div className="report-section-pair">
+    {dependencies || findings ? <div className="report-section-stack">
       {dependencies ? <ReportSection section={dependencies} /> : null}
       {findings ? <ReportSection section={findings} /> : null}
     </div> : null}
@@ -148,17 +209,23 @@ function ReportSections({ sections }: { sections: LineageReport['sections'] }) {
   </div>
 }
 
-function SourceDiagram({ report }: { report: LineageReport }) {
+function SourceDiagram({ report, hasDependencies }: { report: LineageReport; hasDependencies: boolean }) {
   const diagramRef = useRef<HTMLDivElement>(null)
+  const tallDiagram = isTallDiagram(report.diagramSvg)
 
   useLayoutEffect(() => {
-    if (diagramRef.current) fitDiagramText(diagramRef.current)
-  }, [report.diagramSvg])
+    if (!diagramRef.current) return
+    fitDiagramText(diagramRef.current)
+    if (!hasDependencies) centerIsolatedTable(diagramRef.current)
+  }, [hasDependencies, report.diagramSvg])
 
-  return <section className="report-diagram-card">
+  return <section className={`report-diagram-card${tallDiagram ? ' is-tall' : ''}`}>
     <div className="report-diagram-heading">
       <div><span className="flow-kicker">Source lineage artifact</span><h2>{report.title}</h2><p>{report.subtitle}</p></div>
-      <div className="report-source-actions"><span><i aria-hidden="true" />Source report verified</span><a href={report.publicPath} target="_blank" rel="noreferrer">Open original HTML</a></div>
+      <div className="report-source-actions">
+        <span><i aria-hidden="true" />Source report verified</span>
+        <a href={report.publicPath} target="_blank" rel="noreferrer">Open original HTML</a>
+      </div>
     </div>
     <div className="report-legend" aria-label="Diagram legend"><span><i className="external" />External source</span><span><i className="live" />Live process</span><span><i className="injection" />Injection</span><span><i className="dependency" />Fact dependency</span><span><i className="target" />Target table</span><span><i className="legacy" />Inactive path</span></div>
     <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable lineage diagram for ${report.tableName}`}>
@@ -172,11 +239,12 @@ export default function FlowView({ active: _active }: { active: boolean }) {
   const report = LINEAGE_REPORTS.find((item) => item.tableName === selectedName) ?? LINEAGE_REPORTS[0]
   if (!report) return <p>No lineage HTML reports were generated.</p>
   const table = DATA.tables.find((item) => item.name === report.tableName)
+  const hasDependencies = report.sections.some((section) => section.title === 'Dependencies')
 
   return <div>
     <TableSelector value={selectedName} onChange={setSelectedName} />
-    <TableSummary table={table} report={report} />
-    <SourceDiagram report={report} />
+    <TableSummary table={table} report={report} key={report.sourceFile} />
+    <SourceDiagram report={report} hasDependencies={hasDependencies} key={report.sourceSha256} />
     <ReportSections sections={report.sections} />
     <p className="report-footer">{report.footer}</p>
   </div>

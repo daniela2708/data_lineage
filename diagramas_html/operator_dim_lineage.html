@@ -1,0 +1,100 @@
+<meta charset="utf-8">
+<title>WMBI.OPERATOR_DIM lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.OPERATOR_DIM: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/operator_dim/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 499" width="765" height="499" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#B4B2A9">TLOG upsert (frozen since 2016).  Last execution: 2016-03-02</text>
+<rect x="20" y="46" width="215" height="117" rx="4" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.6" stroke-dasharray="4 3"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z" fill="#F1EFE8"/>
+<line x1="20" y1="104" x2="235" y2="104" stroke="#B4B2A9" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#444441" font-family="ui-monospace,Menlo,monospace">eamtran_operator_dim</text>
+<text x="30" y="79" font-size="10.5" fill="#B4B2A9">source table does not resolve in</text>
+<text x="30" y="95" font-size="10.5" fill="#B4B2A9">this Oracle environment</text>
+<text x="30" y="122" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">OPERATOR_ID</text>
+<line x1="20" y1="132" x2="235" y2="132" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="146" font-size="10.5" fill="#B4B2A9">frozen since 2016-03-02, 554 rows</text>
+<line x1="235" y1="104.5" x2="451" y2="104.5" stroke="#B4B2A9" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="271" y="94" width="148" height="21" rx="3" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.6"/>
+<text x="345" y="107" font-size="10" fill="#B4B2A9" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_upsert_operator_dim</text>
+<text x="20" y="199" font-size="12.5" font-weight="500" fill="#854F0B">Fact-side injection (live, dominant)</text>
+<rect x="20" y="207" width="215" height="228" rx="4" fill="#fff" stroke="#854F0B" stroke-width="0.6"/>
+<path d="M20 211a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v150H20z" fill="#FAEEDA"/>
+<line x1="20" y1="361" x2="235" y2="361" stroke="#854F0B" stroke-width="0.6"/>
+<text x="30" y="224" font-size="10.5" font-weight="500" fill="#412402" font-family="ui-monospace,Menlo,monospace">unresolved source</text>
+<text x="30" y="240" font-size="10.5" fill="#854F0B">STG_OVERRIDES_ALERTS_F is a weak</text>
+<text x="30" y="256" font-size="10.5" fill="#854F0B">circumstantial guess only</text>
+<text x="30" y="272" font-size="10.5" fill="#854F0B">(name/column match); the flow&#x27;s</text>
+<text x="30" y="288" font-size="10.5" fill="#854F0B">own DEP_4 default</text>
+<text x="30" y="304" font-size="10.5" fill="#854F0B">(STG_SALES_POS_TX_F_NEW) produces</text>
+<text x="30" y="320" font-size="10.5" fill="#854F0B">a DIFFERENT truncated string than</text>
+<text x="30" y="336" font-size="10.5" fill="#854F0B">observed, so the real caller and</text>
+<text x="30" y="352" font-size="10.5" fill="#854F0B">source remain genuinely unlocated</text>
+<text x="30" y="379" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">OPERATOR_ID</text>
+<line x1="20" y1="389" x2="235" y2="389" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="403" font-size="10.5" fill="#854F0B">74% of the table (1,615 of 2,194</text>
+<text x="30" y="418" font-size="10.5" fill="#854F0B">rows), live through today</text>
+<line x1="235" y1="321.0" x2="451" y2="321.0" stroke="#854F0B" stroke-width="1.1" marker-end="url(#a)"/>
+<rect x="283" y="304" width="124" height="34" rx="3" fill="#fff" stroke="#FAC775" stroke-width="0.6"/>
+<text x="345" y="317" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">df_ins_unappr_val_</text>
+<text x="345" y="330" font-size="10" fill="#854F0B" text-anchor="middle" font-family="ui-monospace,Menlo,monospace">operator_dim_param</text>
+<rect x="455" y="46" width="290" height="389" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.OPERATOR_DIM</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">2,194 rows · 8 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">OPERATOR_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, surrogate, sequence via O…</text>
+<text x="467" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">OPERATOR_ID</text>
+<text x="733" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK, business key</text>
+<line x1="455" y1="134" x2="745" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="166" font-size="10.5" fill="#534AB7">OPERATOR_SEQ_TR, BEFORE INSERT, assigns</text>
+<text x="467" y="182" font-size="10.5" fill="#534AB7">OPERATOR_KEY</text>
+</svg>
+</div>
+
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td><code>eamtran_operator_dim: does not resolve in this Oracle environment (dead)</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>unresolved source: injected by df_ins_unappr_val_operator_dim_param.fex</code></td></tr></table><h3>Depends on this table, inferred from naming</h3><p class='intro'>Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load.</p><table><tr><td><code>WMBI.OVERRIDES_ALERTS_F: carries OPERATOR_KEY, no .fex join confirmed</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>About 74% of this table (1,615 of 2,194 rows) is placeholder data automatically generated by another process, not real operator records, and new placeholders are still being added today. The process that should load real operator records stopped working over 10 years ago (2016), despite being scheduled to run every day</li>
+<li>Closer checking shows the suspected source does not fully hold up: the placeholder-creating process has a built-in default source (a POS sales transaction table) that produces a different result than what actually appears on the placeholder records, meaning some other process must be supplying the real source before it runs. This also shows the same shared template is separately used elsewhere against POS transaction data, for an unrelated purpose</li>
+<li>The process that creates these placeholder records is a shared, reusable template used across several tables. The specific source it draws from for this table has not been identified</li>
+<li>The likely real source of these placeholder records is WMBI.OVERRIDES_ALERTS_F (17,746,540 rows, live), based on a naming and column match. This has not been confirmed by any process explicitly linking the two tables</li>
+<li>The source system for real operator records, eamtran_operator_dim, cannot be located anywhere in the Oracle environment, the same issue already found on the TX_TYPE_DIM and POS_ITEM_TYPE_DIM tables</li>
+<li>Unlike every other lookup table reviewed so far in this project, this table has no generic &#x27;unknown&#x27; placeholder row</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>The process and exact source feeding the placeholder-creating step have not been identified<br><span class='why'>This process now creates most of the table&#x27;s records (74% of all rows), so confirming its real source (most likely related to OVERRIDES_ALERTS_F, but not proven) and its schedule matters more here than on tables where this kind of placeholder is rare</span></li>
+<li>Whether any process besides the placeholder generator still adds real, complete operator records is unconfirmed<br><span class='why'>The process that should add real operator records has been stopped since 2016; if nothing else feeds this table, it will only keep accumulating placeholders instead of real data</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: which process loads this table.<br><span class='why'>The process now writing 74% of this table&#x27;s rows is confirmed live, but its real source and caller are not: a plausible candidate (OVERRIDES_ALERTS_F) does not hold up against the process&#x27;s own code, so this remains genuinely unresolved, not just undocumented.</span></li>
+<li>Still unknown: who gets notified if this process fails.<br><span class='why'>Same root cause as writers_identified: without the real caller identified, we have no way to see who is notified if this process fails.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>Same root cause as writers_identified: without the real caller identified, we have no way to confirm how often this process runs.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

@@ -1,0 +1,68 @@
+<meta charset="utf-8">
+<title>WMBI.LOC_ID_EXCL_DT_XREF lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:765px}</style>
+<h1>WMBI.LOC_ID_EXCL_DT_XREF: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/loc_id_excl_dt_xref/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 765 364" width="765" height="364" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#B4B2A9">Manual entries (2017, 2019).  Last execution: 2019-11-25</text>
+<rect x="455" y="46" width="290" height="298" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="455" y1="83" x2="745" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="467" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.LOC_ID_EXCL_DT_XREF</text>
+<text x="467" y="78" font-size="10.5" fill="#534AB7">2 rows · 11 columns</text>
+<text x="467" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">LOC_ID_EXCL_DT_KEY</text>
+<text x="733" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">PK, single-column surr…</text>
+<line x1="455" y1="118" x2="745" y2="118" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="134" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="467" y="150" font-size="10.5" fill="#534AB7">LOC_ID_EXCL_DT_SEQ_TR, BEFORE EACH ROW</text>
+<text x="467" y="166" font-size="10.5" fill="#534AB7">INSERT, assigns LOC_ID_EXCL_DT_KEY</text>
+<line x1="455" y1="180" x2="745" y2="180" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="467" y="196" font-size="11" font-weight="500" fill="#26215C">Anomaly</text>
+<text x="467" y="212" font-size="10.5" fill="#534AB7">LOC_ID, LOC_EXCL_BEGIN_DT and LOC_EXCL_END_DT</text>
+<text x="467" y="228" font-size="10.5" fill="#534AB7">are each individually declared UNIQUE</text>
+<text x="467" y="244" font-size="10.5" fill="#534AB7">(catalog/keys_indexes.csv), not just part of</text>
+<text x="467" y="260" font-size="10.5" fill="#534AB7">a composite key: a store can never have more</text>
+<text x="467" y="276" font-size="10.5" fill="#534AB7">than one exclusion period recorded under the</text>
+<text x="467" y="292" font-size="10.5" fill="#534AB7">current design. Whether that is intentional</text>
+<text x="467" y="308" font-size="10.5" fill="#534AB7">is unconfirmed</text>
+</svg>
+</div>
+
+
+<h2>Findings</h2><ul class='findings'><li>Under the current design, a store can never have more than one exclusion period recorded, and no two rows can share the same begin or end date.</li>
+<li>This table holds only 2 rows, entered years apart by two different people and never updated since: store 0154 excluded from 2017-06-08 to 2017-07-12 (remodeling following an incident) and store 0191 excluded from 2019-11-24 to 2019-12-25 (a fire closure). There is no staging table or ongoing process feeding this table; it is entered by hand.</li>
+<li>The store reference and the two exclusion dates each point to the store and date reference tables correctly.</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>Whether it is intentional that a store can only ever have one exclusion period recorded has not been confirmed<br><span class='why'>If a store ever needed a second extended closure, the current design would not support it without a change, so this should be confirmed before carrying the same limitation into the target platform</span></li></ul>
+
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>

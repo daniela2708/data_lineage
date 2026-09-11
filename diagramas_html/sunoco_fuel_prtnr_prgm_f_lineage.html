@@ -1,0 +1,119 @@
+<meta charset="utf-8">
+<title>WMBI.SUNOCO_FUEL_PRTNR_PRGM_F lineage</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+color:#2C2C2A;background:#fff;margin:0;padding:32px 40px 60px;line-height:1.6}
+h1{font-size:22px;font-weight:500;margin:0 0 4px}
+h2{font-size:19px;font-weight:500;margin:40px 0 6px;padding-bottom:6px;border-bottom:2px solid #2C2C2A}
+h3{font-size:15.5px;font-weight:500;margin:26px 0 2px;color:#26215C}
+.sub{font-size:13px;color:#5F5E5A;margin:0 0 18px}
+.intro{font-size:13.5px;color:#5F5E5A;margin:0 0 8px;max-width:940px}
+.draft{background:#FCEBEB;border-left:3px solid #E24B4A;padding:10px 14px;margin:0 0 18px;
+font-size:13.5px;color:#501313;max-width:940px}
+.wrap{width:100%;overflow-x:auto}svg{display:block}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+background:#F1EFE8;padding:1px 4px;border-radius:3px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;margin:8px 0 0}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9}
+td.group-head{font-weight:500;color:#26215C;background:#F5F4F0;padding-top:10px}
+td.group-item{padding-left:26px}
+ul.findings{list-style:disc;margin:10px 0 0;padding-left:22px;max-width:940px}
+ul.findings li{margin:0 0 10px;font-size:13.5px}
+ul.pending{list-style:disc;margin:6px 0 0;max-width:940px;background:#F5F4F0;
+border-radius:6px;padding:10px 14px 10px 34px}
+ul.pending .why{color:#78766F;font-size:12.5px}
+ul.pending li{margin:0 0 6px;font-size:13px;color:#5F5E5A}
+ul.pending li:last-child{margin-bottom:0}
+ul.important-notes{background:#FAEEDA;border:1px solid #F0D9AE}
+ul.important-notes code{background:#F5E4C3}
+.foot{margin-top:40px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:12px}
+svg{min-width:1635px}</style>
+<h1>WMBI.SUNOCO_FUEL_PRTNR_PRGM_F: relational diagram of the current process</h1>
+<p class="sub">Oracle / TIBCO DataMigrator side. Generated from analysis/sunoco_fuel_prtnr_prgm_f/lineage.yml</p>
+
+<div class="wrap">
+<svg viewBox="0 0 1635 393" width="1635" height="393" xmlns="http://www.w3.org/2000/svg">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="20" y="38" font-size="12.5" font-weight="500" fill="#0F6E56">Live pipeline, code not exported.  Last execution: 2026-09-05</text>
+<rect x="20" y="46" width="215" height="155" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v86H20z" fill="#EAF0FB"/>
+<line x1="20" y1="136" x2="235" y2="136" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="30" y="63" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">sunoco_location_eod_report_vw</text>
+<text x="30" y="79" font-size="10.5" fill="#2E5FA3">plausible source view, via</text>
+<text x="30" y="95" font-size="10.5" fill="#2E5FA3">DataMigrator connection &#x27;picscs&#x27;;</text>
+<text x="30" y="111" font-size="10.5" fill="#2E5FA3">unconfirmed as this table&#x27;s</text>
+<text x="30" y="127" font-size="10.5" fill="#2E5FA3">actual feed</text>
+<line x1="20" y1="140" x2="235" y2="140" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="30" y="154" font-size="10.5" fill="#2E5FA3">read by a one-off, single-day</text>
+<text x="30" y="169" font-size="10.5" fill="#2E5FA3">diagnostic CSV extract, not a</text>
+<text x="30" y="184" font-size="10.5" fill="#2E5FA3">scheduled loader</text>
+<rect x="455" y="46" width="215" height="148" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v134H455z" fill="#E1F5EE"/>
+<line x1="455" y1="184" x2="670" y2="184" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="465" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="465" y="79" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">PSTG_SUNOCO_FUEL_PRTNR_PRGM_F</text>
+<text x="465" y="95" font-size="10.5" fill="#0F6E56">pre-staging landing table; a</text>
+<text x="465" y="111" font-size="10.5" fill="#0F6E56">loader by this name is confirmed</text>
+<text x="465" y="127" font-size="10.5" fill="#0F6E56">to have existed via its</text>
+<text x="465" y="143" font-size="10.5" fill="#0F6E56">DBMS-error master file, but the</text>
+<text x="465" y="159" font-size="10.5" fill="#0F6E56">.fex script itself is not in the</text>
+<text x="465" y="175" font-size="10.5" fill="#0F6E56">files we have</text>
+<rect x="890" y="46" width="215" height="199" rx="4" fill="#fff" stroke="#0F6E56" stroke-width="0.6"/>
+<path d="M890 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H890z" fill="#E1F5EE"/>
+<line x1="890" y1="120" x2="1105" y2="120" stroke="#0F6E56" stroke-width="0.6"/>
+<text x="900" y="63" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">WMBI_ETL.</text>
+<text x="900" y="79" font-size="10.5" font-weight="500" fill="#04342C" font-family="ui-monospace,Menlo,monospace">STG_SUNOCO_FUEL_PRTNR_PRGM_F</text>
+<text x="900" y="95" font-size="10.5" fill="#0F6E56">448 rows today; no file in the</text>
+<text x="900" y="111" font-size="10.5" fill="#0F6E56">files we have loads it</text>
+<line x1="890" y1="124" x2="1105" y2="124" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="900" y="138" font-size="10.5" fill="#0F6E56">writer stamp &#x27;SUNOCO via EME&#x27; on</text>
+<text x="900" y="153" font-size="10.5" fill="#0F6E56">the target; EME also seen, and</text>
+<text x="900" y="168" font-size="10.5" fill="#0F6E56">confirmed live, on CLUB_CARD_DIM.</text>
+<text x="900" y="183" font-size="10.5" fill="#0F6E56">A named pre-staging loader is now</text>
+<text x="900" y="198" font-size="10.5" fill="#0F6E56">confirmed to have existed (its</text>
+<text x="900" y="213" font-size="10.5" fill="#0F6E56">DBMS-error master file survives),</text>
+<text x="900" y="228" font-size="10.5" fill="#0F6E56">but its own .fex script does not</text>
+<rect x="890" y="259" width="215" height="70" rx="4" fill="#fff" stroke="#2E5FA3" stroke-width="0.6"/>
+<path d="M890 263a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H890z" fill="#EAF0FB"/>
+<line x1="890" y1="285" x2="1105" y2="285" stroke="#2E5FA3" stroke-width="0.6"/>
+<text x="900" y="276" font-size="10.5" font-weight="500" fill="#122C4C" font-family="ui-monospace,Menlo,monospace">WMBI.CLUB_CARD_DIM</text>
+<line x1="890" y1="289" x2="1105" y2="289" stroke="#D3D1C7" stroke-width="0.5"/>
+<text x="900" y="303" font-size="10.5" fill="#2E5FA3">declared FK, no writer confirmed</text>
+<line x1="235" y1="123.5" x2="451" y2="120.0" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="670" y1="120.0" x2="886" y2="145.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="1105" y1="145.5" x2="1321" y2="145.5" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<line x1="1105" y1="294.0" x2="1321" y2="294.0" stroke="#0F6E56" stroke-width="1.1" stroke-dasharray="4 3" marker-end="url(#a)"/>
+<rect x="1325" y="46" width="290" height="283" rx="4" fill="#fff" stroke="#534AB7" stroke-width="0.8"/>
+<path d="M1325 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z" fill="#EEEDFE"/>
+<line x1="1325" y1="83" x2="1615" y2="83" stroke="#534AB7" stroke-width="0.8"/>
+<text x="1337" y="64" font-size="12.5" font-weight="500" fill="#26215C" font-family="ui-monospace,Menlo,monospace">WMBI.SUNOCO_FUEL_PRTNR_PRGM_F</text>
+<text x="1337" y="78" font-size="10.5" fill="#534AB7">2,583,803 rows · 29 columns</text>
+<text x="1337" y="104" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">SUNOCO_FUEL_PRTNR_PRGM_KEY, TX_DT_KEY</text>
+<text x="1603" y="104" font-size="10" fill="#5F5E5A" text-anchor="end">P…</text>
+<text x="1337" y="120" font-size="10.5" fill="#2C2C2A" font-family="ui-monospace,Menlo,monospace">5-column business key</text>
+<text x="1603" y="120" font-size="10" fill="#5F5E5A" text-anchor="end">UK: TX_DT_KEY, PRTN…</text>
+<line x1="1325" y1="134" x2="1615" y2="134" stroke="#AFA9EC" stroke-width="0.5"/>
+<text x="1337" y="150" font-size="11" font-weight="500" fill="#26215C">Trigger</text>
+<text x="1337" y="166" font-size="10.5" fill="#534AB7">SUNOCO_FUEL_PRTNR_PRGM_SEQ_TR, BEFORE EACH</text>
+<text x="1337" y="182" font-size="10.5" fill="#534AB7">ROW INSERT, assigns</text>
+<text x="1337" y="198" font-size="10.5" fill="#534AB7">SUNOCO_FUEL_PRTNR_PRGM_KEY</text>
+</svg>
+</div>
+
+<h2>Dependencies</h2><h3>Built exclusively to load this table</h3><p class='intro'>Nothing outside this chain reads them.</p><table><tr><td class='group-head'>Loaded by <code>unresolved loader</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.STG_SUNOCO_FUEL_PRTNR_PRGM_F</code></td></tr>
+<tr><td class='group-item'><code>WMBI_ETL.PSTG_SUNOCO_FUEL_PRTNR_PRGM_F</code></td></tr></table><h3>Owned by other processes</h3><p class='intro'>Not created for this table, but it reads from them or receives rows through them.</p><table><tr><td><code>WMBI.CLUB_CARD_DIM: declared FK, no writer confirmed</code></td></tr>
+<tr><td><code>sunoco_location_eod_report_vw: plausible source view, read only by a one-off diagnostic extract, not confirmed as this table&#x27;s real feed</code></td></tr></table>
+<h2>Findings</h2><ul class='findings'><li>The process that loads this table is not included in the available files. All 2.58 million rows were written by the same system, identified only by the label &#x27;SUNOCO via EME&#x27;</li>
+<li>The CARD_TYPE field is empty on every one of the 2.58 million rows, even though the field exists both in this table&#x27;s schema and in the related extract file&#x27;s own columns. A later file export supplies the pre-staging loader&#x27;s own column layout, which marks this field MISSING=ON, but 18 of the file&#x27;s other 23 columns carry the same flag: a blanket tolerance on this error-capture descriptor, not a signal specific to CARD_TYPE. It does not explain why CARD_TYPE is the one blank on every single row</li>
+<li>A related file was found that extracts data from a similar source, a Sunoco location report, into a plain export file rather than into this table. Its columns closely match this table&#x27;s own columns, which suggests the same underlying source likely feeds this table, but that is not confirmed</li>
+<li>&#x27;EME&#x27;, the name identifying the system that writes to this table, is not explained anywhere in the available records. The same name identifies the writer of the Club Card dimension table as well, and is confirmed live and current on both tables</li>
+<li>A pre-staging loader, inferred to be named df_build_pstg_sunoco_fuel_prtnr_prgm_f by stripping the _DBMSERR suffix from its own FILENAME= field, is now confirmed to have existed: its DBMS-error master file, listing this table&#x27;s exact column layout, survives in a later file export. The loader&#x27;s own .fex script, and therefore its transformation logic and any schedule, is still not among the files we have</li>
+<li>No invalid record keys, no placeholder club card values, and no duplicate business keys were found across any of the 2.58 million rows</li></ul>
+<h2>Pending validation</h2><p class='intro'>Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten.</p><ul class='pending'><li>It has not been confirmed which system actually loads new data into this table. A related source, a Sunoco location report, was found, but it has not been proven to be the real feed<br><span class='why'>This table is live and growing daily, so confirming its true source matters for planning the migration</span></li>
+<li>It is unclear what system or platform &#x27;EME&#x27; refers to. The same name identifies the writer of both this table and the Club Card dimension table, and is confirmed live and current on both<br><span class='why'>Understanding it would clarify how much of the loyalty and rewards data relies on the same system, and whether other tables use it without yet being recognized</span></li>
+<li>Whether CARD_TYPE is ever populated by the upstream Sunoco/EME feed in practice is unconfirmed. Its loader&#x27;s error-capture layout tolerates a blank value on this field, but so do 18 other columns in the same descriptor (19 of 24 total), so this does not explain why CARD_TYPE alone is blank on every one of 2.58 million rows<br><span class='why'>It has been empty across the table&#x27;s entire history; this is still a real gap, not one the newer file evidence resolves</span></li></ul>
+<h2>Important notes</h2><p class='intro'>A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden.</p><ul class='pending important-notes'><li>Still unknown: who gets notified if this process fails.<br><span class='why'>The program that loads this table is not among the files we have (only its error-log file survives), so we have no way to see who is notified if it fails.</span></li>
+<li>Still unknown: whether this process runs on a set schedule.<br><span class='why'>Same root cause as alerts: without the loading program itself, we have no way to confirm how often it runs.</span></li></ul>
+<p class="foot">Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand</p>
