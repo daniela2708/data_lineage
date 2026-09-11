@@ -1,6 +1,7 @@
 import { useDeferredValue, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
 import { DATA } from '../../data/dataset'
 import { LINEAGE_REPORTS, type LineageReport, type ReportBlock } from '../../data/lineageReports'
+import { schemaGroupsForReport, shouldGroupBySchema, type SchemaGroup } from '../../lib/schemaGroups'
 import type { TableRec } from '../../types'
 
 const REPORT_OPTIONS = LINEAGE_REPORTS.map((report) => ({
@@ -10,6 +11,8 @@ const REPORT_OPTIONS = LINEAGE_REPORTS.map((report) => ({
 const SOURCE_OPTIONS = [...new Set(REPORT_OPTIONS.map(({ table }) => table?.src).filter((source): source is string => Boolean(source)))].sort()
 const PAIRED_SECTION_TITLES = new Set(['Dependencies', 'Findings', 'Pending validation', 'Important notes'])
 const SVG_VIEWBOX = /viewBox=["'](?:-?[\d.]+\s+){2}([\d.]+)\s+([\d.]+)["']/i
+const REPORT_NAME_LOOKUP = new Map(LINEAGE_REPORTS.map((report) => [report.tableName.toUpperCase(), report.tableName]))
+const SCHEMA_GROUPS_BY_REPORT = new Map(LINEAGE_REPORTS.map((report) => [report.sourceSha256, schemaGroupsForReport(report)]))
 
 function isTallDiagram(svg: string): boolean {
   const viewBox = svg.match(SVG_VIEWBOX)
@@ -209,9 +212,45 @@ function ReportSections({ sections }: { sections: LineageReport['sections'] }) {
   </div>
 }
 
-function SourceDiagram({ report, hasDependencies }: { report: LineageReport; hasDependencies: boolean }) {
+function SchemaExplorer({ groups, currentTable, onOpenReport }: { groups: SchemaGroup[]; currentTable: string; onOpenReport: (tableName: string) => void }) {
+  const tableCount = groups.reduce((total, group) => total + group.tables.length, 0)
+
+  return <section className="schema-explorer" aria-labelledby="schema-explorer-title">
+    <div className="schema-explorer-heading">
+      <div><span className="flow-kicker">Compact diagram index</span><h3 id="schema-explorer-title">Explore tables by schema</h3></div>
+      <span>{groups.length} schemas · {tableCount} tables</span>
+    </div>
+    <div className="schema-group-grid">
+      {groups.map((group) => <details className="schema-group" key={group.schema}>
+        <summary>
+          <span className="schema-group-icon" aria-hidden="true">{group.schema.slice(0, 2).toUpperCase()}</span>
+          <span className="schema-group-name"><strong>{group.schema}</strong><small>{group.tables.length} tables</small></span>
+          <i aria-hidden="true" />
+        </summary>
+        <ul>
+          {group.tables.map((table) => {
+            const reportName = REPORT_NAME_LOOKUP.get(table.tableName.toUpperCase())
+            const canOpen = Boolean(reportName && reportName !== currentTable)
+            return <li key={table.qualifiedName}>
+              {canOpen ? <button type="button" onClick={() => onOpenReport(reportName!)}>
+                <span>{table.tableName}</span><em>Open report</em>
+              </button> : <div className={reportName ? 'is-current' : undefined}>
+                <span>{table.tableName}</span><em>{reportName ? 'Current report' : 'Referenced table'}</em>
+              </div>}
+              {table.detail ? <small title={table.detail}>{table.detail}</small> : null}
+            </li>
+          })}
+        </ul>
+      </details>)}
+    </div>
+  </section>
+}
+
+function SourceDiagram({ report, hasDependencies, onOpenReport }: { report: LineageReport; hasDependencies: boolean; onOpenReport: (tableName: string) => void }) {
   const diagramRef = useRef<HTMLDivElement>(null)
   const tallDiagram = isTallDiagram(report.diagramSvg)
+  const schemaGroups = SCHEMA_GROUPS_BY_REPORT.get(report.sourceSha256) ?? []
+  const groupedDiagram = shouldGroupBySchema(schemaGroups)
 
   useLayoutEffect(() => {
     if (!diagramRef.current) return
@@ -228,6 +267,7 @@ function SourceDiagram({ report, hasDependencies }: { report: LineageReport; has
       </div>
     </div>
     <div className="report-legend" aria-label="Diagram legend"><span><i className="external" />External source</span><span><i className="live" />Live process</span><span><i className="injection" />Injection</span><span><i className="dependency" />Fact dependency</span><span><i className="target" />Target table</span><span><i className="legacy" />Inactive path</span></div>
+    {groupedDiagram ? <SchemaExplorer groups={schemaGroups} currentTable={report.tableName} onOpenReport={onOpenReport} /> : null}
     <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable lineage diagram for ${report.tableName}`}>
       <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: report.diagramSvg }} />
     </div>
@@ -244,7 +284,7 @@ export default function FlowView({ active: _active }: { active: boolean }) {
   return <div>
     <TableSelector value={selectedName} onChange={setSelectedName} />
     <TableSummary table={table} report={report} key={report.sourceFile} />
-    <SourceDiagram report={report} hasDependencies={hasDependencies} key={report.sourceSha256} />
+    <SourceDiagram report={report} hasDependencies={hasDependencies} onOpenReport={setSelectedName} key={report.sourceSha256} />
     <ReportSections sections={report.sections} />
     <p className="report-footer">{report.footer}</p>
   </div>
