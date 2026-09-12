@@ -212,42 +212,73 @@ function ReportSections({ sections }: { sections: LineageReport['sections'] }) {
   </div>
 }
 
-function SchemaExplorer({ groups, currentTable, onOpenReport }: { groups: SchemaGroup[]; currentTable: string; onOpenReport: (tableName: string) => void }) {
-  const tableCount = groups.reduce((total, group) => total + group.tables.length, 0)
+function reportProcessLabel(report: LineageReport): string {
+  const orchestrator = report.sections.find((section) => section.title === 'Orchestrator')
+  if (!orchestrator) return 'Documented loading process'
 
-  return <section className="schema-explorer" aria-labelledby="schema-explorer-title">
-    <div className="schema-explorer-heading">
-      <div><span className="flow-kicker">Compact diagram index</span><h3 id="schema-explorer-title">Explore tables by schema</h3></div>
-      <span>{groups.length} schemas · {tableCount} tables</span>
-    </div>
-    <div className="schema-group-grid">
-      {groups.map((group) => <details className="schema-group" key={group.schema}>
-        <summary>
-          <span className="schema-group-icon" aria-hidden="true">{group.schema.slice(0, 2).toUpperCase()}</span>
-          <span className="schema-group-name"><strong>{group.schema}</strong><small>{group.tables.length} tables</small></span>
-          <i aria-hidden="true" />
-        </summary>
-        <ul>
-          {group.tables.map((table) => {
-            const reportName = REPORT_NAME_LOOKUP.get(table.tableName.toUpperCase())
-            const canOpen = Boolean(reportName && reportName !== currentTable)
-            return <li key={table.qualifiedName}>
-              {canOpen ? <button type="button" onClick={() => onOpenReport(reportName!)}>
-                <span>{table.tableName}</span><em>Open report</em>
-              </button> : <div className={reportName ? 'is-current' : undefined}>
-                <span>{table.tableName}</span><em>{reportName ? 'Current report' : 'Referenced table'}</em>
-              </div>}
-              {table.detail ? <small title={table.detail}>{table.detail}</small> : null}
-            </li>
-          })}
-        </ul>
-      </details>)}
-    </div>
-  </section>
+  for (const block of orchestrator.blocks) {
+    if (block.type !== 'table') continue
+    const flowRow = block.rows.find((row) => row[0]?.text.trim().toLowerCase() === 'flow')
+    if (flowRow?.[1]?.text) return flowRow[1].text
+  }
+  return 'Documented loading process'
+}
+
+function SourceGroup({ group, currentTable, onOpenReport }: { group: SchemaGroup; currentTable: string; onOpenReport: (tableName: string) => void }) {
+  return <details className="compact-source-group">
+    <summary>
+      <span className="compact-group-stack" aria-hidden="true"><i /><i /><i /></span>
+      <span className="compact-group-copy"><strong>{group.schema}</strong><small>{group.tables.length} source tables</small></span>
+      <span className="compact-group-toggle" aria-hidden="true" />
+    </summary>
+    <ul>
+      {group.tables.map((table) => {
+        const reportName = REPORT_NAME_LOOKUP.get(table.tableName.toUpperCase())
+        const canOpen = Boolean(reportName && reportName !== currentTable)
+        return <li className="compact-source-table" key={table.qualifiedName}>
+          <div>
+            <span>{table.tableName}</span>
+            <em>{table.schema}</em>
+          </div>
+          {table.detail ? <small>{table.detail}</small> : null}
+          {canOpen ? <button type="button" onClick={() => onOpenReport(reportName!)}>Open table report</button> : null}
+        </li>
+      })}
+    </ul>
+  </details>
+}
+
+function CompactSourceDiagram({ groups, report, onOpenReport }: { groups: SchemaGroup[]; report: LineageReport; onOpenReport: (tableName: string) => void }) {
+  const tableCount = groups.reduce((total, group) => total + group.tables.length, 0)
+  const volume = report.rowCount !== null && report.columnCount !== null
+    ? `${report.rowCount.toLocaleString('en-US')} rows · ${report.columnCount.toLocaleString('en-US')} columns`
+    : 'Volume not documented'
+
+  return <div className="compact-lineage" role="region" aria-label={`${tableCount} upstream source tables grouped by schema, feeding ${report.qualifiedTable}`}>
+    <section className="compact-lineage-stage compact-source-stage" aria-label="Grouped upstream source tables">
+      <div className="compact-stage-label"><span>Upstream sources</span><em>{groups.length} {groups.length === 1 ? 'schema' : 'schemas'} · {tableCount} tables</em></div>
+      <div className="compact-source-groups">
+        {groups.map((group) => <SourceGroup group={group} currentTable={report.tableName} onOpenReport={onOpenReport} key={group.schema} />)}
+      </div>
+    </section>
+    <div className="compact-lineage-connector" aria-hidden="true"><span>feeds</span><i /></div>
+    <section className="compact-process-node" aria-label="Loading process">
+      <span>Loading process</span>
+      <strong>{reportProcessLabel(report)}</strong>
+      <small>Aggregated upstream path</small>
+    </section>
+    <div className="compact-lineage-connector" aria-hidden="true"><span>writes</span><i /></div>
+    <section className="compact-target-node" aria-label="Target table">
+      <span>Target table</span>
+      <strong>{report.qualifiedTable}</strong>
+      <small>{volume}</small>
+    </section>
+  </div>
 }
 
 function SourceDiagram({ report, hasDependencies, onOpenReport }: { report: LineageReport; hasDependencies: boolean; onOpenReport: (tableName: string) => void }) {
   const diagramRef = useRef<HTMLDivElement>(null)
+  const [originalOpen, setOriginalOpen] = useState(false)
   const tallDiagram = isTallDiagram(report.diagramSvg)
   const schemaGroups = SCHEMA_GROUPS_BY_REPORT.get(report.sourceSha256) ?? []
   const groupedDiagram = shouldGroupBySchema(schemaGroups)
@@ -256,7 +287,7 @@ function SourceDiagram({ report, hasDependencies, onOpenReport }: { report: Line
     if (!diagramRef.current) return
     fitDiagramText(diagramRef.current)
     if (!hasDependencies) centerIsolatedTable(diagramRef.current)
-  }, [hasDependencies, report.diagramSvg])
+  }, [hasDependencies, originalOpen, report.diagramSvg])
 
   return <section className={`report-diagram-card${tallDiagram ? ' is-tall' : ''}`}>
     <div className="report-diagram-heading">
@@ -267,10 +298,17 @@ function SourceDiagram({ report, hasDependencies, onOpenReport }: { report: Line
       </div>
     </div>
     <div className="report-legend" aria-label="Diagram legend"><span><i className="external" />External source</span><span><i className="live" />Live process</span><span><i className="injection" />Injection</span><span><i className="dependency" />Fact dependency</span><span><i className="target" />Target table</span><span><i className="legacy" />Inactive path</span></div>
-    {groupedDiagram ? <SchemaExplorer groups={schemaGroups} currentTable={report.tableName} onOpenReport={onOpenReport} /> : null}
-    <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable lineage diagram for ${report.tableName}`}>
+    {groupedDiagram ? <>
+      <CompactSourceDiagram groups={schemaGroups} report={report} onOpenReport={onOpenReport} />
+      <details className="original-diagram-disclosure" onToggle={(event) => setOriginalOpen(event.currentTarget.open)}>
+        <summary><span><strong>Full verified diagram</strong><small>Show every original node and connection</small></span><i aria-hidden="true" /></summary>
+        <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable full lineage diagram for ${report.tableName}`}>
+          <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: report.diagramSvg }} />
+        </div>
+      </details>
+    </> : <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable lineage diagram for ${report.tableName}`}>
       <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: report.diagramSvg }} />
-    </div>
+    </div>}
   </section>
 }
 

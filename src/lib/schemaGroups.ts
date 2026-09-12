@@ -1,7 +1,9 @@
 import type { LineageReport } from '../data/lineageReports'
 
 const QUALIFIED_TABLE = /\b([A-Za-z][A-Za-z0-9_$#]*)\.([A-Za-z][A-Za-z0-9_$#]*)\b/g
+const UNQUALIFIED_TABLES = /^([A-Za-z][A-Za-z0-9_$#]*(?:\s*\/\s*[A-Za-z][A-Za-z0-9_$#]*)*)\s*(?::|$)/
 const FILE_EXTENSIONS = new Set(['csv', 'fex', 'html', 'js', 'json', 'mjs', 'py', 'sql', 'ts', 'tsx', 'xlsx'])
+const UNKNOWN_SCHEMA = 'Schema not documented'
 
 export type SchemaTableReference = {
   schema: string
@@ -24,8 +26,33 @@ export function schemaGroupsForReport(report: LineageReport): SchemaGroup[] {
   if (!dependencies) return []
 
   const bySchema = new Map<string, Map<string, SchemaTableReference>>()
+  const targetTable = report.qualifiedTable.toUpperCase()
+  let upstream = true
+
+  const addReference = (schema: string, tableName: string, detail: string) => {
+    const schemaKey = schema.toUpperCase()
+    const tableKey = `${schema}.${tableName}`.toUpperCase()
+    if (tableKey === targetTable || tableName.toUpperCase() === report.tableName.toUpperCase()) return
+    const schemaTables = bySchema.get(schemaKey) ?? new Map<string, SchemaTableReference>()
+    const current = schemaTables.get(tableKey)
+
+    if (!current || (!current.detail && detail)) {
+      schemaTables.set(tableKey, {
+        schema,
+        tableName,
+        qualifiedName: schema === UNKNOWN_SCHEMA ? tableName : `${schema}.${tableName}`,
+        detail,
+      })
+    }
+    bySchema.set(schemaKey, schemaTables)
+  }
 
   for (const block of dependencies.blocks) {
+    if (block.type === 'heading') {
+      upstream = !block.text.toLowerCase().startsWith('depends on this table')
+      continue
+    }
+    if (!upstream) continue
     if (block.type !== 'table') continue
 
     for (const row of block.rows) {
@@ -39,20 +66,17 @@ export function schemaGroupsForReport(report: LineageReport): SchemaGroup[] {
 
         for (const match of matches) {
           const [, schema, tableName] = match
-          const schemaKey = schema.toUpperCase()
-          const tableKey = `${schema}.${tableName}`.toUpperCase()
-          const schemaTables = bySchema.get(schemaKey) ?? new Map<string, SchemaTableReference>()
-          const current = schemaTables.get(tableKey)
+          addReference(schema, tableName, detail)
+        }
 
-          if (!current || (!current.detail && detail)) {
-            schemaTables.set(tableKey, {
-              schema,
-              tableName,
-              qualifiedName: `${schema}.${tableName}`,
-              detail,
-            })
+        if (!matches.length && (cell.kind === 'item' || cell.kind === 'value')) {
+          const unqualified = cell.text.match(UNQUALIFIED_TABLES)
+          if (!unqualified) continue
+          const detailStart = unqualified[0].length
+          const unqualifiedDetail = cell.text.slice(detailStart).replace(/^[\s:;,.·/–—-]+/, '').trim()
+          for (const tableName of unqualified[1].split('/').map((name) => name.trim())) {
+            addReference(UNKNOWN_SCHEMA, tableName, unqualifiedDetail)
           }
-          bySchema.set(schemaKey, schemaTables)
         }
       }
     }
@@ -67,5 +91,5 @@ export function schemaGroupsForReport(report: LineageReport): SchemaGroup[] {
 }
 
 export function shouldGroupBySchema(groups: SchemaGroup[]): boolean {
-  return groups.length > 2 && groups.some((group) => group.tables.length > 3)
+  return groups.reduce((total, group) => total + group.tables.length, 0) > 3
 }
