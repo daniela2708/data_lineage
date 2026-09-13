@@ -1,0 +1,122 @@
+{
+ "sections": [
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.ITEM_DIM: provides item identification, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.LOC_DIM: provides store location, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.VENDOR_DIM: provides vendor identification, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "This cost table has been rebuilt at least eight times over the years. Only the newest copy is still active and updated this week. The other seven copies have been frozen since late 2019 or early 2020"
+      },
+      {
+       "text": "The true row count is 25.76 billion, measured directly, higher than the database's own quoted statistic of 24.1 billion. Both the measured count and the age of this table, with data going back to November 2019, are extraordinary for a cost table and should be sanity checked with the Weis team before repeating in a client deliverable"
+      },
+      {
+       "text": "One cost adjustment field is populated on only a small fraction of rows, effectively unused across this table's history. A related preferred-vendor field is populated on nearly all rows. The other adjustment fields checked are fully populated"
+      },
+      {
+       "text": "The same pattern repeats one step earlier in the pipeline: six copies of the landing table exist, only one is active"
+      },
+      {
+       "text": "Two sources write this table. One is the running load, HQ, responsible for essentially the entire table and still active today. The other, labelled COST OVERRIDE, touched a small number of rows and has been frozen since May 2023, a one time manual correction rather than an ongoing process"
+      },
+      {
+       "text": "No automatic key assignment happens on insert here, unlike most dimension tables in this warehouse. That is expected: the primary key is a business key (which store, which item, which effective date), not a generated one"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Which process currently loads this table's staging tables has not been identified yet, despite checking every likely folder for it.",
+       "note": "These staging tables are confirmed live, but the process that fills them has not been found or read. Column naming suggests the same external vendor cost system already seen elsewhere, but the specific process was not located."
+      },
+      {
+       "text": "What the two values of the fully populated status field mean has not been confirmed.",
+       "note": "A targeted check or reading the load logic would settle it."
+      },
+      {
+       "text": "A second table with the exact same name exists elsewhere in the warehouse, also with 26 columns. Whether it is live, a stale copy, or a duplicate has not been checked. It is excluded from this table's column list and the Data Dictionary until this is resolved, so the dictionary does not show unconfirmed content as if it were verified.",
+       "note": "A direct database check would settle whether this is a leftover copy, frozen like the other duplicate copies, or a real part of the chain."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Important notes",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Still unknown: whether this table pulls in data from another table after loading.",
+       "note": "We could not find the program that loads this table anywhere in the files we have, so we have no way to check whether it reads a second fact table as part of its load."
+      },
+      {
+       "text": "Still unknown: who gets notified if this process fails.",
+       "note": "Same root cause as reads_a_fact: without the loading program, we have no way to see who is notified if it fails."
+      },
+      {
+       "text": "Still unknown: whether this process runs on a set schedule.",
+       "note": "Same root cause as reads_a_fact: without the loading program, we have no way to confirm how often it runs."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 765 411\" width=\"765\" height=\"411\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">Dimension keys (carried, not confirmed by code)</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"72\" x2=\"235\" y2=\"72\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.ITEM_DIM</text>\n<line x1=\"20\" y1=\"76\" x2=\"235\" y2=\"76\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"90\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"105\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"120\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"151\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 155a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"177\" x2=\"235\" y2=\"177\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"168\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.LOC_DIM</text>\n<line x1=\"20\" y1=\"181\" x2=\"235\" y2=\"181\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"195\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"210\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"225\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"256\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 260a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"282\" x2=\"235\" y2=\"282\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"273\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.VENDOR_DIM</text>\n<line x1=\"20\" y1=\"286\" x2=\"235\" y2=\"286\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"300\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"315\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"330\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<line x1=\"235\" y1=\"91.5\" x2=\"451\" y2=\"91.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"196.5\" x2=\"451\" y2=\"196.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"301.5\" x2=\"451\" y2=\"301.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"455\" y=\"46\" width=\"290\" height=\"301\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"455\" y1=\"83\" x2=\"745\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"467\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.ITEM_COST_F</text>\n<text x=\"467\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">25,760,583,867 rows · 26 columns</text>\n<text x=\"467\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ACCT_EFF_DT_KEY</text>\n<text x=\"733\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK</text>\n<text x=\"467\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">LOC_KEY</text>\n<text x=\"733\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK</text>\n<text x=\"467\" y=\"136\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ITEM_KEY</text>\n<text x=\"733\" y=\"136\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK</text>\n<text x=\"467\" y=\"152\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">VENDOR_KEY</text>\n<text x=\"733\" y=\"152\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">nullable</text>\n<text x=\"467\" y=\"168\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">VENDOR_ITEM_KEY</text>\n<text x=\"733\" y=\"168\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">nullable</text>\n<line x1=\"455\" y1=\"182\" x2=\"745\" y2=\"182\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"198\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"467\" y=\"214\" font-size=\"10.5\" fill=\"#534AB7\">None. The primary key is a business key</text>\n<text x=\"467\" y=\"230\" font-size=\"10.5\" fill=\"#534AB7\">(effective date, store,</text>\n<text x=\"467\" y=\"246\" font-size=\"10.5\" fill=\"#534AB7\">item), not a generated one, so no sequence is</text>\n<text x=\"467\" y=\"262\" font-size=\"10.5\" fill=\"#534AB7\">needed.</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

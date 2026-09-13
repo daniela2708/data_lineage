@@ -35,28 +35,20 @@ src/
   types.ts                   the dataset contract, documented field by field
   data/
     lineage.json             generated browser-ready cache of the Excel catalog
-    lineageReports.json      generated structured content from every lineage HTML
+    lineageReports.json      generated index of every lineage HTML, one small entry each
+    reportDetails/           generated body of each report, one file per table
     lineageReportSummary.json small summary used before the report module loads
-    dataset.ts               typed access plus the derived slices used everywhere
+    dataset.ts               typed access to the catalog
+    anomalies.ts             the Phase 1 findings and the counts derived from them
   lib/
-    tokens.ts                palette, fonts, and the two colour rules
-    flowLayout.ts            pure geometry and timing for the animated chain
-    text.ts                  label wrapping and truncation for the SVG views
-  hooks/
-    useFlowTimeline.ts       one requestAnimationFrame loop, play, pause, speed
+    schemaGroups.ts          groups upstream sources by schema, free of React
+  lineage/                   HTML parser kept as validation, not wired into the app
   components/
-    Header, StatStrip
-    flow/    FlowView and the generated report renderer
-    table/   TableView, LineageGraph
-    estate/  EstateView
+    AppChrome, ExplorerNav, OverviewHeader, SummaryStrip, StatStrip, AccessGate
+    flow/        FlowView and the generated report renderer
+    anomalies/   AnomaliesView and the per-table finding
   index.css                  design tokens as custom properties, plus layout
 ```
-
-## The two rules the visuals follow
-
-**Impact colour** says how widely a change to a table would be felt, by the number of business cases that depend on it: one is green, two or three is aqua, four or more is red, none is grey. It is in `lib/tokens.ts` as `impact()`.
-
-**Zone colour** walks the layers from dark to red as the data moves towards published: SQL Server, Landing, Raw, Bronze, Silver, Gold, CSV, Snowflake. Also in `lib/tokens.ts` as `zoneColor()`.
 
 ## HTML lineage ingestion
 
@@ -65,6 +57,13 @@ src/
 report data. The build fails if a source information carrier is not represented exactly once.
 `scripts/validate_lineage_html_content.py` independently compares all generated report content
 with all source HTML files and can also verify the exact files published in `dist` with `--dist`.
+
+Each report is written twice over: a small entry in `lineageReports.json` holding the name,
+title, volume and checksum, and a file in `reportDetails/` holding the diagram and the parsed
+sections. The explorer shows one table at a time, so it loads the index once and fetches a single
+detail file when a table is opened, instead of shipping all 57 diagrams to read one. The split is
+a delivery concern only: nothing is dropped, and the validator rejoins the two halves before
+comparing them with the source HTML.
 
 ## Rules the data follows
 

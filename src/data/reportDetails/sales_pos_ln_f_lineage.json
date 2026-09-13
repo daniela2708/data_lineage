@@ -1,0 +1,262 @@
+{
+ "sections": [
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Built exclusively to load this table"
+    },
+    {
+     "type": "paragraph",
+     "text": "Nothing outside this chain reads them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI_ETL.STG_SALES_POS_LINE",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.AMS_OFFER_DIM: provides offer, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.CLUB_CARD_DIM: provides loyalty account, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.GL_DEPT_DIM: provides GL department coding, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.ITEM_DIM: provides item identification, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.LOC_DIM: provides store location, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.POS_DEPT_DIM: provides POS department, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.POS_ITEM_TYPE_DIM: provides POS item type, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.PRICE_LVL_DIM: provides price level, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.PRICE_TYPE_DIM: provides price type, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.TX_TYPE_DIM: provides transaction type, inferred (key column present in the target, no join to this dimension found in the files we have)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.LINK_CD_DIM: LEFT JOIN fallback for LINK_CD_KEY when staging's own approved key is null, read by df_wmbi_insert_sales_pos_line_facts",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, confirmed in code"
+    },
+    {
+     "type": "paragraph",
+     "text": ""
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by pf_do_unapproved_dim_procedures",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.CLUB_CARD_DIM: df_wmbi_unapproved_vals_club_card_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.LOC_DIM: df_wmbi_unapproved_vals_loc_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.ITEM_DIM: df_wmbi_unapproved_vals_item_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.TERMINAL_DIM: df_wmbi_unapproved_vals_terminal_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.POS_ITEM_TYPE_DIM: df_wmbi_unapproved_vals_pos_item_type_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.POS_DEPT_DIM: df_wmbi_unapproved_vals_pos_dept_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.GL_ACCT_DIM: df_wmbi_unapproved_vals_gl_acct_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.GL_BIZ_UNIT_DIM: df_wmbi_unapproved_vals_gl_biz_unit_dim, placeholder members",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.GL_DEPT_DIM: df_wmbi_unapproved_vals_gl_dept_dim, placeholder members",
+        "kind": "item"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The column recording when a row was last updated is populated for virtually every row, but the confirmed loading process does not set it; something else fills it in afterward. That process has not been located"
+      },
+      {
+       "text": "Four columns related to AMS offers and coupons are roughly 62 percent empty across the table, and the confirmed loading process does not populate them at all. Whatever fills them in today has not been identified"
+      },
+      {
+       "text": "The only known loading process for this table refers to a column name that no longer exists in the database; the current table uses a differently named column instead. It is not resolved whether this means the process being reviewed is out of date, or whether the current column is not actually being populated by any confirmed process"
+      },
+      {
+       "text": "This table is organized by day, the same approach used for the related transaction table, through today"
+      },
+      {
+       "text": "This table has no automatic key-assignment mechanism, the same as the related transaction table"
+      },
+      {
+       "text": "Of the 9 reference tables that receive placeholder entries from this table's data, all but one read this table's staging data directly; one instead reads a different staging table, despite being part of the same overall process"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The only known loading process for this table references a column that does not exist in the current database; a differently named column exists instead",
+       "note": "Since the table is loading successfully every day, either a newer version of this process exists that was not reviewed, or the current column is silently going unpopulated. This affects whether that column's data can be trusted for migration"
+      },
+      {
+       "text": "Four columns related to AMS offers and coupons are not populated by the only known loading process, despite existing on the table",
+       "note": "Needed to find whatever process actually determines the offer applied to a line item"
+      },
+      {
+       "text": "The process that actually schedules and runs this table's load has not been reviewed; it lives in a folder that was never provided",
+       "note": "Needed to confirm how often it runs and who is alerted if it fails"
+      },
+      {
+       "text": "What actually fills in the last-updated timestamp on this table has not been identified, since the known loading process leaves it blank",
+       "note": "A process significant enough to touch every row should be identifiable; not finding it points to a gap in the material reviewed so far"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Important notes",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Still unknown: who gets notified if this process fails.",
+       "note": "The actual caller of this process sits in a folder that was never made available to us, so we cannot see who is alerted if it fails."
+      },
+      {
+       "text": "Still unknown: whether this process runs on a set schedule.",
+       "note": "The same missing folder would show the real schedule; what we can see gives no schedule information either way."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 765 1404\" width=\"765\" height=\"1404\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">Line fact load</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"100\" rx=\"4\" fill=\"#fff\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#E1F5EE\"></path>\n<line x1=\"20\" y1=\"72\" x2=\"235\" y2=\"72\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#04342C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.STG_SALES_POS_LINE</text>\n<text x=\"30\" y=\"90\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">SALES_POS_LN_KEY</text>\n<line x1=\"20\" y1=\"100\" x2=\"235\" y2=\"100\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"114\" font-size=\"10.5\" fill=\"#0F6E56\">REFUND_RSN_KEY column mismatch,</text>\n<text x=\"30\" y=\"129\" font-size=\"10.5\" fill=\"#0F6E56\">see findings</text>\n<rect x=\"20\" y=\"160\" width=\"215\" height=\"100\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 164a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v86H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"250\" x2=\"235\" y2=\"250\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"177\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.LINK_CD_DIM</text>\n<text x=\"30\" y=\"193\" font-size=\"10.5\" fill=\"#2E5FA3\">LEFT JOIN fallback when staging&#x27;s</text>\n<text x=\"30\" y=\"209\" font-size=\"10.5\" fill=\"#2E5FA3\">own LINK_CD_KEY_APPROVED is null,</text>\n<text x=\"30\" y=\"225\" font-size=\"10.5\" fill=\"#2E5FA3\">matched on unapproved</text>\n<text x=\"30\" y=\"241\" font-size=\"10.5\" fill=\"#2E5FA3\">(APPRV_REC_IND=&#x27;N&#x27;) members</text>\n<line x1=\"235\" y1=\"96.0\" x2=\"451\" y2=\"96.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"274\" y=\"79\" width=\"142\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"92\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_wmbi_insert_sales_</text>\n<text x=\"345\" y=\"105\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">pos_line_facts</text>\n<line x1=\"235\" y1=\"210.0\" x2=\"451\" y2=\"210.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<text x=\"20\" y=\"296\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">Dimension keys (carried, not confirmed by code)</text>\n<rect x=\"20\" y=\"304\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 308a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"330\" x2=\"235\" y2=\"330\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"321\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.AMS_OFFER_DIM</text>\n<line x1=\"20\" y1=\"334\" x2=\"235\" y2=\"334\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"348\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"363\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"378\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"409\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 413a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"435\" x2=\"235\" y2=\"435\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"426\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.CLUB_CARD_DIM</text>\n<line x1=\"20\" y1=\"439\" x2=\"235\" y2=\"439\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"453\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"468\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"483\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"514\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 518a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"540\" x2=\"235\" y2=\"540\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"531\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.GL_DEPT_DIM</text>\n<line x1=\"20\" y1=\"544\" x2=\"235\" y2=\"544\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"558\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"573\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"588\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"619\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 623a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"645\" x2=\"235\" y2=\"645\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"636\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.ITEM_DIM</text>\n<line x1=\"20\" y1=\"649\" x2=\"235\" y2=\"649\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"663\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"678\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"693\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"724\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 728a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"750\" x2=\"235\" y2=\"750\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"741\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.LOC_DIM</text>\n<line x1=\"20\" y1=\"754\" x2=\"235\" y2=\"754\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"768\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"783\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"798\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"829\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 833a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"855\" x2=\"235\" y2=\"855\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"846\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.POS_DEPT_DIM</text>\n<line x1=\"20\" y1=\"859\" x2=\"235\" y2=\"859\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"873\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"888\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"903\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"934\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 938a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"960\" x2=\"235\" y2=\"960\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"951\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.POS_ITEM_TYPE_DIM</text>\n<line x1=\"20\" y1=\"964\" x2=\"235\" y2=\"964\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"978\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"993\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"1008\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"1039\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 1043a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"1065\" x2=\"235\" y2=\"1065\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"1056\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.PRICE_LVL_DIM</text>\n<line x1=\"20\" y1=\"1069\" x2=\"235\" y2=\"1069\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"1083\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"1098\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"1113\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"1144\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 1148a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"1170\" x2=\"235\" y2=\"1170\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"1161\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.PRICE_TYPE_DIM</text>\n<line x1=\"20\" y1=\"1174\" x2=\"235\" y2=\"1174\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"1188\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"1203\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"1218\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<rect x=\"20\" y=\"1249\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 1253a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"1275\" x2=\"235\" y2=\"1275\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"1266\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.TX_TYPE_DIM</text>\n<line x1=\"20\" y1=\"1279\" x2=\"235\" y2=\"1279\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"1293\" font-size=\"10.5\" fill=\"#2E5FA3\">key column present; no join to</text>\n<text x=\"30\" y=\"1308\" font-size=\"10.5\" fill=\"#2E5FA3\">this dimension found in the files</text>\n<text x=\"30\" y=\"1323\" font-size=\"10.5\" fill=\"#2E5FA3\">we have</text>\n<line x1=\"235\" y1=\"349.5\" x2=\"451\" y2=\"349.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"454.5\" x2=\"451\" y2=\"454.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"559.5\" x2=\"451\" y2=\"559.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"664.5\" x2=\"451\" y2=\"664.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"769.5\" x2=\"451\" y2=\"769.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"874.5\" x2=\"451\" y2=\"874.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"979.5\" x2=\"451\" y2=\"979.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"1084.5\" x2=\"451\" y2=\"1084.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"1189.5\" x2=\"451\" y2=\"1189.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"1294.5\" x2=\"451\" y2=\"1294.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"455\" y=\"46\" width=\"290\" height=\"1294\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"455\" y1=\"83\" x2=\"745\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"467\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.SALES_POS_LN_F</text>\n<text x=\"467\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">20,108,474,680 rows · 39 columns</text>\n<text x=\"467\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">SALES_POS_LN_KEY</text>\n<text x=\"733\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK (composite with ACCT_…</text>\n<text x=\"467\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ACCT_EFF_DT_KEY</text>\n<text x=\"733\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK (composite), also the p…</text>\n<text x=\"467\" y=\"136\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ORDINAL</text>\n<text x=\"733\" y=\"136\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK (composite with TX_ID and ACCT_E…</text>\n<line x1=\"455\" y1=\"150\" x2=\"745\" y2=\"150\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"166\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"467\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">None. Same as SALES_POS_TX_F, no sequence</text>\n<text x=\"467\" y=\"198\" font-size=\"10.5\" fill=\"#534AB7\">trigger exists on this table</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

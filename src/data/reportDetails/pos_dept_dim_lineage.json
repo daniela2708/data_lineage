@@ -1,0 +1,255 @@
+{
+ "sections": [
+  {
+   "title": "Orchestrator",
+   "blocks": [
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Flow",
+        "kind": "header"
+       },
+       {
+        "text": "df_upsert_pos_dept_dim.fex",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule in the file header",
+        "kind": "header"
+       },
+       {
+        "text": "DM_SCHDSTRT=201601080200, recurring, every 1 day",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule observed in the data",
+        "kind": "header"
+       },
+       {
+        "text": "newest REC_UPDT_DT for approved rows 2026-09-02 02:00:11, matches daily schedule",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Alerts to",
+        "kind": "header"
+       },
+       {
+        "text": "not recorded",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Steps that never run",
+        "kind": "header"
+       },
+       {
+        "text": "none found",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Built exclusively to load this table"
+    },
+    {
+     "type": "paragraph",
+     "text": "Nothing outside this chain reads them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by df_wmbi_upsert_pos_dept_dim.fex, source stg_pos_dept never populated (dead)",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.STG_POS_DEPT",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_POS_DEPT",
+        "kind": "item"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by df_upsert_pos_dept_dim.fex",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "store_department: the main source",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "accounting_department: feeds POS_DEPT_GL_DESC",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.POS_DEPT_DIM: self-join, resolves the existing key",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_SALES_POS_LINE: injects a placeholder department via df_wmbi_unapproved_vals_pos_dept_dim.fex (flagged broken by DataMigrator, unconfirmed either way)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_LOC_RCV_LN_F: injects a placeholder department via df_wmbi_unapproved_dim_vals_05_from_pstg_rcv_ln_f.fex / _06.fex; whether this pipeline is still live is unconfirmed (likely dead)",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, confirmed in code"
+    },
+    {
+     "type": "paragraph",
+     "text": ""
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.LOC_DEPT_PRICING_STRAT_XREF: INNER JOIN in df_loc_dept_pricing_strat_xref_upsert.fex",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, inferred from naming"
+    },
+    {
+     "type": "paragraph",
+     "text": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "INV_AS_COUNTED_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "LOC_DSD_INVOICE_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "RECLM_SCAN_DETAIL_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "SALES_POS_LN_F",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The tables originally expected to feed this dimension are empty and unused. That did not mean the dimension itself is dead: a different process loads it directly from HQ's store department and accounting systems, with no intermediate staging step, and updates it daily, most recently today. This is the same pattern already found on the location dimension (LOC_DIM): same author, same scheduling style, same direct-load-from-HQ approach. Confirmed by directly checking: neither source table exists anywhere in this Oracle environment, under any schema or object type."
+      },
+      {
+       "text": "The live loading process's own internal activity logging is mislabeled under a different process's name, not its own. The identical mistake was already found on the location dimension's loader, which logged under yet another process's name. This looks like a repeated copy-paste habit across this author's direct-load files, not an isolated mistake."
+      },
+      {
+       "text": "6 of the 101 department rows are unapproved placeholders, not real departments, and all have been frozen since 2014-2015, never touched again. The current live loader is not responsible for them: it always marks new rows as approved when its own source data is missing. Two utility processes exist that could in theory create this kind of placeholder, but neither can be tied to these specific 6 rows, and one of them is flagged as broken. Where these 6 rows actually came from is unconfirmed. This matters because one of them, department code '000', is behind 2,678,364 sales records, not a trivial edge case."
+      },
+      {
+       "text": "A second, undocumented table (PROD_POS_DEPT_DIM) exists with the exact same structure as this one. Its earliest record matches this table's earliest record down to a fraction of a second, strongly suggesting it is a copy taken at some point. It has not been touched since 2019, and nothing in the available material explains its purpose."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The purpose and origin of the second, undocumented table (PROD_POS_DEPT_DIM) are unknown, despite its structure and earliest record matching this table exactly.",
+       "note": "If this is a genuine backup or an old copy, it likely does not need migrating. If it is a second table still in active use elsewhere, that changes the migration plan. Ask the Weis team directly what this table is."
+      },
+      {
+       "text": "The process that loads this table daily has no clear owning process or caller identified anywhere in the available material, the same gap already seen on the location dimension and another table.",
+       "note": "Worth confirming with the Weis team, via the scheduler that actually runs these jobs, that this process genuinely runs on its own."
+      },
+      {
+       "text": "The 6 frozen 2014-2015 unapproved department rows cannot be traced to any known process, and one of them (department code '000') is behind 2,678,364 sales records.",
+       "note": "Not a low-priority detail: a meaningful volume of sales data resolves to an unapproved, undescribed department. Worth asking Weis directly what department code '000' represents and whether it should be a real, approved department."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 1200 736\" width=\"1200\" height=\"736\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">pos dept dim upsert  ·  orchestrator: df_upsert_pos_dept_dim.fex</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"84\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"120\" x2=\"235\" y2=\"120\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">store_department</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" fill=\"#2E5FA3\">external HQ store department</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#2E5FA3\">system, the main source. Schema</text>\n<text x=\"30\" y=\"111\" font-size=\"10.5\" fill=\"#2E5FA3\">not visible to this discovery</text>\n<rect x=\"20\" y=\"144\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 148a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"202\" x2=\"235\" y2=\"202\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"161\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">accounting_department</text>\n<text x=\"30\" y=\"177\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves POS_DEPT_GL_DESC, by GL</text>\n<text x=\"30\" y=\"193\" font-size=\"10.5\" fill=\"#2E5FA3\">code</text>\n<rect x=\"20\" y=\"228\" width=\"215\" height=\"84\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 232a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"302\" x2=\"235\" y2=\"302\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"245\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.POS_DEPT_DIM</text>\n<text x=\"30\" y=\"261\" font-size=\"10.5\" fill=\"#2E5FA3\">self-join, resolves the existing</text>\n<text x=\"30\" y=\"277\" font-size=\"10.5\" fill=\"#2E5FA3\">POS_DEPT_KEY for an update, or -1</text>\n<text x=\"30\" y=\"293\" font-size=\"10.5\" fill=\"#2E5FA3\">for a new department</text>\n<line x1=\"235\" y1=\"88.0\" x2=\"886\" y2=\"88.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"498\" y=\"71\" width=\"130\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"562\" y=\"84\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_upsert_pos_dept_</text>\n<text x=\"562\" y=\"97\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">dim.fex (DEP_MAIN)</text>\n<line x1=\"235\" y1=\"179.0\" x2=\"886\" y2=\"179.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"270.0\" x2=\"886\" y2=\"270.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<text x=\"20\" y=\"348\" font-size=\"12.5\" font-weight=\"500\" fill=\"#B4B2A9\">via stg_pos_dept (dead).  Last execution: never, 0 rows recorded</text>\n<rect x=\"20\" y=\"356\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M20 360a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#F1EFE8\"></path>\n<line x1=\"20\" y1=\"382\" x2=\"235\" y2=\"382\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"373\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.PSTG_POS_DEPT</text>\n<line x1=\"20\" y1=\"386\" x2=\"235\" y2=\"386\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"400\" font-size=\"10.5\" fill=\"#B4B2A9\">also empty, no timestamp</text>\n<rect x=\"455\" y=\"356\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M455 360a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H455z\" fill=\"#F1EFE8\"></path>\n<line x1=\"455\" y1=\"382\" x2=\"670\" y2=\"382\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"465\" y=\"373\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.STG_POS_DEPT</text>\n<line x1=\"455\" y1=\"386\" x2=\"670\" y2=\"386\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"465\" y=\"400\" font-size=\"10.5\" fill=\"#B4B2A9\">empty, and its own scheduler is</text>\n<text x=\"465\" y=\"415\" font-size=\"10.5\" fill=\"#B4B2A9\">flagged broken</text>\n<line x1=\"235\" y1=\"391.0\" x2=\"451\" y2=\"394.0\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"670\" y1=\"394.0\" x2=\"886\" y2=\"394.0\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"700\" y=\"377\" width=\"160\" height=\"34\" rx=\"3\" fill=\"#F1EFE8\" stroke=\"#D3D1C7\" stroke-width=\"0.6\"></rect>\n<text x=\"780\" y=\"390\" font-size=\"10\" fill=\"#B4B2A9\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_wmbi_upsert_pos_dept_</text>\n<text x=\"780\" y=\"403\" font-size=\"10\" fill=\"#B4B2A9\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">dim.fex (DEP_MAIN)</text>\n<text x=\"20\" y=\"468\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">unapproved value injection</text>\n<rect x=\"20\" y=\"476\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 480a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#FAEEDA\"></path>\n<line x1=\"20\" y1=\"502\" x2=\"235\" y2=\"502\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"493\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.PSTG_SALES_POS_LINE</text>\n<line x1=\"20\" y1=\"506\" x2=\"235\" y2=\"506\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"520\" font-size=\"10.5\" fill=\"#854F0B\">flagged broken by DataMigrator,</text>\n<text x=\"30\" y=\"535\" font-size=\"10.5\" fill=\"#854F0B\">never confirmed to run</text>\n<line x1=\"235\" y1=\"514.0\" x2=\"886\" y2=\"514.0\" stroke=\"#854F0B\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"470\" y=\"497\" width=\"184\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#FAC775\" stroke-width=\"0.6\"></rect>\n<text x=\"562\" y=\"510\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_wmbi_unapproved_vals_pos_</text>\n<text x=\"562\" y=\"523\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">dept_dim.fex (DEP_MAIN)</text>\n<text x=\"20\" y=\"588\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">unapproved value injection (receiving line)</text>\n<rect x=\"20\" y=\"596\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 600a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#FAEEDA\"></path>\n<line x1=\"20\" y1=\"622\" x2=\"235\" y2=\"622\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"613\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.PSTG_LOC_RCV_LN_F</text>\n<line x1=\"20\" y1=\"626\" x2=\"235\" y2=\"626\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"640\" font-size=\"10.5\" fill=\"#854F0B\">whether this pipeline still runs</text>\n<text x=\"30\" y=\"655\" font-size=\"10.5\" fill=\"#854F0B\">is unconfirmed, likely dead</text>\n<line x1=\"235\" y1=\"634.0\" x2=\"886\" y2=\"634.0\" stroke=\"#854F0B\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"462\" y=\"604\" width=\"200\" height=\"60\" rx=\"3\" fill=\"#fff\" stroke=\"#FAC775\" stroke-width=\"0.6\"></rect>\n<text x=\"562\" y=\"617\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_wmbi_unapproved_dim_vals_05_</text>\n<text x=\"562\" y=\"630\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">from_pstg_rcv_ln_f.fex (DEP_MAIN)</text>\n<text x=\"562\" y=\"643\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_wmbi_unapproved_dim_vals_06_</text>\n<text x=\"562\" y=\"656\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">from_pstg_rcv_ln_f.fex (DEP_MAIN)</text>\n<rect x=\"890\" y=\"46\" width=\"290\" height=\"626\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M890 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"890\" y1=\"83\" x2=\"1180\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"902\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.POS_DEPT_DIM</text>\n<text x=\"902\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">101 rows · 15 columns</text>\n<text x=\"902\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">POS_DEPT_KEY</text>\n<text x=\"1168\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK, surrogate, by trigger, on…</text>\n<text x=\"902\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">POS_DEPT_ID</text>\n<text x=\"1168\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK, the POS department code</text>\n<line x1=\"890\" y1=\"134\" x2=\"1180\" y2=\"134\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"902\" y=\"150\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"902\" y=\"166\" font-size=\"10.5\" fill=\"#534AB7\">POS_DEPT_SEQ_TR, BEFORE EACH ROW, INSERT,</text>\n<text x=\"902\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">ENABLED</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

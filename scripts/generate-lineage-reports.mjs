@@ -1,11 +1,28 @@
 import { createHash } from 'node:crypto'
-import { readdir, readFile, writeFile } from 'node:fs/promises'
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { HTMLElement, parse } from 'node-html-parser'
 
 const sourceDirectory = resolve('diagramas_html')
-const outputPath = resolve('src/data/lineageReports.json')
+const indexOutputPath = resolve('src/data/lineageReports.json')
+const detailOutputDirectory = resolve('src/data/reportDetails')
 const summaryOutputPath = resolve('src/data/lineageReportSummary.json')
+
+/**
+ * A report is written as a small index entry plus a detail file, because the
+ * explorer shows one table at a time: bundling all 57 diagrams and section
+ * trees would ship roughly 780 kB to render a single report. The split is a
+ * delivery concern only, nothing is dropped. scripts/validate_lineage_html_content.py
+ * rejoins the two halves and checks the result against the source HTML.
+ */
+const INDEX_FIELDS = [
+  'tableName', 'qualifiedTable', 'title', 'subtitle', 'sourceFile',
+  'publicPath', 'sourceSha256', 'rowCount', 'columnCount', 'carrierCount',
+]
+const DETAIL_FIELDS = ['sections', 'diagramSvg', 'footer']
+
+const pick = (report, fields) => Object.fromEntries(fields.map((field) => [field, report[field]]))
+const detailFileName = (sourceFile) => `${sourceFile.replace(/[.]html$/, '')}.json`
 
 const normalize = (value) => value.trim().replace(/\s+/g, ' ')
 const textOf = (element) => normalize(element.text)
@@ -176,8 +193,21 @@ const summary = {
   carrierCount: reports.reduce((total, report) => total + report.carrierCount, 0),
   catalogTableCount: catalog.tables.length,
 }
+await mkdir(detailOutputDirectory, { recursive: true })
+const staleDetailFiles = (await readdir(detailOutputDirectory)).filter((name) => name.endsWith('.json'))
+const currentDetailFiles = new Set(reports.map((report) => detailFileName(report.sourceFile)))
+
 await Promise.all([
-  writeFile(outputPath, `${JSON.stringify({ reports }, null, 1)}\n`),
+  writeFile(indexOutputPath, `${JSON.stringify({ reports: reports.map((report) => pick(report, INDEX_FIELDS)) }, null, 1)}\n`),
   writeFile(summaryOutputPath, `${JSON.stringify(summary, null, 1)}\n`),
+  ...reports.map((report) => writeFile(
+    resolve(detailOutputDirectory, detailFileName(report.sourceFile)),
+    `${JSON.stringify(pick(report, DETAIL_FIELDS), null, 1)}\n`,
+  )),
 ])
+
+const orphaned = staleDetailFiles.filter((name) => !currentDetailFiles.has(name))
+if (orphaned.length) {
+  console.warn(`Detail files without a source HTML report, safe to remove: ${orphaned.join(', ')}`)
+}
 console.log(`Generated ${reports.length} lineage reports from diagramas_html with complete semantic coverage`)

@@ -1,22 +1,35 @@
 import { lazy, Suspense, useState } from 'react'
-import AccessGate, { hasSessionAccess } from './components/AccessGate'
-import Header from './components/Header'
-import StatStrip from './components/StatStrip'
+import AccessGate from './components/AccessGate'
+import AppChrome from './components/AppChrome'
+import ExplorerNav, { type ExplorerSection } from './components/ExplorerNav'
 import { LINEAGE_REPORT_SUMMARY } from './data/lineageReportSummary'
 
 const FlowView = lazy(() => import('./components/flow/FlowView'))
+const AnomaliesView = lazy(() => import('./components/anomalies/AnomaliesView'))
 
 export default function App() {
-  const [hasAccess, setHasAccess] = useState(hasSessionAccess)
+  const [hasAccess, setHasAccess] = useState(false)
+  const [section, setSection] = useState<ExplorerSection>('lineage')
+  const [selectedTableName, setSelectedTableName] = useState('')
 
   if (!hasAccess) return <AccessGate onUnlock={() => setHasAccess(true)} />
 
+  const openLineage = (tableName: string) => {
+    setSelectedTableName(tableName)
+    setSection('lineage')
+    requestAnimationFrame(() => document.querySelector('main')?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
+
   return (
     <>
-      <Header />
-      <StatStrip />
-      <div className="page-shell wrap wide">
-        <main><Suspense fallback={<p className="lineage-loading">Loading lineage reports…</p>}><FlowView active /></Suspense></main>
+      <AppChrome />
+      <ExplorerNav value={section} onChange={setSection} />
+      <div className="page-shell wrap">
+        <main><Suspense fallback={<p className="lineage-loading">Loading explorer…</p>}>
+          {section === 'lineage'
+            ? <FlowView selectedTableName={selectedTableName} onSelectTable={setSelectedTableName} />
+            : <AnomaliesView onOpenLineage={openLineage} />}
+        </Suspense></main>
       </div>
       <footer>
         <div className="page-shell footer-inner">

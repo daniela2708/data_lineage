@@ -1,0 +1,196 @@
+{
+ "sections": [
+  {
+   "title": "Orchestrator",
+   "blocks": [
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Flow",
+        "kind": "header"
+       },
+       {
+        "text": "dlf_vendor_item_adjustment.fex",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule in the file header",
+        "kind": "header"
+       },
+       {
+        "text": "DM_SCHDSTRT=201610030700, recurring, every 1 day",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule observed in the data",
+        "kind": "header"
+       },
+       {
+        "text": "newest REC_UPDT_DT 2026-09-01 07:00:44, matches the 07:00 daily schedule",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Alerts to",
+        "kind": "header"
+       },
+       {
+        "text": "not recorded",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Steps that never run",
+        "kind": "header"
+       },
+       {
+        "text": "none found",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Built exclusively to load this table"
+    },
+    {
+     "type": "paragraph",
+     "text": "Nothing outside this chain reads them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "STG_VENDOR_ITEM_ADJ_F: loaded by pstg_vendor_item_adj.fex, truncated and reloaded every run",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by dlf_vendor_item_adjustment.fex (DEP_MAIN) → WMBI.VENDOR_ITEM_ADJ_F",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "VENDOR_DIM: key lookup",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "VENDOR_ITEM_XREF: key lookup",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "LOC_DIM: key lookup",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "ADJ_CD_DIM: key lookup",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WAREHOUSE_SUPPL_DIM: key lookup",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "DT_DIM: key lookup",
+        "kind": "item"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Four fields, EVENT_ID, LABEL_SCHEME, BILLBACK_VENDOR_KEY and WAREHOUSE_SUPPL_KEY, are never populated on any of the table's 2.98 million rows"
+      },
+      {
+       "text": "This table's staging area appeared empty at the time of review, but that is expected: it is cleared and reloaded fresh on every run. The daily schedule and the table's most recent update confirm this loading process is live and running"
+      },
+      {
+       "text": "This table only ever adds new records; existing rows are never updated in place. Every incoming record is always treated as brand new when it is loaded"
+      },
+      {
+       "text": "New data is added to this table's staging area only for records that changed since the last successful run, not as a full daily reload. This means the staging area can legitimately be empty on a given day if nothing changed upstream, which does not indicate the process is broken"
+      },
+      {
+       "text": "No duplicate records were found on the table's full business key, consistent with the table only ever adding new rows and never updating existing ones"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "This table's loading process appears to run directly on its own schedule, without a parent orchestrator process, unlike most other tables in this project",
+       "note": "Worth confirming with the team that manages the scheduler that this is really a standalone job, and not one missing a parent process that was left out of the available files"
+      },
+      {
+       "text": "No specific alert recipient has been identified for this table's loading process; only a generic logging destination is named",
+       "note": "Need to know who to notify if this process breaks during the migration cutover; this should be confirmed directly with the Weis team"
+      },
+      {
+       "text": "No process or report that reads from this table has been confirmed in the available files",
+       "note": "The available files are a partial export, and the roughly 1,100 reports that read from the warehouse are largely not included, so this table could still feed reports not visible in this review. A fuller export, or direct confirmation from the Weis team, would settle this before treating the table as having no downstream consumers"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 765 751\" width=\"765\" height=\"751\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">vendor item adj load  ·  orchestrator: dlf_vendor_item_adjustment.fex</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"109\" rx=\"4\" fill=\"#fff\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#E1F5EE\"></path>\n<line x1=\"20\" y1=\"120\" x2=\"235\" y2=\"120\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#04342C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.STG_VENDOR_ITEM_ADJ_F</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" fill=\"#0F6E56\">incremental, filtered on</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#0F6E56\">RECORD_STATUS_DATE &gt; last run&#x27;s</text>\n<text x=\"30\" y=\"111\" font-size=\"10.5\" fill=\"#0F6E56\">cutoff</text>\n<line x1=\"20\" y1=\"124\" x2=\"235\" y2=\"124\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"138\" font-size=\"10.5\" fill=\"#0F6E56\">truncated and reloaded every run</text>\n<rect x=\"20\" y=\"169\" width=\"215\" height=\"84\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 173a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"243\" x2=\"235\" y2=\"243\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"186\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.VENDOR_DIM</text>\n<text x=\"30\" y=\"202\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves VENDOR_KEY and</text>\n<text x=\"30\" y=\"218\" font-size=\"10.5\" fill=\"#2E5FA3\">BILLBACK_VENDOR_KEY, by source</text>\n<text x=\"30\" y=\"234\" font-size=\"10.5\" fill=\"#2E5FA3\">vendor id</text>\n<rect x=\"20\" y=\"267\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 271a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"309\" x2=\"235\" y2=\"309\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"284\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.VENDOR_ITEM_XREF</text>\n<text x=\"30\" y=\"300\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves VENDOR_ITEM_KEY</text>\n<rect x=\"20\" y=\"351\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 355a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"409\" x2=\"235\" y2=\"409\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"368\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.LOC_DIM</text>\n<text x=\"30\" y=\"384\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves LOC_KEY, by source store</text>\n<text x=\"30\" y=\"400\" font-size=\"10.5\" fill=\"#2E5FA3\">id</text>\n<rect x=\"20\" y=\"435\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 439a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"477\" x2=\"235\" y2=\"477\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"452\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.ADJ_CD_DIM</text>\n<text x=\"30\" y=\"468\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves ADJ_CD_KEY</text>\n<rect x=\"20\" y=\"519\" width=\"215\" height=\"84\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 523a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"593\" x2=\"235\" y2=\"593\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"536\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.WAREHOUSE_SUPPL_DIM</text>\n<text x=\"30\" y=\"552\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves WAREHOUSE_SUPPL_KEY.</text>\n<text x=\"30\" y=\"568\" font-size=\"10.5\" fill=\"#2E5FA3\">Measured 0 of 2,983,676 rows</text>\n<text x=\"30\" y=\"584\" font-size=\"10.5\" fill=\"#2E5FA3\">populated</text>\n<rect x=\"20\" y=\"617\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 621a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"675\" x2=\"235\" y2=\"675\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"634\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.DT_DIM</text>\n<text x=\"30\" y=\"650\" font-size=\"10.5\" fill=\"#2E5FA3\">resolves ADJ_START_DT_KEY and</text>\n<text x=\"30\" y=\"666\" font-size=\"10.5\" fill=\"#2E5FA3\">ADJ_END_DT_KEY</text>\n<line x1=\"235\" y1=\"100.5\" x2=\"451\" y2=\"100.5\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"262\" y=\"84\" width=\"166\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"96\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">dlf_vendor_item_</text>\n<text x=\"345\" y=\"110\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">adjustment.fex (DEP_MAIN)</text>\n<line x1=\"235\" y1=\"211.0\" x2=\"451\" y2=\"211.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"302.0\" x2=\"451\" y2=\"302.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"386.0\" x2=\"451\" y2=\"386.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"470.0\" x2=\"451\" y2=\"470.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"561.0\" x2=\"451\" y2=\"561.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"652.0\" x2=\"451\" y2=\"652.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"455\" y=\"46\" width=\"290\" height=\"641\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"455\" y1=\"83\" x2=\"745\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"467\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.VENDOR_ITEM_ADJ_F</text>\n<text x=\"467\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">2,983,676 rows · 55 columns</text>\n<text x=\"467\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">VENDOR_ITEM_ADJ_KEY</text>\n<text x=\"733\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK, surrogate, by tri…</text>\n<text x=\"467\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">VENDOR_KEY</text>\n<text x=\"733\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"136\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">VENDOR_ITEM_KEY</text>\n<text x=\"733\" y=\"136\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"152\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">COST_ZONE</text>\n<text x=\"733\" y=\"152\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"168\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">LOC_KEY</text>\n<text x=\"733\" y=\"168\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"184\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ADJ_CD_KEY</text>\n<text x=\"733\" y=\"184\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"200\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ADJ_START_DT_KEY</text>\n<text x=\"733\" y=\"200\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"216\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">PROCESS_ORDER</text>\n<text x=\"733\" y=\"216\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"467\" y=\"232\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ADJ_SEQ</text>\n<text x=\"733\" y=\"232\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<line x1=\"455\" y1=\"246\" x2=\"745\" y2=\"246\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"262\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"467\" y=\"278\" font-size=\"10.5\" fill=\"#534AB7\">VENDOR_ITEM_ADJ_F_SEQ_TR, BEFORE EACH ROW,</text>\n<text x=\"467\" y=\"294\" font-size=\"10.5\" fill=\"#534AB7\">INSERT, ENABLED</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

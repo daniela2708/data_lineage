@@ -1,0 +1,195 @@
+{
+ "sections": [
+  {
+   "title": "Orchestrator",
+   "blocks": [
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Flow",
+        "kind": "header"
+       },
+       {
+        "text": "df_upsert_scenario_dim.fex",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule in the file header",
+        "kind": "header"
+       },
+       {
+        "text": "DM_SCHDSTRT=201511120200, Recurring, Every 01 Day(s), since 2015-11-12 02:00",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule observed in the data",
+        "kind": "header"
+       },
+       {
+        "text": "table frozen since 2017-01-18 13:55:15; no row has changed",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Alerts to",
+        "kind": "header"
+       },
+       {
+        "text": "not recorded",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Steps that never run",
+        "kind": "header"
+       },
+       {
+        "text": "none found",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "qty_semantic: source of df_upsert_scenario_dim.fex, unresolved (dead)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.STG_SALES_DAILY_BUDGET_F: read by df_ins_unappr_val_scenario_dim_param.fex, placeholder injector",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, inferred from naming"
+    },
+    {
+     "type": "paragraph",
+     "text": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.SALES_DAILY_BUDGET_F: carries SCENARIO_KEY",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.LABOR_DAILY_BUDGET_F: carries SCENARIO_KEY",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.ITEM_DAILY_BUDGET_F: carries SCENARIO_KEY, not in this project's 63-table scope",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The one loading process found for this table reads from a source that does not exist anywhere in this Oracle environment. The process is scheduled to run daily and has been since 2015, but whether it actually runs successfully, or fails silently every day against a missing source, is unconfirmed"
+      },
+      {
+       "text": "This table holds only 5 rows, all created within the same half hour on 2017-01-18, and none has changed since. This is the complete, stable list of business scenarios Weis reports budgets against (Actual, Budgeted, Projected, Actual (approx), Preacquisition Sales)"
+      },
+      {
+       "text": "A related, live table elsewhere in the warehouse carries a column referencing the same missing concept, confirming it is a real idea used elsewhere in the business, not a typo confined to one file. This does not resolve where the missing source table itself actually is"
+      },
+      {
+       "text": "A changelog note in a later file export confirms QTY_SEMANTIC_DIM, read as the loader's missing qty_semantic source by name match, was decommissioned in 2014. Its own last change to this table was in 2017, a 3 year gap this note does not explain, but it does confirm the job's source has been gone for over a decade, not merely mistyped or recently dropped"
+      },
+      {
+       "text": "No staging table has ever existed for this table, unlike almost every other reference table in this project; the loading process writes directly into the final table"
+      },
+      {
+       "text": "This table has no record of who last updated each row, unlike every other reference table reviewed so far; only a record of who created it, the same value on all 5 rows"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Whether this table's daily loading process still runs at all is unconfirmed, since its source does not exist in this Oracle environment",
+       "note": "Five business scenarios is a very small, stable list, but a daily job that can only ever fail against a missing source should either be fixed or retired before migration, not carried forward silently"
+      },
+      {
+       "text": "No specific person or team was found who is alerted if this daily job fails",
+       "note": "Needed to know who, if anyone, is actually notified when this process fails"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Important notes",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Still unknown: who gets notified if this process fails.",
+       "note": "The loader's own header names only generic log destinations (ETLLOG, E-Mail), not a specific person or team, so we cannot confirm who, if anyone, is notified if this daily job fails against its missing source."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 765 438\" width=\"765\" height=\"438\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#B4B2A9\">Daily upsert, source unresolved.  Last execution: 2017-01-18, initial load</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"177\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z\" fill=\"#F1EFE8\"></path>\n<line x1=\"20\" y1=\"104\" x2=\"235\" y2=\"104\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">qty_semantic</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" fill=\"#B4B2A9\">does not resolve in this Oracle</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#B4B2A9\">environment</text>\n<text x=\"30\" y=\"122\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">QTY_SEMANTIC_ID</text>\n<line x1=\"20\" y1=\"132\" x2=\"235\" y2=\"132\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"146\" font-size=\"10.5\" fill=\"#B4B2A9\">no schema prefix, no</text>\n<text x=\"30\" y=\"161\" font-size=\"10.5\" fill=\"#B4B2A9\">ENGINE/connection line declared</text>\n<text x=\"30\" y=\"176\" font-size=\"10.5\" fill=\"#B4B2A9\">in the flow. Likely</text>\n<text x=\"30\" y=\"191\" font-size=\"10.5\" fill=\"#B4B2A9\">QTY_SEMANTIC_DIM, decommissioned</text>\n<text x=\"30\" y=\"206\" font-size=\"10.5\" fill=\"#B4B2A9\">2014 per a later changelog</text>\n<line x1=\"235\" y1=\"134.5\" x2=\"451\" y2=\"134.5\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"271\" y=\"124\" width=\"148\" height=\"21\" rx=\"3\" fill=\"#F1EFE8\" stroke=\"#D3D1C7\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"137\" font-size=\"10\" fill=\"#B4B2A9\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_upsert_scenario_dim</text>\n<text x=\"20\" y=\"259\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">unapproved value injection.  Last execution: never fired</text>\n<rect x=\"20\" y=\"267\" width=\"215\" height=\"107\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 271a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z\" fill=\"#FAEEDA\"></path>\n<line x1=\"20\" y1=\"309\" x2=\"235\" y2=\"309\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"284\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.</text>\n<text x=\"30\" y=\"300\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">STG_SALES_DAILY_BUDGET_F</text>\n<line x1=\"20\" y1=\"313\" x2=\"235\" y2=\"313\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"327\" font-size=\"10.5\" fill=\"#854F0B\">has never fired: 0 rows with</text>\n<text x=\"30\" y=\"342\" font-size=\"10.5\" fill=\"#854F0B\">APPRV_REC_IND=&#x27;N&#x27; across all 5</text>\n<text x=\"30\" y=\"357\" font-size=\"10.5\" fill=\"#854F0B\">rows</text>\n<line x1=\"235\" y1=\"320.5\" x2=\"451\" y2=\"320.5\" stroke=\"#854F0B\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"271\" y=\"304\" width=\"148\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#FAC775\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"316\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_ins_unappr_val_</text>\n<text x=\"345\" y=\"330\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">scenario_dim_param.fex</text>\n<rect x=\"455\" y=\"46\" width=\"290\" height=\"328\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"455\" y1=\"83\" x2=\"745\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"467\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.SCENARIO_DIM</text>\n<text x=\"467\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">5 rows · 9 columns</text>\n<text x=\"467\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">SCENARIO_KEY</text>\n<text x=\"733\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK</text>\n<text x=\"467\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">SCENARIO_ID</text>\n<text x=\"733\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<line x1=\"455\" y1=\"134\" x2=\"745\" y2=\"134\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"150\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"467\" y=\"166\" font-size=\"10.5\" fill=\"#534AB7\">SCENARIO_DIM_SEQ_TR, BEFORE EACH ROW INSERT,</text>\n<text x=\"467\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">assigns SCENARIO_KEY</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

@@ -1,18 +1,26 @@
-import { useDeferredValue, useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
+import { useDeferredValue, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { DATA } from '../../data/dataset'
-import { LINEAGE_REPORTS, type LineageReport, type ReportBlock } from '../../data/lineageReports'
+import AnomalyFinding, { TableStatusBadge } from '../anomalies/AnomalyFinding'
+import OverviewHeader from '../OverviewHeader'
+import StatStrip from '../StatStrip'
+import {
+  LINEAGE_REPORTS,
+  LINEAGE_REPORT_BY_TABLE,
+  loadReportDetail,
+  type LineageReportDetail,
+  type LineageReportIndexEntry,
+  type ReportBlock,
+  type ReportSection,
+} from '../../data/lineageReports'
 import { schemaGroupsForReport, shouldGroupBySchema, type SchemaGroup } from '../../lib/schemaGroups'
 import type { TableRec } from '../../types'
 
-const REPORT_OPTIONS = LINEAGE_REPORTS.map((report) => ({
-  report,
-  table: DATA.tables.find((item) => item.name === report.tableName),
-}))
+const TABLE_BY_NAME = new Map(DATA.tables.map((table) => [table.name, table]))
+const REPORT_OPTIONS = LINEAGE_REPORTS.map((report) => ({ report, table: TABLE_BY_NAME.get(report.tableName) }))
 const SOURCE_OPTIONS = [...new Set(REPORT_OPTIONS.map(({ table }) => table?.src).filter((source): source is string => Boolean(source)))].sort()
 const PAIRED_SECTION_TITLES = new Set(['Dependencies', 'Findings', 'Pending validation', 'Important notes'])
 const SVG_VIEWBOX = /viewBox=["'](?:-?[\d.]+\s+){2}([\d.]+)\s+([\d.]+)["']/i
 const REPORT_NAME_LOOKUP = new Map(LINEAGE_REPORTS.map((report) => [report.tableName.toUpperCase(), report.tableName]))
-const SCHEMA_GROUPS_BY_REPORT = new Map(LINEAGE_REPORTS.map((report) => [report.sourceSha256, schemaGroupsForReport(report)]))
 
 function isTallDiagram(svg: string): boolean {
   const viewBox = svg.match(SVG_VIEWBOX)
@@ -40,9 +48,14 @@ function fitDiagramText(root: HTMLDivElement): void {
     const x = Number(text.getAttribute('x'))
     const y = Number(text.getAttribute('y'))
     if (!Number.isFinite(x) || !Number.isFinite(y)) continue
-    const box = boxes
-      .filter((candidate) => x >= candidate.x && x <= candidate.x + candidate.width && y >= candidate.y && y <= candidate.y + candidate.height)
-      .sort((left, right) => left.area - right.area)[0]
+
+    // The tightest box containing the label is the one that actually clips it.
+    let box: (typeof boxes)[number] | undefined
+    for (const candidate of boxes) {
+      if (x < candidate.x || x > candidate.x + candidate.width) continue
+      if (y < candidate.y || y > candidate.y + candidate.height) continue
+      if (!box || candidate.area < box.area) box = candidate
+    }
     if (!box) continue
 
     const anchor = text.getAttribute('text-anchor') ?? 'start'
@@ -89,6 +102,31 @@ function centerIsolatedTable(root: HTMLDivElement): void {
   svg.dataset.centered = 'isolated-table'
 }
 
+/**
+ * The diagram and sections of one report arrive as their own chunk, so the
+ * picker and the catalog summary stay interactive while a table is opened.
+ */
+function useReportDetail(sourceFile: string) {
+  const [state, setState] = useState<{ sourceFile: string; detail: LineageReportDetail | null; failure: string }>(
+    { sourceFile, detail: null, failure: '' },
+  )
+
+  useEffect(() => {
+    let current = true
+    setState({ sourceFile, detail: null, failure: '' })
+    loadReportDetail(sourceFile).then(
+      (detail) => { if (current) setState({ sourceFile, detail, failure: '' }) },
+      (error: unknown) => {
+        if (current) setState({ sourceFile, detail: null, failure: error instanceof Error ? error.message : 'The lineage report could not be read.' })
+      },
+    )
+    return () => { current = false }
+  }, [sourceFile])
+
+  // A stale chunk must never render under the heading of another table.
+  return state.sourceFile === sourceFile ? state : { detail: null, failure: '' }
+}
+
 function FilterBox({ label, options, selected, onSelect, allLabel }: { label: string; options: string[]; selected: string; onSelect: (value: string) => void; allLabel?: string }) {
   const inputId = useId()
   const filterRef = useRef<HTMLElement>(null)
@@ -132,24 +170,39 @@ function FilterBox({ label, options, selected, onSelect, allLabel }: { label: st
   </section>
 }
 
+const optionsForSource = (source: string) => REPORT_OPTIONS.filter(({ table }) => !source || table?.src === source)
+
 function TableSelector({ value, onChange }: { value: string; onChange: (name: string) => void }) {
   const [source, setSource] = useState('')
-  const visibleOptions = REPORT_OPTIONS.filter(({ table }) => !source || table?.src === source)
+  const visibleOptions = useMemo(() => optionsForSource(source), [source])
 
   const selectSource = (nextSource: string) => {
     setSource(nextSource)
-    const nextOptions = REPORT_OPTIONS.filter(({ table }) => !nextSource || table?.src === nextSource)
+    const nextOptions = optionsForSource(nextSource)
     const selectedRemainsVisible = nextOptions.some(({ report }) => report.tableName === value)
     if (!selectedRemainsVisible && nextOptions[0]) onChange(nextOptions[0].report.tableName)
   }
 
-  return <section className="table-selector-card" aria-label="Lineage filters">
-    <FilterBox label="Source system" options={SOURCE_OPTIONS} selected={source} onSelect={selectSource} allLabel="All source systems" />
-    <FilterBox label="Table name" options={visibleOptions.map(({ report }) => report.tableName)} selected={value} onSelect={onChange} />
-  </section>
+  return <>
+    <section className="lineage-filter-bar" aria-label="Lineage filters">
+      <div className="table-selector-filters">
+        <FilterBox label="Source system" options={SOURCE_OPTIONS} selected={source} onSelect={selectSource} allLabel="All source systems" />
+        <FilterBox label="Table name" options={visibleOptions.map(({ report }) => report.tableName)} selected={value} onSelect={onChange} />
+      </div>
+    </section>
+    <section className="lineage-overview" aria-labelledby="lineage-overview-title">
+      <OverviewHeader
+        eyebrow="Phase 1 discovery"
+        title="Lineage overview"
+        titleId="lineage-overview-title"
+        description="Explore lineage by source system and table name to see how data moves through the current environment."
+      />
+      <StatStrip />
+    </section>
+  </>
 }
 
-function TableSummary({ table, report }: { table?: TableRec; report: LineageReport }) {
+function TableSummary({ table, report }: { table?: TableRec; report: LineageReportIndexEntry }) {
   const metadata = [['Database', table?.db], ['Schema', table?.schema], ['Source system', table?.src], ['Business cases', table?.bcs.join(', ')], ['Wave', table?.wave], ['Complexity', table?.cplx], ['Technical owner', table?.owner], ['Status', table?.status]]
   const volume = report.rowCount !== null && report.columnCount !== null
     ? `${report.rowCount.toLocaleString('en-US')} rows · ${report.columnCount.toLocaleString('en-US')} columns`
@@ -159,6 +212,7 @@ function TableSummary({ table, report }: { table?: TableRec; report: LineageRepo
     <summary>
       <div className="summary-identity"><span className="flow-kicker">Selected table</span><div className="title-row"><h3>{report.tableName}</h3><span className="tid">{table?.id}</span></div></div>
       <div className="summary-glance">
+        <TableStatusBadge tableName={report.tableName} />
         <span className="summary-source">{table?.src || 'Source not documented'}</span>
         <span className="summary-volume">{volume}</span>
         <span className="summary-toggle"><i aria-hidden="true" />Catalog details</span>
@@ -184,7 +238,7 @@ function ReportBlockView({ block }: { block: ReportBlock }) {
   </div>
 }
 
-function ReportSection({ section }: { section: LineageReport['sections'][number] }) {
+function ReportSectionCard({ section }: { section: ReportSection }) {
   const tone = section.title.toLowerCase().replaceAll(' ', '-')
   return <section className={`report-section-card report-section-${tone}`}>
     <div className="report-section-heading"><h2>{section.title}</h2><span>{section.blocks.length} source blocks</span></div>
@@ -192,28 +246,38 @@ function ReportSection({ section }: { section: LineageReport['sections'][number]
   </section>
 }
 
-function ReportSections({ sections }: { sections: LineageReport['sections'] }) {
-  const dependencies = sections.find((section) => section.title === 'Dependencies')
-  const findings = sections.find((section) => section.title === 'Findings')
-  const pendingValidation = sections.find((section) => section.title === 'Pending validation')
-  const importantNotes = sections.find((section) => section.title === 'Important notes')
-  const standalone = sections.filter((section) => !PAIRED_SECTION_TITLES.has(section.title))
+function ReportSections({ sections }: { sections: ReportSection[] }) {
+  const { dependencies, findings, pendingValidation, importantNotes, standalone } = useMemo(() => {
+    const paired: Record<string, ReportSection | undefined> = {}
+    const rest: ReportSection[] = []
+    for (const section of sections) {
+      if (PAIRED_SECTION_TITLES.has(section.title)) paired[section.title] = section
+      else rest.push(section)
+    }
+    return {
+      dependencies: paired.Dependencies,
+      findings: paired.Findings,
+      pendingValidation: paired['Pending validation'],
+      importantNotes: paired['Important notes'],
+      standalone: rest,
+    }
+  }, [sections])
 
   return <div className="report-sections">
-    {standalone.map((section) => <ReportSection section={section} key={section.title} />)}
+    {standalone.map((section) => <ReportSectionCard section={section} key={section.title} />)}
     {dependencies || findings ? <div className="report-section-stack">
-      {dependencies ? <ReportSection section={dependencies} /> : null}
-      {findings ? <ReportSection section={findings} /> : null}
+      {dependencies ? <ReportSectionCard section={dependencies} /> : null}
+      {findings ? <ReportSectionCard section={findings} /> : null}
     </div> : null}
     {pendingValidation || importantNotes ? <div className="report-section-pair">
-      {pendingValidation ? <ReportSection section={pendingValidation} /> : null}
-      {importantNotes ? <ReportSection section={importantNotes} /> : null}
+      {pendingValidation ? <ReportSectionCard section={pendingValidation} /> : null}
+      {importantNotes ? <ReportSectionCard section={importantNotes} /> : null}
     </div> : null}
   </div>
 }
 
-function reportProcessLabel(report: LineageReport): string {
-  const orchestrator = report.sections.find((section) => section.title === 'Orchestrator')
+function reportProcessLabel(sections: ReportSection[]): string {
+  const orchestrator = sections.find((section) => section.title === 'Orchestrator')
   if (!orchestrator) return 'Documented loading process'
 
   for (const block of orchestrator.blocks) {
@@ -234,21 +298,21 @@ function SourceGroup({ group, currentTable, onOpenReport }: { group: SchemaGroup
     <ul>
       {group.tables.map((table) => {
         const reportName = REPORT_NAME_LOOKUP.get(table.tableName.toUpperCase())
-        const canOpen = Boolean(reportName && reportName !== currentTable)
+        const openableReport = reportName && reportName !== currentTable ? reportName : ''
         return <li className="compact-source-table" key={table.qualifiedName}>
           <div>
             <span>{table.tableName}</span>
             <em>{table.schema}</em>
           </div>
           {table.detail ? <small>{table.detail}</small> : null}
-          {canOpen ? <button type="button" onClick={() => onOpenReport(reportName!)}>Open table report</button> : null}
+          {openableReport ? <button type="button" onClick={() => onOpenReport(openableReport)}>Open table report</button> : null}
         </li>
       })}
     </ul>
   </details>
 }
 
-function CompactSourceDiagram({ groups, report, onOpenReport }: { groups: SchemaGroup[]; report: LineageReport; onOpenReport: (tableName: string) => void }) {
+function CompactSourceDiagram({ groups, report, detail, onOpenReport }: { groups: SchemaGroup[]; report: LineageReportIndexEntry; detail: LineageReportDetail; onOpenReport: (tableName: string) => void }) {
   const tableCount = groups.reduce((total, group) => total + group.tables.length, 0)
   const volume = report.rowCount !== null && report.columnCount !== null
     ? `${report.rowCount.toLocaleString('en-US')} rows · ${report.columnCount.toLocaleString('en-US')} columns`
@@ -264,7 +328,7 @@ function CompactSourceDiagram({ groups, report, onOpenReport }: { groups: Schema
     <div className="compact-lineage-connector" aria-hidden="true"><span>feeds</span><i /></div>
     <section className="compact-process-node" aria-label="Loading process">
       <span>Loading process</span>
-      <strong>{reportProcessLabel(report)}</strong>
+      <strong>{reportProcessLabel(detail.sections)}</strong>
       <small>Aggregated upstream path</small>
     </section>
     <div className="compact-lineage-connector" aria-hidden="true"><span>writes</span><i /></div>
@@ -276,18 +340,22 @@ function CompactSourceDiagram({ groups, report, onOpenReport }: { groups: Schema
   </div>
 }
 
-function SourceDiagram({ report, hasDependencies, onOpenReport }: { report: LineageReport; hasDependencies: boolean; onOpenReport: (tableName: string) => void }) {
+function SourceDiagram({ report, detail, onOpenReport }: { report: LineageReportIndexEntry; detail: LineageReportDetail; onOpenReport: (tableName: string) => void }) {
   const diagramRef = useRef<HTMLDivElement>(null)
   const [originalOpen, setOriginalOpen] = useState(false)
-  const tallDiagram = isTallDiagram(report.diagramSvg)
-  const schemaGroups = SCHEMA_GROUPS_BY_REPORT.get(report.sourceSha256) ?? []
+  const tallDiagram = isTallDiagram(detail.diagramSvg)
+  const hasDependencies = detail.sections.some((section) => section.title === 'Dependencies')
+  const schemaGroups = useMemo(
+    () => schemaGroupsForReport({ tableName: report.tableName, qualifiedTable: report.qualifiedTable, sections: detail.sections }),
+    [detail.sections, report.qualifiedTable, report.tableName],
+  )
   const groupedDiagram = shouldGroupBySchema(schemaGroups)
 
   useLayoutEffect(() => {
     if (!diagramRef.current) return
     fitDiagramText(diagramRef.current)
     if (!hasDependencies) centerIsolatedTable(diagramRef.current)
-  }, [hasDependencies, originalOpen, report.diagramSvg])
+  }, [hasDependencies, originalOpen, detail.diagramSvg])
 
   return <section className={`report-diagram-card${tallDiagram ? ' is-tall' : ''}`}>
     <div className="report-diagram-heading">
@@ -299,31 +367,40 @@ function SourceDiagram({ report, hasDependencies, onOpenReport }: { report: Line
     </div>
     <div className="report-legend" aria-label="Diagram legend"><span><i className="external" />External source</span><span><i className="live" />Live process</span><span><i className="injection" />Injection</span><span><i className="dependency" />Fact dependency</span><span><i className="target" />Target table</span><span><i className="legacy" />Inactive path</span></div>
     {groupedDiagram ? <>
-      <CompactSourceDiagram groups={schemaGroups} report={report} onOpenReport={onOpenReport} />
+      <CompactSourceDiagram groups={schemaGroups} report={report} detail={detail} onOpenReport={onOpenReport} />
       <details className="original-diagram-disclosure" onToggle={(event) => setOriginalOpen(event.currentTarget.open)}>
         <summary><span><strong>Full verified diagram</strong><small>Show every original node and connection</small></span><i aria-hidden="true" /></summary>
         <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable full lineage diagram for ${report.tableName}`}>
-          <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: report.diagramSvg }} />
+          <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: detail.diagramSvg }} />
         </div>
       </details>
     </> : <div className="report-diagram-scroll" tabIndex={0} role="region" aria-label={`Scrollable lineage diagram for ${report.tableName}`}>
-      <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: report.diagramSvg }} />
+      <div ref={diagramRef} className="report-diagram-svg" dangerouslySetInnerHTML={{ __html: detail.diagramSvg }} />
     </div>}
   </section>
 }
 
-export default function FlowView({ active: _active }: { active: boolean }) {
-  const [selectedName, setSelectedName] = useState(LINEAGE_REPORTS[0]?.tableName ?? '')
-  const report = LINEAGE_REPORTS.find((item) => item.tableName === selectedName) ?? LINEAGE_REPORTS[0]
+function ReportBody({ report, onSelectTable }: { report: LineageReportIndexEntry; onSelectTable: (tableName: string) => void }) {
+  const { detail, failure } = useReportDetail(report.sourceFile)
+
+  if (failure) return <p className="lineage-loading" role="alert">{failure}</p>
+  if (!detail) return <p className="lineage-loading">Loading the lineage report for {report.tableName}…</p>
+
+  return <>
+    <SourceDiagram report={report} detail={detail} onOpenReport={onSelectTable} />
+    <ReportSections sections={detail.sections} />
+    <p className="report-footer">{detail.footer}</p>
+  </>
+}
+
+export default function FlowView({ selectedTableName, onSelectTable }: { selectedTableName: string; onSelectTable: (tableName: string) => void }) {
+  const report = LINEAGE_REPORT_BY_TABLE.get(selectedTableName) ?? LINEAGE_REPORTS[0]
   if (!report) return <p>No lineage HTML reports were generated.</p>
-  const table = DATA.tables.find((item) => item.name === report.tableName)
-  const hasDependencies = report.sections.some((section) => section.title === 'Dependencies')
 
   return <div>
-    <TableSelector value={selectedName} onChange={setSelectedName} />
-    <TableSummary table={table} report={report} key={report.sourceFile} />
-    <SourceDiagram report={report} hasDependencies={hasDependencies} onOpenReport={setSelectedName} key={report.sourceSha256} />
-    <ReportSections sections={report.sections} />
-    <p className="report-footer">{report.footer}</p>
+    <TableSelector value={report.tableName} onChange={onSelectTable} />
+    <TableSummary table={TABLE_BY_NAME.get(report.tableName)} report={report} key={report.sourceFile} />
+    <AnomalyFinding tableName={report.tableName} />
+    <ReportBody report={report} onSelectTable={onSelectTable} key={report.sourceSha256} />
   </div>
 }

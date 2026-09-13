@@ -1,0 +1,162 @@
+{
+ "sections": [
+  {
+   "title": "Orchestrator",
+   "blocks": [
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Flow",
+        "kind": "header"
+       },
+       {
+        "text": "df_upsert_catgy_dim.fex",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule in the file header",
+        "kind": "header"
+       },
+       {
+        "text": "DM_SCHDSTRT=201511120200, recurring, every 1 day",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule observed in the data",
+        "kind": "header"
+       },
+       {
+        "text": "newest REC_UPDT_DTTM for approved rows 2026-09-02 02:00:04, matches daily schedule",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Alerts to",
+        "kind": "header"
+       },
+       {
+        "text": "not recorded",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Steps that never run",
+        "kind": "header"
+       },
+       {
+        "text": "none found",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by df_upsert_catgy_dim.fex (DEP_MAIN) → WMBI.CATGY_DIM",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "category: the main source, self-joined for the parent category description",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.CATGY_DIM: self-join, resolves the existing key",
+        "kind": "item"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, confirmed in code"
+    },
+    {
+     "type": "paragraph",
+     "text": ""
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.LOC_CATGY_PRICING_STRAT_XREF: INNER JOIN in df_loc_catgy_pricing_strat_xref_upsert.fex",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "One column (GL_ACCT_ID) has values in only a handful of rows, and the current loading process never writes to it. These values are leftover from an earlier process, not something the current system produces."
+      },
+      {
+       "text": "This table loads directly from an external HQ category source, with no intermediate staging step, the same pattern used by two other similar tables. Confirmed by directly checking: no object named 'category' exists anywhere in this Oracle environment, under any schema or object type."
+      },
+      {
+       "text": "Unlike two other similar loading processes on this project, this one's own internal logging is correctly labeled with its own name. Those two mislabel their logging with a different process's name."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Where the small number of populated GL_ACCT_ID values came from is not confirmed.",
+       "note": "Small in row count, but worth a direct answer from Weis on whether this column is still meaningful or a leftover from a retired process, before deciding whether to migrate it."
+      },
+      {
+       "text": "This table's loading process has no orchestrating wrapper or external caller found among the available files, the same gap already seen on two other similar tables.",
+       "note": "Worth confirming directly with the scheduling system that this process genuinely runs on its own."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 765 292\" width=\"765\" height=\"292\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">catgy dim upsert  ·  orchestrator: df_upsert_catgy_dim.fex</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"84\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"120\" x2=\"235\" y2=\"120\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">category</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" fill=\"#2E5FA3\">external HQ category master, the</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#2E5FA3\">main source, self-joined for the</text>\n<text x=\"30\" y=\"111\" font-size=\"10.5\" fill=\"#2E5FA3\">parent category description</text>\n<rect x=\"20\" y=\"144\" width=\"215\" height=\"84\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 148a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"218\" x2=\"235\" y2=\"218\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"161\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.CATGY_DIM</text>\n<text x=\"30\" y=\"177\" font-size=\"10.5\" fill=\"#2E5FA3\">self-join, resolves the existing</text>\n<text x=\"30\" y=\"193\" font-size=\"10.5\" fill=\"#2E5FA3\">CATGY_KEY for an update, or -1</text>\n<text x=\"30\" y=\"209\" font-size=\"10.5\" fill=\"#2E5FA3\">for a new category</text>\n<line x1=\"235\" y1=\"88.0\" x2=\"451\" y2=\"88.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"283\" y=\"71\" width=\"124\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"84\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_upsert_catgy_</text>\n<text x=\"345\" y=\"97\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">dim.fex (DEP_MAIN)</text>\n<line x1=\"235\" y1=\"186.0\" x2=\"451\" y2=\"186.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"455\" y=\"46\" width=\"290\" height=\"182\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"455\" y1=\"83\" x2=\"745\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"467\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.CATGY_DIM</text>\n<text x=\"467\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">3,578 rows · 17 columns</text>\n<text x=\"467\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CATGY_KEY</text>\n<text x=\"733\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK, surrogate, by trigger, only…</text>\n<text x=\"467\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CATGY_ID</text>\n<text x=\"733\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK, the category code</text>\n<line x1=\"455\" y1=\"134\" x2=\"745\" y2=\"134\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"150\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"467\" y=\"166\" font-size=\"10.5\" fill=\"#534AB7\">CATGY_DIM_SEQ_TR, BEFORE EACH ROW, INSERT,</text>\n<text x=\"467\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">ENABLED</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

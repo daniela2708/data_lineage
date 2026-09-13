@@ -17,8 +17,8 @@ Prototype for a consulting discovery engagement. It is shown to the client, so w
 ## Style
 
 - TypeScript strict. No `any`, no non null assertions to get past a type error: fix the type.
-- Functional components, hooks for behaviour, pure functions for geometry. `lib/flowLayout.ts` is deliberately free of React so the layout can be reasoned about and tested on its own.
-- Styling is global CSS with custom properties in `src/index.css`. Class names are shared with the design, so rename with care. SVG needs literal colour strings, which is why `lib/tokens.ts` mirrors the custom properties.
+- Functional components, hooks for behaviour, pure functions for data shaping. `lib/schemaGroups.ts` is deliberately free of React so the grouping can be reasoned about and tested on its own.
+- Styling is global CSS with custom properties in `src/index.css`. Class names are shared with the design, so rename with care. The SVG in a lineage report arrives with its own literal colours from the source HTML, so it is styled by attribute selector, not by token.
 - Comments explain why, not what. Do not narrate the obvious.
 - **No browser storage.** No `localStorage`, no `sessionStorage`. State lives in React.
 
@@ -26,7 +26,7 @@ Prototype for a consulting discovery engagement. It is shown to the client, so w
 
 Wizeline: Velocity Red `#E93D44`, Contrast Dark `#211E1E`, Contrast Light `#FCFBF5`. Space Mono uppercase for titles and labels, Nunito Sans for body. Rounded cards, generous whitespace, high contrast. The client logo and the Wizeline logomark sit together top right, unmodified, separated by a hairline. Footer stays "Proprietary and confidential".
 
-Full palette is in `src/lib/tokens.ts` and mirrored in `src/index.css`.
+Full palette is in `src/index.css`, as custom properties on `:root`.
 
 ## When you change the data
 
@@ -40,4 +40,4 @@ If the shape changes, update `src/types.ts` first and let the compiler find the 
 npm run build   # typecheck plus a production build, both must pass clean
 ```
 
-If you touched the animated flow, load it and watch a full loop: every step should light in order, the pulse should travel each segment once, and the chain should reset without a jump. Verify the reduced motion path too, since it takes a different branch in `useFlowTimeline`.
+If you touched the chrome, load both sections and scroll: the tab row and the lineage filter row stay pinned, meet with no gap, and never cover the heading below them. Their offset is `--bar-h`, which has to match the tab row's own height.

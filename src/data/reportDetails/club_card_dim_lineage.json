@@ -1,0 +1,429 @@
+{
+ "sections": [
+  {
+   "title": "Orchestrator",
+   "blocks": [
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Flow",
+        "kind": "header"
+       },
+       {
+        "text": "pf_ams_club_card_dim_process",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule in the file header",
+        "kind": "header"
+       },
+       {
+        "text": "Recurring, Continuous Type. Every 1 day. Start 2020/08/27 05:00:00",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule observed in the data",
+        "kind": "header"
+       },
+       {
+        "text": "",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Alerts to",
+        "kind": "header"
+       },
+       {
+        "text": "tscott@weismarkets.com",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Steps that never run",
+        "kind": "header"
+       },
+       {
+        "text": "DEP_0 / df_build_pstg_ams_clubcard_src_feed",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Built exclusively to load this table"
+    },
+    {
+     "type": "paragraph",
+     "text": "Nothing outside this chain reads them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by move_data/wmbi_pstg_ams_clubcard_src_feed → WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_AMS_CLUBCARD_SRC_FEED",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "Loaded by df_build_pstg_club_card_dim → WMBI_ETL.PSTG_CLUB_CARD_DIM",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_CLUB_CARD_DIM",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "Loaded by df_build_stg_club_card_dim → WMBI_ETL.STG_CLUB_CARD_DIM_AMS",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.STG_CLUB_CARD_DIM_AMS",
+        "kind": "item"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "AMS_PROD.LogixXS.dbo: the actual source, on SQL Server, external to the warehouse, read by move_data/wmbi_pstg_ams_clubcard_src_feed",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Loaded by df_build_update_first_tx_dt → WMBI.CLUB_CARD_DIM",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.SALES_POS_TX_F: computes FIRST_TX_DT. Must be loaded first, but nothing verifies it",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.DT_DIM: turns ACCT_EFF_DT_KEY into a calendar date",
+        "kind": "item"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.STG_MARKETFORCE_SURV_RESP: injects placeholder members for unrecognized card numbers, via df_ins_unappr_val_club_card_dim_no_date_param",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.STG_POS_POINTS_EARNED_F: the POS points load injects placeholder members. Not yet confirmed in code, the file that does it has not been identified",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, inferred from naming"
+    },
+    {
+     "type": "paragraph",
+     "text": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "AMS_POINT_ACT_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "AMS_POS_POINTS_EARN_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "AMS_TX_REWARD_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "CLUB_CARD_ATTRIB_XREF",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "CLUB_CARD_DIM_BKUP_PRE_AMS",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "CLUB_CARD_VWM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "CUSTOMER_ATTR_XREF",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "FUEL_PRTNR_PRGM_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "HOUSEHOLD_40_DAY_TOP_20_VWM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "ITEM_LOC_CUST_SALES_YTD_MVW",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "MANUAL_POINT_ADJ_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "MARKETFORCE_SURV_RESP_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "MARKETFORCE_WEIS2GO_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "MEGA_SALE_AMS_TX_IDS_VWM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "MEGA_SALE_TX_IDS_VWM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "MLOG$_SALES_POS_TX_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "POINTS_EARNED_REDEEMED_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "POINTS_EARN_REDEEM_FV2",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "POS_POINTS_EARNED_REDEEMED_VWM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "POS_POINTS_EARN_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "POS_POINTS_EARN_VWM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "POS_TX_TENDER_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "SALES_POS_LN_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "SALES_POS_TX_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "SHK_DAILY_ORDER_EXPORT_F",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "SUNOCO_FUEL_PRTNR_PRGM_F",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Two different loading processes have fed this table over the years. The old one stopped running in 2020 (15,019,410 rows, frozen). The current one runs daily and touched data again this morning (6,958,825 rows)"
+      },
+      {
+       "text": "Serious: the step meant to keep household level benefit flags correct only looks at households that still exist in the staging table frozen since 2020. Any household created or changed since then is silently skipped, its benefit flags never get re-evaluated"
+      },
+      {
+       "text": "Serious, same root cause: the step meant to correct a card's points earning flag also only compares against that same frozen 2020 staging table. For any card active since then, there is no working mechanism left in this table's process to ever fix that flag once it goes wrong"
+      },
+      {
+       "text": "Confirmed: the final step into this table inserts new cards and updates existing ones by matching the internal key. Every update also overwrites the basket discount and points earning flags with whatever the staging table has, which, as found above, is empty from the true source. This is not a hypothesis anymore, it is confirmed in code: any card touched by today's process loses these two settings"
+      },
+      {
+       "text": "Confirmed: the step that copies data from the raw feed into the next staging table always marks every card as approved, and computes a fingerprint used to detect what changed. That fingerprint is built from name, address and contact fields only. A card whose only change is to its discount or points settings would not be picked up as changed at all"
+      },
+      {
+       "text": "26 other tables depend on this one, including the two largest transaction tables in the warehouse. This table has to be migrated before any of them"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Whether CLUB_CARD_DIM should move to Wave 2 is still pending a decision (proposal in deliverables/catalog_review.md).",
+       "note": "SALES_POS_TX_F, scheduled Wave 2, carries CLUB_CARD_KEY and needs the dimension to exist first."
+      },
+      {
+       "text": "The step that fills in a customer's first purchase date has not been fully reviewed yet.",
+       "note": "It is the last unread step in the daily process. Its place in the sequence is confirmed, but whether it has the same frozen-data problem found in the household and points-earning steps is not."
+      },
+      {
+       "text": "The process that injects placeholder members from the loyalty points source has not been identified.",
+       "note": "A confirmed placeholder process only handles a different source, the customer survey tool. A separate, still unidentified process must handle the loyalty points source."
+      },
+      {
+       "text": "What triggers the process that creates placeholder members from the customer survey tool has not been identified.",
+       "note": "That process has no schedule of its own and is not called by the main daily process, so something else triggers it. Not yet identified."
+      },
+      {
+       "text": "Whether a status column is populated only for one particular source system's rows, or the matching counts are a coincidence, has not been confirmed.",
+       "note": "Worth one more check before treating this as a real pattern."
+      },
+      {
+       "text": "How many cards already have their basket discount or points earning settings blanked out, versus still showing a real value, has not been measured.",
+       "note": "The cause is now confirmed: every card the daily process touches loses these two settings. A count would show how many cards are already affected."
+      },
+      {
+       "text": "The real, observed run schedule for this table's daily process, rather than what its schedule setting states, is still unknown.",
+       "note": "Earlier project notes claim it actually runs twice a day, not once as configured. Not reconfirmed this session."
+      },
+      {
+       "text": "The 15,183 stub member figure from references/anomaly-checklist.md has not been reconciled against this session's 240,954.",
+       "note": "This session's number is 16 times higher. Could be growth over time or a different counting basis. Left unresolved rather than asserted either way."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Important notes",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "A few things below are worth knowing before you rely on this table."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Important note on validation timing: Row counts for this dimension will not match Oracle during the wave that builds it (Wave 1). The Oracle table contains members inserted by POS_POINTS_EARN_F, migrating in Wave 3, that have not landed yet. This will look like a defect and is not one. Two checkpoints are needed instead of one: a structural checkpoint in Wave 1, confirming columns, keys and transformations, and a row count checkpoint after POS_POINTS_EARN_F lands in Wave 3. Filtering on APPRV_REC_IND separates real members from injected placeholders and makes the first checkpoint meaningful on its own."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 2070 861\" width=\"2070\" height=\"861\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#0F6E56\">Live chain: AMS process, daily  ·  orchestrator: pf_ams_club_card_dim_process</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"92\" rx=\"4\" fill=\"#fff\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v54H20z\" fill=\"#EAF0FB\"></path>\n<line x1=\"20\" y1=\"104\" x2=\"235\" y2=\"104\" stroke=\"#2E5FA3\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#122C4C\" font-family=\"ui-monospace,Menlo,monospace\">AMS_PROD.LogixXS.dbo</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" fill=\"#2E5FA3\">CardIDs, Customers, CustomerExt,</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#2E5FA3\">CustomerPreferences</text>\n<text x=\"30\" y=\"122\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_ID</text>\n<rect x=\"455\" y=\"46\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#fff\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H455z\" fill=\"#E1F5EE\"></path>\n<line x1=\"455\" y1=\"88\" x2=\"670\" y2=\"88\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></line>\n<text x=\"465\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#04342C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.</text>\n<text x=\"465\" y=\"79\" font-size=\"10.5\" font-weight=\"500\" fill=\"#04342C\" font-family=\"ui-monospace,Menlo,monospace\">PSTG_AMS_CLUBCARD_SRC_FEED</text>\n<text x=\"465\" y=\"106\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_ID</text>\n<rect x=\"890\" y=\"46\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#fff\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></rect>\n<path d=\"M890 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H890z\" fill=\"#E1F5EE\"></path>\n<line x1=\"890\" y1=\"72\" x2=\"1105\" y2=\"72\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></line>\n<text x=\"900\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#04342C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.PSTG_CLUB_CARD_DIM</text>\n<text x=\"900\" y=\"90\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CHECKSUM_VAL</text>\n<text x=\"900\" y=\"106\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_ID</text>\n<rect x=\"1325\" y=\"46\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></rect>\n<path d=\"M1325 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z\" fill=\"#E1F5EE\"></path>\n<line x1=\"1325\" y1=\"72\" x2=\"1540\" y2=\"72\" stroke=\"#0F6E56\" stroke-width=\"0.6\"></line>\n<text x=\"1335\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#04342C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.STG_CLUB_CARD_DIM_AMS</text>\n<text x=\"1335\" y=\"90\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_KEY</text>\n<line x1=\"235\" y1=\"92.0\" x2=\"451\" y2=\"84.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"274\" y=\"71\" width=\"142\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"84\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">move_data/wmbi_pstg_</text>\n<text x=\"345\" y=\"97\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">ams_clubcard_src_feed</text>\n<line x1=\"670\" y1=\"84.0\" x2=\"886\" y2=\"84.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"691\" y=\"74\" width=\"178\" height=\"21\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"780\" y=\"86\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_build_pstg_club_card_dim</text>\n<line x1=\"1105\" y1=\"84.0\" x2=\"1321\" y2=\"81.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"1129\" y=\"72\" width=\"172\" height=\"21\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"1215\" y=\"85\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_build_stg_club_card_dim</text>\n<line x1=\"1540\" y1=\"81.0\" x2=\"1756\" y2=\"81.0\" stroke=\"#0F6E56\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"1582\" y=\"64\" width=\"136\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#9FE1CB\" stroke-width=\"0.6\"></rect>\n<text x=\"1650\" y=\"77\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_build_insert_</text>\n<text x=\"1650\" y=\"90\" font-size=\"10\" fill=\"#0F6E56\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">update_club_card_dim</text>\n<text x=\"1325\" y=\"174\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">Injection: survey load</text>\n<rect x=\"1325\" y=\"182\" width=\"215\" height=\"101\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M1325 186a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H1325z\" fill=\"#FAEEDA\"></path>\n<line x1=\"1325\" y1=\"224\" x2=\"1540\" y2=\"224\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"1335\" y=\"199\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.</text>\n<text x=\"1335\" y=\"215\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">STG_MARKETFORCE_SURV_RESP</text>\n<text x=\"1335\" y=\"242\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_ID</text>\n<line x1=\"1325\" y1=\"252\" x2=\"1540\" y2=\"252\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"1335\" y=\"266\" font-size=\"10.5\" fill=\"#854F0B\">Injects placeholder members</text>\n<line x1=\"1540\" y1=\"232.5\" x2=\"1756\" y2=\"232.5\" stroke=\"#854F0B\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"1573\" y=\"216\" width=\"154\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#FAC775\" stroke-width=\"0.6\"></rect>\n<text x=\"1650\" y=\"228\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_ins_unappr_val_club_</text>\n<text x=\"1650\" y=\"242\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">card_dim_no_date_param</text>\n<text x=\"1325\" y=\"319\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">Injection: POS points load</text>\n<rect x=\"1325\" y=\"327\" width=\"215\" height=\"77\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M1325 331a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H1325z\" fill=\"#FAEEDA\"></path>\n<line x1=\"1325\" y1=\"369\" x2=\"1540\" y2=\"369\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"1335\" y=\"344\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.</text>\n<text x=\"1335\" y=\"360\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">STG_POS_POINTS_EARNED_F</text>\n<line x1=\"1325\" y1=\"373\" x2=\"1540\" y2=\"373\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"1335\" y=\"387\" font-size=\"10.5\" fill=\"#854F0B\">Injects placeholder members</text>\n<line x1=\"1540\" y1=\"365.5\" x2=\"1756\" y2=\"365.5\" stroke=\"#854F0B\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<text x=\"1325\" y=\"440\" font-size=\"12.5\" font-weight=\"500\" fill=\"#993C1D\">Fact: transaction history</text>\n<rect x=\"1325\" y=\"448\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#993C1D\" stroke-width=\"0.6\"></rect>\n<path d=\"M1325 452a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z\" fill=\"#FAECE7\"></path>\n<line x1=\"1325\" y1=\"474\" x2=\"1540\" y2=\"474\" stroke=\"#993C1D\" stroke-width=\"0.6\"></line>\n<text x=\"1335\" y=\"465\" font-size=\"10.5\" font-weight=\"500\" fill=\"#4A1B0C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.SALES_POS_TX_F</text>\n<text x=\"1335\" y=\"492\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_KEY</text>\n<line x1=\"1540\" y1=\"483.0\" x2=\"1756\" y2=\"483.0\" stroke=\"#993C1D\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"1561\" y=\"472\" width=\"178\" height=\"21\" rx=\"3\" fill=\"#fff\" stroke=\"#F5C4B3\" stroke-width=\"0.6\"></rect>\n<text x=\"1650\" y=\"486\" font-size=\"10\" fill=\"#993C1D\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_build_update_first_tx_dt</text>\n<text x=\"1325\" y=\"554\" font-size=\"12.5\" font-weight=\"500\" fill=\"#993C1D\">Fact: calendar</text>\n<rect x=\"1325\" y=\"562\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#993C1D\" stroke-width=\"0.6\"></rect>\n<path d=\"M1325 566a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z\" fill=\"#FAECE7\"></path>\n<line x1=\"1325\" y1=\"588\" x2=\"1540\" y2=\"588\" stroke=\"#993C1D\" stroke-width=\"0.6\"></line>\n<text x=\"1335\" y=\"579\" font-size=\"10.5\" font-weight=\"500\" fill=\"#4A1B0C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.DT_DIM</text>\n<text x=\"1335\" y=\"606\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">ACCT_EFF_DT_KEY</text>\n<line x1=\"1540\" y1=\"597.0\" x2=\"1756\" y2=\"597.0\" stroke=\"#993C1D\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"1561\" y=\"586\" width=\"178\" height=\"21\" rx=\"3\" fill=\"#fff\" stroke=\"#F5C4B3\" stroke-width=\"0.6\"></rect>\n<text x=\"1650\" y=\"600\" font-size=\"10\" fill=\"#993C1D\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_build_update_first_tx_dt</text>\n<text x=\"1325\" y=\"668\" font-size=\"12.5\" font-weight=\"500\" fill=\"#B4B2A9\">Dead: pre-AMS staging chain.  Last execution: 2020-08-12</text>\n<rect x=\"1325\" y=\"676\" width=\"215\" height=\"121\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M1325 680a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H1325z\" fill=\"#F1EFE8\"></path>\n<line x1=\"1325\" y1=\"702\" x2=\"1540\" y2=\"702\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"1335\" y=\"693\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.STG_CLUB_CARD_DIM</text>\n<line x1=\"1325\" y1=\"706\" x2=\"1540\" y2=\"706\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"1335\" y=\"720\" font-size=\"10.5\" fill=\"#B4B2A9\">frozen; superseded by</text>\n<text x=\"1335\" y=\"735\" font-size=\"10.5\" fill=\"#B4B2A9\">STG_CLUB_CARD_DIM_AMS. Not the</text>\n<text x=\"1335\" y=\"750\" font-size=\"10.5\" fill=\"#B4B2A9\">EME writer stamp itself, which is</text>\n<text x=\"1335\" y=\"765\" font-size=\"10.5\" fill=\"#B4B2A9\">confirmed live and current on</text>\n<text x=\"1335\" y=\"780\" font-size=\"10.5\" fill=\"#B4B2A9\">this table</text>\n<line x1=\"1540\" y1=\"736.5\" x2=\"1756\" y2=\"736.5\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"1760\" y=\"46\" width=\"290\" height=\"751\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M1760 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"1760\" y1=\"83\" x2=\"2050\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"1772\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.CLUB_CARD_DIM</text>\n<text x=\"1772\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">13,109,987 rows · 41 columns</text>\n<text x=\"1772\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_KEY</text>\n<text x=\"2038\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK</text>\n<text x=\"1772\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CLUB_CARD_ID</text>\n<text x=\"2038\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<text x=\"1772\" y=\"136\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CHECKSUM_VAL</text>\n<text x=\"2038\" y=\"136\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK</text>\n<line x1=\"1760\" y1=\"150\" x2=\"2050\" y2=\"150\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"1772\" y=\"166\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Post-load steps, on the loaded table</text>\n<text x=\"1772\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">3 steps run after load: household flag, first</text>\n<text x=\"1772\" y=\"198\" font-size=\"10.5\" fill=\"#534AB7\">transaction date, points-earned flag.</text>\n<text x=\"1772\" y=\"214\" font-size=\"10.5\" fill=\"#534AB7\">Two of the three are limited by a frozen</text>\n<text x=\"1772\" y=\"230\" font-size=\"10.5\" fill=\"#534AB7\">table, see findings.</text>\n<line x1=\"1760\" y1=\"244\" x2=\"2050\" y2=\"244\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"1772\" y=\"260\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"1772\" y=\"276\" font-size=\"10.5\" fill=\"#534AB7\">Assigns CLUB_CARD_KEY automatically on every</text>\n<text x=\"1772\" y=\"292\" font-size=\"10.5\" fill=\"#534AB7\">insert.</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

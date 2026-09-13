@@ -123,5 +123,3 @@ export interface Dataset {
   flow: Flow
   meta: Meta
 }
-
-export type ViewKey = 'flow' | 'table' | 'estate'

@@ -1,0 +1,302 @@
+<meta charset="utf-8">
+<title>Weis Markets discovery: lineage findings and anomalies</title>
+<style>
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+       color:#2C2C2A;background:#fff;margin:0 auto;padding:40px 48px 70px;max-width:1180px;line-height:1.65}
+  h1{font-size:24px;font-weight:500;margin:0 0 6px}
+  h2{font-size:19px;font-weight:500;margin:44px 0 8px;padding-bottom:7px;border-bottom:2px solid #2C2C2A}
+  h3{font-size:15.5px;font-weight:500;margin:30px 0 4px;color:#26215C}
+  h4{font-size:14px;font-weight:500;margin:22px 0 2px}
+  .sub{font-size:13px;color:#5F5E5A;margin:0 0 26px}
+  p{font-size:14px}
+  .lead{font-size:14.5px;color:#444441}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;margin:10px 0 0}
+  th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid #D3D1C7}
+  th{font-weight:500;color:#5F5E5A;border-bottom:1px solid #B4B2A9;white-space:nowrap}
+  td.n,th.n{text-align:right;white-space:nowrap}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+       background:#F1EFE8;padding:1px 5px;border-radius:3px}
+  .tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:10px;white-space:nowrap}
+  .ok{background:#E1F5EE;color:#04342C}
+  .info{background:#E6F1FB;color:#0C447C}
+  .warn{background:#FAEEDA;color:#412402}
+  .bad{background:#FCEBEB;color:#501313}
+  .dead{background:#F1EFE8;color:#444441}
+  .box{background:#F1EFE8;border-left:3px solid #888780;padding:12px 16px;margin:16px 0;
+       font-size:13.5px}
+  .box.alert{background:#FCEBEB;border-left-color:#E24B4A}
+  .box.note{background:#FAEEDA;border-left-color:#BA7517}
+  .cards{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 6px}
+  .card{border:1px solid #D3D1C7;border-radius:6px;padding:12px 16px;min-width:140px;flex:1}
+  .card .big{font-size:26px;font-weight:500;line-height:1.2}
+  .card .lbl{font-size:12px;color:#5F5E5A;margin-top:2px}
+  ul{font-size:14px;padding-left:22px}
+  li{margin:5px 0}
+  .foot{margin-top:48px;font-size:12px;color:#888780;border-top:1px solid #D3D1C7;padding-top:14px}
+  .tl{list-style:none;padding-left:0}
+  .tl li{border-left:2px solid #D3D1C7;padding:0 0 14px 18px;margin:0;position:relative}
+  .tl li:before{content:"";position:absolute;left:-5px;top:7px;width:8px;height:8px;
+                border-radius:50%;background:#888780}
+</style>
+
+<h1>Weis Markets data engineering discovery</h1>
+<p class="sub">Lineage findings and anomalies across the 63 Phase 1 tables &nbsp;·&nbsp; Wizeline &nbsp;·&nbsp; September 2026</p>
+
+<h2>Summary</h2>
+
+<div class="cards">
+  <div class="card"><div class="big">63</div><div class="lbl">tables in Phase 1 scope</div></div>
+  <div class="card"><div class="big">31</div><div class="lbl">lineage fully traced</div></div>
+  <div class="card"><div class="big">32</div><div class="lbl">carry an open anomaly</div></div>
+  <div class="card"><div class="big">8</div><div class="lbl">distinct anomaly types</div></div>
+</div>
+
+<p class="lead">Every table in scope was analysed end to end: what loads it, in what order, with
+which file, and what is wrong with it. Thirty one tables came out with a complete chain from
+source system to warehouse table. The remaining thirty two each hit one of eight distinct
+problems, and those problems are the substance of this report.</p>
+
+<div class="box">
+<strong>One thing to be clear about.</strong> Lineage traced does not mean defect free. It means we
+can state where the data comes from and what transforms it. Several fully traced tables carry
+findings of their own, and those are covered in the cross cutting section.
+</div>
+
+<h3>Anomalies by type</h3>
+
+<table>
+<tr><th>#</th><th>Anomaly</th><th class="n">Tables</th><th>What it blocks</th><th>Who can resolve it</th></tr>
+<tr><td>1</td><td>Not an Oracle table, external system</td><td class="n">6</td>
+    <td>Nothing. They are correctly out of the dictionary and lineage</td><td><span class="tag ok">no action</span></td></tr>
+<tr><td>2</td><td>No source table and no pipeline identified</td><td class="n">9</td>
+    <td>Lineage cannot be stated at all</td><td><span class="tag bad">needs files</span></td></tr>
+<tr><td>3</td><td>Loading process not identified</td><td class="n">6</td>
+    <td>Transformations unknown, cannot be reproduced</td><td><span class="tag bad">needs files</span></td></tr>
+<tr><td>4</td><td>Appears to be loaded from a file drop</td><td class="n">5</td>
+    <td>Owner and delivery mechanism unknown</td><td><span class="tag warn">client question</span></td></tr>
+<tr><td>5</td><td>Loading process is dead</td><td class="n">3</td>
+    <td>Migrating it would migrate something nobody maintains</td><td><span class="tag warn">client decision</span></td></tr>
+<tr><td>6</td><td>Source table unknown, process known</td><td class="n">1</td>
+    <td>The live writer is a fact side injector whose caller is unidentified</td><td><span class="tag bad">needs files</span></td></tr>
+<tr><td>7</td><td>Pipeline runs but the data is stale</td><td class="n">1</td>
+    <td>A production feed has been silently broken since April</td><td><span class="tag bad">escalate now</span></td></tr>
+<tr><td>8</td><td>Has not been fed in a long time</td><td class="n">1</td>
+    <td>May not belong in scope at all</td><td><span class="tag warn">client decision</span></td></tr>
+<tr><th>&nbsp;</th><th>Total with an anomaly</th><th class="n">32</th><th colspan="2">&nbsp;</th></tr>
+</table>
+
+<div class="box note">
+<strong>Where the effort actually sits.</strong> Sixteen tables, groups 2, 3 and 6, are blocked on the
+same thing: DataMigrator files we have never seen. That is the single largest lever in this
+report.
+</div>
+
+<h2>Detail by anomaly</h2>
+
+<h3>1. Not an Oracle table, external system</h3>
+<p>Six entries in scope are not <code>WMBI</code> tables. They are external systems or a manual
+intake process, so they will not appear in the data dictionary or in the table lineage, and that
+is correct rather than a gap.</p>
+
+<table>
+<tr><th>Entry</th><th>What it actually is</th></tr>
+<tr><td>Organization</td><td>Workday, external HR system</td></tr>
+<tr><td>Worker</td><td>Workday, external HR system</td></tr>
+<tr><td>Supervisory Organization</td><td>Workday, external HR system</td></tr>
+<tr><td>Historical Purchase Order Cost</td><td>Retalix / Biceps, external</td></tr>
+<tr><td>Historical Purchases</td><td>Retalix / Biceps, external</td></tr>
+<tr><td>SALES PLAN SPREADSHEET INPUTS</td><td>A manual intake process, not a table. Documented separately</td></tr>
+</table>
+
+<p><strong>Implication.</strong> These are new connectors, not refactors. They carry external delivery
+lead time and depend on a third party, which is why they sit on the parallel track from week 1.</p>
+
+<h3>2. No source table and no pipeline identified</h3>
+<p>Nine tables where neither the feeding table nor the loading pipeline could be found. The
+lineage for these cannot be stated at all today.</p>
+
+<table>
+<tr><th>Table</th><th>Wave</th></tr>
+<tr><td><code>CATGY_RPT_COMP</code></td><td>Wave 3</td></tr>
+<tr><td><code>LOC_ID_EXCL_DT_XREF</code></td><td>Wave 4</td></tr>
+<tr><td><code>POINTS_EARNED_REDEEMED_F</code></td><td>Wave 3</td></tr>
+<tr><td><code>POS_POINTS_EARN_F</code></td><td>Wave 3</td></tr>
+<tr><td><code>AMS_POS_POINTS_EARN_F</code></td><td>Wave 3</td></tr>
+<tr><td><code>AMS_TX_REWARD_F</code></td><td>Wave 3</td></tr>
+<tr><td><code>MANUAL_POINT_ADJ_F</code></td><td>Wave 3</td></tr>
+<tr><td><code>WAREHOUSE_SHIPT_F</code></td><td>Wave 4</td></tr>
+<tr><td><code>LABOR_DAILY_BUDGET_F</code></td><td>Wave 5</td></tr>
+</table>
+
+<div class="box alert">
+The loyalty use case, UC4, cannot be estimated with confidence until these are resolved.
+</div>
+
+<h3>3. Loading process not identified</h3>
+<p>Six tables where the source is visible but the process that loads them is not. We can say
+where the data comes from, not what happens to it on the way.</p>
+
+<table>
+<tr><th>Table</th><th>Wave</th><th>What is known</th></tr>
+<tr><td><code>GL_DEPT_DIM</code></td><td>Wave 1</td><td>Only placeholder references found</td></tr>
+<tr><td><code>AMS_OFFER_DIM</code></td><td>Wave 1</td><td>Source known, loading process not</td></tr>
+<tr><td><code>ITEM_PRICE_F</code></td><td>Wave 1</td><td>&nbsp;</td></tr>
+<tr><td><code>ITEM_COST_F</code></td><td>Wave 2</td><td>&nbsp;</td></tr>
+<tr><td><code>LOC_DSD_INVOICE_F</code></td><td>Wave 2</td><td>&nbsp;</td></tr>
+<tr><td><code>ITEM_MARKDOWN_DEFAULT_DIM</code></td><td>Wave 3</td><td>&nbsp;</td></tr>
+</table>
+
+<h3>4. Appears to be loaded from a file drop</h3>
+<p>Five tables whose data seems to arrive as a file rather than through a database connection.
+The hypothesis comes from the shape of the staging and the absence of a source connection.</p>
+
+<table>
+<tr><th>Table</th><th>Wave</th></tr>
+<tr><td><code>DT_DIM</code></td><td>Wave 1</td></tr>
+<tr><td><code>STORE_START_END_DATE</code></td><td>Wave 1</td></tr>
+<tr><td><code>SALES_DAILY_BUDGET_F</code></td><td>Wave 1</td></tr>
+<tr><td><code>CLUB_CARD_ATTRIB_DIM</code></td><td>Wave 3</td></tr>
+<tr><td><code>LABOR_PREM_COST_F</code></td><td>Wave 5</td></tr>
+</table>
+
+<h3>5. Loading process is dead</h3>
+<p>Three tables whose loading process exists in DataMigrator but shows no execution activity.</p>
+
+<table>
+<tr><th>Table</th><th>Wave</th><th>Note</th></tr>
+<tr><td><code>PRICE_LVL_DIM</code></td><td>Wave 1</td><td>Has an associated staging table, loading pipeline unknown</td></tr>
+<tr><td><code>CUSTOMER_SGM_DIM</code></td><td>Wave 3</td><td>&nbsp;</td></tr>
+<tr><td><code>SHK_DAILY_LABOR_EXPORT_F</code></td><td>Wave 5</td><td>&nbsp;</td></tr>
+</table>
+
+<p><strong>Implication.</strong> A dead loading process and a static reference table look identical
+from the outside. Some small lookup tables are loaded once and never change, which is by design.
+Others stopped being fed and nobody noticed. The distinction decides whether the table is migrated
+as is or retired, and it is a business question, not a technical one.</p>
+
+<h3>6, 7 and 8. Single table anomalies</h3>
+
+<h4><code>OPERATOR_DIM</code>: the table is mostly placeholder data</h4>
+<p>The real loading chain, a TLOG upsert, has been frozen since 2016. What keeps the table alive
+is a fact side injector, and it is not an edge case: <strong>1,615 of 2,194 rows, 74 percent of the
+table, are placeholders generated by another process rather than real operator records.</strong></p>
+<h4><code>RECLM_SCAN_DETAIL_F</code>: a live feed that stopped four months ago</h4>
+<p>The integration is real and still scheduled: <code>flow-irc-data.fex</code>, running daily since
+June 2020, writing with a confirmed <code>IRC</code> stamp. <strong>But no new reclamation scan data
+has arrived since around 25 April 2026</strong>, more than four months before this analysis.</p>
+<p>Nothing reports a failure. The staging table's own statistics still read as live, because the
+pipeline executes successfully every day. It simply carries nothing new.</p>
+<h4><code>CUSTOMER_ATTR_XREF</code>: 124 million rows frozen since 2019</h4>
+<p>Migrating it moves seven year old data into a new platform. Whether that is wanted is a business
+decision, and it should be made deliberately rather than by default.</p>
+
+<h2>Tables with lineage fully traced</h2>
+
+<p class="lead">Thirty one tables have a complete chain: source system, staging, loading process,
+transformations and destination. These are ready to estimate and to migrate without further
+discovery.</p>
+
+<table>
+<tr><th>Wave 1</th><th>Wave 2</th><th>Wave 3 and later</th></tr>
+<tr><td>
+<code>LOC_DIM</code><br><code>POS_DEPT_DIM</code><br><code>ITEM_DIM</code><br>
+<code>CATGY_DIM</code><br><code>LOC_LINK_CD_XREF</code><br><code>AMS_OFFER_GRP_XREF</code><br>
+<code>PRICE_TYPE_DIM</code><br><code>SCENARIO_DIM</code><br><code>TX_TYPE_DIM</code><br>
+<code>AD_GRP_DIM</code><br><code>LINK_CD_DIM</code><br><code>LOC_AD_GRP_XREF</code><br>
+<code>LOC_CATGY_PRICING_STRAT_XREF</code><br><code>LOC_DEPT_PRICING_STRAT_XREF</code><br>
+<code>POS_ITEM_TYPE_DIM</code><br><code>VENDOR_DIM</code><br><code>SALES_POS_LN_F</code><br>
+<code>CLUB_CARD_DIM</code>
+</td><td>
+<code>POS_TAX_CLASS_DIM</code><br><code>ADJ_CD_DIM</code><br><code>WAREHOUSE_SUPPL_DIM</code><br>
+<code>SHIPPER_ITEM_XREF</code><br><code>VENDOR_COST_ZONE_XREF</code><br><code>VENDOR_LOC_XREF</code><br>
+<code>VENDOR_ITEM_XREF</code><br><code>SALES_POS_TX_F</code><br><code>INV_AS_COUNTED_F</code><br>
+<code>DAILY_LOC_FUEL_F</code><br><code>SUNOCO_FUEL_PRTNR_PRGM_F</code><br><code>VENDOR_ITEM_ADJ_F</code>
+</td><td>
+<code>CLUB_CARD_ATTRIB_XREF</code>
+</td></tr>
+</table>
+
+<div class="box">
+<strong>Note the distribution.</strong> Almost every fully traced table sits in Waves 1 and 2. Wave 3
+onwards, which is loyalty and labour, is where the unknowns concentrate. The plan is best
+understood as confident for the first half and provisional for the second.
+</div>
+
+<h2>Questions for Weis</h2>
+
+<p class="lead">Three questions. The first unblocks half of the anomalies and needs an IT action
+rather than knowledge of the legacy system. The second and third need a business answer, and each
+one comes with what we observed and what we propose, so they can be confirmed or corrected rather
+than researched.</p>
+
+<h3>Question 1. Where are the remaining DataMigrator files?</h3>
+
+<table>
+<tr><th>No source table and no pipeline identified</th><th>Loading process not identified</th></tr>
+<tr><td>
+<code>CATGY_RPT_COMP</code><br><code>LOC_ID_EXCL_DT_XREF</code><br><code>POINTS_EARNED_REDEEMED_F</code><br>
+<code>POS_POINTS_EARN_F</code><br><code>AMS_POS_POINTS_EARN_F</code><br><code>AMS_TX_REWARD_F</code><br>
+<code>MANUAL_POINT_ADJ_F</code><br><code>WAREHOUSE_SHIPT_F</code><br><code>LABOR_DAILY_BUDGET_F</code><br>
+<code>OPERATOR_DIM</code>
+</td><td>
+<code>GL_DEPT_DIM</code><br><code>AMS_OFFER_DIM</code><br><code>ITEM_PRICE_F</code><br>
+<code>ITEM_COST_F</code><br><code>LOC_DSD_INVOICE_F</code><br><code>ITEM_MARKDOWN_DEFAULT_DIM</code>
+</td></tr>
+</table>
+
+<h3>Question 2. Are these tables still current, and do they need to be migrated?</h3>
+
+<p>Five tables where the analysis suggests the data is no longer being maintained. We are not
+proposing to drop anything unilaterally. Each row states what we measured and what we would do
+absent other information.</p>
+
+<table>
+<tr><th>Table</th><th>What we observed</th></tr>
+<tr><td><code>CUSTOMER_ATTR_XREF</code></td>
+    <td>124 million rows, not fed since 2019</td></tr>
+<tr><td><code>CUSTOMER_SGM_DIM</code></td>
+    <td>Loading process shows no execution activity</td></tr>
+<tr><td><code>SHK_DAILY_LABOR_EXPORT_F</code></td>
+    <td>Loading process shows no execution activity</td></tr>
+<tr><td><code>PRICE_LVL_DIM</code></td>
+    <td>Staging table exists, loading pipeline shows no activity</td></tr>
+<tr><td><code>RECLM_SCAN_DETAIL_F</code></td>
+    <td>Pipeline runs daily and reports success, but no new reclamation scan data since 25 April 2026</td></tr>
+</table>
+
+<div class="box">
+A dead loading process and a static reference table look identical from the outside. Some small
+lookup tables are loaded once and never change, which is by design. Others stopped being fed and
+nobody noticed. That distinction is the answer we need, and it is a business question rather than
+a technical one: <strong>does any report or process still depend on this data being current?</strong>
+</div>
+
+<h3>Question 3. Who owns the file based feeds?</h3>
+
+<p>Five tables appear to be loaded from a file rather than from a database connection. A file feed
+has a producer, a schedule and a format, and none of the three are documented. If the file stops
+arriving, nothing fails loudly, the data simply goes stale.</p>
+
+<table>
+<tr><th>Table</th><th>Wave</th></tr>
+<tr><td><code>DT_DIM</code></td><td>Wave 1</td></tr>
+<tr><td><code>STORE_START_END_DATE</code></td><td>Wave 1</td></tr>
+<tr><td><code>SALES_DAILY_BUDGET_F</code></td><td>Wave 1</td></tr>
+<tr><td><code>CLUB_CARD_ATTRIB_DIM</code></td><td>Wave 3</td></tr>
+<tr><td><code>LABOR_PREM_COST_F</code></td><td>Wave 5</td></tr>
+</table>
+
+<div class="box note">
+<strong>On <code>DT_DIM</code>.</strong> A date dimension usually has no source system. It is
+generated once by a script, one row per calendar day across a long range, then extended when the
+range runs out. What does come from the business is the retail calendar: period boundaries, week
+numbering and holiday flags.
+<br><br>
+Two questions, and either answer is fine:
+<br>
+1. Is the calendar generated by a script, or loaded from a file?
+<br>
+2. Who decides the fiscal period boundaries, and how do they reach the warehouse?
+</div>
+
+<p class="foot">Wizeline &nbsp;·&nbsp; Weis Markets Phase 1 discovery &nbsp;·&nbsp; based on the analysis of all 63 in scope tables, the Oracle catalogue, and a corpus of 882 DataMigrator files &nbsp;·&nbsp; September 2026</p>

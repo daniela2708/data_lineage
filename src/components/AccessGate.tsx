@@ -1,11 +1,11 @@
 import { FormEvent, useState } from 'react'
 
+/**
+ * A shared prompt for a discovery prototype, not a security control: an SPA
+ * ships whatever it checks against. Anything that must actually be restricted
+ * belongs behind deployment-level protection.
+ */
 const ACCESS_PASSWORD = 'WeisLineage2026!'
-const SESSION_KEY = 'lineage-explorer-access'
-
-export function hasSessionAccess() {
-  return sessionStorage.getItem(SESSION_KEY) === 'granted'
-}
 
 export default function AccessGate({ onUnlock }: { onUnlock: () => void }) {
   const [password, setPassword] = useState('')
@@ -20,7 +20,6 @@ export default function AccessGate({ onUnlock }: { onUnlock: () => void }) {
       return
     }
 
-    sessionStorage.setItem(SESSION_KEY, 'granted')
     onUnlock()
   }
 

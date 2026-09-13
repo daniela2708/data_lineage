@@ -1,0 +1,263 @@
+{
+ "sections": [
+  {
+   "title": "Orchestrator",
+   "blocks": [
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Flow",
+        "kind": "header"
+       },
+       {
+        "text": "pf_upsert_ams_offer_dim",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule in the file header",
+        "kind": "header"
+       },
+       {
+        "text": "DM_SCHDSTRT=202008270100, recurring daily, started 2020-08-27 01:00",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Schedule observed in the data",
+        "kind": "header"
+       },
+       {
+        "text": "HQ writes stopped 2023-02-27; no run since per REC_UPDT_DTTM",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Alerts to",
+        "kind": "header"
+       },
+       {
+        "text": "tscott@weismarkets.com",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "Steps that never run",
+        "kind": "header"
+       },
+       {
+        "text": "none found",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Built exclusively to load this table"
+    },
+    {
+     "type": "paragraph",
+     "text": "Nothing outside this chain reads them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by df_load_pstg_ams_offer_dim (dead)",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_AMS_OFFER_DIM",
+        "kind": "item"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "AMS_PROD.logixrt.dbo.CPE_INCENTIVES: the source, on SQL Server, external to the warehouse (dead)",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_AMS_OFFER_GRP_XREF: read by df_build_ams_offer_grp_xref_unapprvd_offer",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.PSTG_SALES_POS_LINE: read by df_wmbi_unapproved_ams_offer_dim",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "AMS_Point_Act_F: confirmed live in data, loader file not located",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, confirmed in code"
+    },
+    {
+     "type": "paragraph",
+     "text": ""
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.AMS_OFFER_GRP_XREF (via STG_AMS_OFFER_GRP_XREF): resolved by df_build_ams_offer_grp_xref_stg",
+        "kind": "value"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Depends on this table, inferred from naming"
+    },
+    {
+     "type": "paragraph",
+     "text": "Candidates that still need verification. A dead process sub-header names a pipeline that no longer runs and the candidate table(s) it used to load."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.AMS_POINT_ACT_F: carries AMS_OFFER_KEY, loader not located",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.AMS_TX_REWARD_F: carries AMS_OFFER_KEY, loader not located",
+        "kind": "value"
+       }
+      ],
+      [
+       {
+        "text": "WMBI.SALES_POS_LN_F: carries AMS_OFFER_KEY, loader not located",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The process that supplies this table's real offer details stopped updating it in early 2023. Since then, only placeholder-creating processes have written to the table."
+      },
+      {
+       "text": "Three columns (CLIENT_OFFER_ID, BUYER_ID, SCORE_CARD_ID) are completely empty across every row in this table"
+      },
+      {
+       "text": "A related backup table (AMS_OFFER_DIM_BAK) also stopped updating around the same time, two days before this table's real data feed stopped. No process referencing this backup table has been found."
+      },
+      {
+       "text": "One of the loading files carries an internal warning about an incomplete step, but that step is just unused logging, not the actual data extract. It does not explain why the table's real data stopped updating in 2023."
+      },
+      {
+       "text": "The staging table behind this dimension does not record a per-row update time, so its last recorded activity date is the only available signal for how fresh it is"
+      },
+      {
+       "text": "One of the placeholder-creating processes marks its rows with a third status value ('0'), outside the usual Yes/No convention used elsewhere"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "The process that creates a specific set of placeholder rows (confirmed present in the data) has not been located, even after an extensive search. One remaining folder of process files has not yet been made available and may hold the answer",
+       "note": "Needed to confirm every process updating this table is accounted for, and whether it will keep running after the migration"
+      },
+      {
+       "text": "The backup table AMS_OFFER_DIM_BAK has not been traced to any process, using the same search",
+       "note": "Unclear whether it needs to be migrated, or is leftover from the process that stopped in 2023"
+      },
+      {
+       "text": "Why the table's real data feed stopped updating in February 2023 has not been confirmed; the break appears to sit in an external source system outside the available files",
+       "note": "Determines whether the table's real attributes can be refreshed again under the current process, or only after it is rebuilt"
+      },
+      {
+       "text": "Three related tables reference this table's key, but the processes that load them have not been located",
+       "note": "Needed to confirm whether one of them shares the same unlocated placeholder-creating process already flagged, or uses a separate one"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Important notes",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "A few things below are still not fully confirmed. We are sharing this table's analysis now rather than holding it back, because the rest of it is solid and these gaps are clearly called out here, not hidden."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Still unknown: which process loads this table.",
+       "note": "One of this table's sources is active and contributing real, current data, but we have not yet found the specific program that loads it."
+      },
+      {
+       "text": "Still unknown: whether every available file was checked.",
+       "note": "We searched every set of files made available to us and found no match. One more folder exists that has not been shared with us yet, so this cannot be called fully closed."
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 1200 652\" width=\"1200\" height=\"652\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#B4B2A9\">HQ dimension load.  Last execution: 2023-02-27</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"124\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#F1EFE8\"></path>\n<line x1=\"20\" y1=\"120\" x2=\"235\" y2=\"120\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">AMS_PROD.logixrt.dbo.</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">CPE_INCENTIVES</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#B4B2A9\">SQL Server, HQAnalytics</text>\n<text x=\"30\" y=\"111\" font-size=\"10.5\" fill=\"#B4B2A9\">connection</text>\n<line x1=\"20\" y1=\"124\" x2=\"235\" y2=\"124\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"138\" font-size=\"10.5\" fill=\"#B4B2A9\">source outside the files we have,</text>\n<text x=\"30\" y=\"153\" font-size=\"10.5\" fill=\"#B4B2A9\">break location unconfirmed</text>\n<rect x=\"455\" y=\"46\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H455z\" fill=\"#F1EFE8\"></path>\n<line x1=\"455\" y1=\"72\" x2=\"670\" y2=\"72\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"465\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.PSTG_AMS_OFFER_DIM</text>\n<line x1=\"455\" y1=\"76\" x2=\"670\" y2=\"76\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"465\" y=\"90\" font-size=\"10.5\" fill=\"#B4B2A9\">no per-row DTTM columns;</text>\n<text x=\"465\" y=\"105\" font-size=\"10.5\" fill=\"#B4B2A9\">last_analyzed 2024-11-28</text>\n<line x1=\"235\" y1=\"108.0\" x2=\"451\" y2=\"84.0\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"259\" y=\"86\" width=\"172\" height=\"21\" rx=\"3\" fill=\"#F1EFE8\" stroke=\"#D3D1C7\" stroke-width=\"0.6\"></rect>\n<text x=\"345\" y=\"98\" font-size=\"10\" fill=\"#B4B2A9\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_load_pstg_ams_offer_dim</text>\n<line x1=\"670\" y1=\"84.0\" x2=\"886\" y2=\"84.0\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"703\" y=\"74\" width=\"154\" height=\"21\" rx=\"3\" fill=\"#F1EFE8\" stroke=\"#D3D1C7\" stroke-width=\"0.6\"></rect>\n<text x=\"780\" y=\"86\" font-size=\"10\" fill=\"#B4B2A9\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_upsert_ams_offer_dim</text>\n<text x=\"20\" y=\"206\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">BMSM FolderLoad injection</text>\n<rect x=\"20\" y=\"214\" width=\"215\" height=\"76\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 218a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v38H20z\" fill=\"#FAEEDA\"></path>\n<line x1=\"20\" y1=\"256\" x2=\"235\" y2=\"256\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"231\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.</text>\n<text x=\"30\" y=\"247\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">PSTG_AMS_OFFER_GRP_XREF</text>\n<text x=\"30\" y=\"274\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">AMS_OFFER_ID</text>\n<line x1=\"235\" y1=\"252.0\" x2=\"886\" y2=\"252.0\" stroke=\"#854F0B\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"486\" y=\"235\" width=\"154\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#FAC775\" stroke-width=\"0.6\"></rect>\n<text x=\"562\" y=\"248\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_build_ams_offer_grp_</text>\n<text x=\"562\" y=\"261\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">xref_unapprvd_offer</text>\n<text x=\"20\" y=\"326\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">UNAPPROVED LINE FACT injection</text>\n<rect x=\"20\" y=\"334\" width=\"215\" height=\"70\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 338a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#FAEEDA\"></path>\n<line x1=\"20\" y1=\"360\" x2=\"235\" y2=\"360\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"351\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.PSTG_SALES_POS_LINE</text>\n<text x=\"30\" y=\"378\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">AMS_OFFER_ID</text>\n<line x1=\"235\" y1=\"369.0\" x2=\"886\" y2=\"369.0\" stroke=\"#854F0B\" stroke-width=\"1.1\" marker-end=\"url(#a)\"></line>\n<rect x=\"498\" y=\"352\" width=\"130\" height=\"34\" rx=\"3\" fill=\"#fff\" stroke=\"#FAC775\" stroke-width=\"0.6\"></rect>\n<text x=\"562\" y=\"365\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">df_wmbi_unapproved_</text>\n<text x=\"562\" y=\"378\" font-size=\"10\" fill=\"#854F0B\" text-anchor=\"middle\" font-family=\"ui-monospace,Menlo,monospace\">ams_offer_dim</text>\n<text x=\"20\" y=\"440\" font-size=\"12.5\" font-weight=\"500\" fill=\"#854F0B\">AMS_Point_Act_F injection</text>\n<rect x=\"20\" y=\"448\" width=\"215\" height=\"140\" rx=\"4\" fill=\"#fff\" stroke=\"#854F0B\" stroke-width=\"0.6\"></rect>\n<path d=\"M20 452a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v86H20z\" fill=\"#FAEEDA\"></path>\n<line x1=\"20\" y1=\"538\" x2=\"235\" y2=\"538\" stroke=\"#854F0B\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"465\" font-size=\"10.5\" font-weight=\"500\" fill=\"#412402\" font-family=\"ui-monospace,Menlo,monospace\">AMS_Point_Act_F</text>\n<text x=\"30\" y=\"481\" font-size=\"10.5\" fill=\"#854F0B\">not found anywhere in the files</text>\n<text x=\"30\" y=\"497\" font-size=\"10.5\" fill=\"#854F0B\">we have, even after 5 of 6</text>\n<text x=\"30\" y=\"513\" font-size=\"10.5\" fill=\"#854F0B\">candidate folders were exported</text>\n<text x=\"30\" y=\"529\" font-size=\"10.5\" fill=\"#854F0B\">and searched</text>\n<line x1=\"20\" y1=\"542\" x2=\"235\" y2=\"542\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"556\" font-size=\"10.5\" fill=\"#854F0B\">unconfirmed in code; ams/ remains</text>\n<text x=\"30\" y=\"571\" font-size=\"10.5\" fill=\"#854F0B\">the one unexported lead</text>\n<line x1=\"235\" y1=\"518.0\" x2=\"886\" y2=\"518.0\" stroke=\"#854F0B\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"890\" y=\"46\" width=\"290\" height=\"542\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M890 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"890\" y1=\"83\" x2=\"1180\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"902\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.AMS_OFFER_DIM</text>\n<text x=\"902\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">6,658 rows · 93 columns</text>\n<text x=\"902\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">AMS_OFFER_KEY</text>\n<text x=\"1168\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK, surrogate, sequence via…</text>\n<text x=\"902\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">AMS_OFFER_ID</text>\n<text x=\"1168\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK, business key, XAK1AMS_OFF…</text>\n<line x1=\"890\" y1=\"134\" x2=\"1180\" y2=\"134\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"902\" y=\"150\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"902\" y=\"166\" font-size=\"10.5\" fill=\"#534AB7\">AMS_OFFER_DIM_SEQ_TR, BEFORE INSERT, assigns</text>\n<text x=\"902\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">AMS_OFFER_KEY</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

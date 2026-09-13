@@ -1,0 +1,98 @@
+{
+ "sections": [
+  {
+   "title": "Dependencies",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "Built exclusively to load this table"
+    },
+    {
+     "type": "paragraph",
+     "text": "Nothing outside this chain reads them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "Loaded by ORACLE/DATALOGX (dead)",
+        "kind": "group"
+       }
+      ],
+      [
+       {
+        "text": "WMBI_ETL.STG_CUSTOMER_ATTR_XREF",
+        "kind": "item"
+       }
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Owned by other processes"
+    },
+    {
+     "type": "paragraph",
+     "text": "Not created for this table, but it reads from them or receives rows through them."
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       {
+        "text": "WMBI.CUSTOMER_SGM_DIM: resolves via CUSTOMER_SGM_KEY",
+        "kind": "value"
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Findings",
+   "blocks": [
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "All 124 million rows were loaded in a single batch on 2019-04-11 by the same outside vendor, DATALOGX, that also loaded CUSTOMER_SGM_DIM the day before. Nothing has touched this table since, about 7.4 years ago"
+      },
+      {
+       "text": "A separate, older row-count figure for this table differs slightly from the fresh count taken here. Reconciled: the older figure was based on a partial sample, not an exact count, and is not evidence of any activity after 2019"
+      },
+      {
+       "text": "No available file mentions this table or the DATALOGX vendor by name. Unlike CUSTOMER_SGM_DIM, no matching landing table for this data was found either"
+      },
+      {
+       "text": "Two columns that look like they should link to other tables by their naming carry no formal link constraint. One of the two was checked directly and every value used does successfully match its related table, with no mismatches"
+      },
+      {
+       "text": "No invalid keys and no duplicate records exist across all 124 million rows. Every row is marked approved; no placeholder rows exist"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": "Pending validation",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Still open, not confirmed in code or data yet. None of this blocks the lineage above, it is tracked here so nothing gets forgotten."
+    },
+    {
+     "type": "list",
+     "items": [
+      {
+       "text": "Whether the DATALOGX vendor relationship ended after this one 2019 load, or a refresh is expected at some point, has not been confirmed.",
+       "note": "Determines whether the migration needs to replace a real recurring process, or whether this table is a frozen historical snapshot to migrate once. The same question applies to CUSTOMER_SGM_DIM, since both tables were loaded by the same vendor on consecutive days"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "diagramSvg": "<svg viewBox=\"0 0 765 396\" width=\"765\" height=\"396\" xmlns=\"http://www.w3.org/2000/svg\">\n<defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"8\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\"><path d=\"M2 1L8 5L2 9\" fill=\"none\" stroke=\"context-stroke\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path></marker></defs>\n<text x=\"20\" y=\"38\" font-size=\"12.5\" font-weight=\"500\" fill=\"#B4B2A9\">One-time DATALOGX batch load (2019).  Last execution: 2019-04-11</text>\n<rect x=\"20\" y=\"46\" width=\"215\" height=\"154\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M20 50a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v70H20z\" fill=\"#F1EFE8\"></path>\n<line x1=\"20\" y1=\"120\" x2=\"235\" y2=\"120\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"63\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">WMBI_ETL.</text>\n<text x=\"30\" y=\"79\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">STG_CUSTOMER_ATTR_XREF</text>\n<text x=\"30\" y=\"95\" font-size=\"10.5\" fill=\"#B4B2A9\">frozen since 2019-04-10; no file</text>\n<text x=\"30\" y=\"111\" font-size=\"10.5\" fill=\"#B4B2A9\">in the files we have loads it</text>\n<line x1=\"20\" y1=\"124\" x2=\"235\" y2=\"124\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"138\" font-size=\"10.5\" fill=\"#B4B2A9\">writer stamp &#x27;ORACLE/DATALOGX&#x27; on</text>\n<text x=\"30\" y=\"153\" font-size=\"10.5\" fill=\"#B4B2A9\">the target, same vendor that</text>\n<text x=\"30\" y=\"168\" font-size=\"10.5\" fill=\"#B4B2A9\">loaded CUSTOMER_SGM_DIM the day</text>\n<text x=\"30\" y=\"183\" font-size=\"10.5\" fill=\"#B4B2A9\">before</text>\n<rect x=\"20\" y=\"214\" width=\"215\" height=\"91\" rx=\"4\" fill=\"#F1EFE8\" stroke=\"#B4B2A9\" stroke-width=\"0.6\" stroke-dasharray=\"4 3\"></rect>\n<path d=\"M20 218a4 4 0 0 1 4-4h207a4 4 0 0 1 4 4v22H20z\" fill=\"#F1EFE8\"></path>\n<line x1=\"20\" y1=\"240\" x2=\"235\" y2=\"240\" stroke=\"#B4B2A9\" stroke-width=\"0.6\"></line>\n<text x=\"30\" y=\"231\" font-size=\"10.5\" font-weight=\"500\" fill=\"#444441\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.CUSTOMER_SGM_DIM</text>\n<line x1=\"20\" y1=\"244\" x2=\"235\" y2=\"244\" stroke=\"#D3D1C7\" stroke-width=\"0.5\"></line>\n<text x=\"30\" y=\"258\" font-size=\"10.5\" fill=\"#B4B2A9\">resolves CUSTOMER_SGM_KEY; all</text>\n<text x=\"30\" y=\"273\" font-size=\"10.5\" fill=\"#B4B2A9\">244 distinct values used resolve,</text>\n<text x=\"30\" y=\"288\" font-size=\"10.5\" fill=\"#B4B2A9\">0 orphans</text>\n<line x1=\"235\" y1=\"123.0\" x2=\"451\" y2=\"123.0\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<line x1=\"235\" y1=\"259.5\" x2=\"451\" y2=\"259.5\" stroke=\"#B4B2A9\" stroke-width=\"1.1\" stroke-dasharray=\"4 3\" marker-end=\"url(#a)\"></line>\n<rect x=\"455\" y=\"46\" width=\"290\" height=\"330\" rx=\"4\" fill=\"#fff\" stroke=\"#534AB7\" stroke-width=\"0.8\"></rect>\n<path d=\"M455 50a4 4 0 0 1 4-4h282a4 4 0 0 1 4 4v33h-290z\" fill=\"#EEEDFE\"></path>\n<line x1=\"455\" y1=\"83\" x2=\"745\" y2=\"83\" stroke=\"#534AB7\" stroke-width=\"0.8\"></line>\n<text x=\"467\" y=\"64\" font-size=\"12.5\" font-weight=\"500\" fill=\"#26215C\" font-family=\"ui-monospace,Menlo,monospace\">WMBI.CUSTOMER_ATTR_XREF</text>\n<text x=\"467\" y=\"78\" font-size=\"10.5\" fill=\"#534AB7\">124,295,522 rows · 12 columns</text>\n<text x=\"467\" y=\"104\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">CUSTOMER_ATTR_KEY</text>\n<text x=\"733\" y=\"104\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">PK, single-column surro…</text>\n<text x=\"467\" y=\"120\" font-size=\"10.5\" fill=\"#2C2C2A\" font-family=\"ui-monospace,Menlo,monospace\">3-column business key</text>\n<text x=\"733\" y=\"120\" font-size=\"10\" fill=\"#5F5E5A\" text-anchor=\"end\">UK: CUSTOMER_ID_TYP…</text>\n<line x1=\"455\" y1=\"134\" x2=\"745\" y2=\"134\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"150\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Trigger</text>\n<text x=\"467\" y=\"166\" font-size=\"10.5\" fill=\"#534AB7\">CUSTOMER_ATTR_XREF_SEQ_TR, BEFORE EACH ROW</text>\n<text x=\"467\" y=\"182\" font-size=\"10.5\" fill=\"#534AB7\">INSERT, assigns CUSTOMER_ATTR_KEY</text>\n<line x1=\"455\" y1=\"196\" x2=\"745\" y2=\"196\" stroke=\"#AFA9EC\" stroke-width=\"0.5\"></line>\n<text x=\"467\" y=\"212\" font-size=\"11\" font-weight=\"500\" fill=\"#26215C\">Anomaly</text>\n<text x=\"467\" y=\"228\" font-size=\"10.5\" fill=\"#534AB7\">No declared FK exists on CLUB_CARD_KEY or</text>\n<text x=\"467\" y=\"244\" font-size=\"10.5\" fill=\"#534AB7\">CUSTOMER_SGM_KEY, despite both looking like</text>\n<text x=\"467\" y=\"260\" font-size=\"10.5\" fill=\"#534AB7\">foreign keys by naming and both being part of</text>\n<text x=\"467\" y=\"276\" font-size=\"10.5\" fill=\"#534AB7\">the declared unique key. CUSTOMER_SGM_KEY was</text>\n<text x=\"467\" y=\"292\" font-size=\"10.5\" fill=\"#534AB7\">checked directly: all 244 distinct values</text>\n<text x=\"467\" y=\"308\" font-size=\"10.5\" fill=\"#534AB7\">used resolve against CUSTOMER_SGM_DIM, 0</text>\n<text x=\"467\" y=\"324\" font-size=\"10.5\" fill=\"#534AB7\">orphans. CLUB_CARD_KEY was not independently</text>\n<text x=\"467\" y=\"340\" font-size=\"10.5\" fill=\"#534AB7\">checked</text>\n</svg>",
+ "footer": "Wizeline · Weis Markets discovery · table level lineage · generated, do not edit by hand"
+}

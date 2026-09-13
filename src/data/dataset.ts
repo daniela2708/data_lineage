@@ -8,14 +8,5 @@ import type { Dataset } from '../types'
  */
 export const DATA = raw as unknown as Dataset
 
-/** Tables in Phase 1 scope, the default working set. */
+/** Tables in Phase 1 scope. anomalies.test.ts checks the count against the summary. */
 export const scopedTables = DATA.tables.filter((t) => t.scope === 'In Scope')
-
-/** In scope and with no pipeline recorded: where the tracing effort sits. */
-export const tablesWithoutPipeline = scopedTables.filter((t) => !t.pipeIds.length)
-
-/** In scope and read by the legacy reporting estate. */
-export const tablesInLegacyReporting = scopedTables.filter((t) => t.inwf)
-
-/** Every business case that appears on a table, sorted. */
-export const businessCases = [...new Set(DATA.tables.flatMap((t) => t.bcs))].sort()

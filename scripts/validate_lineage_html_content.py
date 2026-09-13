@@ -16,7 +16,8 @@ from typing import Any
 
 
 SOURCE_DIRECTORY = Path("diagramas_html")
-REPORT_DATASET = Path("src/data/lineageReports.json")
+REPORT_INDEX = Path("src/data/lineageReports.json")
+REPORT_DETAIL_DIRECTORY = Path("src/data/reportDetails")
 CATALOG_DATASET = Path("src/data/lineage.json")
 TEXT_TAGS = ("h1", "h2", "h3", "p", "tr", "li")
 
@@ -159,14 +160,25 @@ def validate_report(path: Path, report: dict[str, Any], dist_directory: Path | N
     return failures
 
 
+def load_reports() -> list[dict[str, Any]]:
+    """Rejoin the index with its detail files, the shape the generator parsed."""
+    index = json.loads(REPORT_INDEX.read_text(encoding="utf-8"))["reports"]
+    reports = []
+    for entry in index:
+        detail_path = REPORT_DETAIL_DIRECTORY / f'{entry["sourceFile"].removesuffix(".html")}.json'
+        if not detail_path.exists():
+            raise SystemExit(f"missing detail file for {entry['sourceFile']}: {detail_path}")
+        reports.append({**entry, **json.loads(detail_path.read_text(encoding="utf-8"))})
+    return reports
+
+
 def main() -> int:
     argument_parser = argparse.ArgumentParser()
     argument_parser.add_argument("--dist", action="store_true", help="Also verify exact HTML copies in dist/diagramas_html")
     arguments = argument_parser.parse_args()
 
     source_paths = sorted(SOURCE_DIRECTORY.glob("*_lineage.html"))
-    dataset = json.loads(REPORT_DATASET.read_text(encoding="utf-8"))
-    reports = dataset["reports"]
+    reports = load_reports()
     reports_by_file = {report["sourceFile"]: report for report in reports}
     catalog = json.loads(CATALOG_DATASET.read_text(encoding="utf-8"))
     catalog_names = {table["name"] for table in catalog["tables"]}

@@ -1,5 +1,8 @@
 import type { LineageReport } from '../data/lineageReports'
 
+/** Only the parts of a report this reads, so the detail chunk is the only input needed. */
+type SchemaGroupSource = Pick<LineageReport, 'tableName' | 'qualifiedTable' | 'sections'>
+
 const QUALIFIED_TABLE = /\b([A-Za-z][A-Za-z0-9_$#]*)\.([A-Za-z][A-Za-z0-9_$#]*)\b/g
 const UNQUALIFIED_TABLES = /^([A-Za-z][A-Za-z0-9_$#]*(?:\s*\/\s*[A-Za-z][A-Za-z0-9_$#]*)*)\s*(?::|$)/
 const FILE_EXTENSIONS = new Set(['csv', 'fex', 'html', 'js', 'json', 'mjs', 'py', 'sql', 'ts', 'tsx', 'xlsx'])
@@ -21,7 +24,7 @@ export type SchemaGroup = {
  * Pull table references from the verified Dependencies section without changing
  * the source SVG. File names such as loader.fex are deliberately ignored.
  */
-export function schemaGroupsForReport(report: LineageReport): SchemaGroup[] {
+export function schemaGroupsForReport(report: SchemaGroupSource): SchemaGroup[] {
   const dependencies = report.sections.find((section) => section.title === 'Dependencies')
   if (!dependencies) return []
 
